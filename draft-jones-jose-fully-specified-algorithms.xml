@@ -1,0 +1,717 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<!DOCTYPE rfc PUBLIC "-//IETF//DTD RFC 2629//EN" "http://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd">
+
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+  category="std" ipr="trust200902"
+  docName="draft-jones-jose-fully-specified-algorithms-latest"
+  updates="8037, 9053">
+
+  <?rfc toc="yes"?>
+  <?rfc tocompact="yes"?>
+  <?rfc tocdepth="5"?>
+  <?rfc tocindent="yes"?>
+  <?rfc symrefs="yes"?>
+  <?rfc sortrefs="yes"?>
+  <?rfc compact="yes"?>
+  <?rfc subcompact="no"?>
+
+  <front>
+
+    <title>Fully-Specified Algorithms for JOSE and COSE</title>
+
+    <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+      <organization>independent</organization>
+      <address>
+	<email>michael_b_jones@hotmail.com</email>
+	<uri>https://self-issued.info/</uri>
+      </address>
+    </author>
+
+    <author fullname="Orie Steele" initials="O." surname="Steele">
+      <organization>Transmute</organization>
+      <address>
+	<email>orie@transmute.industries</email>
+      </address>
+    </author>
+
+    <date day="28" month="August" year="2023" />
+
+    <area>Security</area>
+    <workgroup>JOSE Working Group</workgroup>
+
+    <keyword>Cryptographic Algorithm Identifiers</keyword>
+    <keyword>JSON Object Signing and Encryption (JOSE)</keyword>
+    <keyword>CBOR Object Signing and Encryption (COSE)</keyword>
+    <keyword>Internet-Draft</keyword>
+
+    <abstract>
+      <t>
+	This specification refers to cryptographic algorithm identifiers
+	that fully specify the cryptographic operations to be performed,
+	including any curve, key derivation function (KDF), hash functions, etc.
+	as being "fully specified".
+	Whereas, it refers to cryptographic algorithm identifiers
+	that require additional information beyond the algorithm identifier
+	to determine the cryptographic operations to be performed
+	as being "polymorphic".
+	This specification creates fully-specified algorithm identifiers for all registered
+	JOSE and COSE polymorphic algorithm identifiers,
+	enabling applications to use only fully-specified algorithm identifiers.
+      </t>
+    </abstract>
+
+  </front>
+
+  <middle>
+
+    <section anchor="Introduction" title="Introduction">
+      <t>
+	The IANA algorithm registries for JOSE <xref target="IANA.JOSE.Algorithms"/> and
+	COSE <xref target="IANA.COSE.Algorithms"/> contain two kinds of algorithm identifiers:
+      </t>
+      <t>
+	<list style="hanging">
+
+          <t hangText="Fully Specified">
+	    <vspace/>
+	    Those that fully determine the cryptographic operations to be performed,
+	    including any curve, key derivation function (KDF), hash functions, etc.
+	    Examples are <spanx style="verb">RS256</spanx>, <spanx style="verb">ES256K</spanx>,
+	    and <spanx style="verb">ES256</spanx> in JOSE.
+	  </t>
+
+          <t hangText="Polymorphic">
+	    <vspace/>
+	    Those requiring infomation beyond the algorithm identifier
+	    to determine the cryptographic operations to be performed.
+	    Such additional information could include the actual key value and a curve that it uses.
+	    Examples are <spanx style="verb">EdDSA</spanx> and <spanx style="verb">ES256</spanx> in COSE.
+	  </t>
+
+	</list>
+      </t>
+      <t>
+	This matters because many protocols negotiate supported operations using only algorithm identifiers.
+	For instance, OAuth Authorization Server Metadata <xref target="RFC8414"/>
+	uses negotiation parameters like these (from an example in the specification):
+	<figure><artwork><![CDATA[
+  "token_endpoint_auth_signing_alg_values_supported": ["RS256", "ES256"]
+]]></artwork></figure>
+      </t>
+      <t>
+	OpenID Connect Discovery <xref target="OpenID.Discovery"/> likewise negotiates supported algorithms
+	using <spanx style="verb">alg</spanx> and <spanx style="verb">enc</spanx> values.
+	W3C Web Authentication <xref target="WebAuthn"/> and
+	FIDO Client to Authenticator Protocol (CTAP) <xref target="FIDO2"/>
+	negotiate using COSE <spanx style="verb">alg</spanx> numbers.
+      </t>
+      <t>
+	This does not work for polymorphic algorithms.
+	For instance, with <spanx style="verb">EdDSA</spanx>, you do not know which of the curves
+	<spanx style="verb">Ed25519</spanx> and/or <spanx style="verb">Ed448</spanx> are supported!
+	This causes real problems in practice.
+      </t>
+      <t>
+	WebAuthn contains this de-facto algorithm definition to work around this problem:
+	<figure><artwork><![CDATA[
+  -8 (EdDSA), where crv is 6 (Ed25519)
+]]></artwork></figure>
+      </t>
+      <t>
+	This redefines the COSE <spanx style="verb">EdDSA</spanx> algorithm identifier
+	for the purposes of WebAuth to restrict it to using
+	the <spanx style="verb">Ed25519</spanx> curve - making it non-polymorphic
+	so that algorithm negotiation can succeed, but also effectively
+	eliminating the possibility of using <spanx style="verb">Ed448</spanx>.
+	Other similar workarounds for polymorphic algorithm identifiers are used in practice.
+      </t>
+      <t>
+	This specification creates fully-specified algorithm identifiers for all registered
+	polymorphic JOSE and COSE algorithms and their parameters,
+	enabling applications to use only fully-specified algorithm identifiers.
+	It furthermore deprecates the practice of registering polymorphic algorithm identifiers.
+      </t>
+
+      <section anchor="rnc" title="Requirements Notation and Conventions">
+        <t>
+	  The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+	  "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+	  "OPTIONAL" in this document are to be interpreted as described in
+	  BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and
+	  only when, they appear in all capitals, as shown here.
+	</t>
+      </section>
+    </section>
+
+    <section anchor="fully-specified-algs" title="Fully-specified Digital Signature Algorithm Identifiers">
+      <t>
+	This section creates fully-specified digital signature algorithm identifiers for all registered
+	polymorphic JOSE and COSE algorithms and their parameters.
+      </t>
+
+      <section anchor="ECDSA" title="Elliptic Curve Digital Signature Algorithm (ECDSA)">
+	<t>
+	  <xref target="RFC9053"/> defines the current use of
+	  the Elliptic Curve Digital Signature Algorithm (ECDSA) by COSE.
+	  The COSE algorithm registrations for ECDSA are polymorphic,
+	  since they do not specify the curve used.
+	  For instance, <spanx style="verb">ES256</spanx> is defined as
+	  "ECDSA w/ SHA-256" in Section 2.1 of <xref target="RFC9053"/>.
+	  (The corresponding JOSE registrations in <xref target="RFC7518"/> are full-specified.)
+	</t>
+	<t>
+	  The following fully-specified COSE algorithms are defined:
+	</t>
+	<texttable anchor="ecdsa-algs" title="ECDSA Algorithm Values" suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">Value</ttcol>
+	  <ttcol align="left">Description</ttcol>
+	  <ttcol align="left">Recommended</ttcol>
+
+	  <c>ESP256</c>
+	  <c>TBD (requested assignment -9)</c>
+	  <c>ECDSA using P-256 curve and SHA-256</c>
+	  <c>Yes</c>
+
+	  <c>ESP384</c>
+	  <c>TBD (requested assignment -48)</c>
+	  <c>ECDSA using P-384 curve and SHA-384</c>
+	  <c>Yes</c>
+
+	  <c>ESP512</c>
+	  <c>TBD (requested assignment -49)</c>
+	  <c>ECDSA using P-521 curve and SHA-512</c>
+	  <c>Yes</c>
+
+	</texttable>
+      </section>
+
+      <section anchor="EdDSA" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">
+	<t>
+	  <xref target="RFC8037"/> defines the current use of
+	  the Edwards-Curve Digital Signature Algorithm (EdDSA)
+	  by JOSE and <xref target="RFC9053"/> defines its current use by COSE.
+	  Both register polymorphic <spanx style="verb">EdDSA</spanx> algorithm identifiers.
+	</t>
+	<t>
+	  The following fully-specified JOSE and COSE algorithms are defined:
+	</t>
+	<texttable anchor="eddsa-algs" title="EdDSA Algorithm Values" suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">COSE Value</ttcol>
+	  <ttcol align="left">Description</ttcol>
+	  <ttcol align="left">JOSE Implementation Requirements</ttcol>
+	  <ttcol align="left">COSE Recommended</ttcol>
+
+	  <c>ES25519</c>
+	  <c>TBD (requested assignment -50)</c>
+	  <c>EdDSA using Ed25519 curve</c>
+	  <c>Optional</c>
+	  <c>No</c>
+
+	  <c>ES448</c>
+	  <c>TBD (requested assignment -51)</c>
+	  <c>EdDSA using Ed448 curve</c>
+	  <c>Optional</c>
+	  <c>No</c>
+
+	</texttable>
+      </section>
+
+    </section>
+
+    <section anchor="IANA" title="IANA Considerations">
+
+      <section anchor="jose-algorithm-registration" title="JOSE Algorithms Registrations">
+        <t>
+	  This section registers the following values in the
+	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>.
+	</t>
+
+	<section anchor="new-jose-regs" title="Fully-Specified JOSE Algorithm Registrations">
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style="symbols">
+	      <t>
+		Algorithm Name: ES25519
+	      </t>
+	      <t>
+		Algorithm Description: EdDSA using Ed25519 curve
+	      </t>
+	      <t>
+		Algorithm Usage Locations: alg
+	      </t>
+	      <t>
+		JOSE Implementation Requirements: Optional
+	      </t>
+	      <t>
+		Change Controller: IESG
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Algorithm Analysis Document(s): <xref target="RFC8032"/>
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Algorithm Name: ES448
+	      </t>
+	      <t>
+		Algorithm Description: EdDSA using Ed448 curve
+	      </t>
+	      <t>
+		Algorithm Usage Locations: alg
+	      </t>
+	      <t>
+		JOSE Implementation Requirements: Optional
+	      </t>
+	      <t>
+		Change Controller: IESG
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Algorithm Analysis Document(s): <xref target="RFC8032"/>
+	      </t>
+	    </list>
+	  </t>
+	  <?rfc subcompact="no"?>
+	</section>
+
+	<section anchor="deprecated-jose-regs" title="Deprecated Polymorphic JOSE Algorithm Registrations">
+	  <t>
+	    The following registration is updated to change its status to Deprecated.
+	  </t>
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style="symbols">
+	      <t>
+		Algorithm Name: EdDSA
+	      </t>
+	      <t>
+		Algorithm Description: EdDSA signature algorithms
+	      </t>
+	      <t>
+		Algorithm Usage Locations: alg
+	      </t>
+	      <t>
+		JOSE Implementation Requirements: Deprecated
+	      </t>
+	      <t>
+		Change Controller: IESG
+	      </t>
+	      <t>
+		Reference: Section 3.1 of RFC8037
+	      </t>
+	      <t>
+		Algorithm Analysis Document(s): <xref target="RFC8032"/>
+	      </t>
+	    </list>
+	  </t>
+	  <?rfc subcompact="no"?>
+	</section>
+      </section>
+
+      <section anchor="cose-algorithms-registrations" title="COSE Algorithms Registrations">
+        <t>
+	  This section registers the following values in the
+	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>.
+	</t>
+
+	<section anchor="new-cose-regs" title="Fully-Specified COSE Algorithm Registrations">
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style="symbols">
+	      <t>
+		Name: ESP256
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -9)
+	      </t>
+	      <t>
+		Description: ECDSA using P-256 curve and SHA-256
+	      </t>
+	      <t>
+		Reference: <xref target="ECDSA"/> of this document 
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ESP384
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -48)
+	      </t>
+	      <t>
+		Description: ECDSA using P-384 curve and SHA-384
+	      </t>
+	      <t>
+		Reference: <xref target="ECDSA"/> of this document 
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ESP512
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -49)
+	      </t>
+	      <t>
+		Description: ECDSA using P-521 curve and SHA-512
+	      </t>
+	      <t>
+		Reference: <xref target="ECDSA"/> of this document 
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ES25519
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -50)
+	      </t>
+	      <t>
+		Description: EdDSA using Ed25519 curve
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document 
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ES448
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -51)
+	      </t>
+	      <t>
+		Description: EdDSA using Ed448 curve
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document 
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <?rfc subcompact="no"?>
+	</section>
+
+	<section anchor="deprecated-cose-regs" title="Deprecated Polymorphic COSE Algorithm Registrations">
+	  <t>
+	    The following registrations are updated to change their status to Deprecated.
+	  </t>
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style="symbols">
+	      <t>
+		Name: ES256
+	      </t>
+	      <t>
+		Value: -7
+	      </t>
+	      <t>
+		Description: ECDSA w/ SHA-256
+	      </t>
+	      <t>
+		Reference: RFC 9053
+	      </t>
+	      <t>
+		Recommended: Deprecated
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ES384
+	      </t>
+	      <t>
+		Value: -35
+	      </t>
+	      <t>
+		Description: ECDSA w/ SHA-384
+	      </t>
+	      <t>
+		Reference: RFC 9053
+	      </t>
+	      <t>
+		Recommended: Deprecated
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ES512
+	      </t>
+	      <t>
+		Value: -36
+	      </t>
+	      <t>
+		Description: ECDSA w/ SHA-512
+	      </t>
+	      <t>
+		Reference: RFC 9053
+	      </t>
+	      <t>
+		Recommended: Deprecated
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: EdDSA
+	      </t>
+	      <t>
+		Value: -8
+	      </t>
+	      <t>
+		Description: EdDSA
+	      </t>
+	      <t>
+		Reference: RFC 9053
+	      </t>
+	      <t>
+		Recommended: Deprecated
+	      </t>
+	    </list>
+	  </t>
+	  <?rfc subcompact="no"?>
+	</section>
+      </section>
+
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>
+	Using fully-specified algorithm identifiers reduces the attack surface
+	relative to using polymorphic algorithm identifiers,
+	since it reduces the opportunity for attackers to choose algorithms.
+      </t>
+      <t>
+	The securty considerations for ECDSA in <xref target="RFC7518"/> and
+	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
+      </t>
+    </section>
+
+    <section anchor="TBD" title="TBD">
+      <t>
+	Future versions of this specification may cover these additional topics:
+      </t>
+      <t>
+        <list style="symbols">
+	  <t>
+	    What other polymorphic algorithm registrations have we missed?
+	  </t>
+          <t>
+	    Discuss why varying RSA key sizes don't necessitate per-key-size algorithm identifiers.
+          </t>
+	  <t>
+	    Discuss the treatment of <spanx style="verb">EDCH-ES</spanx> and it ephemeral keys.
+	  </t>
+        </list>
+      </t>
+    </section>
+
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8037.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8725.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9053.xml"/>
+
+    </references>
+
+    <references title="Informative References">
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7518.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8032.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
+
+      <reference anchor="IANA.JOSE.Algorithms" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
+        <front>
+          <title>JOSE Algorithms</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
+      <reference anchor="IANA.COSE.Algorithms" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
+        <front>
+          <title>COSE Algorithms</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
+      <reference anchor="OpenID.Discovery" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+	<front>
+	  <title>OpenID Connect Discovery 1.0</title>
+
+	  <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+	    <organization abbrev="NAT.Consulting (was at NRI)">NAT.Consulting</organization>
+	  </author>
+
+	  <author fullname="John Bradley" initials="J." surname="Bradley">
+	    <organization abbrev="Yubico (was at Ping Identity)">Yubico</organization>
+	  </author>
+
+	  <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+	    <organization abbrev="independent (was at Microsoft)">independent</organization>
+	  </author>
+
+	  <author fullname="Edmund Jay" initials="E." surname="Jay">
+	    <organization abbrev="Illumila">Illumila</organization>
+	  </author>
+
+          <date day="8" month="November" year="2014"/>
+	</front>
+      </reference>
+
+      <reference anchor="WebAuthn" target="https://www.w3.org/TR/2021/REC-webauthn-2-20210408/">
+        <front>
+          <title>Web Authentication: An API for accessing Public Key Credentials - Level 2</title>
+          <seriesInfo name="World Wide Web Consortium (W3C)" value="Recommendation"/>
+          <author initials="J." surname="Hodges" fullname="Jeff Hodges">
+            <organization>PayPal</organization>
+            <address>
+              <email>jdhodges@google.com</email>
+            </address>
+          </author>
+          <author initials="J.C." surname="Jones" fullname="J.C. Jones">
+            <organization>Mozilla</organization>
+            <address>
+              <email>jc@mozilla.com</email>
+            </address>
+          </author>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mbj@microsoft.com</email>
+              <uri>http://self-issued.info/</uri>
+            </address>
+          </author>
+          <author initials="A." surname="Kumar" fullname="Akshay Kumar">
+            <organization>Microsoft</organization>
+            <address>
+              <email>akshayku@microsoft.com</email>
+            </address>
+          </author>
+          <author initials="E." surname="Lundberg" fullname="Emil Lundberg">
+            <organization>Yubico</organization>
+            <address>
+              <email>emil@yubico.com</email>
+            </address>
+          </author>
+          <date day="8" month="April" year="2021"/>
+        </front>
+      </reference>
+
+      <reference anchor="FIDO2" target="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-20210615.html">
+        <front>
+          <title>Client to Authenticator Protocol (CTAP)</title>
+          <seriesInfo name="FIDO Alliance" value="Proposed Standard"/>
+          <author initials="J." surname="Bradley" fullname="John Bradley">
+            <organization>Yubico</organization>
+            <address>
+              <email>jbradley@yubico.com</email>
+            </address>
+          </author>
+          <author initials="J." surname="Hodges" fullname="Jeff Hodges">
+            <organization>PayPal</organization>
+            <address>
+              <email>jdhodges@google.com</email>
+            </address>
+          </author>
+          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+            <organization>Microsoft</organization>
+            <address>
+              <email>mbj@microsoft.com</email>
+              <uri>http://self-issued.info/</uri>
+            </address>
+          </author>
+          <author initials="A." surname="Kumar" fullname="Akshay Kumar">
+            <organization>Microsoft</organization>
+            <address>
+              <email>akshayku@microsoft.com</email>
+            </address>
+          </author>
+          <author initials="J." surname="Johan" fullname="Johan Verrept">
+            <organization>OneSpan</organization>
+            <address>
+              <email>johan.verrept@onespan.com</email>
+            </address>
+          </author>
+          <date day="15" month="June" year="2021"/>
+        </front>
+      </reference>
+
+    </references>
+
+    <section title="Document History" anchor="History">
+      <t>
+        [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+        -00
+        <list style="symbols">
+          <t>
+	    Initial version.
+          </t>
+        </list>
+      </t>
+
+    </section>
+
+    <section title="Acknowledgements" anchor="Acknowledgements" numbered="no">
+      <t>
+	The authors thank
+	Brian Campbell
+	and
+	Tobias Looker
+	for their contributions to this specification.
+      </t>
+    </section>
+
+  </back>
+
+</rfc>
