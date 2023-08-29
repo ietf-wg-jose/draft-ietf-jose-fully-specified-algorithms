@@ -5,7 +5,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std" ipr="trust200902"
   docName="draft-jones-jose-fully-specified-algorithms-latest"
-  updates="8037, 9053">
+  updates="7518, 8037, 9053">
 
   <?rfc toc="yes"?>
   <?rfc tocompact="yes"?>
@@ -532,6 +532,27 @@
 	  </t>
 	  <?rfc subcompact="no"?>
 	</section>
+      </section>
+
+      <section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
+	<t>
+	  The review instructions for the designated experts for the
+	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
+	  in Section 7.1 of <xref target="RFC7518"/>
+	  are updated to add this additional review criterion:
+	  <list style="symbols">
+	    <t>
+	      Registration requests for polymorphic algorithm identifiers must not be accepted;
+	      only fully-specified algorithm identifiers may be registered going forward.
+	    </t>
+	  </list>
+	</t>
+	<t>
+	  The review instructions for the designated experts for the
+	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>
+	  in Section 10.4 of <xref target="RFC9053"/>
+	  are also updated to add the same additional review criterion.
+	</t>
       </section>
 
     </section>
