@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="28" month="August" year="2023" />
+    <date day="29" month="August" year="2023" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -705,7 +705,8 @@
     <section title="Acknowledgements" anchor="Acknowledgements" numbered="no">
       <t>
 	The authors thank
-	Brian Campbell
+	John Bradley,
+	Brian Campbell,
 	and
 	Tobias Looker
 	for their contributions to this specification.
