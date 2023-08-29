@@ -49,7 +49,7 @@
       <t>
 	This specification refers to cryptographic algorithm identifiers
 	that fully specify the cryptographic operations to be performed,
-	including any curve, key derivation function (KDF), hash functions, etc.
+	including any curve, key derivation function (KDF), hash functions, etc.,
 	as being "fully specified".
 	Whereas, it refers to cryptographic algorithm identifiers
 	that require additional information beyond the algorithm identifier
@@ -83,7 +83,7 @@
 
           <t hangText="Polymorphic">
 	    <vspace/>
-	    Those requiring infomation beyond the algorithm identifier
+	    Those requiring information beyond the algorithm identifier
 	    to determine the cryptographic operations to be performed.
 	    Such additional information could include the actual key value and a curve that it uses.
 	    Examples are <spanx style="verb">EdDSA</spanx> in both JOSE and COSE
@@ -121,7 +121,7 @@
       </t>
       <t>
 	This redefines the COSE <spanx style="verb">EdDSA</spanx> algorithm identifier
-	for the purposes of WebAuth to restrict it to using
+	for the purposes of WebAuthn to restrict it to using
 	the <spanx style="verb">Ed25519</spanx> curve - making it non-polymorphic
 	so that algorithm negotiation can succeed, but also effectively
 	eliminating the possibility of using <spanx style="verb">Ed448</spanx>.
@@ -564,7 +564,8 @@
 	since it reduces the opportunity for attackers to choose algorithms.
       </t>
       <t>
-	The securty considerations for ECDSA in <xref target="RFC7518"/> and
+	The security considerations for ECDSA in <xref target="RFC7518"/>,
+	for EdDSA in <xref target="RFC8037"/>, and
 	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
       </t>
     </section>
