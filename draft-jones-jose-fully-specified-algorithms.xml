@@ -583,7 +583,7 @@
 	    Discuss why varying RSA key sizes don't necessitate per-key-size algorithm identifiers.
           </t>
 	  <t>
-	    Discuss the treatment of <spanx style="verb">EDCH-ES</spanx> and it ephemeral keys.
+	    Discuss the treatment of <spanx style="verb">EDCH-ES</spanx> and its ephemeral keys.
 	  </t>
         </list>
       </t>
