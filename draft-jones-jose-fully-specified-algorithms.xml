@@ -338,7 +338,7 @@
 		Description: ECDSA using P-256 curve and SHA-256
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document 
+		Reference: <xref target="ECDSA"/> of this document
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -357,7 +357,7 @@
 		Description: ECDSA using P-384 curve and SHA-384
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document 
+		Reference: <xref target="ECDSA"/> of this document
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -376,7 +376,7 @@
 		Description: ECDSA using P-521 curve and SHA-512
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document 
+		Reference: <xref target="ECDSA"/> of this document
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -395,7 +395,7 @@
 		Description: EdDSA using Ed25519 curve
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document 
+		Reference: <xref target="EdDSA"/> of this document
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -414,7 +414,7 @@
 		Description: EdDSA using Ed448 curve
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document 
+		Reference: <xref target="EdDSA"/> of this document
 	      </t>
 	      <t>
 		Recommended: Yes
