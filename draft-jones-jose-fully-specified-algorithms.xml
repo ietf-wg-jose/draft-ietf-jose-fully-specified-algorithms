@@ -166,9 +166,9 @@
 	</t>
 	<texttable anchor="ecdsa-algs" title="ECDSA Algorithm Values" suppress-title="false" align="center" style="full">
 	  <ttcol align="left">Name</ttcol>
-	  <ttcol align="left">Value</ttcol>
+	  <ttcol align="left">COSE Value</ttcol>
 	  <ttcol align="left">Description</ttcol>
-	  <ttcol align="left">Recommended</ttcol>
+	  <ttcol align="left">COSE Recommended</ttcol>
 
 	  <c>ESP256</c>
 	  <c>TBD (requested assignment -9)</c>
@@ -258,7 +258,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Algorithm Name: ES448
@@ -348,7 +350,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ESP384
@@ -368,7 +372,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ESP512
@@ -388,7 +394,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ES25519
@@ -408,7 +416,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ES448
@@ -455,7 +465,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ES384
@@ -475,7 +487,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: ES512
@@ -495,7 +509,9 @@
 	    </list>
 	  </t>
 	  <t>
-	    <vspace/>
+	    &#xA0;
+	  </t>
+	  <t>
 	    <list style="symbols">
 	      <t>
 		Name: EdDSA
