@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="29" month="August" year="2023" />
+    <date day="31" month="August" year="2023" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -205,13 +205,13 @@
 	  <ttcol align="left">JOSE Implementation Requirements</ttcol>
 	  <ttcol align="left">COSE Recommended</ttcol>
 
-	  <c>ES25519</c>
+	  <c>Ed25519</c>
 	  <c>TBD (requested assignment -50)</c>
 	  <c>EdDSA using Ed25519 curve</c>
 	  <c>Optional</c>
 	  <c>No</c>
 
-	  <c>ES448</c>
+	  <c>Ed448</c>
 	  <c>TBD (requested assignment -51)</c>
 	  <c>EdDSA using Ed448 curve</c>
 	  <c>Optional</c>
@@ -235,7 +235,7 @@
 	    <?rfc subcompact="yes"?>
 	    <list style="symbols">
 	      <t>
-		Algorithm Name: ES25519
+		Algorithm Name: Ed25519
 	      </t>
 	      <t>
 		Algorithm Description: EdDSA using Ed25519 curve
@@ -263,7 +263,7 @@
 	  <t>
 	    <list style="symbols">
 	      <t>
-		Algorithm Name: ES448
+		Algorithm Name: Ed448
 	      </t>
 	      <t>
 		Algorithm Description: EdDSA using Ed448 curve
@@ -399,7 +399,7 @@
 	  <t>
 	    <list style="symbols">
 	      <t>
-		Name: ES25519
+		Name: Ed25519
 	      </t>
 	      <t>
 		Value: TBD (requested assignment -50)
@@ -421,7 +421,7 @@
 	  <t>
 	    <list style="symbols">
 	      <t>
-		Name: ES448
+		Name: Ed448
 	      </t>
 	      <t>
 		Value: TBD (requested assignment -51)
@@ -576,6 +576,11 @@
       </t>
       <t>
         <list style="symbols">
+	  <t>
+	    State that key representations for the new fully-specified algorithms
+	    are the same as for the polymorphic algorithms that they replaced,
+	    other than the <spanx style="verb">alg</spanx> value, if included.
+	  </t>
 	  <t>
 	    What other polymorphic algorithm registrations have we missed?
 	  </t>
@@ -738,6 +743,16 @@
       </t>
 
       <t>
+        -01
+        <list style="symbols">
+          <t>
+	    Renamed <spanx style="verb">ES25519</spanx> to <spanx style="verb">Ed25519</spanx> and
+	    <spanx style="verb">ES448</spanx> to <spanx style="verb">Ed448</spanx>, by popular demand!
+          </t>
+        </list>
+      </t>
+
+      <t>
         -00
         <list style="symbols">
           <t>
@@ -753,8 +768,10 @@
 	The authors thank
 	John Bradley,
 	Brian Campbell,
+	Ilari Liusvarra,
+	Tobias Looker,
 	and
-	Tobias Looker
+	Filip Skokan
 	for their contributions to this specification.
       </t>
     </section>
