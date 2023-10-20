@@ -236,6 +236,57 @@
       </t>
     </section>
 
+    <section anchor="NotUpdated" title="Notes on Algorithms Not Updated">
+      <t>
+	The working group has discussed some existing algorithms that are not updated
+	by this specification.
+	This section discusses why they have not been updated.
+      </t>
+
+      <section anchor="RSA" title="Algorithms for Signing with RSASSA-PKCS1-v1_5">
+	<t>
+	  The working group has discussed whether the
+	  <spanx style="verb">RS256</spanx>,
+	  <spanx style="verb">RS384</spanx>, and
+	  <spanx style="verb">RS512</spanx> algorithms
+	  should be considered fully-specified or not,
+	  because they can operate on keys of different sizes.
+	  For instance, they can use both 2048- and 4096-bit keys.
+	  The same is true of the <spanx style="verb">PS*</spanx> algorithms.
+	</t>
+	<t>
+	  This is not a problem in practice, because RSA libraries accomodate
+	  keys of different sizes without having to use different code.
+	  Therefore, for example, there are not known cases in the wild where it would be useful
+	  to have different algorithm identifiers for RSASSA-PKCS1-v1_5 with SHA-256 and 2048-bit keys
+	  and RSASSA-PKCS1-v1_5 with SHA-256 and 4096-bit keys or 8192-bit keys.
+	  Therefore, the RSA signature algorithms are not replaced by this specification.
+	</t>
+      </section>
+
+      <section anchor="ECDH-ES" title="ECDH-ES and its Ephemeral Keys">
+	<t>
+	  The working group has discussed whether the
+	  <spanx style="verb">ECDH-ES</spanx> key agreement algorithm
+	  should be considered fully-specified or not,
+	  because it can use ephemeral keys of different key types and algorithms.
+	  Indeed, an implementation might work when <spanx style="verb">ECDH-ES</spanx>
+	  is used with a ephemeral keys using the <spanx style="verb">P-256</spanx> curve,
+	  and not work when used with ephemeral keys using the
+	  <spanx style="verb">Ed25519</spanx> curve.
+	</t>
+	<t>
+	  One way that protocols can handle this situation is to use a discovery mechanism
+	  to declare what ephemeral key types are supported.
+	  The alternative would be to introduce new fully-specified algorithm identifiers
+	  for choices such as "ECDH-ES with the P-256 Curve", etc.
+	  Feedback from deployers would be useful in determining
+	  what actions this specification should take in this case.
+	</t>
+      </section>
+
+    </section>
+
     <section anchor="IANA" title="IANA Considerations">
 
       <section anchor="jose-algorithm-registration" title="JOSE Algorithms Registrations">
@@ -584,25 +635,6 @@
       </t>
     </section>
 
-    <section anchor="TBD" title="To Do">
-      <t>
-	Future versions of this specification may cover these additional topics:
-      </t>
-      <t>
-        <list style="symbols">
-	  <t>
-	    What other polymorphic algorithm registrations have we missed?
-	  </t>
-          <t>
-	    Discuss why varying RSA key sizes don't necessitate per-key-size algorithm identifiers.
-          </t>
-	  <t>
-	    Discuss the treatment of <spanx style="verb">EDCH-ES</spanx> and its ephemeral keys.
-	  </t>
-        </list>
-      </t>
-    </section>
-
   </middle>
 
   <back>
@@ -758,6 +790,9 @@
 	    Stated that key representations remain the same,
 	    other than the <spanx style="verb">alg</spanx> value.
           </t>
+	  <t>
+	    Discussed algorithms not updated.
+	  </t>
         </list>
       </t>
 
