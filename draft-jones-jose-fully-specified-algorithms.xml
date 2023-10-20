@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="31" month="August" year="2023" />
+    <date day="20" month="October" year="2023" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -220,6 +220,20 @@
 	</texttable>
       </section>
 
+    </section>
+
+    <section anchor="Keys" title="Key Representations">
+      <t>
+	The key representations for the new fully-specified algorithms
+	defined by this specification are the same as those for the
+	polymorphic algorithms that they replace,
+	other than the <spanx style="verb">alg</spanx> value, if included.
+	For instance, the representation for a key used with the
+	<spanx style="verb">Ed25519</spanx> algorithm is the same as that specified
+	in <xref target="RFC8037"/>, except that the <spanx style="verb">alg</spanx>
+	value would be <spanx style="verb">Ed25519</spanx> rather than
+	<spanx style="verb">EdDSA</spanx>, if included.
+      </t>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
@@ -577,11 +591,6 @@
       <t>
         <list style="symbols">
 	  <t>
-	    State that key representations for the new fully-specified algorithms
-	    are the same as for the polymorphic algorithms that they replaced,
-	    other than the <spanx style="verb">alg</spanx> value, if included.
-	  </t>
-	  <t>
 	    What other polymorphic algorithm registrations have we missed?
 	  </t>
           <t>
@@ -740,6 +749,16 @@
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+	-02
+        <list style="symbols">
+          <t>
+	    Stated that key representations remain the same,
+	    other than the <spanx style="verb">alg</spanx> value.
+          </t>
+        </list>
       </t>
 
       <t>
