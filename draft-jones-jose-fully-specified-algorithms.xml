@@ -21,7 +21,7 @@
     <title>Fully-Specified Algorithms for JOSE and COSE</title>
 
     <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-      <organization>independent</organization>
+      <organization>Self-Issued Consulting</organization>
       <address>
 	<email>michael_b_jones@hotmail.com</email>
 	<uri>https://self-issued.info/</uri>
@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="20" month="October" year="2023" />
+    <date day="8" month="November" year="2023" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
