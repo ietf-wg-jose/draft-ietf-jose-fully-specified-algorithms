@@ -4,7 +4,7 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std" ipr="trust200902"
-  docName="draft-jones-jose-fully-specified-algorithms-latest"
+  docName="draft-ietf-jose-fully-specified-algorithms-latest"
   updates="7518, 8037, 9053">
 
   <?rfc toc="yes"?>
@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="8" month="November" year="2023" />
+    <date day="25" month="January" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -784,33 +784,10 @@
       </t>
 
       <t>
-	-02
-        <list style="symbols">
-          <t>
-	    Stated that key representations remain the same,
-	    other than the <spanx style="verb">alg</spanx> value.
-          </t>
-	  <t>
-	    Discussed algorithms not updated.
-	  </t>
-        </list>
-      </t>
-
-      <t>
-        -01
-        <list style="symbols">
-          <t>
-	    Renamed <spanx style="verb">ES25519</spanx> to <spanx style="verb">Ed25519</spanx> and
-	    <spanx style="verb">ES448</spanx> to <spanx style="verb">Ed448</spanx>, by popular demand!
-          </t>
-        </list>
-      </t>
-
-      <t>
         -00
         <list style="symbols">
           <t>
-	    Initial version.
+	    Created initial working group version based on draft-jones-jose-fully-specified-algorithms-02.
           </t>
         </list>
       </t>
