@@ -534,26 +534,50 @@
 	</section>
       </section>
 
-      <section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
+<section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
+  <section anchor="UpdatedInstructions1" title="JSON Web Signature and Encryption Algorithms">
+	<t>
+		IANA is directed to preserve the current Reference to RFC7518,
+		and to add a reference to this section, of this document.
+	</t>
 	<t>
 	  The review instructions for the designated experts for the
 	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
 	  in Section 7.1 of <xref target="RFC7518"/>
-	  are updated to add this additional review criterion:
+	  have been updated to include an additional review criterion:
 	  <list style="symbols">
 	    <t>
-	      Registration requests for polymorphic algorithm identifiers must not be accepted;
-	      only fully-specified algorithm identifiers may be registered going forward.
+				Only fully-specified algorithm identifiers may be registered.
+	      Polymorphic algorithm identifiers must not be registered.
+	    </t>
+			<t>
+				Only proposed standard RFCs are acceptable as references.
 	    </t>
 	  </list>
+	</t>
+	</section>
+	<section anchor="UpdatedInstructions2" title="COSE Algorithms">
+	<t>
+		IANA is directed to preserve the current Reference to RFC9053 and RFC9054,
+		and to add a reference to this section, of this document.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
 	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>
 	  in Section 10.4 of <xref target="RFC9053"/>
-	  are also updated to add the same additional review criterion.
+	  have been updated to include an additional review criterion:
+	  <list style="symbols">
+	    <t>
+				Only fully-specified algorithm identifiers may be registered.
+	      Polymorphic algorithm identifiers must not be registered.
+	    </t>
+			<t>
+				Only proposed standard RFCs are acceptable as references.
+	    </t>
+	  </list>
 	</t>
-      </section>
+	</section>
+</section>
 
     </section>
 
