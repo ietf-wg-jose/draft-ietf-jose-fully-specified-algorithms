@@ -555,8 +555,8 @@
 	</section>
 	<section anchor="UpdatedInstructions2" title="COSE Algorithms">
 	<t>
-		IANA is directed to preserve the current Reference to RFC9053 and RFC9054,
-		and to add a reference to this section, of this document.
+		IANA is directed to preserve the current references to RFC 9053 and RFC 9054,
+		and to add a reference to this section of this document.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
