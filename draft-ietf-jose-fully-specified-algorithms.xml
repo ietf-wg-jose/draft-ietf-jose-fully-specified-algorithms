@@ -534,26 +534,44 @@
 	</section>
       </section>
 
-      <section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
+<section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
+  <section anchor="UpdatedInstructions1" title="JSON Web Signature and Encryption Algorithms">
+	<t>
+		IANA is directed to preserve the current reference to RFC 7518,
+		and to add a reference to this section of this document.
+	</t>
 	<t>
 	  The review instructions for the designated experts for the
 	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
 	  in Section 7.1 of <xref target="RFC7518"/>
-	  are updated to add this additional review criterion:
+	  have been updated to include an additional review criterion:
 	  <list style="symbols">
 	    <t>
-	      Registration requests for polymorphic algorithm identifiers must not be accepted;
-	      only fully-specified algorithm identifiers may be registered going forward.
+				Only fully-specified algorithm identifiers may be registered.
+	      Polymorphic algorithm identifiers must not be registered.
 	    </t>
 	  </list>
+	</t>
+	</section>
+	<section anchor="UpdatedInstructions2" title="COSE Algorithms">
+	<t>
+		IANA is directed to preserve the current references to RFC 9053 and RFC 9054,
+		and to add a reference to this section of this document.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
 	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>
 	  in Section 10.4 of <xref target="RFC9053"/>
-	  are also updated to add the same additional review criterion.
+	  have been updated to include an additional review criterion:
+	  <list style="symbols">
+	    <t>
+				Only fully-specified algorithm identifiers may be registered.
+	      Polymorphic algorithm identifiers must not be registered.
+	    </t>
+	  </list>
 	</t>
-      </section>
+	</section>
+</section>
 
     </section>
 
@@ -617,6 +635,14 @@
 	  for choices such as "ECDH-ES with the P-256 Curve", etc.
 	  Feedback from deployers would be useful in determining
 	  what actions this specification should take in this case.
+	</t>
+      </section>
+
+			<section anchor="KEMs" title="KEMs and Encapsulated Keys">
+	<t>
+    All KEM algorithms provide three functions: KeyGen(), Encapsulate(), and Decapsulate().
+		In order to consider a KEM algorithm fully specified,
+		there MUST be a single KDF used per KEM Algorithm.
 	</t>
       </section>
 
