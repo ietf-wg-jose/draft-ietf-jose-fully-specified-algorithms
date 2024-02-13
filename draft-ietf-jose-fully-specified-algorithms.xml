@@ -568,9 +568,6 @@
 				Only fully-specified algorithm identifiers may be registered.
 	      Polymorphic algorithm identifiers must not be registered.
 	    </t>
-			<t>
-				Only proposed standard RFCs are acceptable as references.
-	    </t>
 	  </list>
 	</t>
 	</section>
