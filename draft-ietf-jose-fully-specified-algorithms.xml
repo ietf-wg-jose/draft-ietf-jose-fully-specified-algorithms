@@ -537,8 +537,8 @@
 <section anchor="UpdatedInstructions" title="Updated Review Instructions for Designated Experts">
   <section anchor="UpdatedInstructions1" title="JSON Web Signature and Encryption Algorithms">
 	<t>
-		IANA is directed to preserve the current Reference to RFC7518,
-		and to add a reference to this section, of this document.
+		IANA is directed to preserve the current reference to RFC 7518,
+		and to add a reference to this section of this document.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
