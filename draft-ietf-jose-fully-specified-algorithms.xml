@@ -591,7 +591,7 @@
       </t>
     </section>
 
-    <section anchor="MultiAlgs" title="Fully-Spedified Computations Using Multiple Algorithms">
+    <section anchor="MultiAlgs" title="Fully-Specified Computations Using Multiple Algorithms">
       <t>
 	Both JOSE and COSE have operations that take multiple algorithms as parameters.
 	Encrypted objects in JOSE <xref target="RFC7516"/> use two algorithm identifiers:
@@ -844,7 +844,7 @@
 	    Added text on KEMs and Encapsulated keys.
 	  </t>
 	  <t>
-	    Added the section Fully-Spedified Computations Using Multiple Algorithms.
+	    Added the section Fully-Specified Computations Using Multiple Algorithms.
 	  </t>
         </list>
       </t>
