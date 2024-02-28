@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="27" month="February" year="2024" />
+    <date day="28" month="February" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -603,13 +603,12 @@
 	for corresponding purposes.
       </t>
       <t>
-	For purposes of being fully specified,
-	each of these multiple algorithms must be independently fully specified.
+	Each of these multiple algorithms must be independently fully specified.
 	The operations performed by each of them MUST NOT vary
-	when combined with other algorithms.
-	So for instance, for JOSE <spanx style="verb">alg</spanx> values
+	when used alongside other algorithms.
+	So for instance, for JOSE, <spanx style="verb">alg</spanx> values
 	and <spanx style="verb">enc</spanx> values MUST each be fully specified,
-	and their specified behaviors MUST not depend upon one another.
+	and their behaviors MUST NOT depend upon one another.
       </t>
     </section>
 
