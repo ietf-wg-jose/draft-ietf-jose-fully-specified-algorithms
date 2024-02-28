@@ -18,7 +18,7 @@
 
   <front>
 
-    <title>Fully-Specified Algorithms for JOSE and COSE</title>
+    <title abbrev="Fully-Specified Algorithms">Fully-Specified Algorithms for JOSE and COSE</title>
 
     <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
       <organization>Self-Issued Consulting</organization>
@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="25" month="January" year="2024" />
+    <date day="27" month="February" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -97,7 +97,8 @@
 	For instance, OAuth Authorization Server Metadata <xref target="RFC8414"/>
 	uses negotiation parameters like these (from an example in the specification):
 	<figure><artwork><![CDATA[
-  "token_endpoint_auth_signing_alg_values_supported": ["RS256", "ES256"]
+  "token_endpoint_auth_signing_alg_values_supported":
+    ["RS256", "ES256"]
 ]]></artwork></figure>
       </t>
       <t>
@@ -227,7 +228,8 @@
       <section anchor="jose-algorithm-registration" title="JOSE Algorithms Registrations">
         <t>
 	  This section registers the following values in the
-	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>.
+	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
+	  established by <xref target="RFC7515"/>.
 	</t>
 
 	<section anchor="new-jose-regs" title="Fully-Specified JOSE Algorithm Registrations">
@@ -589,6 +591,28 @@
       </t>
     </section>
 
+    <section anchor="MultiAlgs" title="Fully-Spedified Computations Using Multiple Algorithms">
+      <t>
+	Both JOSE and COSE have operations that take multiple algorithms as parameters.
+	Encrypted objects in JOSE <xref target="RFC7516"/> use two algorithm identifiers:
+	the first in the <spanx style="verb">alg</spanx> (Algorithm) Header Parameter,
+	which specifies how to determine the content encryption key, and
+	the second in the <spanx style="verb">enc</spanx> (Encryption Algorithm)
+	Header Parameter, which specifies the content encryption algorithm.
+	Likewise, encrypted COSE objects can use multiple algorithms
+	for corresponding purposes.
+      </t>
+      <t>
+	For purposes of being fully specified,
+	each of these multiple algorithms must be independently fully specified.
+	The operations performed by each of them MUST NOT vary
+	when combined with other algorithms.
+	So for instance, for JOSE <spanx style="verb">alg</spanx> values
+	and <spanx style="verb">enc</spanx> values MUST each be fully specified,
+	and their specified behaviors MUST not depend upon one another.
+      </t>
+    </section>
+
     <section anchor="NotUpdated" title="Notes on Algorithms Not Updated">
       <t>
 	The working group has discussed some existing algorithms that are not updated
@@ -668,6 +692,8 @@
     <references title="Normative References">
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8037.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9053.xml"/>
@@ -807,6 +833,21 @@
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+        -01
+        <list style="symbols">
+          <t>
+	    Included additional instructions for IANA.
+          </t>
+	  <t>
+	    Added text on KEMs and Encapsulated keys.
+	  </t>
+	  <t>
+	    Added the section Fully-Spedified Computations Using Multiple Algorithms.
+	  </t>
+        </list>
       </t>
 
       <t>
