@@ -663,9 +663,11 @@
 
 			<section anchor="KEMs" title="KEMs and Encapsulated Keys">
 	<t>
-    All KEM algorithms provide three functions: KeyGen(), Encapsulate(), and Decapsulate().
+    All key encapsulation mechanisms (KEM) algorithms provide three functions: KeyGen(), Encapsulate(), and Decapsulate().
 		In order to consider a KEM algorithm fully specified,
 		there MUST be a single KDF used per KEM Algorithm.
+		For example, the HPKE KEM "0x0010 or DHKEM(P-256, HKDF-SHA256)" as defined in RFC9180 is fully specified, 
+		because it uses a single elliptic curve (secp256r1) and a single KDF (HKDF with SHA256) as described in RFC5869.
 	</t>
       </section>
 
