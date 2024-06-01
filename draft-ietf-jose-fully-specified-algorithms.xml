@@ -223,51 +223,56 @@
 
     </section>
 
-		<section anchor="fully-specified-encryption-algs" title="Fully-specified Encryption Algorithm Identifiers">
+    <section anchor="fully-specified-encryption-algs" title="Fully-specified Encryption Algorithm Identifiers">
       <t>
-	This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing JOSE and COSE encryption schemes,
-	such as JSON Web Encryption (JWE) as described in <xref target="RFC7516"/> and COSE Encrypt as described in <xref target="RFC9052"/>.
+  This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing JOSE and COSE encryption schemes,
+  such as JSON Web Encryption (JWE) as described in <xref target="RFC7516"/> and COSE Encrypt as described in <xref target="RFC9052"/>.
       </t>
 
-			<t>
+      <t>
 JOSE and COSE support several modes of encryption, although the terminology may differ between JOSE and COSE,
 these modes are meant to support:
       </t>
-			<list style="symbols">
-				<t>
+      <list style="symbols">
+        <t>
 Direct Encryption - A symmetric cryptographic operation.
-				</t>
-				<t>
+        </t>
+        <t>
 Key Establishment and Direct Encryption - An assymetric cryptographic operation to derive a shared secret, key derivation and then a symmetric cryptographic operation.
-				</t>
-				<t>
+        </t>
+        <t>
 Two Layer Encryption - A content encryption key is protected (many possible ways), content encryption and decryption is performed using the protected content encryption key.
-				</t>
-			</list>
-			<t>
+        </t>
+      </list>
+      <t>
 Mode complexity creates the following risks:
-			</t>
+      </t>
 
-			<list style="symbols">
-				<t>
+      <list style="symbols">
+        <t>
 The combination of chosen algorithms might not be implemented by the receiver.
-				</t>
-				<t>
+        </t>
+        <t>
 The combinations of chosen algorithms migth not be aligned in terms of bit strength.
-				</t>
-				<t>
+        </t>
+        <t>
 Under specified or implicit parameters could lead to exploitable faults in implementations, for example cross curve ECDH between P-256 and P-384 or X25519.
-				</t>
-				<t>
+        </t>
+        <t>
 Alternative algorithms at a component layer, such as symmetric key encryption, might provide different security properties, for example AES-CBC vs AES-GCM.
-				</t>
-			</list>
+        </t>
+      </list>
 
-			<t>
+      <t>
+While this specification provides a definition of what fully specified encryption algorithm identifiers are for both JOSE and COSE, including examples,
+it does not deprecate any polymorphic algorithms or register any new fully specified algorithms.
+</t>
+
+      <t>
 The following sections describe what fully specified means for each mode.
-			</t>
+      </t>
 
-			<section anchor="fully-specified-symmetric-encryption-algs" title="Direct Encryption">
+      <section anchor="fully-specified-symmetric-encryption-algs" title="Direct Encryption">
 <t>
 Symmetric encryption algorithms generally satisfy the following interface:
 </t>
@@ -306,9 +311,9 @@ Example of a decoded JWE Protected Header, for Direct Encryption:
 </t>
 <sourcecode>
 {
-	"alg": "dir",
-	"enc": "A128GCM",
-	...
+  "alg": "dir",
+  "enc": "A128GCM",
+  ...
 }
 </sourcecode>
 
@@ -317,17 +322,19 @@ Example of a decoded JWE Protected Header, for Key Wrapping:
 </t>
 <sourcecode>
 {
-	"alg": "A128KW",
-	"enc": "A128GCM",
-	...
+  "alg": "A128KW",
+  "enc": "A128GCM",
+  ...
 }
 </sourcecode>
 
+<t>
 TODO: COSE EDN example.
+</t>
 
-			</section>
+      </section>
 
-			<section anchor="fully-specified-direct-encryption-algs" title="Key Establishment and Direct Encryption">
+      <section anchor="fully-specified-direct-encryption-algs" title="Key Establishment and Direct Encryption">
 <t>
 Key establishment and direct encryption algorithms generally satisfy the following interface:
 </t>
@@ -352,7 +359,7 @@ The process of producing a shared secret is key type specific, and is different 
 </t>
 
 <t>
-Elliptic curve Diffie-Hellman (ECDH) is used to produce	a shared secret with elliptic curve based keys.
+Elliptic curve Diffie-Hellman (ECDH) is used to produce  a shared secret with elliptic curve based keys.
 </t>
 <sourcecode>
 secret_key1, public_key1 = key_generation(algorithm_identifier)
@@ -407,13 +414,15 @@ Example of a decoded JWE Protected Header, for Key Establishment and Direct Encr
 
 <sourcecode>
 {
-	"alg":"ECDH-ES",
-	"enc":"A128GCM",
-	...
+  "alg":"ECDH-ES",
+  "enc":"A128GCM",
+  ...
 }
 </sourcecode>
 
+<t>
 TODO: COSE EDN example.
+</t>
 
 <t>
 Despite containing both the key establishment algorithm (with an implicit KDF) and the symmetric encryption algorithm, the example above is not fully specified.
@@ -440,9 +449,9 @@ For example: "ECDH-ES-P256-HKDF-SHA-256-A128GCM", "ECDH-ES-P384-HKDF-SHA-512-A25
 Fully specified Key Establishment and Direct Encryption algorithms enable the sender and receiver to agree on all algorithms needed to encrypt and decrypt a message using a single algorithm identifier.
 </t>
 
-			</section>
+      </section>
 
-			<section anchor="fully-specified-key-wrapping-encryption-algs" title="Two Layer Encryption">
+      <section anchor="fully-specified-key-wrapping-encryption-algs" title="Two Layer Encryption">
 
 <t>
 This section is confusing because it needs to address both JOSE and COSE which each offer multiple ways that a content encryption key can be produced and protected, then later used to decrypt or encrypt content.
@@ -528,9 +537,9 @@ Example of a decoded JWE Protected Header, for Key Encryption using RSA-OAEP wit
 
 <sourcecode>
 {
-	"alg": "RSA-OAEP",
-	"enc": "A256GCM",
-	...
+  "alg": "RSA-OAEP",
+  "enc": "A256GCM",
+  ...
 }
 </sourcecode>
 
@@ -540,9 +549,9 @@ Example of a decoded JWE Protected Header, for Key Encryption using ECDH-ES and 
 
 <sourcecode>
 {
-	"alg": "ECDH-ES+A128KW",
-	"enc": "A128GCM",
-	...
+  "alg": "ECDH-ES+A128KW",
+  "enc": "A128GCM",
+  ...
 }
 </sourcecode>
 
@@ -578,13 +587,7 @@ or mismatched kdf size to symmetric key scenarios.
 </t>
 
 </section>
-
-<t>
-While this specification provides a definition of what fully specified encryption algorithm identifiers are for both JOSE and COSE, including examples,
-it does not deprecate any polymorphic algorithms or register any new fully specified algorithms.
-</t>
-
-		</section>
+	</section>
 
     <section anchor="IANA" title="IANA Considerations">
 
@@ -1051,29 +1054,16 @@ it does not deprecate any polymorphic algorithms or register any new fully speci
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8037.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9053.xml"/>
+			<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9052.xml"/>
 
     </references>
 
     <references title="Informative References">
-
-			<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5869.xml"/>
-			<xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9180.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7518.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8032.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
 
 			
-
-			<reference anchor="NIST.PQC-API" target="https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/example-files/api-notes.pdf">
-        <front>
-          <title>PQC-API</title>
-          <author>
-            <organization>National Institute of Standards and Technology (NIST)</organization>
-          </author>
-	  <date/>
-        </front>
-      </reference>
-
       <reference anchor="IANA.JOSE.Algorithms" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
         <front>
           <title>JOSE Algorithms</title>
@@ -1083,6 +1073,7 @@ it does not deprecate any polymorphic algorithms or register any new fully speci
 	  <date/>
         </front>
       </reference>
+
 
       <reference anchor="IANA.COSE.Algorithms" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
         <front>
