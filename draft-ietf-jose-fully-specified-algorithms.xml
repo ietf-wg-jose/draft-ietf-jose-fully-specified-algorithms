@@ -477,11 +477,11 @@ How the content encryption key was generated is out of scope when considering th
 <t>
 As noted in the Direct Encryption section, Key wrapping algorithms generally satisfy the following interface:
 </t>
-<sourcecode>
+<t>
 key_encryption_key = key_generation(algorithm_identifier)
 encrypted_content_encryption_key = encrypt(content_encryption_key, key_encryption_key)
 content_encryption_key  = decrypt(encrypted_content_encryption_key, key_encryption_key)
-</sourcecode>
+</t>
 
 <t>
 When Key Establishment with Key Wrapping is used, the content encryption key is protected with Key Wrapping, where the Key Encryption Key is derived from an assymetric cryptographic operation and a key derivation function.
@@ -490,13 +490,13 @@ When Key Establishment with Key Wrapping is used, the content encryption key is 
 <t>
 Key Establishment with Key Wrapping algorithms generally satisfy the following interface:
 </t>
-<sourcecode>
+<t>
 secret_key, public_key = key_generation(algorithm_identifier)
 # ignoring ephemeral static vs static static, etc...
 key_encryption_key = key_establishment(public_key, secret_key)
 encrypted_content_encryption_key = encrypt(content_encryption_key, key_encryption_key)
 content_encryption_key = decrypt(encrypted_content_encryption_key, key_encryption_key)
-</sourcecode>
+</t>
 
 <t>
 The interface above is consistent with the Section on Key Establishment and Direct Encryption,
@@ -507,11 +507,11 @@ The difference is that instead of using the derived content encryption key direc
 <t>
 Regardless of how a Two Layer Encryption scheme protects a content encryption key, content encryption algorithms generally satisfy the following interface:
 </t>
-<sourcecode>
+<t>
 content_encryption_key = unwrap or establish and unwrap or key transport...
 ciphertext = encrypt(plaintext, content_encryption_key)
 plaintext  = decrypt(ciphertext, content_encryption_key)
-</sourcecode>
+</t>
 
 <t>
 Depending on the content encryption algorithm, additional parameters such as additional authenticated data (AAD) or initialization vector (IV) might be required.
