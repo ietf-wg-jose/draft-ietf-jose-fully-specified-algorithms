@@ -661,7 +661,7 @@
 	</t>
       </section>
 
-      <section anchor="KEMs" title="KEMs and Encapsulated Keys">
+      <!-- <section anchor="KEMs" title="KEMs and Encapsulated Keys">
 	<t>
 	  All key encapsulation mechanisms (KEM) algorithms,
 	  as described in <xref target="NIST.PQC-API"/>,
@@ -673,7 +673,7 @@
 	  because it uses a single elliptic curve (secp256r1) and
 	  a single KDF (HKDF with SHA256), as described in <xref target="RFC5869"/>.
 	</t>
-      </section>
+      </section> -->
 
     </section>
 
@@ -681,7 +681,7 @@
       <t>
 	Using fully-specified algorithm identifiers reduces the attack surface
 	relative to using polymorphic algorithm identifiers,
-	since it reduces the opportunity for attackers to choose algorithms.
+	since it reduces the opportunity for attackers to choose insecure or unexpected combinations of algorithms.
       </t>
       <t>
 	The security considerations for ECDSA in <xref target="RFC7518"/>,
@@ -852,6 +852,16 @@
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+			<t>
+        -03 - TBD
+        <list style="symbols">
+          <t>
+	    Address security considerations feedback from WGLC.
+          </t>
+	 
+        </list>
       </t>
 
       <t>
