@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="28" month="February" year="2024" />
+    <date day="23" month="June" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -210,13 +210,13 @@
 	  <c>TBD (requested assignment -50)</c>
 	  <c>EdDSA using Ed25519 curve</c>
 	  <c>Optional</c>
-	  <c>No</c>
+	  <c>Yes</c>
 
 	  <c>Ed448</c>
 	  <c>TBD (requested assignment -51)</c>
 	  <c>EdDSA using Ed448 curve</c>
 	  <c>Optional</c>
-	  <c>No</c>
+	  <c>Yes</c>
 
 	</texttable>
       </section>
@@ -1213,13 +1213,18 @@ or mismatched KDF size to symmetric key scenarios.
         [[ to be removed by the RFC Editor before publication as an RFC ]]
       </t>
 
-			<t>
-        -03 - TBD
+      <t>
+        -03
         <list style="symbols">
+	  <t>
+	    Acknowledged contributions made during Working Group Last Call.
+	  </t>
           <t>
-	    Address security considerations feedback from WGLC.
+	    Addressed security considerations feedback from WGLC.
           </t>
-	
+	  <t>
+	    Made COSE Recommended status for Ed25519 and Ed448 "yes".
+	  </t>
         </list>
       </t>
 
@@ -1264,12 +1269,22 @@ or mismatched KDF size to symmetric key scenarios.
     <section title="Acknowledgements" anchor="Acknowledgements" numbered="no">
       <t>
 	The authors thank
+	Carsten Bormann,
 	John Bradley,
+	Tim Bray,
 	Brian Campbell,
+	Stephen Farrell,
 	Ilari Liusvaara,
 	Tobias Looker,
+	Neil Madden,
+	John Mattsson,
+	Jeremy O'Donoghue,
+	Anders Rundgren,
+	Göran Selander,
+	Filip Skokan,
+	Oliver Terbu,
 	and
-	Filip Skokan
+	David Waite
 	for their contributions to this specification.
       </t>
     </section>
