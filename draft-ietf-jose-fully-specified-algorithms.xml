@@ -186,6 +186,26 @@
 	  <c>ECDSA using P-521 curve and SHA-512</c>
 	  <c>Yes</c>
 
+	  <c>ESB256</c>
+	  <c>TBD (requested assignment -261)</c>
+	  <c>ECDSA using BrainpoolP256r1 curve and SHA-256</c>
+	  <c>No</c>
+
+	  <c>ESB320</c>
+	  <c>TBD (requested assignment -262)</c>
+	  <c>ECDSA using BrainpoolP320r1 curve and SHA-384</c>
+	  <c>No</c>
+
+	  <c>ESB384</c>
+	  <c>TBD (requested assignment -263)</c>
+	  <c>ECDSA using BrainpoolP384r1 curve and SHA-384</c>
+	  <c>No</c>
+
+	  <c>ESB512</c>
+	  <c>TBD (requested assignment -264)</c>
+	  <c>ECDSA using BrainpoolP512r1 curve and SHA-512</c>
+	  <c>No</c>
+
 	</texttable>
       </section>
 
@@ -786,6 +806,94 @@ or mismatched KDF size to symmetric key scenarios.
 	  <t>
 	    <list style="symbols">
 	      <t>
+		Name: ESB256
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -261)
+	      </t>
+	      <t>
+		Description: ECDSA using BrainpoolP256r1 curve and SHA-256
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document
+	      </t>
+	      <t>
+		Recommended: No
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ESB320
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -262)
+	      </t>
+	      <t>
+		Description: ECDSA using BrainpoolP320r1 curve and SHA-384
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document
+	      </t>
+	      <t>
+		Recommended: No
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ESB384
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -263)
+	      </t>
+	      <t>
+		Description: ECDSA using BrainpoolP384r1 curve and SHA-384
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document
+	      </t>
+	      <t>
+		Recommended: No
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ESB512
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -264)
+	      </t>
+	      <t>
+		Description: ECDSA using BrainpoolP512r1 curve and SHA-512
+	      </t>
+	      <t>
+		Reference: <xref target="EdDSA"/> of this document
+	      </t>
+	      <t>
+		Recommended: No
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
 		Name: Ed25519
 	      </t>
 	      <t>
@@ -1224,6 +1332,9 @@ or mismatched KDF size to symmetric key scenarios.
           </t>
 	  <t>
 	    Made COSE Recommended status for Ed25519 and Ed448 "yes".
+	  </t>
+	  <t>
+	    Registered COSE algorithms for using Brainpool curves with ECDSA.
 	  </t>
         </list>
       </t>
