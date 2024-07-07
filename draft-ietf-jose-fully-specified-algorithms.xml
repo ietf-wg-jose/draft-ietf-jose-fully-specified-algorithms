@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="23" month="June" year="2024" />
+    <date day="7" month="July" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -55,7 +55,7 @@
 	that require additional information beyond the algorithm identifier
 	to determine the cryptographic operations to be performed
 	as being "polymorphic".
-	This specification creates fully-specified algorithm identifiers for all registered
+	This specification creates fully-specified algorithm identifiers for registered
 	JOSE and COSE polymorphic algorithm identifiers,
 	enabling applications to use only fully-specified algorithm identifiers.
       </t>
@@ -129,7 +129,7 @@
 	Other similar workarounds for polymorphic algorithm identifiers are used in practice.
       </t>
       <t>
-	This specification creates fully-specified algorithm identifiers for all registered
+	This specification creates fully-specified algorithm identifiers for registered
 	polymorphic JOSE and COSE algorithms and their parameters,
 	enabling applications to use only fully-specified algorithm identifiers.
 	It furthermore deprecates the practice of registering polymorphic algorithm identifiers.
@@ -245,8 +245,9 @@
 
     <section anchor="fully-specified-encryption-algs" title="Fully-specified Encryption Algorithm Identifiers">
       <t>
-  This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing JOSE and COSE encryption schemes,
-  such as JSON Web Encryption (JWE) as described in <xref target="RFC7516"/> and COSE Encrypt as described in <xref target="RFC9052"/>.
+  This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing the JOSE and COSE encryption schemes
+  JSON Web Encryption (JWE) as described in <xref target="RFC7516"/> and
+  COSE Encrypt as described in <xref target="RFC9052"/>.
       </t>
 
       <t>
@@ -258,7 +259,7 @@ these modes are meant to support:
 Direct Encryption - A symmetric cryptographic operation.
         </t>
         <t>
-Key Establishment and Direct Encryption - An asymmetric cryptographic operation to derive a shared secret, key derivation and then a symmetric cryptographic operation.
+Key Establishment with Direct Encryption - An asymmetric cryptographic operation to derive a shared secret, key derivation and then a symmetric cryptographic operation.
         </t>
         <t>
 Two-Layer Encryption - A content encryption key is protected (many possible ways), content encryption and decryption is performed using the protected content encryption key.
@@ -285,12 +286,16 @@ Alternative algorithms at a component layer, such as symmetric key encryption, m
 
       <t>
 While this specification provides a definition of what fully-specified encryption algorithm identifiers are for both JOSE and COSE, including examples,
-it does not deprecate any polymorphic algorithms or register any new fully-specified algorithms.
-<!-- TODO: We are going to register a few fully-specified ECDH algorithms, such as ECDH-ES-P-256 and ECDH-ES-P-256+A128KW. -->
+it does not deprecate any polymorphic algorithms,
+since complete replacements for them are not provided.
+It does register a small set of new fully-specified encryption algorithms,
+so that polymorphic encryption algorithms need not be used.
 </t>
 
       <t>
 The following sections describe what fully specified means for each mode.
+They also register at least one fully-specified algorithm for each mode,
+when one was not already available.
       </t>
 
       <section anchor="fully-specified-symmetric-encryption-algs" title="Direct Encryption">
@@ -357,9 +362,9 @@ TODO: COSE EDN example.
 
       </section>
 
-      <section anchor="fully-specified-direct-encryption-algs" title="Key Establishment and Direct Encryption">
+      <section anchor="fully-specified-direct-encryption-algs" title="Key Establishment with Direct Encryption">
 <t>
-Key establishment and direct encryption algorithms generally satisfy the following interface:
+Key establishment with direct encryption algorithms generally satisfy the following interface:
 </t>
 <sourcecode>
 private_key, public_key = key_generation(algorithm_identifier)
@@ -405,8 +410,8 @@ shared_secret = decap(ciphertext, private_key)
 </sourcecode>
 
 <t>
-When using Key Establishment and Direct Encryption, the ciphertext is not only the output of symmetric encryption, but also includes all parameters necessary for the recipient to decrypt the ciphertext.
-Encrypted content encryption keys are not produced by fully-specified Key Establishment and Direct Encryption algorithms.
+When using Key Establishment with Direct Encryption, the ciphertext is not only the output of symmetric encryption, but also includes all parameters necessary for the recipient to decrypt the ciphertext.
+Encrypted content encryption keys are not produced by fully-specified Key Establishment with Direct Encryption algorithms.
 </t>
 
 <t>
@@ -432,7 +437,7 @@ It is considered a best practice to only support 1 algorithm during the lifetime
 </t>
 
 <t>
-Example of a decoded JWE Protected Header, for Key Establishment and Direct Encryption:
+Example of a decoded JWE Protected Header, for Key Establishment with Direct Encryption:
 </t>
 
 <sourcecode>
@@ -454,24 +459,24 @@ Despite containing both the key establishment algorithm (with an implicit KDF) a
 </t>
 
 <t>
-To make a Key Establishment and Direct Encryption algorithm fully specified, all essential parameters need to be encoded in the algorithm identifier.
+To make a Key Establishment with Direct Encryption algorithm fully specified, all essential parameters need to be encoded in the algorithm identifier.
 In the context of the example above, the missing explicit parameters are curve name and KDF name.
 If the KDF requires additional parameters, they need to be present.
 </t>
 
 <t>
-To convey a fully-specified Key Establishment and Direct Encryption algorithm in JOSE, the "alg" value MUST be "dir",
-and the "enc" value MUST be fully specified, and include all essential parameters for both key establishment and symmetric encryption.
+To convey a fully-specified Key Establishment with Direct Encryption algorithm in JOSE, the "alg" value MUST be "dir",
+and the "enc" value MUST be fully specified, specifying all essential parameters for both key establishment and symmetric encryption.
 For example: "ECDH-ES-P256-CONCAT-KDF-A128GCM", "ECDH-ES-P384-CONCAT-KDF-A256GCM" or "ECDH-ES-X25519-CONCAT-KDF-A256GCM"
 </t>
 
 <t>
-To convey a fully-specified Key Establishment and Direct Encryption algorithm in COSE, the "alg" value MUST include all essential parameters for both key establishment and symmetric encryption.
+To convey a fully-specified Key Establishment with Direct Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for both key establishment and symmetric encryption.
 For example: "ECDH-ES-P256-HKDF-SHA-256-A128GCM", "ECDH-ES-P384-HKDF-SHA-512-A256GCM" or "ECDH-ES-X25519-HKDF-SHA-512-A256GCM"
 </t>
 
 <t>
-Fully-specified Key Establishment and Direct Encryption algorithms enable the sender and receiver to agree on all algorithms needed to encrypt and decrypt a message using a single algorithm identifier.
+Fully-specified Key Establishment with Direct Encryption algorithms enable the sender and receiver to agree on all algorithms needed to encrypt and decrypt a message using a single algorithm identifier.
 </t>
 
       </section>
@@ -536,7 +541,7 @@ decrypt(encrypted_content_encryption_key, key_encryption_key)
 </sourcecode>
 
 <t>
-The interface above is consistent with the Section on Key Establishment and Direct Encryption,
+The interface above is consistent with the Section on Key Establishment with Direct Encryption,
 specifically the description of how the process of deriving a shared secret and content encryption key is specific to the asymmetric key type used.
 The difference is that instead of using the derived content encryption key directly, Two-Layer encryption always derives a key encryption key, and wraps the content encryption key.
 </t>
@@ -604,12 +609,12 @@ In the context of the examples above, the missing explicit parameters are curve 
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption in JOSE, the "alg" MUST include all essential parameters for key establishment, key wrapping, and symmetric encryption.
+To convey a fully-specified Two-Layer Encryption in JOSE, the "alg" MUST specify all essential parameters for key establishment, key wrapping, and symmetric encryption.
 For example: "ECDH-ES-P256-CONCAT-KDF-A128KW-A128GCM", "ECDH-ES-P384-CONCAT-KDF-A256KW-A256GCM", "RSA-OAEP-256-4096-A128GCM" or "ECDH-ES-X25519-CONCAT-KDF-A256KW-A256GCM"
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption algorithm in COSE, the "alg" value MUST include all essential parameters for key establishment, key wrapping, and symmetric encryption.
+To convey a fully-specified Two-Layer Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for key establishment, key wrapping, and symmetric encryption.
 For example: "ECDH-ES-P256-HKDF-SHA-256-A128KW-A128GCM", "ECDH-ES-P384-HKDF-SHA-512-A256KW-A256GCM" or "ECDH-ES-X25519-HKDF-SHA-512-A256KW-A256GCM"
 </t>
 
@@ -1315,6 +1320,208 @@ or mismatched KDF size to symmetric key scenarios.
       </reference>
 
     </references>
+
+    <section title="Inventory of Polymorphic ECDH Algorithms" anchor="PolymorphicECDH">
+      <t>
+	The working group assembled the following inventory of registered polymorphic
+	Elliptic Curve Diffie Helman (ECDH) JOSE and COSE algorithms
+	with the goal of understanding what
+	registering fully-specified ECDH algorithms to replace them would entail.
+	While there was not an appetite in the working group
+	to register the full set of replacement algorithms at this time,
+	this inventory documents how to do so,
+	should others wish to register some or all of the replacements in the future.
+      </t>
+      <t>
+	Nonetheless, because working group members did document that
+	not having fully-specified algorithms is a problem for some use cases,
+	The engineering compromise employed in this specification is
+	to register a single fully-specified ECDH algorithm of each kind
+	so that it becomes possible to rely only on fully-specified ECDH algorithms
+	for JOSE and COSE.
+	<!-- This is done in <xref target="fully-specified-ECDH"/>. -->
+      </t>
+
+      <section title="Polymorphic ECDH JOSE Algorithms"
+	       anchor="polymorphic-ECDH-jose">
+	<t>
+	  These registered JOSE algorithms are polymorphic,
+	  because they do not include the algorithm to be used for the ephemeral key:
+	</t>
+	<texttable anchor="poly-ecdh-jose" title="Polymorphic ECDH JOSE Algorithms"
+		   suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">Description</ttcol>
+
+	  <c>ECDH-ES</c>
+	  <c>ECDH-ES using Concat KDF</c>
+
+	  <c>ECDH-ES+A128KW</c>
+	  <c>ECDH-ES using Concat KDF and "A128KW" wrapping</c>
+
+	  <c>ECDH-ES+A192KW</c>
+	  <c>ECDH-ES using Concat KDF and "A192KW" wrapping</c>
+
+	  <c>ECDH-ES+A256KW</c>
+	  <c>ECDH-ES using Concat KDF and "A256KW" wrapping</c>
+
+	</texttable>
+
+	<t>
+	  Fully-specified JOSE versions of these algorithms
+	  using combinations that make sense, as discussed by the working group,
+	  would be:
+	</t>
+	<texttable anchor="full-ecdh-jose" title="Fully-Specified ECDH JOSE Algorithms"
+		   suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">Description</ttcol>
+
+	  <c>ECDH-ES-P-256</c>
+	  <c>ECDH-ES using Concat KDF and P-256</c>
+
+	  <c>ECDH-ES-P-384</c>
+	  <c>ECDH-ES using Concat KDF and P-384</c>
+
+	  <c>ECDH-ES-P-521</c>
+	  <c>ECDH-ES using Concat KDF and P-521</c>
+
+	  <c>ECDH-ES-X25519</c>
+	  <c>ECDH-ES using Concat KDF and X25519</c>
+
+	  <c>ECDH-ES-X448</c>
+	  <c>ECDH-ES using Concat KDF and X448</c>
+
+	  <c>ECDH-ES-P-256+A128KW</c>
+	  <c>ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping</c>
+
+	  <c>ECDH-ES-X25519+A128KW</c>
+	  <c>ECDH-ES using Concat KDF and X25519 and "A128KW" wrapping</c>
+
+	  <c>ECDH-ES-P-384+A192KW</c>
+	  <c>ECDH-ES using Concat KDF and P-384 and "A192KW" wrapping</c>
+
+	  <c>ECDH-ES-P-521+A256KW</c>
+	  <c>ECDH-ES using Concat KDF and P-521 and "A256KW" wrapping</c>
+
+	  <c>ECDH-ES-X448+A256KW</c>
+	  <c>ECDH-ES using Concat KDF and X448 and "A256KW" wrapping</c>
+
+	</texttable>
+      </section>
+
+      <section title="Polymorphic ECDH COSE Algorithms"
+	       anchor="polymorphic-ECDH-cose">
+	<t>
+	  These registered COSE algorithms are likewise polymorphic,
+	  because they do not include the algorithm to be used with
+	  the ephemeral key or the static key:
+	</t>
+	<texttable anchor="poly-ecdh-cose" title="Polymorphic ECDH COSE Algorithms"
+		   suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">Description</ttcol>
+
+	  <c>ECDH-ES + HKDF-256</c>
+	  <c>ECDH ES w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES + HKDF-512</c>
+	  <c>ECDH ES w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS + HKDF-256</c>
+	  <c>ECDH SS w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS + HKDF-512</c>
+	  <c>ECDH SS w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES + A128KW</c>
+	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-ES + A192KW</c>
+	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+
+	  <c>ECDH-ES + A256KW</c>
+	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	  <c>ECDH-SS + A128KW</c>
+	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-SS + A192KW</c>
+	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+
+	  <c>ECDH-SS + A256KW</c>
+	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	</texttable>
+
+	<t>
+	  Fully-specified COSE versions of these algorithms
+	  using combinations that make sense, as discussed by the working group,
+	  would be:
+	</t>
+	<texttable anchor="full-ecdh-cose" title="Fully-Specified ECDH COSE Algorithms"
+		   suppress-title="false" align="center" style="full">
+	  <ttcol align="left">Name</ttcol>
+	  <ttcol align="left">Description</ttcol>
+
+	  <c>ECDH-ES-P-256 + HKDF-256</c>
+	  <c>ECDH ES using P-256 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES-X25519 + HKDF-256</c>
+	  <c>ECDH ES using X25519 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES-P-521 + HKDF-512</c>
+	  <c>ECDH ES using P-521 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES-X448 + HKDF-512</c>
+	  <c>ECDH ES using X448 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS-P-256 + HKDF-256</c>
+	  <c>ECDH SS using P-256 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS-X25519 + HKDF-256</c>
+	  <c>ECDH SS using X25519 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS-P-521 + HKDF-512</c>
+	  <c>ECDH SS using P-521 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-SS-X448 + HKDF-512</c>
+	  <c>ECDH SS using X448 w/ HKDF -- generate key directly</c>
+
+	  <c>ECDH-ES-P-256 + A128KW</c>
+	  <c>ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-ES-X25519 + A128KW</c>
+	  <c>ECDH ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-ES-P-384 + A192KW</c>
+	  <c>ECDH ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+
+	  <c>ECDH-ES-P-521 + A256KW</c>
+	  <c>ECDH ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	  <c>ECDH-ES-X448 + A256KW</c>
+	  <c>ECDH ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	  <c>ECDH-SS-P-256 + A128KW</c>
+	  <c>ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-SS-X25519 + A128KW</c>
+	  <c>ECDH SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+
+	  <c>ECDH-SS-P-384 + A192KW</c>
+	  <c>ECDH SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+
+	  <c>ECDH-SS-P-521 + A256KW</c>
+	  <c>ECDH SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	  <c>ECDH-SS-X448 + A256KW</c>
+	  <c>ECDH SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+
+	</texttable>
+      </section>
+
+    </section>
 
     <section title="Document History" anchor="History">
       <t>
