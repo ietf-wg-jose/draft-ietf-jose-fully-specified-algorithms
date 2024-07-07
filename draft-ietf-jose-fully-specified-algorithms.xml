@@ -146,7 +146,7 @@
       </section>
     </section>
 
-    <section anchor="fully-specified-algs" title="Fully-specified Digital Signature Algorithm Identifiers">
+    <section anchor="fully-specified-algs" title="Fully-Specified Digital Signature Algorithm Identifiers">
       <t>
 	This section creates fully-specified digital signature algorithm identifiers for all registered
 	polymorphic JOSE and COSE algorithms and their parameters.
@@ -163,7 +163,7 @@
 	  (The corresponding JOSE registrations in <xref target="RFC7518"/> are full-specified.)
 	</t>
 	<t>
-	  The following fully-specified COSE algorithms are defined:
+	  The following fully-specified COSE ECDSA algorithms are defined:
 	</t>
 	<texttable anchor="ecdsa-algs" title="ECDSA Algorithm Values" suppress-title="false" align="center" style="full">
 	  <ttcol align="left">Name</ttcol>
@@ -217,7 +217,7 @@
 	  Both register polymorphic <spanx style="verb">EdDSA</spanx> algorithm identifiers.
 	</t>
 	<t>
-	  The following fully-specified JOSE and COSE algorithms are defined:
+	  The following fully-specified JOSE and COSE EdDSA algorithms are defined:
 	</t>
 	<texttable anchor="eddsa-algs" title="EdDSA Algorithm Values" suppress-title="false" align="center" style="full">
 	  <ttcol align="left">Name</ttcol>
@@ -243,13 +243,35 @@
 
     </section>
 
-    <section anchor="fully-specified-encryption-algs" title="Fully-specified Encryption Algorithm Identifiers">
+    <section anchor="fully-specified-enc" title="Fully-Specified Encryption">
       <t>
   This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing the JOSE and COSE encryption schemes
   JSON Web Encryption (JWE) as described in <xref target="RFC7516"/> and
   COSE Encrypt as described in <xref target="RFC9052"/>.
       </t>
 
+      <section anchor="MultiAlgs" title="Fully-Specified Computations Using Multiple Algorithms">
+	<t>
+	  Both JOSE and COSE have operations that take multiple algorithms as parameters.
+	  Encrypted objects in JOSE <xref target="RFC7516"/> use two algorithm identifiers:
+	  the first in the <spanx style="verb">alg</spanx> (Algorithm) Header Parameter,
+	  which specifies how to determine the content encryption key, and
+	  the second in the <spanx style="verb">enc</spanx> (Encryption Algorithm)
+	  Header Parameter, which specifies the content encryption algorithm.
+	  Likewise, encrypted COSE objects can use multiple algorithms
+	  for corresponding purposes.
+	</t>
+	<t>
+	  Each of these multiple algorithms must be independently fully specified.
+	  The operations performed by each of them MUST NOT vary
+	  when used alongside other algorithms.
+	  So for instance, for JOSE, <spanx style="verb">alg</spanx> values
+	  and <spanx style="verb">enc</spanx> values MUST each be fully specified,
+	  and their behaviors MUST NOT depend upon one another.
+	</t>
+      </section>
+
+      <section title="Analysis of Modes of Encryption" anchor="EncryptionModes">
       <t>
 JOSE and COSE support several modes of encryption, although the terminology may differ between JOSE and COSE,
 these modes are meant to support:
@@ -387,7 +409,7 @@ The process of producing a shared secret is key type specific, and is different 
 </t>
 
 <t>
-Elliptic curve Diffie-Hellman (ECDH) is used to produce a shared secret with elliptic curve based keys as follows:
+Elliptic Curve Diffie-Hellman (ECDH) is used to produce a shared secret with elliptic curve based keys as follows:
 </t>
 <sourcecode>
 private_key1, public_key1 = key_generation(algorithm_identifier)
@@ -630,8 +652,78 @@ cross mode symmetric encryption,
 or mismatched KDF size to symmetric key scenarios.
 </t>
 
-</section>
+      </section>
+      </section>
+
+      <section anchor="fully-specified-encryption-algs" title="Fully-Specified Encryption Algorithm Identifiers">
+
+	<section anchor="ecdh-algs" title="Elliptic Curve Diffie-Hellman (ECDH)">
+	  <t>
+	    <xref target="RFC7518"/> defines the current use of
+	    Elliptic Curve Diffie-Hellman (ECDH) by JOSE.
+	    Likewise, <xref target="RFC9053"/> defines the current use of
+	    Elliptic Curve Diffie-Hellman (ECDH) by COSE.
+	    As described in <xref target="PolymorphicECDH"/>,
+	    both sets of registered ECDH algorithms are polymorphic.
+	  </t>
+	  <t>
+	    The following fully-specified JOSE ECDH algorithms are defined:
+	  </t>
+	  <texttable anchor="jose-ecdh-algs" title="JOSE ECDH Algorithm Values" suppress-title="false" align="center" style="full">
+	    <ttcol align="left">Name</ttcol>
+	    <ttcol align="left">Description</ttcol>
+	    <ttcol align="left">Implementation Requirements</ttcol>
+
+	    <c>ECDH-ES-P-256</c>
+	    <c>ECDH-ES using Concat KDF and P-256</c>
+	    <c>Recommended</c>
+
+	    <c>ECDH-ES-P-256+A128KW</c>
+	    <c>ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping</c>
+	    <c>Recommended</c>
+
+	  </texttable>
+
+	  <t>
+	    The following fully-specified COSE ECDH algorithms are defined:
+	  </t>
+	  <texttable anchor="cose-ecdh-algs" title="COSE ECDH Algorithm Values" suppress-title="false" align="center" style="full">
+	    <ttcol align="left">Name</ttcol>
+	    <ttcol align="left">COSE Value</ttcol>
+	    <ttcol align="left">Description</ttcol>
+	    <ttcol align="left">Recommended</ttcol>
+
+	    <c>ECDH-ES-P-256 + HKDF-256</c>
+	    <c>TBD (requested assignment -52)</c>
+	    <c>ECDH ES using P-256 w/ HKDF -- generate key directly</c>
+	    <c>Yes</c>
+
+	    <c>ECDH-SS-P-256 + HKDF-256</c>
+	    <c>TBD (requested assignment -53)</c>
+	    <c>ECDH SS using P-256 w/ HKDF -- generate key directly</c>
+	    <c>Yes</c>
+
+	    <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
+	    <c>TBD (requested assignment -54)</c>
+	    <c>ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	    <c>Yes</c>
+
+	    <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
+	    <c>TBD (requested assignment -55)</c>
+	    <c>ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	    <c>Yes</c>
+
+	  </texttable>
+	  <t>
+	    Should additional fully-specified ECDH algorithms be required,
+	    future specifications can register them,
+	    using the descriptions in the tables in <xref target="PolymorphicECDH"/>,
+	    when applicable.
+	  </t>
 	</section>
+      </section>
+
+    </section>
 
     <section anchor="IANA" title="IANA Considerations">
 
@@ -659,7 +751,7 @@ or mismatched KDF size to symmetric key scenarios.
 		JOSE Implementation Requirements: Optional
 	      </t>
 	      <t>
-		Change Controller: IESG
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
@@ -687,10 +779,66 @@ or mismatched KDF size to symmetric key scenarios.
 		JOSE Implementation Requirements: Optional
 	      </t>
 	      <t>
-		Change Controller: IESG
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Algorithm Analysis Document(s): <xref target="RFC8032"/>
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Algorithm Name: ECDH-ES-P-256
+	      </t>
+	      <t>
+		Algorithm Description: ECDH-ES using Concat KDF and P-256
+	      </t>
+	      <t>
+		Algorithm Usage Locations: alg
+	      </t>
+	      <t>
+		JOSE Implementation Requirements: Recommended
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Algorithm Analysis Document(s): <xref target="RFC8032"/>
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Algorithm Name: ECDH-ES-P-256+A128KW
+	      </t>
+	      <t>
+		Algorithm Description: ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping
+	      </t>
+	      <t>
+		Algorithm Usage Locations: alg
+	      </t>
+	      <t>
+		JOSE Implementation Requirements: Recommended
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Algorithm Analysis Document(s): <xref target="RFC8032"/>
@@ -720,7 +868,7 @@ or mismatched KDF size to symmetric key scenarios.
 		JOSE Implementation Requirements: Deprecated
 	      </t>
 	      <t>
-		Change Controller: IESG
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: Section 3.1 of RFC8037
@@ -754,7 +902,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using P-256 curve and SHA-256
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -776,7 +924,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using P-384 curve and SHA-384
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -798,7 +946,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using P-521 curve and SHA-512
 	      </t>
 	      <t>
-		Reference: <xref target="ECDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -820,7 +968,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP256r1 curve and SHA-256
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: No
@@ -842,7 +990,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP320r1 curve and SHA-384
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: No
@@ -864,7 +1012,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP384r1 curve and SHA-384
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: No
@@ -886,7 +1034,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP512r1 curve and SHA-512
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: No
@@ -908,7 +1056,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: EdDSA using Ed25519 curve
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="EdDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -930,7 +1078,95 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: EdDSA using Ed448 curve
 	      </t>
 	      <t>
-		Reference: <xref target="EdDSA"/> of this document
+		Reference: <xref target="EdDSA"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ECDH-ES-P-256 + HKDF-256
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -52)
+	      </t>
+	      <t>
+		Description: ECDH ES using P-256 w/ HKDF -- generate key directly
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ECDH-SS-P-256 + HKDF-256
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -53)
+	      </t>
+	      <t>
+		Description: ECDH SS using P-256 w/ HKDF -- generate key directly
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ECDH-ES-P-256 + HKDF-256 + A128KW
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -54)
+	      </t>
+	      <t>
+		Description: ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
+	      </t>
+	      <t>
+		Recommended: Yes
+	      </t>
+	    </list>
+	  </t>
+	  <t>
+	    &#xA0;
+	  </t>
+	  <t>
+	    <list style="symbols">
+	      <t>
+		Name: ECDH-SS-P-256 + HKDF-256 + A128KW
+	      </t>
+	      <t>
+		Value: TBD (requested assignment -55)
+	      </t>
+	      <t>
+		Description: ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
+	      </t>
+	      <t>
+		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -1038,7 +1274,7 @@ or mismatched KDF size to symmetric key scenarios.
   <section anchor="UpdatedInstructions1" title="JSON Web Signature and Encryption Algorithms">
 	<t>
 		IANA is directed to preserve the current reference to RFC 7518,
-		and to add a reference to this section of this document.
+		and to add a reference to this section of this specification.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
@@ -1056,7 +1292,7 @@ or mismatched KDF size to symmetric key scenarios.
 	<section anchor="UpdatedInstructions2" title="COSE Algorithms">
 	<t>
 		IANA is directed to preserve the current references to RFC 9053 and RFC 9054,
-		and to add a reference to this section of this document.
+		and to add a reference to this section of this specification.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
@@ -1086,27 +1322,6 @@ or mismatched KDF size to symmetric key scenarios.
 	in <xref target="RFC8037"/>, except that the <spanx style="verb">alg</spanx>
 	value would be <spanx style="verb">Ed25519</spanx> rather than
 	<spanx style="verb">EdDSA</spanx>, if included.
-      </t>
-    </section>
-
-    <section anchor="MultiAlgs" title="Fully-Specified Computations Using Multiple Algorithms">
-      <t>
-	Both JOSE and COSE have operations that take multiple algorithms as parameters.
-	Encrypted objects in JOSE <xref target="RFC7516"/> use two algorithm identifiers:
-	the first in the <spanx style="verb">alg</spanx> (Algorithm) Header Parameter,
-	which specifies how to determine the content encryption key, and
-	the second in the <spanx style="verb">enc</spanx> (Encryption Algorithm)
-	Header Parameter, which specifies the content encryption algorithm.
-	Likewise, encrypted COSE objects can use multiple algorithms
-	for corresponding purposes.
-      </t>
-      <t>
-	Each of these multiple algorithms must be independently fully specified.
-	The operations performed by each of them MUST NOT vary
-	when used alongside other algorithms.
-	So for instance, for JOSE, <spanx style="verb">alg</spanx> values
-	and <spanx style="verb">enc</spanx> values MUST each be fully specified,
-	and their behaviors MUST NOT depend upon one another.
       </t>
     </section>
 
@@ -1324,7 +1539,7 @@ or mismatched KDF size to symmetric key scenarios.
     <section title="Inventory of Polymorphic ECDH Algorithms" anchor="PolymorphicECDH">
       <t>
 	The working group assembled the following inventory of registered polymorphic
-	Elliptic Curve Diffie Helman (ECDH) JOSE and COSE algorithms
+	Elliptic Curve Diffie-Hellman (ECDH) JOSE and COSE algorithms
 	with the goal of understanding what
 	registering fully-specified ECDH algorithms to replace them would entail.
 	While there was not an appetite in the working group
@@ -1336,10 +1551,10 @@ or mismatched KDF size to symmetric key scenarios.
 	Nonetheless, because working group members did document that
 	not having fully-specified algorithms is a problem for some use cases,
 	The engineering compromise employed in this specification is
-	to register a single fully-specified ECDH algorithm of each kind
-	so that it becomes possible to rely only on fully-specified ECDH algorithms
-	for JOSE and COSE.
-	<!-- This is done in <xref target="fully-specified-ECDH"/>. -->
+	registering a single fully-specified ECDH algorithm
+	for each kind of operation so that it becomes possible
+	to rely on fully-specified ECDH algorithms for JOSE and COSE.
+	These registrations are performed in <xref target="ecdh-algs"/>.
       </t>
 
       <section title="Polymorphic ECDH JOSE Algorithms"
@@ -1488,34 +1703,34 @@ or mismatched KDF size to symmetric key scenarios.
 	  <c>ECDH-SS-X448 + HKDF-512</c>
 	  <c>ECDH SS using X448 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-ES-P-256 + A128KW</c>
+	  <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
 	  <c>ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-ES-X25519 + A128KW</c>
+	  <c>ECDH-ES-X25519 + HKDF-256 + A128KW</c>
 	  <c>ECDH ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-ES-P-384 + A192KW</c>
+	  <c>ECDH-ES-P-384 + HKDF-384 + A192KW</c>
 	  <c>ECDH ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
-	  <c>ECDH-ES-P-521 + A256KW</c>
+	  <c>ECDH-ES-P-521 + HKDF-512 + A256KW</c>
 	  <c>ECDH ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-ES-X448 + A256KW</c>
+	  <c>ECDH-ES-X448 + HKDF-512 + A256KW</c>
 	  <c>ECDH ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-SS-P-256 + A128KW</c>
+	  <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
 	  <c>ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-SS-X25519 + A128KW</c>
+	  <c>ECDH-SS-X25519 + HKDF-256 + A128KW</c>
 	  <c>ECDH SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-SS-P-384 + A192KW</c>
+	  <c>ECDH-SS-P-384 + HKDF-384 + A192KW</c>
 	  <c>ECDH SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
-	  <c>ECDH-SS-P-521 + A256KW</c>
+	  <c>ECDH-SS-P-521 + HKDF-512 + A256KW</c>
 	  <c>ECDH SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-SS-X448 + A256KW</c>
+	  <c>ECDH-SS-X448 + HKDF-512 + A256KW</c>
 	  <c>ECDH SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	</texttable>
@@ -1542,6 +1757,9 @@ or mismatched KDF size to symmetric key scenarios.
 	  </t>
 	  <t>
 	    Registered COSE algorithms for using Brainpool curves with ECDSA.
+	  </t>
+	  <t>
+	    Enabled use of fully-specified ECDH algorithms.
 	  </t>
         </list>
       </t>
