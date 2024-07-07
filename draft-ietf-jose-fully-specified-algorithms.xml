@@ -1351,26 +1351,10 @@ or mismatched KDF size to symmetric key scenarios.
 	  and RSASSA-PKCS1-v1_5 with SHA-256 and 4096-bit keys or 8192-bit keys.
 	  Therefore, the RSA signature algorithms are not replaced by this specification.
 	</t>
-      </section>
-
-      <section anchor="ECDH-ES" title="ECDH-ES and its Ephemeral Keys">
 	<t>
-	  The working group has discussed whether the
-	  <spanx style="verb">ECDH-ES</spanx> key agreement algorithm
-	  should be considered fully-specified or not,
-	  because it can use ephemeral keys of different key types and algorithms.
-	  Indeed, an implementation might work when <spanx style="verb">ECDH-ES</spanx>
-	  is used with ephemeral keys using the <spanx style="verb">P-256</spanx> curve,
-	  and not work when used with ephemeral keys using the
-	  <spanx style="verb">Ed25519</spanx> curve.
-	</t>
-	<t>
-	  One way that protocols can handle this situation is to use a discovery mechanism
-	  to declare what ephemeral key types are supported.
-	  The alternative would be to introduce new fully-specified algorithm identifiers
-	  for choices such as "ECDH-ES with the P-256 Curve", etc.
-	  Feedback from deployers would be useful in determining
-	  what actions this specification should take in this case.
+	  That said, should it be useful at some point to have
+	  RSA algorithm identifiers that are specific to the key size,
+	  a future specification can always register them.
 	</t>
       </section>
 
