@@ -1414,7 +1414,7 @@ or mismatched KDF size to symmetric key scenarios.
 	       anchor="polymorphic-ECDH-cose">
 	<t>
 	  These registered COSE algorithms are likewise polymorphic,
-	  because they do not include the algorithm to be used with
+	  because they do not include the curve name in the algorithm to be used with
 	  the ephemeral key or the static key:
 	</t>
 	<texttable anchor="poly-ecdh-cose" title="Polymorphic ECDH COSE Algorithms"
