@@ -1346,7 +1346,7 @@ or mismatched KDF size to symmetric key scenarios.
 	       anchor="polymorphic-ECDH-jose">
 	<t>
 	  These registered JOSE algorithms are polymorphic,
-	  because they do not include the algorithm to be used for the ephemeral key:
+	  because they do not include the curve name in the algorithm to be used with the ephemeral key:
 	</t>
 	<texttable anchor="poly-ecdh-jose" title="Polymorphic ECDH JOSE Algorithms"
 		   suppress-title="false" align="center" style="full">
