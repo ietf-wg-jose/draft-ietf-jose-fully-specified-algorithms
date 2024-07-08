@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="7" month="July" year="2024" />
+    <date day="8" month="July" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -273,8 +273,9 @@
 
       <section title="Analysis of Modes of Encryption" anchor="EncryptionModes">
       <t>
-JOSE and COSE support several modes of encryption, although the terminology may differ between JOSE and COSE,
-these modes are meant to support:
+JOSE and COSE support several modes of encryption.
+Although the terminology sometimes differs between JOSE and COSE,
+both support these encryption modes:
       </t>
       <list style="symbols">
         <t>
@@ -284,7 +285,7 @@ Direct Encryption - A symmetric cryptographic operation.
 Key Establishment with Direct Encryption - An asymmetric cryptographic operation to derive a shared secret, key derivation and then a symmetric cryptographic operation.
         </t>
         <t>
-Two-Layer Encryption - A content encryption key is protected (many possible ways), content encryption and decryption is performed using the protected content encryption key.
+Two-Layer Encryption - A content encryption key is protected (multiple possible ways), then content encryption or decryption is performed using the protected content encryption key.
         </t>
       </list>
       <t>
@@ -405,11 +406,11 @@ An algorithm called a key derivation function (KDF) is applied between key estab
 
 <t>
 Key establishment algorithms often rely on an asymmetric cryptographic operation whereby a public and a private key are used to produce a shared secret, which can be combined with a KDF to produce a symmetric key.
-The process of producing a shared secret is key type specific, and is different for elliptic curves, RSA, and lattice based algorithms.
+The process of producing a shared secret is key type specific, and is different for elliptic curves, RSA, and lattice-based algorithms.
 </t>
 
 <t>
-Elliptic Curve Diffie-Hellman (ECDH) is used to produce a shared secret with elliptic curve based keys as follows:
+Elliptic Curve Diffie-Hellman (ECDH) is used to produce a shared secret with elliptic curve-based keys as follows:
 </t>
 <sourcecode>
 private_key1, public_key1 = key_generation(algorithm_identifier)
@@ -427,8 +428,8 @@ Key encapsulation algorithms generally satisfy the following interface:
 </t>
 <sourcecode>
 private_key, public_key = key_generation(algorithm_identifier)
-ciphertext, shared_secret = encap(public_key)
-shared_secret = decap(ciphertext, private_key)
+ciphertext, shared_secret = encapsulate(public_key)
+shared_secret = deencapsulate(ciphertext, private_key)
 </sourcecode>
 
 <t>
@@ -437,7 +438,7 @@ Encrypted content encryption keys are not produced by fully-specified Key Establ
 </t>
 
 <t>
-In JOSE, the KDF algorithm is "ConcatKDF" and is an implicit parameter of the key establishment algorithm.
+In JOSE, the KDF algorithm is "Concat KDF" and is an implicit parameter of the key establishment algorithm.
 In JOSE and COSE, key establishment algorithms have historically been generic to a key type including all its mandatory parameters.
 For example, "ECDH-ES" establishes a shared secret, and then through the use of a KDF, a content encryption key, for keys based on elliptic curves.
 However, the mandatory parameters of the public_key and private_key need be the same in the context of the key type.
@@ -455,7 +456,7 @@ To successfully encrypt to a recipient, a sender needs to possess the recipient'
 
 <t>
 In JOSE and COSE, key representations can support communicating the algorithm which a recipient supports for a given key.
-It is considered a best practice to only support 1 algorithm during the lifetime of a key.
+It is considered a best practice to only support one algorithm during the lifetime of a key.
 </t>
 
 <t>
@@ -489,12 +490,12 @@ If the KDF requires additional parameters, they need to be present.
 <t>
 To convey a fully-specified Key Establishment with Direct Encryption algorithm in JOSE, the "alg" value MUST be "dir",
 and the "enc" value MUST be fully specified, specifying all essential parameters for both key establishment and symmetric encryption.
-For example: "ECDH-ES-P256-CONCAT-KDF-A128GCM", "ECDH-ES-P384-CONCAT-KDF-A256GCM" or "ECDH-ES-X25519-CONCAT-KDF-A256GCM"
+For example: "ECDH-ES using P-256 and Concat-KDF with A128GCM" or "ECDH-ES using X25519 and Concat-KDF with A256GCM".
 </t>
 
 <t>
 To convey a fully-specified Key Establishment with Direct Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for both key establishment and symmetric encryption.
-For example: "ECDH-ES-P256-HKDF-SHA-256-A128GCM", "ECDH-ES-P384-HKDF-SHA-512-A256GCM" or "ECDH-ES-X25519-HKDF-SHA-512-A256GCM"
+For example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".
 </t>
 
 <t>
@@ -528,7 +529,7 @@ How the content encryption key was generated is out of scope when considering th
 </t>
 
 <t>
-As noted in the Direct Encryption section, Key wrapping algorithms generally satisfy the following interface:
+Key wrapping algorithms generally satisfy the following interface:
 </t>
 <sourcecode>
 key_encryption_key = \
@@ -550,7 +551,7 @@ Key Establishment with Key Wrapping algorithms generally satisfy the following i
 </t>
 <sourcecode>
 private_key, public_key = key_generation(algorithm_identifier)
-# ignoring ephemeral static vs. static static, etc.
+# ignoring ephemeral/static vs. static/static, etc.
 
 key_encryption_key = \
 key_establishment(public_key, private_key)
@@ -563,9 +564,9 @@ decrypt(encrypted_content_encryption_key, key_encryption_key)
 </sourcecode>
 
 <t>
-The interface above is consistent with the Section on Key Establishment with Direct Encryption,
-specifically the description of how the process of deriving a shared secret and content encryption key is specific to the asymmetric key type used.
-The difference is that instead of using the derived content encryption key directly, Two-Layer encryption always derives a key encryption key, and wraps the content encryption key.
+The interface above is consistent with Key Establishment with Direct Encryption.
+The process of deriving a shared secret and content encryption key is specific to the asymmetric key type used.
+The difference is that instead of using the derived content encryption key directly, two-layer encryption always derives a key encryption key, and wraps the content encryption key.
 </t>
 
 <t>
@@ -626,26 +627,26 @@ Despite containing both the key establishment algorithm, with either an implicit
 </t>
 
 <t>
-To make a Two-Layer Encryption algorithm fully specified, all security relevant details need to be encoded in the algorithm identifier.
-In the context of the examples above, the missing explicit parameters are curve name, kdf and required parameters, and content encryption algorithm to use with the decrypted content encryption key.
+To make a Two-Layer Encryption algorithm fully specified, all security relevant details need to be encoded in the algorithm identifiers.
+In the context of the examples above, the missing explicit parameters are the curve name, KDF and required parameters, and content encryption algorithm to use with the decrypted content encryption key.
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption in JOSE, the "alg" MUST specify all essential parameters for key establishment, key wrapping, and symmetric encryption.
-For example: "ECDH-ES-P256-CONCAT-KDF-A128KW-A128GCM", "ECDH-ES-P384-CONCAT-KDF-A256KW-A256GCM", "RSA-OAEP-256-4096-A128GCM" or "ECDH-ES-X25519-CONCAT-KDF-A256KW-A256GCM"
+To convey a fully-specified Two-Layer Encryption algorithm in JOSE, the "alg" value MUST specify all essential parameters for key establishment and key wrapping.
+For example: "ECDH-ES using Concat KDF and P-256" or "ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping".
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for key establishment, key wrapping, and symmetric encryption.
-For example: "ECDH-ES-P256-HKDF-SHA-256-A128KW-A128GCM", "ECDH-ES-P384-HKDF-SHA-512-A256KW-A256GCM" or "ECDH-ES-X25519-HKDF-SHA-512-A256KW-A256GCM"
+To convey a fully-specified Two-Layer Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for key establishment and key wrapping.
+For example: "ECDH-ES using P-256 w/ HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key".
 </t>
 
 <t>
-The symmetric encryption algorithm that will be used with the content encryption key after it is decrypted is required to prevent cross mode attacks, such as those described in RFC9459.
+The symmetric encryption algorithm that will be used with the content encryption key after it is decrypted is required to prevent cross mode attacks, such as those described in <xref target="RFC9459"/>.
 </t>
 
 <t>
-Fully-specified Two-Layer Encryption algorithms enable the sender and receiver to agree on all mandatory security parameters using a single algorithm identifier.
+Fully-specified Two-Layer Encryption algorithms enable the sender and receiver to agree on all mandatory security parameters.
 They also enable a protocol to specify an allow list of algorithm combinations that does not include polymorphic combinations,
 such as cross curve key establishment,
 cross mode symmetric encryption,
@@ -700,7 +701,7 @@ or mismatched KDF size to symmetric key scenarios.
 
 	    <c>ECDH-SS-P-256 + HKDF-256</c>
 	    <c>TBD (requested assignment -53)</c>
-	    <c>ECDH SS using P-256 w/ HKDF -- generate key directly</c>
+	    <c>ECDH-SS using P-256 w/ HKDF -- generate key directly</c>
 	    <c>Yes</c>
 
 	    <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
@@ -710,7 +711,7 @@ or mismatched KDF size to symmetric key scenarios.
 
 	    <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
 	    <c>TBD (requested assignment -55)</c>
-	    <c>ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	    <c>ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 	    <c>Yes</c>
 
 	  </texttable>
@@ -1097,7 +1098,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Value: TBD (requested assignment -52)
 	      </t>
 	      <t>
-		Description: ECDH ES using P-256 w/ HKDF -- generate key directly
+		Description: ECDH-ES using P-256 w/ HKDF -- generate key directly
 	      </t>
 	      <t>
 		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
@@ -1119,7 +1120,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Value: TBD (requested assignment -53)
 	      </t>
 	      <t>
-		Description: ECDH SS using P-256 w/ HKDF -- generate key directly
+		Description: ECDH-SS using P-256 w/ HKDF -- generate key directly
 	      </t>
 	      <t>
 		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
@@ -1141,7 +1142,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Value: TBD (requested assignment -54)
 	      </t>
 	      <t>
-		Description: ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
+		Description: ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
 	      </t>
 	      <t>
 		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
@@ -1163,7 +1164,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Value: TBD (requested assignment -55)
 	      </t>
 	      <t>
-		Description: ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
+		Description: ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
 	      </t>
 	      <t>
 		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
@@ -1408,13 +1409,13 @@ or mismatched KDF size to symmetric key scenarios.
 	  keys of different sizes without having to use different code.
 	  Therefore, for example, there are not known cases in the wild where it would be useful
 	  to have different algorithm identifiers for RSASSA-PKCS1-v1_5 with SHA-256 and 2048-bit keys
-	  and RSASSA-PKCS1-v1_5 with SHA-256 and 4096-bit keys or 8192-bit keys.
+	  versus 4096-bit keys or 8192-bit keys.
 	  Therefore, the RSA signature algorithms are not replaced by this specification.
 	</t>
 	<t>
 	  That said, should it be useful at some point to have
 	  RSA algorithm identifiers that are specific to the key size,
-	  a future specification can always register them.
+	  a future specification could always register them.
 	</t>
       </section>
 
@@ -1455,6 +1456,7 @@ or mismatched KDF size to symmetric key scenarios.
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8152.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8996.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9459.xml"/>
 
       <reference anchor="IANA.JOSE" target="https://www.iana.org/assignments/jose/">
         <front>
@@ -1682,34 +1684,34 @@ or mismatched KDF size to symmetric key scenarios.
 	  <ttcol align="left">Description</ttcol>
 
 	  <c>ECDH-ES + HKDF-256</c>
-	  <c>ECDH ES w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES + HKDF-512</c>
-	  <c>ECDH ES w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS + HKDF-256</c>
-	  <c>ECDH SS w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS + HKDF-512</c>
-	  <c>ECDH SS w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES + A128KW</c>
-	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-ES w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-ES + A192KW</c>
-	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+	  <c>ECDH-ES w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
 	  <c>ECDH-ES + A256KW</c>
-	  <c>ECDH ES w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-ES w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	  <c>ECDH-SS + A128KW</c>
-	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-SS w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-SS + A192KW</c>
-	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+	  <c>ECDH-SS w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
 	  <c>ECDH-SS + A256KW</c>
-	  <c>ECDH SS w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-SS w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	</texttable>
 
@@ -1724,58 +1726,58 @@ or mismatched KDF size to symmetric key scenarios.
 	  <ttcol align="left">Description</ttcol>
 
 	  <c>ECDH-ES-P-256 + HKDF-256</c>
-	  <c>ECDH ES using P-256 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES using P-256 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES-X25519 + HKDF-256</c>
-	  <c>ECDH ES using X25519 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES using X25519 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES-P-521 + HKDF-512</c>
-	  <c>ECDH ES using P-521 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES using P-521 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES-X448 + HKDF-512</c>
-	  <c>ECDH ES using X448 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-ES using X448 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS-P-256 + HKDF-256</c>
-	  <c>ECDH SS using P-256 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS using P-256 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS-X25519 + HKDF-256</c>
-	  <c>ECDH SS using X25519 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS using X25519 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS-P-521 + HKDF-512</c>
-	  <c>ECDH SS using P-521 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS using P-521 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-SS-X448 + HKDF-512</c>
-	  <c>ECDH SS using X448 w/ HKDF -- generate key directly</c>
+	  <c>ECDH-SS using X448 w/ HKDF -- generate key directly</c>
 
 	  <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
-	  <c>ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-ES-X25519 + HKDF-256 + A128KW</c>
-	  <c>ECDH ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-ES-P-384 + HKDF-384 + A192KW</c>
-	  <c>ECDH ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+	  <c>ECDH-ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
 	  <c>ECDH-ES-P-521 + HKDF-512 + A256KW</c>
-	  <c>ECDH ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	  <c>ECDH-ES-X448 + HKDF-512 + A256KW</c>
-	  <c>ECDH ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	  <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
-	  <c>ECDH SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-SS-X25519 + HKDF-256 + A128KW</c>
-	  <c>ECDH SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
+	  <c>ECDH-SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
 	  <c>ECDH-SS-P-384 + HKDF-384 + A192KW</c>
-	  <c>ECDH SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
+	  <c>ECDH-SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
 	  <c>ECDH-SS-P-521 + HKDF-512 + A256KW</c>
-	  <c>ECDH SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	  <c>ECDH-SS-X448 + HKDF-512 + A256KW</c>
-	  <c>ECDH SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
+	  <c>ECDH-SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	</texttable>
       </section>
