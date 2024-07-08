@@ -5,7 +5,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std" ipr="trust200902"
   docName="draft-ietf-jose-fully-specified-algorithms-latest"
-  updates="7518, 8037, 9053">
+  updates="7518, 8037, 8152, 9053">
 
   <?rfc toc="yes"?>
   <?rfc tocompact="yes"?>
@@ -67,8 +67,8 @@
 
     <section anchor="Introduction" title="Introduction">
       <t>
-	The IANA algorithm registries for JOSE <xref target="IANA.JOSE.Algorithms"/> and
-	COSE <xref target="IANA.COSE.Algorithms"/> contain two kinds of algorithm identifiers:
+	The IANA algorithm registries for JOSE <xref target="IANA.JOSE"/> and
+	COSE <xref target="IANA.COSE"/> contain two kinds of algorithm identifiers:
       </t>
       <t>
 	<list style="hanging">
@@ -730,7 +730,7 @@ or mismatched KDF size to symmetric key scenarios.
       <section anchor="jose-algorithm-registration" title="JOSE Algorithms Registrations">
         <t>
 	  This section registers the following values in the
-	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
+	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE"/>
 	  established by <xref target="RFC7515"/>.
 	</t>
 
@@ -885,7 +885,7 @@ or mismatched KDF size to symmetric key scenarios.
       <section anchor="cose-algorithms-registrations" title="COSE Algorithms Registrations">
         <t>
 	  This section registers the following values in the
-	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>.
+	  IANA "COSE Algorithms" registry <xref target="IANA.COSE"/>.
 	</t>
 
 	<section anchor="new-cose-regs" title="Fully-Specified COSE Algorithm Registrations">
@@ -1278,7 +1278,7 @@ or mismatched KDF size to symmetric key scenarios.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
-	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE.Algorithms"/>
+	  IANA "JSON Web Signature and Encryption Algorithms" registry <xref target="IANA.JOSE"/>
 	  in Section 7.1 of <xref target="RFC7518"/>
 	  have been updated to include an additional review criterion:
 	  <list style="symbols">
@@ -1296,7 +1296,7 @@ or mismatched KDF size to symmetric key scenarios.
 	</t>
 	<t>
 	  The review instructions for the designated experts for the
-	  IANA "COSE Algorithms" registry <xref target="IANA.COSE.Algorithms"/>
+	  IANA "COSE Algorithms" registry <xref target="IANA.COSE"/>
 	  in Section 10.4 of <xref target="RFC9053"/>
 	  have been updated to include an additional review criterion:
 	  <list style="symbols">
@@ -1308,6 +1308,66 @@ or mismatched KDF size to symmetric key scenarios.
 	</t>
 	</section>
 </section>
+
+      <section title="Defining Deprecated and Prohibited" anchor="DeprecatedProhibited">
+	<t>
+	  The terms "Deprecated" and "Prohibited"
+	  as used by JOSE and COSE registrations are currently undefined.
+	  Furthermore, while in <xref target="RFC7518"/> JOSE specifies that both
+	  "Deprecated" and "Prohibited" can be used,
+	  in <xref target="RFC8152"/> COSE specifies
+	  the use of "Deprecated" but not "Prohibited".
+	  (Note that <xref target="RFC9053"/> did not carry the definitions of the
+	  "Recommended" registry columns forward,
+	  so <xref target="RFC8152"/> remains definitive in this regard.)
+	  This section defines these terms for use by both
+	  JOSE and COSE IANA registrations in a consistent manner,
+	  eliminating this potentially confusing inconsistency.
+	</t>
+	<t>
+	  For purposes of use in the "JOSE Implementation Requirements" columns
+	  in the IANA JOSE registries <xref target="IANA.JOSE"/> and
+	  in the "Recommended" columns
+	  in the IANA COSE registries <xref target="IANA.COSE"/>,
+	  these terms are defined as follows:
+	</t>
+	<t>
+	  <list style="hanging">
+
+	    <t hangText="Deprecated">
+	      <vspace/>
+	      There is a preferred mechanism to achieve similar functionality
+	      to that referenced by the identifier;
+	      this replacement functionality SHOULD be utilized in new deployments
+	      in preference to the deprecated identifier.
+	    </t>
+
+	    <t hangText="Prohibited">
+	      <vspace/>
+	      The identifier and the functionality that it references MUST NOT be used.
+	      (Identifiers MAY be designated as "Prohibited" due to security flaws,
+	      for instance.)
+	    </t>
+
+	  </list>
+	</t>
+	<t>
+	  Note that the terms "Deprecated" and "Prohibited" have been used
+	  with a multiplicity of different meanings in various specifications,
+	  sometimes without actually being defined in those specifications.
+	  For instance, the term "Deprecated" is used in the title of
+	  <xref target="RFC8996"/>, but the actual specification text
+	  uses the terminology "MUST NOT be used".
+	</t>
+	<t>
+	  The definitions above were chosen because they are consistent with
+	  all existing registrations in both JOSE and COSE;
+	  none will need to change.
+	  Furthermore, they are consistent with their existing usage in JOSE.
+	  The only net change is to enable a clear distinction between
+	  "Deprecated" and "Prohibited" in future COSE registrations.
+	</t>
+      </section>
 
     </section>
 
@@ -1392,12 +1452,13 @@ or mismatched KDF size to symmetric key scenarios.
     <references title="Informative References">
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7518.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8032.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8152.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8996.xml"/>
 
-			
-      <reference anchor="IANA.JOSE.Algorithms" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
+      <reference anchor="IANA.JOSE" target="https://www.iana.org/assignments/jose/">
         <front>
-          <title>JOSE Algorithms</title>
+          <title>JSON Object Signing and Encryption (JOSE)</title>
           <author>
             <organization>IANA</organization>
           </author>
@@ -1405,10 +1466,9 @@ or mismatched KDF size to symmetric key scenarios.
         </front>
       </reference>
 
-
-      <reference anchor="IANA.COSE.Algorithms" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
+      <reference anchor="IANA.COSE" target="https://www.iana.org/assignments/cose/">
         <front>
-          <title>COSE Algorithms</title>
+          <title>CBOR Object Signing and Encryption (COSE)</title>
           <author>
             <organization>IANA</organization>
           </author>
@@ -1743,7 +1803,13 @@ or mismatched KDF size to symmetric key scenarios.
 	    Registered COSE algorithms for using Brainpool curves with ECDSA.
 	  </t>
 	  <t>
+	    Removed text on KEMs, since currently registered algorithms don't use them.
+	  </t>
+	  <t>
 	    Enabled use of fully-specified ECDH algorithms.
+	  </t>
+	  <t>
+	    Defined the terms "Deprecated" and "Prohibited" for both JOSE and COSE registrations.
 	  </t>
         </list>
       </t>
