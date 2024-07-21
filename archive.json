@@ -1,0 +1,983 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-07-21T00:36:25.537614+00:00",
+  "repo": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOKNEhZc59U4Nf",
+      "title": "Considerations for AEADs",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/issues/3",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In this rather long thread: https://mailarchive.ietf.org/arch/msg/jose/GcoCkOeg37tbFmZDkmtc3ExHVeU/\r\n\r\nWe discussed what fully specified means for HPKE and ECDH-ES+A128KW.\r\n\r\nWe considered solutions to binding the AEAD to the kdf, and how that is related to the current use of concatKDF, as described in https://datatracker.ietf.org/doc/html/rfc7518#section-4.6.2\r\n\r\nNote that \"AlgorithmID\" is mixed in to the ECDH-ES KDF, so a fully specified algorithm would bind the resulting key similar to https://datatracker.ietf.org/doc/draft-housley-lamps-cms-cek-hkdf-sha256/",
+      "createdAt": "2024-01-26T17:47:30Z",
+      "updatedAt": "2024-07-08T20:04:40Z",
+      "closedAt": "2024-07-08T20:04:28Z",
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "addressed in -03",
+          "createdAt": "2024-07-08T20:04:39Z",
+          "updatedAt": "2024-07-08T20:04:39Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOKNEhZc6AuVmJ",
+      "title": "Considerations for KEMs",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/issues/6",
+      "state": "CLOSED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "KEMs are not defined for use in JOSE or COSE at the time we are writing the draft\r\n\r\nWe expect them to be defined soon, and we want to provide guidance that is consistent with both HPKE KEMs and non HPKE KEMs\r\n\r\nhttps://www.iana.org/assignments/hpke/hpke.xhtml#hpke-kem-ids\r\n\r\nDHKEM(P-384, HKDF-SHA384)\r\n\r\nvs\r\n\r\nid-mod-cms-rsa-kem-2023 \r\n\r\nhttps://datatracker.ietf.org/doc/draft-ietf-lamps-rfc5990bis/\r\n\r\nIn general KEMs fit where previously we would have seen ECDH-ES or ECDH-SS\r\n\r\nFully specified KEMS have a fixed KDF internalized\r\n\r\nPolymorphic KEMS parameterize the KDF.\r\n",
+      "createdAt": "2024-02-28T18:53:35Z",
+      "updatedAt": "2024-02-28T19:50:19Z",
+      "closedAt": "2024-02-28T19:50:19Z",
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Need to expand terms on first use to close this",
+          "createdAt": "2024-02-28T19:08:01Z",
+          "updatedAt": "2024-02-28T19:08:01Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOKNEhZc5daTRK",
+      "title": "Key representations remain the same",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/1",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses a To Do point",
+      "createdAt": "2023-10-20T18:24:42Z",
+      "updatedAt": "2023-10-20T19:55:45Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "a42d36f66dee71ecd14951571cd9f98ba5d7584f",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-keys",
+      "headRefOid": "e78c1437ac9bc3e17f37ea6423540dba9a9e924b",
+      "closedAt": "2023-10-20T19:55:45Z",
+      "mergedAt": "2023-10-20T19:55:45Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "e17b62461fab344aaf30c3210c38a7194f233722"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5kx_Ij",
+          "commit": {
+            "abbreviatedOid": "e78c143"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-20T19:55:35Z",
+          "updatedAt": "2023-10-20T19:55:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOKNEhZc5da1U1",
+      "title": "Discussed algorithms not updated",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/2",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This addresses the remaining To Do items.",
+      "createdAt": "2023-10-20T20:37:59Z",
+      "updatedAt": "2023-10-20T20:47:18Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "e17b62461fab344aaf30c3210c38a7194f233722",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-not-updated",
+      "headRefOid": "5c17795c043d0237956f5a992ec789486ea73b0c",
+      "closedAt": "2023-10-20T20:47:18Z",
+      "mergedAt": "2023-10-20T20:47:18Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "80ad4156ba579480837d196764823b3f840cf7f2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5kyM8g",
+          "commit": {
+            "abbreviatedOid": "5c17795"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-20T20:46:51Z",
+          "updatedAt": "2023-10-20T20:46:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOKNEhZc5msAA6",
+      "title": "Updates",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/4",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-12T22:30:35Z",
+      "updatedAt": "2024-02-13T16:41:33Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "48c34cd71bd8fd9c8dd853e7b46b7a1310523ac9",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "updates",
+      "headRefOid": "c11aed3680562557d40af23cc9526248fa328d21",
+      "closedAt": "2024-02-13T16:41:33Z",
+      "mergedAt": "2024-02-13T16:41:33Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "7a910b5dc2eb5f67db2ea1d59493f5414c334c20"
+      },
+      "comments": [
+        {
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have applied your suggestions.",
+          "createdAt": "2024-02-13T14:28:46Z",
+          "updatedAt": "2024-02-13T14:28:46Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5v3r0K",
+          "commit": {
+            "abbreviatedOid": "94e7881"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T04:49:38Z",
+          "updatedAt": "2024-02-13T04:49:38Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n\t\tIANA is directed to preserve the current reference to RFC 7518,\r\n\t\tand to add a reference to this section of this document.\r\n```",
+              "createdAt": "2024-02-13T04:49:38Z",
+              "updatedAt": "2024-02-13T04:49:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5v3r9Z",
+          "commit": {
+            "abbreviatedOid": "94e7881"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T04:50:24Z",
+          "updatedAt": "2024-02-13T04:50:24Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-02-13T04:50:24Z",
+              "updatedAt": "2024-02-13T04:50:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5v3sBp",
+          "commit": {
+            "abbreviatedOid": "94e7881"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T04:50:47Z",
+          "updatedAt": "2024-02-13T04:50:48Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-02-13T04:50:48Z",
+              "updatedAt": "2024-02-13T04:50:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5v3sIf",
+          "commit": {
+            "abbreviatedOid": "94e7881"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T04:51:24Z",
+          "updatedAt": "2024-02-13T04:51:25Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\n\t\tIANA is directed to preserve the current references to RFC 9053 and RFC 9054,\r\n\t\tand to add a reference to this section of this document.\r\n```",
+              "createdAt": "2024-02-13T04:51:24Z",
+              "updatedAt": "2024-02-13T04:51:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5v3sMS",
+          "commit": {
+            "abbreviatedOid": "94e7881"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "Please apply my suggestions.",
+          "createdAt": "2024-02-13T04:51:43Z",
+          "updatedAt": "2024-02-13T04:51:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5v9yKY",
+          "commit": {
+            "abbreviatedOid": "c11aed3"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-13T16:41:17Z",
+          "updatedAt": "2024-02-13T16:41:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOKNEhZc5oHSpj",
+      "title": "Fully-Specified Computations Using Multiple Algorithms",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/5",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Described independently fully-specifying `alg` and `enc` values, etc.",
+      "createdAt": "2024-02-28T00:49:02Z",
+      "updatedAt": "2024-02-28T01:29:15Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "7a910b5dc2eb5f67db2ea1d59493f5414c334c20",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-multiple-algorithms",
+      "headRefOid": "63dfae1c5e5219210adfe35e47cb09059434b4c9",
+      "closedAt": "2024-02-28T01:29:15Z",
+      "mergedAt": "2024-02-28T01:29:15Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "850034cc480e12709e1d7b5e8a99c85f13c455c5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5xjV8I",
+          "commit": {
+            "abbreviatedOid": "63dfae1"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-28T00:52:15Z",
+          "updatedAt": "2024-02-28T00:54:02Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "```suggestion\n\tTo be fully specified,\n```\n",
+              "createdAt": "2024-02-28T00:52:16Z",
+              "updatedAt": "2024-02-28T00:54:02Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "Not sure this is any better than what you have already.",
+              "createdAt": "2024-02-28T00:53:04Z",
+              "updatedAt": "2024-02-28T00:54:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5xjX8Z",
+          "commit": {
+            "abbreviatedOid": "63dfae1"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-28T01:01:31Z",
+          "updatedAt": "2024-02-28T01:01:31Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "I like my wording better, in part, because yours seems possibly a little redundant in the full context of the sentence:\r\n> To fully specified,\teach of these multiple algorithms must be independently fully specified.\r\n",
+              "createdAt": "2024-02-28T01:01:31Z",
+              "updatedAt": "2024-02-28T01:01:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5xjdVB",
+          "commit": {
+            "abbreviatedOid": "63dfae1"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-28T01:27:11Z",
+          "updatedAt": "2024-02-28T01:27:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOKNEhZc5oNcH-",
+      "title": "Adjust KEM related text",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/7",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR addresses feedback from brian campbell.",
+      "createdAt": "2024-02-28T19:18:14Z",
+      "updatedAt": "2024-02-28T19:50:18Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "1567f0481abeff17cb6c2e06f6a6eaeb89ea9db6",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "fix/expand-terms-add-references",
+      "headRefOid": "f78467098e6a9d5c12f03895da497ff14c6ee085",
+      "closedAt": "2024-02-28T19:50:18Z",
+      "mergedAt": "2024-02-28T19:50:18Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "738b271d72980e174e7708a479279cc09c53998a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5xrDCg",
+          "commit": {
+            "abbreviatedOid": "f784670"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-28T19:32:42Z",
+          "updatedAt": "2024-02-28T19:32:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5xrKCN",
+          "commit": {
+            "abbreviatedOid": "f784670"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-28T19:43:35Z",
+          "updatedAt": "2024-02-28T19:43:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOKNEhZc5xMpcV",
+      "title": "WLGC Feedback on Encryption Algorithms",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/8",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR focuses on the WGLC feedback regarding what \"fully specified encryption algorithm identifier\" means.\r\n\r\nThe approach taken is to review the the modes of encryption supported by JOSE and COSE, and comment on the algorithms registered to support those modes, and explain what a fully specified algorithm for each mode would look like.\r\n",
+      "createdAt": "2024-06-01T14:21:34Z",
+      "updatedAt": "2024-06-10T21:01:34Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "67d3751ce5db4eef720d8a90804e326c0f8e8e0e",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "wlgc-encryption-feedback",
+      "headRefOid": "5e641aec8e300258d19efd23680f12b79ee73e4d",
+      "closedAt": "2024-06-10T21:01:33Z",
+      "mergedAt": "2024-06-10T21:01:33Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "6f2fdca8b4a51300140c07aaec04832eaf6c9834"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc58s7Ew",
+          "commit": {
+            "abbreviatedOid": "5381deb"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-01T17:55:13Z",
+          "updatedAt": "2024-06-01T17:55:14Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Why is the KEMs section now commented out?",
+              "createdAt": "2024-06-01T17:55:14Z",
+              "updatedAt": "2024-06-01T17:55:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc58s_nH",
+          "commit": {
+            "abbreviatedOid": "5381deb"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-01T20:14:46Z",
+          "updatedAt": "2024-06-01T20:14:46Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "A local editor mistake, as you can see in the latest changes, I've restructured the entire section to focus on the encryption modes that JOSE and COSE support, and explain what fully specified means for each mode.",
+              "createdAt": "2024-06-01T20:14:46Z",
+              "updatedAt": "2024-06-01T20:14:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc582r74",
+          "commit": {
+            "abbreviatedOid": "5e641ae"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-03T19:45:36Z",
+          "updatedAt": "2024-06-03T19:45:36Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "I think we should register a small number of fully-specified encryption algorithms, but I'm OK leaving this text as-is and changing it when we add those registrations.",
+              "createdAt": "2024-06-03T19:45:36Z",
+              "updatedAt": "2024-06-03T19:45:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc582uhr",
+          "commit": {
+            "abbreviatedOid": "5e641ae"
+          },
+          "author": "selfissued",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-03T19:52:14Z",
+          "updatedAt": "2024-06-03T19:52:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOKNEhZc5yZRqy",
+      "title": "Spelling, grammar, and terminology corrections",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/9",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-06-13T17:43:32Z",
+      "updatedAt": "2024-06-22T00:34:23Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "6f2fdca8b4a51300140c07aaec04832eaf6c9834",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-spelling-grammar-terminology",
+      "headRefOid": "7cd654765a263290e121edae7b1762e8592ad0a2",
+      "closedAt": "2024-06-22T00:34:22Z",
+      "mergedAt": "2024-06-22T00:34:22Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "8ade2474de034ad3d596327454eda43120fdaabb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5-KPdM",
+          "commit": {
+            "abbreviatedOid": "7cd6547"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-13T18:21:00Z",
+          "updatedAt": "2024-06-13T18:21:00Z",
+          "comments": [
+            {
+              "originalPosition": 184,
+              "body": "I think that this is only partially correct.\r\n\r\nExamples for each case:\r\n\r\n- Key Agreement - https://datatracker.ietf.org/doc/html/rfc7518#appendix-C\r\n- Direct Encryption - https://datatracker.ietf.org/doc/html/rfc7520#section-5.6.3\r\n",
+              "createdAt": "2024-06-13T18:21:00Z",
+              "updatedAt": "2024-06-13T18:21:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5-KQWA",
+          "commit": {
+            "abbreviatedOid": "7cd6547"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-13T18:23:07Z",
+          "updatedAt": "2024-06-13T18:23:07Z",
+          "comments": [
+            {
+              "originalPosition": 184,
+              "body": "```suggestion\r\nTo convey a fully-specified Key Establishment (Key Agreement) algorithm, both the \"alg\" and \"enc\" values must be fully-specified, the closest example of this can be found in Appendix C of RFC7518, however the \"alg\" value lacks the explicit curve and key derivation function.\r\nTo convey a fully-specified Direct Encryption algorithm in JOSE, the \"alg\" value MUST be \"dir\",\r\n```",
+              "createdAt": "2024-06-13T18:23:07Z",
+              "updatedAt": "2024-06-13T18:27:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc5-KTPY",
+          "commit": {
+            "abbreviatedOid": "7cd6547"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-13T18:29:17Z",
+          "updatedAt": "2024-06-13T18:29:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOKNEhZc5zSu79",
+      "title": "Make COSE Recommended status for Ed25519 and Ed448 \"yes\"",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/10",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Also populates Acknowledgements for those contributing during WGLC.",
+      "createdAt": "2024-06-23T18:44:14Z",
+      "updatedAt": "2024-06-23T18:50:24Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "8ade2474de034ad3d596327454eda43120fdaabb",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-cose-recommended",
+      "headRefOid": "98b8d15e3b53141d082bdf0cc4e133dda17236f6",
+      "closedAt": "2024-06-23T18:50:24Z",
+      "mergedAt": "2024-06-23T18:50:24Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "ad1063c9afb1f04abe4d82d0d543ace24c38d984"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5_OC9b",
+          "commit": {
+            "abbreviatedOid": "98b8d15"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-23T18:47:28Z",
+          "updatedAt": "2024-06-23T18:47:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOKNEhZc5zS375",
+      "title": "Register COSE algorithms for using Brainpool curves with ECDSA",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/11",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "... since the Brainpool curves are registered with COSE.\r\n\r\ncc: @awoie\r\n",
+      "createdAt": "2024-06-23T20:40:44Z",
+      "updatedAt": "2024-06-23T21:04:28Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "ad1063c9afb1f04abe4d82d0d543ace24c38d984",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-brainpool",
+      "headRefOid": "bb2255a6ef96215b51f2743cd77faf06202a0ddf",
+      "closedAt": "2024-06-23T21:04:28Z",
+      "mergedAt": "2024-06-23T21:04:28Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "3639fdb0013b3e692feb1cf2d8daeac028ee322d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc5_OH2w",
+          "commit": {
+            "abbreviatedOid": "bb2255a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-23T21:02:39Z",
+          "updatedAt": "2024-06-23T21:02:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOKNEhZc50muu_",
+      "title": "Enable use of fully-specified ECDH algorithms",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/12",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Inventories ECDH possibilities in a new appendix.\r\n\r\nChanges the terminology \"Key Establishment and Direct Encryption\" to \"Key Establishment with Direct Encryption\".\r\n\r\nSay that fully-specified algorithms *specify*, rather than *include* all cryptographically relevant parameters.\r\n\r\nChange the abstract and intro wording to align with our intent.\r\n\r\nRegistering a small number of fully-specified ECDH algorithms is the next step for this PR.",
+      "createdAt": "2024-07-07T05:02:50Z",
+      "updatedAt": "2024-07-07T23:09:38Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "3639fdb0013b3e692feb1cf2d8daeac028ee322d",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-ECDH",
+      "headRefOid": "cddca87464d669e20fc3bae60a5d56928c8fbddb",
+      "closedAt": "2024-07-07T23:09:38Z",
+      "mergedAt": "2024-07-07T23:09:38Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "f350beee8e565fec2e795c8e1f9ed500987183df"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6A23H_",
+          "commit": {
+            "abbreviatedOid": "615f4b7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-07T13:49:47Z",
+          "updatedAt": "2024-07-07T13:49:47Z",
+          "comments": [
+            {
+              "originalPosition": 182,
+              "body": "```suggestion\r\n\t  because they do not include the curve name in the algorithm to be used with the ephemeral key:\r\n```",
+              "createdAt": "2024-07-07T13:49:47Z",
+              "updatedAt": "2024-07-07T13:49:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6A23Ji",
+          "commit": {
+            "abbreviatedOid": "615f4b7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-07T13:50:29Z",
+          "updatedAt": "2024-07-07T13:50:29Z",
+          "comments": [
+            {
+              "originalPosition": 182,
+              "body": "They do implicitly include the KDF, just not the curve.",
+              "createdAt": "2024-07-07T13:50:29Z",
+              "updatedAt": "2024-07-07T13:50:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6A23MT",
+          "commit": {
+            "abbreviatedOid": "615f4b7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-07T13:51:38Z",
+          "updatedAt": "2024-07-07T13:51:38Z",
+          "comments": [
+            {
+              "originalPosition": 250,
+              "body": "```suggestion\r\n\t  because they do not include the curve name in the algorithm to be used with\r\n```",
+              "createdAt": "2024-07-07T13:51:38Z",
+              "updatedAt": "2024-07-07T13:51:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6A23Pf",
+          "commit": {
+            "abbreviatedOid": "615f4b7"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-07T13:52:44Z",
+          "updatedAt": "2024-07-07T13:52:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6A3J53",
+          "commit": {
+            "abbreviatedOid": "cddca87"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-07T22:57:09Z",
+          "updatedAt": "2024-07-07T22:57:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOKNEhZc50n5dS",
+      "title": "Update Algorithms Not Updated Section",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/13",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Delete obsolete ECDH text.\r\n\r\nAdd to RSA text to address a last call review comment.",
+      "createdAt": "2024-07-07T23:28:10Z",
+      "updatedAt": "2024-07-07T23:30:27Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "f350beee8e565fec2e795c8e1f9ed500987183df",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-revise-not-updated",
+      "headRefOid": "3502fd67360b7268c18dc2d6d52a086f42e5073e",
+      "closedAt": "2024-07-07T23:30:27Z",
+      "mergedAt": "2024-07-07T23:30:27Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "1db7cf965135acd504900de460edf0c2ca35f05b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6A3MA-",
+          "commit": {
+            "abbreviatedOid": "3502fd6"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-07T23:29:08Z",
+          "updatedAt": "2024-07-07T23:29:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOKNEhZc50oL9_",
+      "title": "Define Deprecated and Prohibited",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/14",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-08T01:11:14Z",
+      "updatedAt": "2024-07-08T01:16:05Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "1db7cf965135acd504900de460edf0c2ca35f05b",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-deprecated",
+      "headRefOid": "24b04923e7ee0876a50edee8c3af82e5204054e4",
+      "closedAt": "2024-07-08T01:16:05Z",
+      "mergedAt": "2024-07-08T01:16:05Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "df92321d3d4b3e2399d04180bad19d48935aaa25"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6A3dLT",
+          "commit": {
+            "abbreviatedOid": "24b0492"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-08T01:15:55Z",
+          "updatedAt": "2024-07-08T01:15:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOKNEhZc50vNS_",
+      "title": "Editorial cleanups on 8-Jul-24",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/15",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "... on the submission cutoff date.",
+      "createdAt": "2024-07-08T19:46:47Z",
+      "updatedAt": "2024-07-08T19:59:59Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "df92321d3d4b3e2399d04180bad19d48935aaa25",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-8-Jul-24",
+      "headRefOid": "7206bf54c844285e5dd9670fa325c705d0e4e9fc",
+      "closedAt": "2024-07-08T19:59:59Z",
+      "mergedAt": "2024-07-08T19:59:59Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "55830e169226ee2143e1c8f5787ca109c0a54e68"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6BAC9-",
+          "commit": {
+            "abbreviatedOid": "7206bf5"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-08T19:59:55Z",
+          "updatedAt": "2024-07-08T19:59:55Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
