@@ -300,7 +300,8 @@ The combination of chosen algorithms might not be implemented by the receiver.
 The combination of chosen algorithms might not be aligned in terms of strength.
         </t>
         <t>
-Underspecified or implicit parameters could lead to exploitable faults in implementations, for example, cross curve ECDH between P-256 and P-384 or X25519.
+Underspecified or implicit parameters could lead to exploitable faults in implementations, for example,
+cross-curve Elliptic Curve Diffie-Hellman (ECDH) between P-256 and P-384 or X25519.
         </t>
         <t>
 Alternative algorithms at a component layer, such as symmetric key encryption, might provide different security properties, for example, "A128GCM" vs. "A128CBC-HS256".
@@ -651,7 +652,7 @@ For example: "ECDH-ES using P-256 w/ HKDF" or "ECDH-ES using P-256 w/ HKDF and A
 </t>
 
 <t>
-In COSE, preventing cross mode attacks, such as those described in <xref target="RFC9459"/>, can be accomplished in two ways:
+In COSE, preventing cross-mode attacks, such as those described in <xref target="RFC9459"/>, can be accomplished in two ways:
 (1) Allow only authenticated content encryption algorithms.
 (2) Bind the the potentially unauthenticated content encryption algorithm to be used
 into the key protection algorithm so that different content encryption algorithms
@@ -662,8 +663,8 @@ Which choice to use in which circumstances is beyond the scope of this specifica
 <t>
 Fully-specified Two-Layer Encryption algorithms enable the sender and receiver to agree on all mandatory security parameters.
 They also enable a protocol to specify an allow list of algorithm combinations that does not include polymorphic combinations,
-such as cross curve key establishment,
-cross mode symmetric encryption,
+such as cross-curve key establishment,
+cross-mode symmetric encryption,
 or mismatched KDF size to symmetric key scenarios.
 </t>
 
@@ -686,7 +687,7 @@ or mismatched KDF size to symmetric key scenarios.
 	    fully-specified ECDH algorithms that could be registered for JOSE and COSE,
 	    the working group decided to leave decisions about
 	    which fully-specified ECDH algorithms to register
-	    to future specifications, when needed.
+	    to future specifications, if needed.
 	  </t>
 	</section>
       </section>
@@ -1216,7 +1217,7 @@ or mismatched KDF size to symmetric key scenarios.
 	This section discusses why they have not been updated.
       </t>
 
-      <section anchor="RSA" title="Algorithms for Signing with RSASSA-PKCS1-v1_5">
+      <section anchor="RSA" title="RSA Signing Algorithms">
 	<t>
 	  The working group has discussed whether the
 	  <spanx style="verb">RS256</spanx>,
@@ -1239,6 +1240,16 @@ or mismatched KDF size to symmetric key scenarios.
 	  That said, should it be useful at some point to have
 	  RSA algorithm identifiers that are specific to the key size,
 	  a future specification could always register them.
+	</t>
+      </section>
+
+      <section anchor="ECDH" title="ECDH Encryption Algorithms">
+	<t>
+	  As discussed in <xref target="ecdh-algs"/>
+	  and <xref target="PolymorphicECDH"/>,
+	  the working group decided not to update the
+	  Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time,
+	  but to describe how to potentially do so in the future, if needed.
 	</t>
       </section>
 
@@ -1581,6 +1592,9 @@ or mismatched KDF size to symmetric key scenarios.
 	  </t>
 	  <t>
 	    Tightened descriptive text for fully-specified encryption algorithms.
+	  </t>
+	  <t>
+	    Applied John Mattsson's suggestion for the RSA section title.
 	  </t>
         </list>
       </t>
