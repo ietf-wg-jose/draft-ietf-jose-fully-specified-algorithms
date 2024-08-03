@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="8" month="July" year="2024" />
+    <date day="2" month="August" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -331,7 +331,7 @@ ciphertext = encrypt(plaintext, secret_key)
 plaintext  = decrypt(ciphertext, secret_key)
 </sourcecode>
 <t>
-Depending on the algorithm, additional parameters such as additional authenticated data (AAD) or initialization vector (IV) might be required.
+Depending on the algorithm, additional parameters such as Additional Authenticated Data (AAD) or Initialization Vector (IV) might be required.
 </t>
 <t>
 In the special case where the plaintext is a content encryption key, to be used with a subsequent symmetric encryption algorithm,
@@ -396,7 +396,7 @@ plaintext  = decrypt(ciphertext, private_key)
 </sourcecode>
 
 <t>
-Depending on the symmetric algorithm, additional parameters such as additional authenticated data (AAD) or initialization vector (IV) might be required.
+Depending on the symmetric algorithm, additional parameters such as Additional Authenticated Data (AAD) or Initialization Vector (IV) might be required.
 </t>
 
 <t>
@@ -520,12 +520,12 @@ A distinguishing characteristic of Two-Layer Encryption schemes is that multiple
 </t>
 
 <t>
-In RSA-OAEP the encrypted content encryption key is generated through an asymmetric cryptographic operation.
+In RSA-OAEP, the encrypted content encryption key is generated through an asymmetric cryptographic operation.
 </t>
 
 <t>
 When Key Wrapping without any key establishment is used, the content encryption key is encrypted using a symmetric cryptographic operation (key wrap).
-How the content encryption key was generated is out of scope when considering this scheme.
+How the content encryption key was generated is out of scope for this discussion.
 </t>
 
 <t>
@@ -566,11 +566,11 @@ decrypt(encrypted_content_encryption_key, key_encryption_key)
 <t>
 The interface above is consistent with Key Establishment with Direct Encryption.
 The process of deriving a shared secret and content encryption key is specific to the asymmetric key type used.
-The difference is that instead of using the derived content encryption key directly, two-layer encryption always derives a key encryption key, and wraps the content encryption key.
+The difference is that instead of using the derived content encryption key directly, two-layer encryption always uses a key encryption key, and protects the content encryption key.
 </t>
 
 <t>
-Regardless of how a Two-Layer Encryption scheme protects a content encryption key, content encryption algorithms generally satisfy the following interface:
+Regardless of how a Two-Layer Encryption scheme protects the content encryption key, content encryption algorithms generally satisfy the following interface:
 </t>
 <sourcecode>
 content_encryption_key = \
@@ -581,37 +581,41 @@ plaintext  = decrypt(ciphertext, content_encryption_key)
 </sourcecode>
 
 <t>
-Depending on the content encryption algorithm, additional parameters such as additional authenticated data (AAD) or initialization vector (IV) might be required.
+Depending on the content encryption algorithm, additional parameters such as Additional Authenticated Data (AAD) and/or an Initialization Vector (IV) might be required.
 </t>
 
 <t>
-Although JOSE and COSE encode Two-Layer Encryptions differently, both rely on an encrypted content encryption key.
-The content encryption key is encrypted either using Key Wrapping directly, or through Key Establishment and then Key Wrapping or Key Transport or Key Encryption.
-When Key Establishment is used, a KDF is usually applied during the production of the key encryption key,
-to ensure that the content encryption algorithm that will be used with the encrypted content encryption key is known and agreed to by both sender and recipient.
+Although JOSE and COSE encode Two-Layer Encryptions differently, both rely on a protected content encryption key.
+The content encryption key is protected using Key Wrapping directly, or through Key Establishment and then Key Wrapping, or Key Transport, or Key Encryption.
 </t>
 
 <t>
-When using Two-Layer Encryption, the ciphertext is not only the output of symmetric encryption, but also includes all parameters necessary for the recipient to decrypt the ciphertext,
+When using Two-Layer Encryption, the ciphertext is not only the output of symmetric encryption, but also includes
+and/or is accompanied by
+all parameters necessary for the recipient to decrypt the ciphertext,
 including parameters for use with the key establishment algorithm, such as ephemeral or encapsulated keys, any required key derivation functions and their parameters and the key wrapping algorithm.
 Encrypted content encryption keys are always present when Two-Layer Encryption algorithms are used.
+Parameters accompanying the ciphertext can include
+an Initialization Vector (IV),
+an Authentication Tag,
+and Additional Authenticated Data (AAD).
 Two-Layer Encryption is often used for encrypting the same plaintext to multiple recipients, in contrast with other modes which can only be used to encrypt to a single recipient.
 </t>
 
 <t>
-Example of a decoded JWE Protected Header, for Key Encryption using RSA-OAEP with AES-GCM:
+Example of a decoded JWE Protected Header, for Key Agreement with ECDH-ES:
 </t>
 
 <sourcecode>
 {
-  "alg": "RSA-OAEP",
+  "alg": "ECDH-ES",
   "enc": "A256GCM",
   ...
 }
 </sourcecode>
 
 <t>
-Example of a decoded JWE Protected Header, for Key Encryption using ECDH-ES and AES-KeyWrap with AES-GCM:
+Example of a decoded JWE Protected Header, for Key Agreement using ECDH-ES and AES-KeyWrap with AES-GCM:
 </t>
 
 <sourcecode>
@@ -623,26 +627,36 @@ Example of a decoded JWE Protected Header, for Key Encryption using ECDH-ES and 
 </sourcecode>
 
 <t>
-Despite containing both the key establishment algorithm, with either an implicit KDF, or a Key Transport algorithm and a symmetric encryption algorithm, the examples above are not fully specified.
+However, despite containing both the key establishment algorithm and a content encryption algorithm, the examples above are not fully specified.
 </t>
 
 <t>
-To make a Two-Layer Encryption algorithm fully specified, all security relevant details need to be encoded in the algorithm identifiers.
-In the context of the examples above, the missing explicit parameters are the curve name, KDF and required parameters, and content encryption algorithm to use with the decrypted content encryption key.
+To make a Two-Layer Encryption algorithm fully specified, all security relevant details need to be encoded in the algorithm identifiers directly or be defined by the other algorithm.
+In the context of the examples above, the missing explicit parameters are
+the curve name for the ephemeral key in both cases and
+for <spanx style="verb">ECDH-ES</spanx>, the keydatalen KDF parameter.
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption algorithm in JOSE, the "alg" value MUST specify all essential parameters for key establishment and key wrapping.
+To convey a fully-specified Two-Layer Encryption algorithm in JOSE, the "alg" value MUST explicitly specify all essential parameters for key establishment and key wrapping
+or have them be specified by the accompanying "enc" value.
 For example: "ECDH-ES using Concat KDF and P-256" or "ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping".
+The keydatalen KDF parameter value for <spanx style="verb">ECDH-ES</spanx> is determined from the "enc" value,
+as described in Section 4.6.2 of <xref target="RFC7518"/>.
 </t>
 
 <t>
-To convey a fully-specified Two-Layer Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for key establishment and key wrapping.
+To convey a fully-specified Two-Layer Encryption algorithm in COSE, the outer "alg" value MUST specify all essential parameters for key establishment and key wrapping.
 For example: "ECDH-ES using P-256 w/ HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key".
 </t>
 
 <t>
-The symmetric encryption algorithm that will be used with the content encryption key after it is decrypted is required to prevent cross mode attacks, such as those described in <xref target="RFC9459"/>.
+In COSE, preventing cross mode attacks, such as those described in <xref target="RFC9459"/>, can be accomplished in two ways:
+(1) Allow only authenticated content encryption algorithms.
+(2) Bind the the potentially unauthenticated content encryption algorithm to be used
+into the key protection algorithm so that different content encryption algorithms
+result in different content encryption keys.
+Which choice to use in which circumstances is beyond the scope of this specification.
 </t>
 
 <t>
@@ -668,58 +682,11 @@ or mismatched KDF size to symmetric key scenarios.
 	    both sets of registered ECDH algorithms are polymorphic.
 	  </t>
 	  <t>
-	    The following fully-specified JOSE ECDH algorithms are defined:
-	  </t>
-	  <texttable anchor="jose-ecdh-algs" title="JOSE ECDH Algorithm Values" suppress-title="false" align="center" style="full">
-	    <ttcol align="left">Name</ttcol>
-	    <ttcol align="left">Description</ttcol>
-	    <ttcol align="left">Implementation Requirements</ttcol>
-
-	    <c>ECDH-ES-P-256</c>
-	    <c>ECDH-ES using Concat KDF and P-256</c>
-	    <c>Recommended</c>
-
-	    <c>ECDH-ES-P-256+A128KW</c>
-	    <c>ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping</c>
-	    <c>Recommended</c>
-
-	  </texttable>
-
-	  <t>
-	    The following fully-specified COSE ECDH algorithms are defined:
-	  </t>
-	  <texttable anchor="cose-ecdh-algs" title="COSE ECDH Algorithm Values" suppress-title="false" align="center" style="full">
-	    <ttcol align="left">Name</ttcol>
-	    <ttcol align="left">COSE Value</ttcol>
-	    <ttcol align="left">Description</ttcol>
-	    <ttcol align="left">Recommended</ttcol>
-
-	    <c>ECDH-ES-P-256 + HKDF-256</c>
-	    <c>TBD (requested assignment -52)</c>
-	    <c>ECDH ES using P-256 w/ HKDF -- generate key directly</c>
-	    <c>Yes</c>
-
-	    <c>ECDH-SS-P-256 + HKDF-256</c>
-	    <c>TBD (requested assignment -53)</c>
-	    <c>ECDH-SS using P-256 w/ HKDF -- generate key directly</c>
-	    <c>Yes</c>
-
-	    <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
-	    <c>TBD (requested assignment -54)</c>
-	    <c>ECDH ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
-	    <c>Yes</c>
-
-	    <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
-	    <c>TBD (requested assignment -55)</c>
-	    <c>ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
-	    <c>Yes</c>
-
-	  </texttable>
-	  <t>
-	    Should additional fully-specified ECDH algorithms be required,
-	    future specifications can register them,
-	    using the descriptions in the tables in <xref target="PolymorphicECDH"/>,
-	    when applicable.
+	    While <xref target="PolymorphicECDH"/> describes possible
+	    fully-specified ECDH algorithms that could be registered for JOSE and COSE,
+	    the working group decided to leave decisions about
+	    which fully-specified ECDH algorithms to register
+	    to future specifications, when needed.
 	  </t>
 	</section>
       </section>
@@ -784,62 +751,6 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Algorithm Analysis Document(s): <xref target="RFC8032"/>
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Algorithm Name: ECDH-ES-P-256
-	      </t>
-	      <t>
-		Algorithm Description: ECDH-ES using Concat KDF and P-256
-	      </t>
-	      <t>
-		Algorithm Usage Locations: alg
-	      </t>
-	      <t>
-		JOSE Implementation Requirements: Recommended
-	      </t>
-	      <t>
-		Change Controller: IETF
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Algorithm Analysis Document(s): <xref target="RFC8032"/>
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Algorithm Name: ECDH-ES-P-256+A128KW
-	      </t>
-	      <t>
-		Algorithm Description: ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping
-	      </t>
-	      <t>
-		Algorithm Usage Locations: alg
-	      </t>
-	      <t>
-		JOSE Implementation Requirements: Recommended
-	      </t>
-	      <t>
-		Change Controller: IETF
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Algorithm Analysis Document(s): <xref target="RFC8032"/>
@@ -1080,94 +991,6 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Recommended: Yes
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Name: ECDH-ES-P-256 + HKDF-256
-	      </t>
-	      <t>
-		Value: TBD (requested assignment -52)
-	      </t>
-	      <t>
-		Description: ECDH-ES using P-256 w/ HKDF -- generate key directly
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Recommended: Yes
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Name: ECDH-SS-P-256 + HKDF-256
-	      </t>
-	      <t>
-		Value: TBD (requested assignment -53)
-	      </t>
-	      <t>
-		Description: ECDH-SS using P-256 w/ HKDF -- generate key directly
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Recommended: Yes
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Name: ECDH-ES-P-256 + HKDF-256 + A128KW
-	      </t>
-	      <t>
-		Value: TBD (requested assignment -54)
-	      </t>
-	      <t>
-		Description: ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
-	      </t>
-	      <t>
-		Recommended: Yes
-	      </t>
-	    </list>
-	  </t>
-	  <t>
-	    &#xA0;
-	  </t>
-	  <t>
-	    <list style="symbols">
-	      <t>
-		Name: ECDH-SS-P-256 + HKDF-256 + A128KW
-	      </t>
-	      <t>
-		Value: TBD (requested assignment -55)
-	      </t>
-	      <t>
-		Description: ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
-	      </t>
-	      <t>
-		Reference: <xref target="ecdh-algs"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Recommended: Yes
@@ -1589,18 +1412,9 @@ or mismatched KDF size to symmetric key scenarios.
 	with the goal of understanding what
 	registering fully-specified ECDH algorithms to replace them would entail.
 	While there was not an appetite in the working group
-	to register the full set of replacement algorithms at this time,
+	to register these replacement algorithms at this time,
 	this inventory documents how to do so,
 	should others wish to register some or all of the replacements in the future.
-      </t>
-      <t>
-	Nonetheless, because working group members did document that
-	not having fully-specified algorithms is a problem for some use cases,
-	The engineering compromise employed in this specification is
-	registering a single fully-specified ECDH algorithm
-	for each kind of operation so that it becomes possible
-	to rely on fully-specified ECDH algorithms for JOSE and COSE.
-	These registrations are performed in <xref target="ecdh-algs"/>.
       </t>
 
       <section title="Polymorphic ECDH JOSE Algorithms"
@@ -1629,43 +1443,32 @@ or mismatched KDF size to symmetric key scenarios.
 	</texttable>
 
 	<t>
-	  Fully-specified JOSE versions of these algorithms
-	  using combinations that make sense, as discussed by the working group,
-	  would be:
+	  Descriptions of fully-specified JOSE versions of these algorithms
+	  using combinations discussed by the working group
+	  that could be registered by future specifications are:
 	</t>
 	<texttable anchor="full-ecdh-jose" title="Fully-Specified ECDH JOSE Algorithms"
 		   suppress-title="false" align="center" style="full">
-	  <ttcol align="left">Name</ttcol>
 	  <ttcol align="left">Description</ttcol>
 
-	  <c>ECDH-ES-P-256</c>
 	  <c>ECDH-ES using Concat KDF and P-256</c>
 
-	  <c>ECDH-ES-P-384</c>
 	  <c>ECDH-ES using Concat KDF and P-384</c>
 
-	  <c>ECDH-ES-P-521</c>
 	  <c>ECDH-ES using Concat KDF and P-521</c>
 
-	  <c>ECDH-ES-X25519</c>
 	  <c>ECDH-ES using Concat KDF and X25519</c>
 
-	  <c>ECDH-ES-X448</c>
 	  <c>ECDH-ES using Concat KDF and X448</c>
 
-	  <c>ECDH-ES-P-256+A128KW</c>
 	  <c>ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping</c>
 
-	  <c>ECDH-ES-X25519+A128KW</c>
 	  <c>ECDH-ES using Concat KDF and X25519 and "A128KW" wrapping</c>
 
-	  <c>ECDH-ES-P-384+A192KW</c>
 	  <c>ECDH-ES using Concat KDF and P-384 and "A192KW" wrapping</c>
 
-	  <c>ECDH-ES-P-521+A256KW</c>
 	  <c>ECDH-ES using Concat KDF and P-521 and "A256KW" wrapping</c>
 
-	  <c>ECDH-ES-X448+A256KW</c>
 	  <c>ECDH-ES using Concat KDF and X448 and "A256KW" wrapping</c>
 
 	</texttable>
@@ -1716,67 +1519,48 @@ or mismatched KDF size to symmetric key scenarios.
 	</texttable>
 
 	<t>
-	  Fully-specified COSE versions of these algorithms
-	  using combinations that make sense, as discussed by the working group,
-	  would be:
+	  Descriptions of fully-specified COSE versions of these algorithms
+	  using combinations discussed by the working group
+	  that could be registered by future specifications are:
 	</t>
 	<texttable anchor="full-ecdh-cose" title="Fully-Specified ECDH COSE Algorithms"
 		   suppress-title="false" align="center" style="full">
-	  <ttcol align="left">Name</ttcol>
 	  <ttcol align="left">Description</ttcol>
 
-	  <c>ECDH-ES-P-256 + HKDF-256</c>
 	  <c>ECDH-ES using P-256 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-ES-X25519 + HKDF-256</c>
 	  <c>ECDH-ES using X25519 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-ES-P-521 + HKDF-512</c>
 	  <c>ECDH-ES using P-521 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-ES-X448 + HKDF-512</c>
 	  <c>ECDH-ES using X448 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-SS-P-256 + HKDF-256</c>
 	  <c>ECDH-SS using P-256 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-SS-X25519 + HKDF-256</c>
 	  <c>ECDH-SS using X25519 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-SS-P-521 + HKDF-512</c>
 	  <c>ECDH-SS using P-521 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-SS-X448 + HKDF-512</c>
 	  <c>ECDH-SS using X448 w/ HKDF -- generate key directly</c>
 
-	  <c>ECDH-ES-P-256 + HKDF-256 + A128KW</c>
 	  <c>ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-ES-X25519 + HKDF-256 + A128KW</c>
 	  <c>ECDH-ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-ES-P-384 + HKDF-384 + A192KW</c>
 	  <c>ECDH-ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
-	  <c>ECDH-ES-P-521 + HKDF-512 + A256KW</c>
 	  <c>ECDH-ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-ES-X448 + HKDF-512 + A256KW</c>
 	  <c>ECDH-ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-SS-P-256 + HKDF-256 + A128KW</c>
 	  <c>ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-SS-X25519 + HKDF-256 + A128KW</c>
 	  <c>ECDH-SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key</c>
 
-	  <c>ECDH-SS-P-384 + HKDF-384 + A192KW</c>
 	  <c>ECDH-SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key</c>
 
-	  <c>ECDH-SS-P-521 + HKDF-512 + A256KW</c>
 	  <c>ECDH-SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
-	  <c>ECDH-SS-X448 + HKDF-512 + A256KW</c>
 	  <c>ECDH-SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key</c>
 
 	</texttable>
@@ -1787,6 +1571,18 @@ or mismatched KDF size to symmetric key scenarios.
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+        -04
+        <list style="symbols">
+	  <t>
+	    Removed ECDH registrations and proposed fully-specified ECDH algorithm identifiers, per feedback at IETF 120.
+	  </t>
+	  <t>
+	    Tightened descriptive text for fully-specified encryption algorithms.
+	  </t>
+        </list>
       </t>
 
       <t>
