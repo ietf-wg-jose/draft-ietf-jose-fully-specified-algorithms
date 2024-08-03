@@ -1240,7 +1240,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-notes-on-algorithms-not-upd" class="internal xref">Notes on Algorithms Not Updated</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-algorithms-for-signing-with" class="internal xref">Algorithms for Signing with RSASSA-PKCS1-v1_5</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-rsa-signing-algorithms" class="internal xref">RSA Signing Algorithms</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-ecdh-encryption-algorithms" class="internal xref">ECDH Encryption Algorithms</a></p>
 </li>
             </ul>
 </li>
@@ -1566,7 +1569,8 @@ The combination of chosen algorithms might not be aligned in terms of strength.<
 </li>
           <li class="normal" id="section-3.2-4.3">
             <p id="section-3.2-4.3.1">
-Underspecified or implicit parameters could lead to exploitable faults in implementations, for example, cross curve ECDH between P-256 and P-384 or X25519.<a href="#section-3.2-4.3.1" class="pilcrow">¶</a></p>
+Underspecified or implicit parameters could lead to exploitable faults in implementations, for example,
+cross-curve Elliptic Curve Diffie-Hellman (ECDH) between P-256 and P-384 or X25519.<a href="#section-3.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.2-4.4">
             <p id="section-3.2-4.4.1">
@@ -1845,7 +1849,7 @@ as described in Section 4.6.2 of <span>[<a href="#RFC7518" class="cite xref">RFC
 To convey a fully-specified Two-Layer Encryption algorithm in COSE, the outer "alg" value MUST specify all essential parameters for key establishment and key wrapping.
 For example: "ECDH-ES using P-256 w/ HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key".<a href="#section-3.2.3-24" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-25">
-In COSE, preventing cross mode attacks, such as those described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span>, can be accomplished in two ways:
+In COSE, preventing cross-mode attacks, such as those described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span>, can be accomplished in two ways:
 (1) Allow only authenticated content encryption algorithms.
 (2) Bind the the potentially unauthenticated content encryption algorithm to be used
 into the key protection algorithm so that different content encryption algorithms
@@ -1854,8 +1858,8 @@ Which choice to use in which circumstances is beyond the scope of this specifica
 <p id="section-3.2.3-26">
 Fully-specified Two-Layer Encryption algorithms enable the sender and receiver to agree on all mandatory security parameters.
 They also enable a protocol to specify an allow list of algorithm combinations that does not include polymorphic combinations,
-such as cross curve key establishment,
-cross mode symmetric encryption,
+such as cross-curve key establishment,
+cross-mode symmetric encryption,
 or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1883,7 +1887,7 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
      fully-specified ECDH algorithms that could be registered for JOSE and COSE,
      the working group decided to leave decisions about
      which fully-specified ECDH algorithms to register
-     to future specifications, when needed.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+     to future specifications, if needed.<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2474,8 +2478,8 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
  This section discusses why they have not been updated.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="RSA">
 <section id="section-6.1">
-        <h3 id="name-algorithms-for-signing-with">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-algorithms-for-signing-with" class="section-name selfRef">Algorithms for Signing with RSASSA-PKCS1-v1_5</a>
+        <h3 id="name-rsa-signing-algorithms">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-rsa-signing-algorithms" class="section-name selfRef">RSA Signing Algorithms</a>
         </h3>
 <p id="section-6.1-1">
    The working group has discussed whether the
@@ -2497,6 +2501,19 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
    That said, should it be useful at some point to have
    RSA algorithm identifiers that are specific to the key size,
    a future specification could always register them.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="ECDH">
+<section id="section-6.2">
+        <h3 id="name-ecdh-encryption-algorithms">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-ecdh-encryption-algorithms" class="section-name selfRef">ECDH Encryption Algorithms</a>
+        </h3>
+<p id="section-6.2-1">
+   As discussed in <a href="#ecdh-algs" class="auto internal xref">Section 3.3.1</a>
+   and <a href="#PolymorphicECDH" class="auto internal xref">Appendix A</a>,
+   the working group decided not to update the
+   Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time,
+   but to describe how to potentially do so in the future, if needed.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2871,6 +2888,10 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
         <li class="normal" id="appendix-B-3.2">
           <p id="appendix-B-3.2.1">
      Tightened descriptive text for fully-specified encryption algorithms.<a href="#appendix-B-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-3.3">
+          <p id="appendix-B-3.3.1">
+     Applied John Mattsson's suggestion for the RSA section title.<a href="#appendix-B-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-4">

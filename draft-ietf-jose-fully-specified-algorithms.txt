@@ -84,7 +84,8 @@ Table of Contents
      4.4.  Defining Deprecated and Prohibited
    5.  Key Representations
    6.  Notes on Algorithms Not Updated
-     6.1.  Algorithms for Signing with RSASSA-PKCS1-v1_5
+     6.1.  RSA Signing Algorithms
+     6.2.  ECDH Encryption Algorithms
    7.  Security Considerations
    8.  References
      8.1.  Normative References
@@ -281,8 +282,8 @@ Table of Contents
       of strength.
 
    *  Underspecified or implicit parameters could lead to exploitable
-      faults in implementations, for example, cross curve ECDH between
-      P-256 and P-384 or X25519.
+      faults in implementations, for example, cross-curve Elliptic Curve
+      Diffie-Hellman (ECDH) between P-256 and P-384 or X25519.
 
    *  Alternative algorithms at a component layer, such as symmetric key
       encryption, might provide different security properties, for
@@ -601,7 +602,7 @@ Table of Contents
    HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit
    key".
 
-   In COSE, preventing cross mode attacks, such as those described in
+   In COSE, preventing cross-mode attacks, such as those described in
    [RFC9459], can be accomplished in two ways: (1) Allow only
    authenticated content encryption algorithms. (2) Bind the the
    potentially unauthenticated content encryption algorithm to be used
@@ -613,8 +614,8 @@ Table of Contents
    Fully-specified Two-Layer Encryption algorithms enable the sender and
    receiver to agree on all mandatory security parameters.  They also
    enable a protocol to specify an allow list of algorithm combinations
-   that does not include polymorphic combinations, such as cross curve
-   key establishment, cross mode symmetric encryption, or mismatched KDF
+   that does not include polymorphic combinations, such as cross-curve
+   key establishment, cross-mode symmetric encryption, or mismatched KDF
    size to symmetric key scenarios.
 
 3.3.  Fully-Specified Encryption Algorithm Identifiers
@@ -629,7 +630,7 @@ Table of Contents
    While Appendix A describes possible fully-specified ECDH algorithms
    that could be registered for JOSE and COSE, the working group decided
    to leave decisions about which fully-specified ECDH algorithms to
-   register to future specifications, when needed.
+   register to future specifications, if needed.
 
 4.  IANA Considerations
 
@@ -857,7 +858,7 @@ Table of Contents
    updated by this specification.  This section discusses why they have
    not been updated.
 
-6.1.  Algorithms for Signing with RSASSA-PKCS1-v1_5
+6.1.  RSA Signing Algorithms
 
    The working group has discussed whether the RS256, RS384, and RS512
    algorithms should be considered fully-specified or not, because they
@@ -876,6 +877,13 @@ Table of Contents
    That said, should it be useful at some point to have RSA algorithm
    identifiers that are specific to the key size, a future specification
    could always register them.
+
+6.2.  ECDH Encryption Algorithms
+
+   As discussed in Section 3.3.1 and Appendix A, the working group
+   decided not to update the Elliptic Curve Diffie-Hellman (ECDH)
+   algorithms at this time, but to describe how to potentially do so in
+   the future, if needed.
 
 7.  Security Considerations
 
@@ -1134,6 +1142,8 @@ Appendix B.  Document History
 
    *  Tightened descriptive text for fully-specified encryption
       algorithms.
+
+   *  Applied John Mattsson's suggestion for the RSA section title.
 
    -03
 
