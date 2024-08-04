@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-01T00:37:12.747045+00:00",
+  "timestamp": "2024-08-04T00:36:36.682190+00:00",
   "repo": "selfissued/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -975,6 +975,48 @@
           "body": "",
           "createdAt": "2024-07-08T19:59:55Z",
           "updatedAt": "2024-07-08T19:59:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOKNEhZc53T18Y",
+      "title": "Incorporate feedback from IETF 120",
+      "url": "https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/pull/16",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "... and tighten descriptive text for fully-specified encryption algorithms.",
+      "createdAt": "2024-08-03T01:57:48Z",
+      "updatedAt": "2024-08-03T02:42:30Z",
+      "baseRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "55830e169226ee2143e1c8f5787ca109c0a54e68",
+      "headRepository": "selfissued/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-post-IETF-120",
+      "headRefOid": "5851e2da7419a3dc9e456b1db3e47d966b16d247",
+      "closedAt": "2024-08-03T02:42:30Z",
+      "mergedAt": "2024-08-03T02:42:30Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "252fec9ff01cb89c960f6a8c2b1024525b223e66"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6EHm3M",
+          "commit": {
+            "abbreviatedOid": "5851e2d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-03T02:42:05Z",
+          "updatedAt": "2024-08-03T02:42:05Z",
           "comments": []
         }
       ]
