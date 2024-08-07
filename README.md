@@ -2,16 +2,16 @@
 
 This is the working area for the JOSE Working Group Internet-Draft, "Fully-Specified Algorithms for JOSE and COSE".
 
-* [Editor's Copy](https://selfissued.github.io/draft-ietf-jose-fully-specified-algorithms/#go.draft-ietf-jose-fully-specified-algorithms.html)
+* [Editor's Copy](https://ietf-wg-jose.github.io/draft-ietf-jose-fully-specified-algorithms/#go.draft-ietf-jose-fully-specified-algorithms.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-jose-fully-specified-algorithms)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-jones-jose-fully-specified-algorithms)
-* [Compare Editor's Copy to Working Group Draft](https://selfissued.github.io/draft-ietf-jose-fully-specified-algorithms/#go.draft-ietf-jose-fully-specified-algorithms.diff)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-jose.github.io/draft-ietf-jose-fully-specified-algorithms/#go.draft-ietf-jose-fully-specified-algorithms.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/selfissued/draft-ietf-jose-fully-specified-algorithms/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
