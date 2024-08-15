@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-13T00:34:48.936372+00:00",
+  "timestamp": "2024-08-15T00:32:25.288084+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1020,6 +1020,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOKNEhZc54TwdX",
+      "title": "Apply IANA early review comments",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/17",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per the thread \"[IANA #1361130] Early review: draft-ietf-jose-fully-specified-algorithms-02 (IETF 119)\"",
+      "createdAt": "2024-08-14T04:26:18Z",
+      "updatedAt": "2024-08-14T04:26:18Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "04adf0555109f71fff6e16f43a1d9a4d11f270e9",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-iana-early-review",
+      "headRefOid": "04b89be45c31e842fab047d9cd0d9d92b7eb1382",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
