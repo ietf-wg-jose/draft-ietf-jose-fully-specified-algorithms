@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="2" month="August" year="2024" />
+    <date day="17" month="August" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -784,7 +784,7 @@ or mismatched KDF size to symmetric key scenarios.
 		Change Controller: IETF
 	      </t>
 	      <t>
-		Reference: Section 3.1 of RFC8037
+		Reference: <xref target="EdDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
 		Algorithm Analysis Document(s): <xref target="RFC8032"/>
@@ -815,6 +815,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using P-256 curve and SHA-256
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
@@ -835,6 +841,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: ECDSA using P-384 curve and SHA-384
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
@@ -859,6 +871,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using P-521 curve and SHA-512
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
@@ -879,6 +897,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: ECDSA using BrainpoolP256r1 curve and SHA-256
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
@@ -903,6 +927,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP320r1 curve and SHA-384
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
@@ -923,6 +953,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: ECDSA using BrainpoolP384r1 curve and SHA-384
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
@@ -947,6 +983,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA using BrainpoolP512r1 curve and SHA-512
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: <xref target="ECDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
@@ -969,6 +1011,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: EdDSA using Ed25519 curve
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
 	      </t>
 	      <t>
@@ -989,6 +1037,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: EdDSA using Ed448 curve
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: <xref target="EdDSA"/> of [[ this specification ]]
@@ -1018,6 +1072,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA w/ SHA-256
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: RFC 9053
 	      </t>
 	      <t>
@@ -1038,6 +1098,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: ECDSA w/ SHA-384
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: RFC 9053
@@ -1062,6 +1128,12 @@ or mismatched KDF size to symmetric key scenarios.
 		Description: ECDSA w/ SHA-512
 	      </t>
 	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
+	      </t>
+	      <t>
 		Reference: RFC 9053
 	      </t>
 	      <t>
@@ -1082,6 +1154,12 @@ or mismatched KDF size to symmetric key scenarios.
 	      </t>
 	      <t>
 		Description: EdDSA
+	      </t>
+	      <t>
+		Capabilities: [kty]
+	      </t>
+	      <t>
+		Change Controller: IETF
 	      </t>
 	      <t>
 		Reference: RFC 9053
@@ -1582,6 +1660,15 @@ or mismatched KDF size to symmetric key scenarios.
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+        -05
+        <list style="symbols">
+	  <t>
+	    Applied IANA early review comments.
+	  </t>
+	</list>
       </t>
 
       <t>
