@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 3 February 2025                                   2 August 2024
+Expires: 18 February 2025                                 17 August 2024
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 February 2025.
+   This Internet-Draft will expire on 18 February 2025.
 
 Copyright Notice
 
@@ -669,7 +669,7 @@ Table of Contents
    *  Algorithm Usage Locations: alg
    *  JOSE Implementation Requirements: Deprecated
    *  Change Controller: IETF
-   *  Reference: Section 3.1 of RFC8037
+   *  Reference: Section 2.2 of [[ this specification ]]
    *  Algorithm Analysis Document(s): [RFC8032]
 
 4.2.  COSE Algorithms Registrations
@@ -682,6 +682,8 @@ Table of Contents
    *  Name: ESP256
    *  Value: TBD (requested assignment -9)
    *  Description: ECDSA using P-256 curve and SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -689,6 +691,8 @@ Table of Contents
    *  Name: ESP384
    *  Value: TBD (requested assignment -48)
    *  Description: ECDSA using P-384 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -696,6 +700,8 @@ Table of Contents
    *  Name: ESP512
    *  Value: TBD (requested assignment -49)
    *  Description: ECDSA using P-521 curve and SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -703,6 +709,8 @@ Table of Contents
    *  Name: ESB256
    *  Value: TBD (requested assignment -261)
    *  Description: ECDSA using BrainpoolP256r1 curve and SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -710,6 +718,8 @@ Table of Contents
    *  Name: ESB320
    *  Value: TBD (requested assignment -262)
    *  Description: ECDSA using BrainpoolP320r1 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -717,6 +727,8 @@ Table of Contents
    *  Name: ESB384
    *  Value: TBD (requested assignment -263)
    *  Description: ECDSA using BrainpoolP384r1 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -724,6 +736,8 @@ Table of Contents
    *  Name: ESB512
    *  Value: TBD (requested assignment -264)
    *  Description: ECDSA using BrainpoolP512r1 curve and SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -731,6 +745,8 @@ Table of Contents
    *  Name: Ed25519
    *  Value: TBD (requested assignment -50)
    *  Description: EdDSA using Ed25519 curve
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.2 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -738,6 +754,8 @@ Table of Contents
    *  Name: Ed448
    *  Value: TBD (requested assignment -51)
    *  Description: EdDSA using Ed448 curve
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.2 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -749,6 +767,8 @@ Table of Contents
    *  Name: ES256
    *  Value: -7
    *  Description: ECDSA w/ SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -756,6 +776,8 @@ Table of Contents
    *  Name: ES384
    *  Value: -35
    *  Description: ECDSA w/ SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -763,6 +785,8 @@ Table of Contents
    *  Name: ES512
    *  Value: -36
    *  Description: ECDSA w/ SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -770,6 +794,8 @@ Table of Contents
    *  Name: EdDSA
    *  Value: -8
    *  Description: EdDSA
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -1134,6 +1160,10 @@ A.2.  Polymorphic ECDH COSE Algorithms
 Appendix B.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -05
+
+   *  Applied IANA early review comments.
 
    -04
 
