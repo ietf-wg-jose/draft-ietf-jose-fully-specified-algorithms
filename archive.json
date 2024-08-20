@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-18T00:36:40.698594+00:00",
+  "timestamp": "2024-08-20T00:33:47.792829+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1026,26 +1026,42 @@
       "id": "PR_kwDOKNEhZc54TwdX",
       "title": "Apply IANA early review comments",
       "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Per the thread \"[IANA #1361130] Early review: draft-ietf-jose-fully-specified-algorithms-02 (IETF 119)\"",
       "createdAt": "2024-08-14T04:26:18Z",
-      "updatedAt": "2024-08-14T04:26:18Z",
+      "updatedAt": "2024-08-18T04:29:44Z",
       "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "baseRefName": "main",
       "baseRefOid": "04adf0555109f71fff6e16f43a1d9a4d11f270e9",
       "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "headRefName": "mbj-iana-early-review",
-      "headRefOid": "04b89be45c31e842fab047d9cd0d9d92b7eb1382",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "2503e1e2156126a15be09bc7d71f1781df1f8ede",
+      "closedAt": "2024-08-18T04:29:44Z",
+      "mergedAt": "2024-08-18T04:29:44Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "67f9f5895c0bb6cd0290634ec077d928f7e40ee3"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6Fw5gV",
+          "commit": {
+            "abbreviatedOid": "04b89be"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-18T02:28:57Z",
+          "updatedAt": "2024-08-18T02:28:57Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
