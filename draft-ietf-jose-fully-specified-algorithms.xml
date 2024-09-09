@@ -1321,7 +1321,7 @@ or mismatched KDF size to symmetric key scenarios.
 	</t>
       </section>
 
-      <section anchor="ECDH" title="ECDH Encryption Algorithms">
+      <section anchor="ECDH" title="ECDH Key Agreement Algorithms">
 	<t>
 	  As discussed in <xref target="ecdh-algs"/>
 	  and <xref target="PolymorphicECDH"/>,
