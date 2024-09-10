@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-08T00:39:37.174077+00:00",
+  "timestamp": "2024-09-10T00:36:10.308491+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1062,6 +1062,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOKNEhZc564GqH",
+      "title": "rename section 6.2",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/18",
+      "state": "OPEN",
+      "author": "panva",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-09T16:38:24Z",
+      "updatedAt": "2024-09-09T16:38:24Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "67f9f5895c0bb6cd0290634ec077d928f7e40ee3",
+      "headRepository": "panva/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "rename-section",
+      "headRefOid": "cdacdf98f5cea647ac9d54aa06d916d1f120dc1d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
