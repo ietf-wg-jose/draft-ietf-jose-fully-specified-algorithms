@@ -85,7 +85,7 @@ Table of Contents
    5.  Key Representations
    6.  Notes on Algorithms Not Updated
      6.1.  RSA Signing Algorithms
-     6.2.  ECDH Encryption Algorithms
+     6.2.  ECDH Key Agreement Algorithms
    7.  Security Considerations
    8.  References
      8.1.  Normative References
@@ -904,7 +904,7 @@ Table of Contents
    identifiers that are specific to the key size, a future specification
    could always register them.
 
-6.2.  ECDH Encryption Algorithms
+6.2.  ECDH Key Agreement Algorithms
 
    As discussed in Section 3.3.1 and Appendix A, the working group
    decided not to update the Elliptic Curve Diffie-Hellman (ECDH)
