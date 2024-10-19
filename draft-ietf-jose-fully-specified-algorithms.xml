@@ -1271,16 +1271,14 @@ or mismatched KDF size to symmetric key scenarios.
 	  The same is true of the <spanx style="verb">PS*</spanx> algorithms.
 	</t>
 	<t>
-	  This is not a problem in practice, because RSA libraries accommodate
-	  keys of different sizes without having to use different code.
-	  Therefore, for example, there are not known cases in the wild where it would be useful
-	  to have different algorithm identifiers for RSASSA-PKCS1-v1_5 with SHA-256 and 2048-bit keys
-	  versus 4096-bit keys or 8192-bit keys.
-	  Therefore, the RSA signature algorithms are not replaced by this specification.
+	  This document does not describe or request registration of any fully specified RSA algorithms. Some RSA signing implementations, such as
+	  FIPS-compliant Hardware Security Modules (HSMs) <xref target="FIPS.140-3"/>
+	  limit RSA key parameters to specific values with acceptable security characteristics.
+	  This approach could be extended to define fully-specified RSA algorithms in the future.
 	</t>
 	<t>
 	  That said, should it be useful at some point to have
-	  RSA algorithm identifiers that are specific to the key size,
+	  RSA algorithm identifiers that are specific to particular key characteristics,
 	  a future specification could always register them.
 	</t>
       </section>
@@ -1463,6 +1461,17 @@ or mismatched KDF size to symmetric key scenarios.
           </author>
           <date day="21" month="June" year="2022"/>
         </front>
+      </reference>
+
+      <reference anchor="FIPS.140-3" target="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf">
+	<front>
+	  <title>Security Requirements for Cryptographic Modules</title>
+	  <author>
+	    <organization>National Institute of Standards and Technology (NIST)</organization>
+	  </author>
+	  <date day="22" month="March" year="2019" />
+	</front>
+	<seriesInfo name="FIPS" value="PUB 140-3" />
       </reference>
 
     </references>
