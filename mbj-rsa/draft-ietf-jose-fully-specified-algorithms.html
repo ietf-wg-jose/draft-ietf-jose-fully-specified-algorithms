@@ -2595,16 +2595,10 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
    For instance, they can use both 2048- and 4096-bit keys.
    The same is true of the <code>PS*</code> algorithms.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">
-   This is not a problem in practice, because RSA libraries typically accommodate
-   keys of different sizes and with different exponents
-   without having to use different code.
-   Of course, some RSA signing implementations, such as
+   This document does not describe or request registration of any fully specified RSA algorithms. Some RSA signing implementations, such as
    FIPS-compliant Hardware Security Modules (HSMs) <span>[<a href="#FIPS.140-3" class="cite xref">FIPS.140-3</a>]</span>
    limit RSA key parameters to specific values with acceptable security characteristics.
-   Nonetheless, no one has made a case that it would practically useful
-   to have different algorithm identifiers for RSA signing with 2048-bit keys
-   versus with 3072-bit keys, 4096-bit keys, 8192-bit keys, etc.
-   Therefore, the RSA signature algorithms are not replaced by this specification.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+   This approach could be extended to define fully specified RSA algorithms in the future.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">
    That said, should it be useful at some point to have
    RSA algorithm identifiers that are specific to particular key characteristics,
