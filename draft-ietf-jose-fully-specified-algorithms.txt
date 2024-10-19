@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 18 February 2025                                 17 August 2024
+Expires: 22 April 2025                                   19 October 2024
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 February 2025.
+   This Internet-Draft will expire on 22 April 2025.
 
 Copyright Notice
 
@@ -69,8 +69,6 @@ Table of Contents
        3.2.1.  Direct Encryption
        3.2.2.  Key Establishment with Direct Encryption
        3.2.3.  Two-Layer Encryption
-     3.3.  Fully-Specified Encryption Algorithm Identifiers
-       3.3.1.  Elliptic Curve Diffie-Hellman (ECDH)
    4.  IANA Considerations
      4.1.  JOSE Algorithms Registrations
        4.1.1.  Fully-Specified JOSE Algorithm Registrations
@@ -249,13 +247,9 @@ Table of Contents
    specifies how to determine the content encryption key, and the second
    in the enc (Encryption Algorithm) Header Parameter, which specifies
    the content encryption algorithm.  Likewise, encrypted COSE objects
-   can use multiple algorithms for corresponding purposes.
-
-   Each of these multiple algorithms must be independently fully
-   specified.  The operations performed by each of them MUST NOT vary
-   when used alongside other algorithms.  So for instance, for JOSE, alg
-   values and enc values MUST each be fully specified, and their
-   behaviors MUST NOT depend upon one another.
+   can use multiple algorithms for corresponding purposes.  The
+   following sections describe how to fully specify encryption
+   algorithms when multiple algorithms are used in the computation.
 
 3.2.  Analysis of Modes of Encryption
 
@@ -292,14 +286,11 @@ Table of Contents
    While this specification provides a definition of what fully-
    specified encryption algorithm identifiers are for both JOSE and
    COSE, including examples, it does not deprecate any polymorphic
-   algorithms, since complete replacements for them are not provided.
-   It does register a small set of new fully-specified encryption
-   algorithms, so that polymorphic encryption algorithms need not be
-   used.
+   encryption algorithms, since replacements for them are not provided
+   by this specification.
 
    The following sections describe what fully specified means for each
-   mode.  They also register at least one fully-specified algorithm for
-   each mode, when one was not already available.
+   mode.
 
 3.2.1.  Direct Encryption
 
@@ -419,12 +410,11 @@ Table of Contents
 
    To successfully encrypt to a recipient, a sender needs to possess the
    recipient's key (which contains the curve parameter) and know the
-   recipients supported algorithms.
+   recipient's supported algorithms.
 
    In JOSE and COSE, key representations can support communicating the
    algorithm which a recipient supports for a given key.  It is
-   considered a best practice to only support one algorithm during the
-   lifetime of a key.
+   considered a best practice to only use a key with one algorithm.
 
    Example of a decoded JWE Protected Header, for Key Establishment with
    Direct Encryption:
@@ -457,10 +447,6 @@ Table of Contents
    parameters for both key establishment and symmetric encryption.  For
    example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or
    "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".
-
-   Fully-specified Key Establishment with Direct Encryption algorithms
-   enable the sender and receiver to agree on all algorithms needed to
-   encrypt and decrypt a message using a single algorithm identifier.
 
 3.2.3.  Two-Layer Encryption
 
@@ -545,19 +531,19 @@ Table of Contents
    Establishment and then Key Wrapping, or Key Transport, or Key
    Encryption.
 
-   When using Two-Layer Encryption, the ciphertext is not only the
-   output of symmetric encryption, but also includes and/or is
-   accompanied by all parameters necessary for the recipient to decrypt
-   the ciphertext, including parameters for use with the key
-   establishment algorithm, such as ephemeral or encapsulated keys, any
-   required key derivation functions and their parameters and the key
-   wrapping algorithm.  Encrypted content encryption keys are always
-   present when Two-Layer Encryption algorithms are used.  Parameters
-   accompanying the ciphertext can include an Initialization Vector
-   (IV), an Authentication Tag, and Additional Authenticated Data (AAD).
-   Two-Layer Encryption is often used for encrypting the same plaintext
-   to multiple recipients, in contrast with other modes which can only
-   be used to encrypt to a single recipient.
+   When using Two-Layer Encryption, the output of symmetric encryption
+   includes the ciphertext and is accompanied by all parameters
+   necessary for the recipient to decrypt the ciphertext, including
+   parameters for use with the key establishment algorithm, such as
+   ephemeral or encapsulated keys, any required key derivation functions
+   and their parameters and the key wrapping algorithm.  Encrypted
+   content encryption keys are always present when Two-Layer Encryption
+   is used.  Parameters accompanying the ciphertext can include an
+   Initialization Vector (IV), an Authentication Tag, and Additional
+   Authenticated Data (AAD).  Two-Layer Encryption is often used for
+   encrypting the same plaintext to multiple recipients, in contrast
+   with other modes which can only be used to encrypt to a single
+   recipient.
 
    Example of a decoded JWE Protected Header, for Key Agreement with
    ECDH-ES:
@@ -617,20 +603,6 @@ Table of Contents
    that does not include polymorphic combinations, such as cross-curve
    key establishment, cross-mode symmetric encryption, or mismatched KDF
    size to symmetric key scenarios.
-
-3.3.  Fully-Specified Encryption Algorithm Identifiers
-
-3.3.1.  Elliptic Curve Diffie-Hellman (ECDH)
-
-   [RFC7518] defines the current use of Elliptic Curve Diffie-Hellman
-   (ECDH) by JOSE.  Likewise, [RFC9053] defines the current use of
-   Elliptic Curve Diffie-Hellman (ECDH) by COSE.  As described in
-   Appendix A, both sets of registered ECDH algorithms are polymorphic.
-
-   While Appendix A describes possible fully-specified ECDH algorithms
-   that could be registered for JOSE and COSE, the working group decided
-   to leave decisions about which fully-specified ECDH algorithms to
-   register to future specifications, if needed.
 
 4.  IANA Considerations
 
@@ -906,10 +878,9 @@ Table of Contents
 
 6.2.  ECDH Key Agreement Algorithms
 
-   As discussed in Section 3.3.1 and Appendix A, the working group
-   decided not to update the Elliptic Curve Diffie-Hellman (ECDH)
-   algorithms at this time, but to describe how to potentially do so in
-   the future, if needed.
+   As discussed in Appendix A, the working group decided not to update
+   the Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time, but
+   to describe how to potentially do so in the future, if needed.
 
 7.  Security Considerations
 
@@ -920,6 +891,9 @@ Table of Contents
 
    The security considerations for ECDSA in [RFC7518], for EdDSA in
    [RFC8037], and for ECDSA and EdDSA in [RFC9053] apply.
+
+   The security considerations for preventing cross-mode attacks
+   described in [RFC9459] apply.
 
 8.  References
 
@@ -958,12 +932,12 @@ Table of Contents
 
 8.2.  Informative References
 
-   [FIDO2]    Bradley, J., Hodges, J., Jones, M., Kumar, A., and J.
-              Johan, "Client to Authenticator Protocol (CTAP)", FIDO
-              Alliance Proposed Standard, 15 June 2021,
+   [FIDO2]    Bradley, J., Hodges, J., Jones, M., Kumar, A., Lindemann,
+              R., and J. Johan, "Client to Authenticator Protocol
+              (CTAP)", FIDO Alliance Proposed Standard, 21 June 2022,
               <https://fidoalliance.org/specs/fido-v2.1-ps-20210615/
-              fido-client-to-authenticator-protocol-v2.1-ps-
-              20210615.html>.
+              fido-client-to-authenticator-protocol-v2.1-ps-errata-
+              20220621.html>.
 
    [IANA.COSE]
               IANA, "CBOR Object Signing and Encryption (COSE)",
@@ -975,7 +949,7 @@ Table of Contents
 
    [OpenID.Discovery]
               Sakimura, N., Bradley, J., Jones, M.B., and E. Jay,
-              "OpenID Connect Discovery 1.0", 8 November 2014,
+              "OpenID Connect Discovery 1.0", 15 December 2023,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
 
@@ -1006,7 +980,7 @@ Table of Contents
               DOI 10.17487/RFC9459, September 2023,
               <https://www.rfc-editor.org/info/rfc9459>.
 
-   [WebAuthn] Hodges, J., Jones, J.C., Jones, M., Kumar, A., and E.
+   [WebAuthn] Hodges, J., Jones, J.C., Jones, M.B., Kumar, A., and E.
               Lundberg, "Web Authentication: An API for accessing Public
               Key Credentials - Level 2", World Wide Web Consortium
               (W3C) Recommendation, 8 April 2021,
@@ -1160,6 +1134,10 @@ A.2.  Polymorphic ECDH COSE Algorithms
 Appendix B.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -06
+
+   *  Corrected inconsistencies identified during the 2nd WGLC.
 
    -05
 
