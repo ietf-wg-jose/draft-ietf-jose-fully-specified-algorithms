@@ -1310,7 +1310,7 @@ or mismatched KDF size to symmetric key scenarios.
 	  This document does not describe or request registration of any fully specified RSA algorithms. Some RSA signing implementations, such as
 	  FIPS-compliant Hardware Security Modules (HSMs) <xref target="FIPS.140-3"/>
 	  limit RSA key parameters to specific values with acceptable security characteristics.
-	  This approach could be extended to define fully specified RSA algorithms in the future.
+	  This approach could be extended to define fully-specified RSA algorithms in the future.
 	</t>
 	<t>
 	  That said, should it be useful at some point to have
