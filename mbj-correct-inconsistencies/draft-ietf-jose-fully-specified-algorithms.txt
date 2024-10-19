@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 3 February 2025                                   2 August 2024
+Expires: 22 April 2025                                   19 October 2024
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 February 2025.
+   This Internet-Draft will expire on 22 April 2025.
 
 Copyright Notice
 
@@ -69,8 +69,6 @@ Table of Contents
        3.2.1.  Direct Encryption
        3.2.2.  Key Establishment with Direct Encryption
        3.2.3.  Two-Layer Encryption
-     3.3.  Fully-Specified Encryption Algorithm Identifiers
-       3.3.1.  Elliptic Curve Diffie-Hellman (ECDH)
    4.  IANA Considerations
      4.1.  JOSE Algorithms Registrations
        4.1.1.  Fully-Specified JOSE Algorithm Registrations
@@ -84,7 +82,8 @@ Table of Contents
      4.4.  Defining Deprecated and Prohibited
    5.  Key Representations
    6.  Notes on Algorithms Not Updated
-     6.1.  Algorithms for Signing with RSASSA-PKCS1-v1_5
+     6.1.  RSA Signing Algorithms
+     6.2.  ECDH Encryption Algorithms
    7.  Security Considerations
    8.  References
      8.1.  Normative References
@@ -248,13 +247,9 @@ Table of Contents
    specifies how to determine the content encryption key, and the second
    in the enc (Encryption Algorithm) Header Parameter, which specifies
    the content encryption algorithm.  Likewise, encrypted COSE objects
-   can use multiple algorithms for corresponding purposes.
-
-   Each of these multiple algorithms must be independently fully
-   specified.  The operations performed by each of them MUST NOT vary
-   when used alongside other algorithms.  So for instance, for JOSE, alg
-   values and enc values MUST each be fully specified, and their
-   behaviors MUST NOT depend upon one another.
+   can use multiple algorithms for corresponding purposes.  The
+   following sections describe how to fully specify encryption
+   algorithms when multiple algorithms are used in the computation.
 
 3.2.  Analysis of Modes of Encryption
 
@@ -281,8 +276,8 @@ Table of Contents
       of strength.
 
    *  Underspecified or implicit parameters could lead to exploitable
-      faults in implementations, for example, cross curve ECDH between
-      P-256 and P-384 or X25519.
+      faults in implementations, for example, cross-curve Elliptic Curve
+      Diffie-Hellman (ECDH) between P-256 and P-384 or X25519.
 
    *  Alternative algorithms at a component layer, such as symmetric key
       encryption, might provide different security properties, for
@@ -291,14 +286,11 @@ Table of Contents
    While this specification provides a definition of what fully-
    specified encryption algorithm identifiers are for both JOSE and
    COSE, including examples, it does not deprecate any polymorphic
-   algorithms, since complete replacements for them are not provided.
-   It does register a small set of new fully-specified encryption
-   algorithms, so that polymorphic encryption algorithms need not be
-   used.
+   encryption algorithms, since replacements for them are not provided
+   by this specification.
 
    The following sections describe what fully specified means for each
-   mode.  They also register at least one fully-specified algorithm for
-   each mode, when one was not already available.
+   mode.
 
 3.2.1.  Direct Encryption
 
@@ -418,12 +410,11 @@ Table of Contents
 
    To successfully encrypt to a recipient, a sender needs to possess the
    recipient's key (which contains the curve parameter) and know the
-   recipients supported algorithms.
+   recipient's supported algorithms.
 
    In JOSE and COSE, key representations can support communicating the
    algorithm which a recipient supports for a given key.  It is
-   considered a best practice to only support one algorithm during the
-   lifetime of a key.
+   considered a best practice to only use a key with one algorithm.
 
    Example of a decoded JWE Protected Header, for Key Establishment with
    Direct Encryption:
@@ -456,10 +447,6 @@ Table of Contents
    parameters for both key establishment and symmetric encryption.  For
    example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or
    "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".
-
-   Fully-specified Key Establishment with Direct Encryption algorithms
-   enable the sender and receiver to agree on all algorithms needed to
-   encrypt and decrypt a message using a single algorithm identifier.
 
 3.2.3.  Two-Layer Encryption
 
@@ -544,19 +531,19 @@ Table of Contents
    Establishment and then Key Wrapping, or Key Transport, or Key
    Encryption.
 
-   When using Two-Layer Encryption, the ciphertext is not only the
-   output of symmetric encryption, but also includes and/or is
-   accompanied by all parameters necessary for the recipient to decrypt
-   the ciphertext, including parameters for use with the key
-   establishment algorithm, such as ephemeral or encapsulated keys, any
-   required key derivation functions and their parameters and the key
-   wrapping algorithm.  Encrypted content encryption keys are always
-   present when Two-Layer Encryption algorithms are used.  Parameters
-   accompanying the ciphertext can include an Initialization Vector
-   (IV), an Authentication Tag, and Additional Authenticated Data (AAD).
-   Two-Layer Encryption is often used for encrypting the same plaintext
-   to multiple recipients, in contrast with other modes which can only
-   be used to encrypt to a single recipient.
+   When using Two-Layer Encryption, the output of symmetric encryption
+   includes the ciphertext and is accompanied by all parameters
+   necessary for the recipient to decrypt the ciphertext, including
+   parameters for use with the key establishment algorithm, such as
+   ephemeral or encapsulated keys, any required key derivation functions
+   and their parameters and the key wrapping algorithm.  Encrypted
+   content encryption keys are always present when Two-Layer Encryption
+   is used.  Parameters accompanying the ciphertext can include an
+   Initialization Vector (IV), an Authentication Tag, and Additional
+   Authenticated Data (AAD).  Two-Layer Encryption is often used for
+   encrypting the same plaintext to multiple recipients, in contrast
+   with other modes which can only be used to encrypt to a single
+   recipient.
 
    Example of a decoded JWE Protected Header, for Key Agreement with
    ECDH-ES:
@@ -601,7 +588,7 @@ Table of Contents
    HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit
    key".
 
-   In COSE, preventing cross mode attacks, such as those described in
+   In COSE, preventing cross-mode attacks, such as those described in
    [RFC9459], can be accomplished in two ways: (1) Allow only
    authenticated content encryption algorithms. (2) Bind the the
    potentially unauthenticated content encryption algorithm to be used
@@ -613,23 +600,9 @@ Table of Contents
    Fully-specified Two-Layer Encryption algorithms enable the sender and
    receiver to agree on all mandatory security parameters.  They also
    enable a protocol to specify an allow list of algorithm combinations
-   that does not include polymorphic combinations, such as cross curve
-   key establishment, cross mode symmetric encryption, or mismatched KDF
+   that does not include polymorphic combinations, such as cross-curve
+   key establishment, cross-mode symmetric encryption, or mismatched KDF
    size to symmetric key scenarios.
-
-3.3.  Fully-Specified Encryption Algorithm Identifiers
-
-3.3.1.  Elliptic Curve Diffie-Hellman (ECDH)
-
-   [RFC7518] defines the current use of Elliptic Curve Diffie-Hellman
-   (ECDH) by JOSE.  Likewise, [RFC9053] defines the current use of
-   Elliptic Curve Diffie-Hellman (ECDH) by COSE.  As described in
-   Appendix A, both sets of registered ECDH algorithms are polymorphic.
-
-   While Appendix A describes possible fully-specified ECDH algorithms
-   that could be registered for JOSE and COSE, the working group decided
-   to leave decisions about which fully-specified ECDH algorithms to
-   register to future specifications, when needed.
 
 4.  IANA Considerations
 
@@ -668,7 +641,7 @@ Table of Contents
    *  Algorithm Usage Locations: alg
    *  JOSE Implementation Requirements: Deprecated
    *  Change Controller: IETF
-   *  Reference: Section 3.1 of RFC8037
+   *  Reference: Section 2.2 of [[ this specification ]]
    *  Algorithm Analysis Document(s): [RFC8032]
 
 4.2.  COSE Algorithms Registrations
@@ -681,6 +654,8 @@ Table of Contents
    *  Name: ESP256
    *  Value: TBD (requested assignment -9)
    *  Description: ECDSA using P-256 curve and SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -688,6 +663,8 @@ Table of Contents
    *  Name: ESP384
    *  Value: TBD (requested assignment -48)
    *  Description: ECDSA using P-384 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -695,6 +672,8 @@ Table of Contents
    *  Name: ESP512
    *  Value: TBD (requested assignment -49)
    *  Description: ECDSA using P-521 curve and SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -702,6 +681,8 @@ Table of Contents
    *  Name: ESB256
    *  Value: TBD (requested assignment -261)
    *  Description: ECDSA using BrainpoolP256r1 curve and SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -709,6 +690,8 @@ Table of Contents
    *  Name: ESB320
    *  Value: TBD (requested assignment -262)
    *  Description: ECDSA using BrainpoolP320r1 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -716,6 +699,8 @@ Table of Contents
    *  Name: ESB384
    *  Value: TBD (requested assignment -263)
    *  Description: ECDSA using BrainpoolP384r1 curve and SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -723,6 +708,8 @@ Table of Contents
    *  Name: ESB512
    *  Value: TBD (requested assignment -264)
    *  Description: ECDSA using BrainpoolP512r1 curve and SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.1 of [[ this specification ]]
    *  Recommended: No
 
@@ -730,6 +717,8 @@ Table of Contents
    *  Name: Ed25519
    *  Value: TBD (requested assignment -50)
    *  Description: EdDSA using Ed25519 curve
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.2 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -737,6 +726,8 @@ Table of Contents
    *  Name: Ed448
    *  Value: TBD (requested assignment -51)
    *  Description: EdDSA using Ed448 curve
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: Section 2.2 of [[ this specification ]]
    *  Recommended: Yes
 
@@ -748,6 +739,8 @@ Table of Contents
    *  Name: ES256
    *  Value: -7
    *  Description: ECDSA w/ SHA-256
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -755,6 +748,8 @@ Table of Contents
    *  Name: ES384
    *  Value: -35
    *  Description: ECDSA w/ SHA-384
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -762,6 +757,8 @@ Table of Contents
    *  Name: ES512
    *  Value: -36
    *  Description: ECDSA w/ SHA-512
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -769,6 +766,8 @@ Table of Contents
    *  Name: EdDSA
    *  Value: -8
    *  Description: EdDSA
+   *  Capabilities: [kty]
+   *  Change Controller: IETF
    *  Reference: RFC 9053
    *  Recommended: Deprecated
 
@@ -857,7 +856,7 @@ Table of Contents
    updated by this specification.  This section discusses why they have
    not been updated.
 
-6.1.  Algorithms for Signing with RSASSA-PKCS1-v1_5
+6.1.  RSA Signing Algorithms
 
    The working group has discussed whether the RS256, RS384, and RS512
    algorithms should be considered fully-specified or not, because they
@@ -877,6 +876,12 @@ Table of Contents
    identifiers that are specific to the key size, a future specification
    could always register them.
 
+6.2.  ECDH Encryption Algorithms
+
+   As discussed in Appendix A, the working group decided not to update
+   the Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time, but
+   to describe how to potentially do so in the future, if needed.
+
 7.  Security Considerations
 
    Using fully-specified algorithm identifiers reduces the attack
@@ -886,6 +891,9 @@ Table of Contents
 
    The security considerations for ECDSA in [RFC7518], for EdDSA in
    [RFC8037], and for ECDSA and EdDSA in [RFC9053] apply.
+
+   The security considerations for preventing cross-mode attacks
+   described in [RFC9459] apply.
 
 8.  References
 
@@ -924,12 +932,12 @@ Table of Contents
 
 8.2.  Informative References
 
-   [FIDO2]    Bradley, J., Hodges, J., Jones, M., Kumar, A., and J.
-              Johan, "Client to Authenticator Protocol (CTAP)", FIDO
-              Alliance Proposed Standard, 15 June 2021,
+   [FIDO2]    Bradley, J., Hodges, J., Jones, M., Kumar, A., Lindemann,
+              R., and J. Johan, "Client to Authenticator Protocol
+              (CTAP)", FIDO Alliance Proposed Standard, 21 June 2022,
               <https://fidoalliance.org/specs/fido-v2.1-ps-20210615/
-              fido-client-to-authenticator-protocol-v2.1-ps-
-              20210615.html>.
+              fido-client-to-authenticator-protocol-v2.1-ps-errata-
+              20220621.html>.
 
    [IANA.COSE]
               IANA, "CBOR Object Signing and Encryption (COSE)",
@@ -941,7 +949,7 @@ Table of Contents
 
    [OpenID.Discovery]
               Sakimura, N., Bradley, J., Jones, M.B., and E. Jay,
-              "OpenID Connect Discovery 1.0", 8 November 2014,
+              "OpenID Connect Discovery 1.0", 15 December 2023,
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
 
@@ -972,7 +980,7 @@ Table of Contents
               DOI 10.17487/RFC9459, September 2023,
               <https://www.rfc-editor.org/info/rfc9459>.
 
-   [WebAuthn] Hodges, J., Jones, J.C., Jones, M., Kumar, A., and E.
+   [WebAuthn] Hodges, J., Jones, J.C., Jones, M.B., Kumar, A., and E.
               Lundberg, "Web Authentication: An API for accessing Public
               Key Credentials - Level 2", World Wide Web Consortium
               (W3C) Recommendation, 8 April 2021,
@@ -1127,6 +1135,14 @@ Appendix B.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -06
+
+   *  Corrected inconsistencies identified during the 2nd WGLC.
+
+   -05
+
+   *  Applied IANA early review comments.
+
    -04
 
    *  Removed ECDH registrations and proposed fully-specified ECDH
@@ -1134,6 +1150,8 @@ Appendix B.  Document History
 
    *  Tightened descriptive text for fully-specified encryption
       algorithms.
+
+   *  Applied John Mattsson's suggestion for the RSA section title.
 
    -03
 
