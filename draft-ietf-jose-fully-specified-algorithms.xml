@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="17" month="August" year="2024" />
+    <date day="19" month="October" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -260,14 +260,8 @@
 	  Header Parameter, which specifies the content encryption algorithm.
 	  Likewise, encrypted COSE objects can use multiple algorithms
 	  for corresponding purposes.
-	</t>
-	<t>
-	  Each of these multiple algorithms must be independently fully specified.
-	  The operations performed by each of them MUST NOT vary
-	  when used alongside other algorithms.
-	  So for instance, for JOSE, <spanx style="verb">alg</spanx> values
-	  and <spanx style="verb">enc</spanx> values MUST each be fully specified,
-	  and their behaviors MUST NOT depend upon one another.
+	  The following sections describe how to fully specify encryption algorithms
+	  when multiple algorithms are used in the computation.
 	</t>
       </section>
 
@@ -310,16 +304,12 @@ Alternative algorithms at a component layer, such as symmetric key encryption, m
 
       <t>
 While this specification provides a definition of what fully-specified encryption algorithm identifiers are for both JOSE and COSE, including examples,
-it does not deprecate any polymorphic algorithms,
-since complete replacements for them are not provided.
-It does register a small set of new fully-specified encryption algorithms,
-so that polymorphic encryption algorithms need not be used.
+it does not deprecate any polymorphic encryption algorithms,
+since replacements for them are not provided by this specification.
 </t>
 
       <t>
 The following sections describe what fully specified means for each mode.
-They also register at least one fully-specified algorithm for each mode,
-when one was not already available.
       </t>
 
       <section anchor="fully-specified-symmetric-encryption-algs" title="Direct Encryption">
@@ -452,12 +442,12 @@ which need to be of the same key type, and having the same parameters, in this c
 </t>
 
 <t>
-To successfully encrypt to a recipient, a sender needs to possess the recipient's key (which contains the curve parameter) and know the recipients supported algorithms.
+To successfully encrypt to a recipient, a sender needs to possess the recipient's key (which contains the curve parameter) and know the recipient's supported algorithms.
 </t>
 
 <t>
 In JOSE and COSE, key representations can support communicating the algorithm which a recipient supports for a given key.
-It is considered a best practice to only support one algorithm during the lifetime of a key.
+It is considered a best practice to only use a key with one algorithm.
 </t>
 
 <t>
@@ -498,11 +488,6 @@ For example: "ECDH-ES using P-256 and Concat-KDF with A128GCM" or "ECDH-ES using
 To convey a fully-specified Key Establishment with Direct Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for both key establishment and symmetric encryption.
 For example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".
 </t>
-
-<t>
-Fully-specified Key Establishment with Direct Encryption algorithms enable the sender and receiver to agree on all algorithms needed to encrypt and decrypt a message using a single algorithm identifier.
-</t>
-
       </section>
 
       <section anchor="fully-specified-key-wrapping-encryption-algs" title="Two-Layer Encryption">
@@ -591,11 +576,11 @@ The content encryption key is protected using Key Wrapping directly, or through 
 </t>
 
 <t>
-When using Two-Layer Encryption, the ciphertext is not only the output of symmetric encryption, but also includes
-and/or is accompanied by
+When using Two-Layer Encryption, the output of symmetric encryption
+includes the ciphertext and is accompanied by
 all parameters necessary for the recipient to decrypt the ciphertext,
 including parameters for use with the key establishment algorithm, such as ephemeral or encapsulated keys, any required key derivation functions and their parameters and the key wrapping algorithm.
-Encrypted content encryption keys are always present when Two-Layer Encryption algorithms are used.
+Encrypted content encryption keys are always present when Two-Layer Encryption is used.
 Parameters accompanying the ciphertext can include
 an Initialization Vector (IV),
 an Authentication Tag,
@@ -669,27 +654,6 @@ or mismatched KDF size to symmetric key scenarios.
 </t>
 
       </section>
-      </section>
-
-      <section anchor="fully-specified-encryption-algs" title="Fully-Specified Encryption Algorithm Identifiers">
-
-	<section anchor="ecdh-algs" title="Elliptic Curve Diffie-Hellman (ECDH)">
-	  <t>
-	    <xref target="RFC7518"/> defines the current use of
-	    Elliptic Curve Diffie-Hellman (ECDH) by JOSE.
-	    Likewise, <xref target="RFC9053"/> defines the current use of
-	    Elliptic Curve Diffie-Hellman (ECDH) by COSE.
-	    As described in <xref target="PolymorphicECDH"/>,
-	    both sets of registered ECDH algorithms are polymorphic.
-	  </t>
-	  <t>
-	    While <xref target="PolymorphicECDH"/> describes possible
-	    fully-specified ECDH algorithms that could be registered for JOSE and COSE,
-	    the working group decided to leave decisions about
-	    which fully-specified ECDH algorithms to register
-	    to future specifications, if needed.
-	  </t>
-	</section>
       </section>
 
     </section>
@@ -1323,8 +1287,7 @@ or mismatched KDF size to symmetric key scenarios.
 
       <section anchor="ECDH" title="ECDH Key Agreement Algorithms">
 	<t>
-	  As discussed in <xref target="ecdh-algs"/>
-	  and <xref target="PolymorphicECDH"/>,
+	  As discussed in <xref target="PolymorphicECDH"/>,
 	  the working group decided not to update the
 	  Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time,
 	  but to describe how to potentially do so in the future, if needed.
@@ -1343,6 +1306,10 @@ or mismatched KDF size to symmetric key scenarios.
 	The security considerations for ECDSA in <xref target="RFC7518"/>,
 	for EdDSA in <xref target="RFC8037"/>, and
 	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
+      </t>
+      <t>
+	The security considerations for preventing cross-mode attacks
+	described in <xref target="RFC9459"/> apply.
       </t>
     </section>
 
@@ -1403,14 +1370,14 @@ or mismatched KDF size to symmetric key scenarios.
 	  </author>
 
 	  <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-	    <organization abbrev="independent (was at Microsoft)">independent</organization>
+	    <organization abbrev="Self-Issued Consulting (was at Microsoft)">Self-Issued Consulting</organization>
 	  </author>
 
 	  <author fullname="Edmund Jay" initials="E." surname="Jay">
 	    <organization abbrev="Illumila">Illumila</organization>
 	  </author>
 
-          <date day="8" month="November" year="2014"/>
+          <date day="15" month="December" year="2023"/>
 	</front>
       </reference>
 
@@ -1430,7 +1397,7 @@ or mismatched KDF size to symmetric key scenarios.
               <email>jc@mozilla.com</email>
             </address>
           </author>
-          <author initials="M." surname="Jones" fullname="Michael B. Jones">
+          <author initials="M.B." surname="Jones" fullname="Michael B. Jones">
             <organization>Microsoft</organization>
             <address>
               <email>mbj@microsoft.com</email>
@@ -1453,7 +1420,7 @@ or mismatched KDF size to symmetric key scenarios.
         </front>
       </reference>
 
-      <reference anchor="FIDO2" target="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-20210615.html">
+      <reference anchor="FIDO2" target="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html">
         <front>
           <title>Client to Authenticator Protocol (CTAP)</title>
           <seriesInfo name="FIDO Alliance" value="Proposed Standard"/>
@@ -1482,13 +1449,19 @@ or mismatched KDF size to symmetric key scenarios.
               <email>akshayku@microsoft.com</email>
             </address>
           </author>
+          <author initials="R." surname="Lindemann" fullname="Rolf Lindemann">
+            <organization>Nok Nok Labs</organization>
+            <address>
+              <email>rolf@noknok.com</email>
+            </address>
+          </author>
           <author initials="J." surname="Johan" fullname="Johan Verrept">
             <organization>OneSpan</organization>
             <address>
               <email>johan.verrept@onespan.com</email>
             </address>
           </author>
-          <date day="15" month="June" year="2021"/>
+          <date day="21" month="June" year="2022"/>
         </front>
       </reference>
 
@@ -1660,6 +1633,15 @@ or mismatched KDF size to symmetric key scenarios.
     <section title="Document History" anchor="History">
       <t>
         [[ to be removed by the RFC Editor before publication as an RFC ]]
+      </t>
+
+      <t>
+        -06
+        <list style="symbols">
+	  <t>
+	    Corrected inconsistencies identified during the 2nd WGLC.
+	  </t>
+	</list>
       </t>
 
       <t>
