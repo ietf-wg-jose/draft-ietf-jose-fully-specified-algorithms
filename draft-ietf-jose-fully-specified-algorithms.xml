@@ -1297,11 +1297,6 @@ or mismatched KDF size to symmetric key scenarios.
 
     <section anchor="Security" title="Security Considerations">
       <t>
-	Using fully-specified algorithm identifiers reduces the attack surface
-	relative to using polymorphic algorithm identifiers,
-	since it reduces the opportunity for attackers to choose insecure or unexpected combinations of algorithms.
-      </t>
-      <t>
 	The security considerations for ECDSA in <xref target="RFC7518"/>,
 	for EdDSA in <xref target="RFC8037"/>, and
 	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
