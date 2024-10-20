@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T00:38:17.652948+00:00",
+  "timestamp": "2024-10-20T00:42:16.274390+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1068,26 +1068,153 @@
       "id": "PR_kwDOKNEhZc564GqH",
       "title": "rename section 6.2",
       "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "panva",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-09T16:38:24Z",
-      "updatedAt": "2024-09-09T16:38:24Z",
+      "updatedAt": "2024-10-19T21:24:52Z",
       "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "baseRefName": "main",
       "baseRefOid": "67f9f5895c0bb6cd0290634ec077d928f7e40ee3",
       "headRepository": "panva/draft-ietf-jose-fully-specified-algorithms",
       "headRefName": "rename-section",
       "headRefOid": "cdacdf98f5cea647ac9d54aa06d916d1f120dc1d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-19T21:23:42Z",
+      "mergedAt": "2024-10-19T21:23:42Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "85228caa5ee1bd3b098455e97415ddcbb502af0a"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N19Kh",
+          "commit": {
+            "abbreviatedOid": "cdacdf9"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-19T21:21:49Z",
+          "updatedAt": "2024-10-19T21:21:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOKNEhZc5_MRFG",
+      "title": "Correct inconsistencies identified during 2nd WGLC",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/19",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-19T21:00:09Z",
+      "updatedAt": "2024-10-19T21:26:26Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "67f9f5895c0bb6cd0290634ec077d928f7e40ee3",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-correct-inconsistencies",
+      "headRefOid": "a703241e14846c46cfc90de2e247677f0f7b885d",
+      "closedAt": "2024-10-19T21:26:26Z",
+      "mergedAt": "2024-10-19T21:26:26Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "10593c64825316a3c448b36923db851ea840e72f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N19ri",
+          "commit": {
+            "abbreviatedOid": "a703241"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-19T21:25:08Z",
+          "updatedAt": "2024-10-19T21:25:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOKNEhZc5_MZPP",
+      "title": "Improved description of why RSA was not updated",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/20",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per John Mattson's comments",
+      "createdAt": "2024-10-19T22:10:27Z",
+      "updatedAt": "2024-10-19T22:58:34Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "10593c64825316a3c448b36923db851ea840e72f",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-rsa",
+      "headRefOid": "3b0d9c34c4fdeb093bf7a1134bfd310a6564ff19",
+      "closedAt": "2024-10-19T22:58:34Z",
+      "mergedAt": "2024-10-19T22:58:34Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "6f34a6965d89a8a81301b69a4ac9d28558a78f59"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N2HSg",
+          "commit": {
+            "abbreviatedOid": "25973a4"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T22:42:58Z",
+          "updatedAt": "2024-10-19T22:42:58Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n\t  This document does not describe or request registration of any fully specified RSA algorithms. Some RSA signing implementations, such as\r\n\t  FIPS-compliant Hardware Security Modules (HSMs) <xref target=\"FIPS.140-3\"/>\r\n\t  limit RSA key parameters to specific values with acceptable security characteristics.\r\n\t  This approach could be extended to define fully specified RSA algorithms in the future.\r\n```",
+              "createdAt": "2024-10-19T22:42:58Z",
+              "updatedAt": "2024-10-19T22:56:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6N2IGm",
+          "commit": {
+            "abbreviatedOid": "4ffac9c"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T22:57:23Z",
+          "updatedAt": "2024-10-19T22:57:24Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\n\t  This approach could be extended to define fully-specified RSA algorithms in the future.\r\n```",
+              "createdAt": "2024-10-19T22:57:24Z",
+              "updatedAt": "2024-10-19T22:57:24Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
