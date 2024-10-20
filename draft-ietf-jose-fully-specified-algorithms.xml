@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="19" month="October" year="2024" />
+    <date day="20" month="October" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -1206,8 +1206,8 @@ or mismatched KDF size to symmetric key scenarios.
 	      There is a preferred mechanism to achieve similar functionality
 	      to that referenced by the identifier;
 	      this replacement functionality SHOULD be utilized in new deployments
-	      in preference to the deprecated identifier, unless there exist documented operational,
-				or regulatory requirments that prevent migration away from the deprecated identifier.
+	      in preference to the deprecated identifier, unless there exist documented operational
+	      or regulatory requirments that prevent migration away from the deprecated identifier.
 	    </t>
 
 	    <t hangText="Prohibited">
@@ -1314,7 +1314,7 @@ or mismatched KDF size to symmetric key scenarios.
 			<t>
 A cryptographic key SHOULD be used with only a single algorithm,
 unless the use of the same key with different algorithms is proven secure.
-See <xref target="25519KeyPairReuse"/> for an example of such a proof.
+See <xref target="Reuse25519"/> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
 unless there exists some other mechanism for ensuring the key is used as intended.
       </t>
@@ -1483,13 +1483,13 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	<seriesInfo name="FIPS" value="PUB 140-3" />
       </reference>
 
-			<reference anchor="25519KeyPairReuse" target="https://eprint.iacr.org/2021/509.pdf">
+      <reference anchor="Reuse25519" target="https://eprint.iacr.org/2021/509.pdf">
         <front>
           <title>On using the same key pair for Ed25519 and an X25519 based KEM</title>
-					<author fullname="Erik Thormarker" initials="E." surname="Thormarker">
-						<organization abbrev="Ericsson">Ericsson</organization>
-					</author>
-					<date day="23" month="April" year="2021"/>
+	  <author fullname="Erik Thormarker" initials="E." surname="Thormarker">
+	    <organization abbrev="Ericsson">Ericsson</organization>
+	  </author>
+	  <date day="23" month="April" year="2021"/>
         </front>
       </reference>
 
