@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 22 April 2025                                   19 October 2024
+Expires: 23 April 2025                                   20 October 2024
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2025.
+   This Internet-Draft will expire on 23 April 2025.
 
 Copyright Notice
 
@@ -820,7 +820,7 @@ Table of Contents
       There is a preferred mechanism to achieve similar functionality to
       that referenced by the identifier; this replacement functionality
       SHOULD be utilized in new deployments in preference to the
-      deprecated identifier, unless there exist documented operational,
+      deprecated identifier, unless there exist documented operational
       or regulatory requirments that prevent migration away from the
       deprecated identifier.
 
@@ -898,8 +898,8 @@ Table of Contents
 
    A cryptographic key SHOULD be used with only a single algorithm,
    unless the use of the same key with different algorithms is proven
-   secure.  See [_5519KeyPairReuse] for an example of such a proof.  As
-   a result, it is RECOMMENDED that the algorithm parameter of JSON Web
+   secure.  See [Reuse25519] for an example of such a proof.  As a
+   result, it is RECOMMENDED that the algorithm parameter of JSON Web
    Keys and COSE Keys be present, unless there exists some other
    mechanism for ensuring the key is used as intended.
 
@@ -968,6 +968,11 @@ Table of Contents
               <https://openid.net/specs/openid-connect-discovery-
               1_0.html>.
 
+   [Reuse25519]
+              Thormarker, E., "On using the same key pair for Ed25519
+              and an X25519 based KEM", 23 April 2021,
+              <https://eprint.iacr.org/2021/509.pdf>.
+
    [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
               DOI 10.17487/RFC7518, May 2015,
               <https://www.rfc-editor.org/info/rfc7518>.
@@ -1000,11 +1005,6 @@ Table of Contents
               Key Credentials - Level 2", World Wide Web Consortium
               (W3C) Recommendation, 8 April 2021,
               <https://www.w3.org/TR/2021/REC-webauthn-2-20210408/>.
-
-   [_5519KeyPairReuse]
-              Thormarker, E., "On using the same key pair for Ed25519
-              and an X25519 based KEM", 23 April 2021,
-              <https://eprint.iacr.org/2021/509.pdf>.
 
 Appendix A.  Inventory of Polymorphic ECDH Algorithms
 
