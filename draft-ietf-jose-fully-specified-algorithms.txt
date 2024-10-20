@@ -400,7 +400,7 @@ Table of Contents
    including all its mandatory parameters.  For example, "ECDH-ES"
    establishes a shared secret, and then through the use of a KDF, a
    content encryption key, for keys based on elliptic curves.  However,
-   the mandatory parameters of the public_key and private_key need be
+   the mandatory parameters of the public key and private key need be
    the same in the context of the key type.
 
    For example, when using ECDH-ES with secp256r1 (P-256) to establish a
@@ -410,11 +410,10 @@ Table of Contents
 
    To successfully encrypt to a recipient, a sender needs to possess the
    recipient's key (which contains the curve parameter) and know the
-   recipient's supported algorithms.
-
-   In JOSE and COSE, key representations can support communicating the
-   algorithm which a recipient supports for a given key.  It is
-   considered a best practice to only use a key with one algorithm.
+   recipient's supported algorithms.  In JOSE and COSE, key
+   representations can support communicating the algorithm that a
+   recipient supports for a given key.  It is considered a best practice
+   to only use a key with one algorithm.
 
    Example of a decoded JWE Protected Header, for Key Establishment with
    Direct Encryption:
@@ -427,26 +426,36 @@ Table of Contents
 
    Despite containing both the key establishment algorithm (with an
    implicit KDF) and the symmetric encryption algorithm, the example
-   above is not fully specified.
+   above is not fully specified.  To make a Key Establishment with
+   Direct Encryption algorithm fully specified, all essential parameters
+   need to be encoded in the algorithm identifiers.  In the example
+   above, the missing explicit parameters are curve name and KDF name.
+   If the KDF requires additional parameters, they also need to be
+   present.
 
-   To make a Key Establishment with Direct Encryption algorithm fully
-   specified, all essential parameters need to be encoded in the
-   algorithm identifier.  In the context of the example above, the
-   missing explicit parameters are curve name and KDF name.  If the KDF
-   requires additional parameters, they need to be present.
+   Note that in JOSE, there is the option to derive some cryptographic
+   parameters used in the "alg" computation from the accompanying "enc"
+   value.  An example of this is that the keydatalen KDF parameter value
+   for ECDH-ES is determined from the "enc" value, as described in
+   Section 4.6.2 of [RFC7518].  For the purposes of an "alg" value being
+   fully-specified, deriving parameters from "enc" does not make the
+   algorithm polymorphic, as the computation is still fully determined
+   by the algorithm identifiers used.  This option is not present in
+   COSE.
 
-   To convey a fully-specified Key Establishment with Direct Encryption
-   algorithm in JOSE, the "alg" value MUST be "dir", and the "enc" value
-   MUST be fully specified, specifying all essential parameters for both
-   key establishment and symmetric encryption.  For example: "ECDH-ES
-   using P-256 and Concat-KDF with A128GCM" or "ECDH-ES using X25519 and
-   Concat-KDF with A256GCM".
+   To convey fully-specified Key Establishment with Direct Encryption in
+   JOSE, the "alg" value MUST specify all essential parameters for key
+   establishment or derive some of them from the accompanying "enc"
+   value and the "enc" value MUST specify all essential parameters for
+   symmetric encryption.  For example, an "alg" value specifiying ECDH-
+   ES using P-256 and Concat-KDF and an "enc" value of "A128GCM".
 
-   To convey a fully-specified Key Establishment with Direct Encryption
-   algorithm in COSE, the "alg" value MUST specify all essential
-   parameters for both key establishment and symmetric encryption.  For
-   example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or
-   "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".
+   To convey fully-specified Key Establishment with Direct Encryption in
+   COSE, the outer "alg" value MUST specify all essential parameters for
+   key establishment and the inner "alg" value must specify all
+   essential parameters for symmetric encryption.  For example, an outer
+   "alg" value specifying ECDH-ES using P-256 and HKDF SHA-256 with
+   128-bit output and an inner "alg" value specifying A128GCM.
 
 3.2.3.  Two-Layer Encryption
 
@@ -465,13 +474,12 @@ Table of Contents
    of algorithms, and that encrypted content encryption keys are always
    present.
 
-   In RSA-OAEP, the encrypted content encryption key is generated
-   through an asymmetric cryptographic operation.
-
-   When Key Wrapping without any key establishment is used, the content
-   encryption key is encrypted using a symmetric cryptographic operation
-   (key wrap).  How the content encryption key was generated is out of
-   scope for this discussion.
+   In RSA-OAEP, the content encryption key is encrypted using an
+   asymmetric cryptographic operation.  When Key Wrapping without any
+   key establishment is used, the content encryption key is encrypted
+   using a symmetric cryptographic operation (key wrap).  How the
+   content encryption key is generated is out of scope for this
+   discussion.
 
    Key wrapping algorithms generally satisfy the following interface:
 
@@ -542,20 +550,20 @@ Table of Contents
    Initialization Vector (IV), an Authentication Tag, and Additional
    Authenticated Data (AAD).  Two-Layer Encryption is often used for
    encrypting the same plaintext to multiple recipients, in contrast
-   with other modes which can only be used to encrypt to a single
+   with other modes that can only be used to encrypt to a single
    recipient.
 
-   Example of a decoded JWE Protected Header, for Key Agreement with
-   ECDH-ES:
+   Example of a decoded JWE Protected Header for Key Encryption with RSA
+   OAEP and Content Encryption using AES_128_CBC_HMAC_SHA_256:
 
    {
-     "alg": "ECDH-ES",
-     "enc": "A256GCM",
+     "alg": "RSA-OAEP-256",
+     "enc": "A128CBC-HS256",
      ...
    }
 
-   Example of a decoded JWE Protected Header, for Key Agreement using
-   ECDH-ES and AES-KeyWrap with AES-GCM:
+   Example of a decoded JWE Protected Header for Key Agreement using
+   ECDH-ES with key wrapping and Content Encryption using AES GCM:
 
    {
      "alg": "ECDH-ES+A128KW",
@@ -564,29 +572,23 @@ Table of Contents
    }
 
    However, despite containing both the key establishment algorithm and
-   a content encryption algorithm, the examples above are not fully
-   specified.
+   a content encryption algorithm, the second example above is not fully
+   specified.  In this example, the missing parameter is the curve name
+   for the ephemeral key used for key agreement.
 
-   To make a Two-Layer Encryption algorithm fully specified, all
-   security relevant details need to be encoded in the algorithm
-   identifiers directly or be defined by the other algorithm.  In the
-   context of the examples above, the missing explicit parameters are
-   the curve name for the ephemeral key in both cases and for ECDH-ES,
-   the keydatalen KDF parameter.
+   To convey fully-specified Two-Layer Encryption in JOSE, the "alg"
+   value MUST specify all essential parameters for key protection or
+   derive them from the accompanying "enc" value and the "enc" value
+   MUST be fully specified, specifying all essential parameters for
+   symmetric encryption.  For example, ECDH-ES using Concat KDF and
+   P-256 and "A128KW" key wrapping used with AES-GCM.
 
-   To convey a fully-specified Two-Layer Encryption algorithm in JOSE,
-   the "alg" value MUST explicitly specify all essential parameters for
-   key establishment and key wrapping or have them be specified by the
-   accompanying "enc" value.  For example: "ECDH-ES using Concat KDF and
-   P-256" or "ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping".
-   The keydatalen KDF parameter value for ECDH-ES is determined from the
-   "enc" value, as described in Section 4.6.2 of [RFC7518].
-
-   To convey a fully-specified Two-Layer Encryption algorithm in COSE,
-   the outer "alg" value MUST specify all essential parameters for key
-   establishment and key wrapping.  For example: "ECDH-ES using P-256 w/
-   HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit
-   key".
+   To convey fully-specified Two-Layer Encryption in COSE, the outer
+   "alg" value MUST specify all essential parameters for key protection
+   and the inner "alg" value MUST be fully specified, specifying all
+   essential parameters for symmetric encryption.  For example, ECDH-ES
+   using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key used with AES-
+   GCM.
 
    In COSE, preventing cross-mode attacks, such as those described in
    [RFC9459], can be accomplished in two ways: (1) Allow only

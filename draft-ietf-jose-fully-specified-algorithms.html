@@ -1674,40 +1674,56 @@ Encrypted content encryption keys are not produced by fully-specified Key Establ
 In JOSE, the KDF algorithm is "Concat KDF" and is an implicit parameter of the key establishment algorithm.
 In JOSE and COSE, key establishment algorithms have historically been generic to a key type including all its mandatory parameters.
 For example, "ECDH-ES" establishes a shared secret, and then through the use of a KDF, a content encryption key, for keys based on elliptic curves.
-However, the mandatory parameters of the public_key and private_key need be the same in the context of the key type.<a href="#section-3.2.2-12" class="pilcrow">¶</a></p>
+However, the mandatory parameters of the public key and private key need be the same in the context of the key type.<a href="#section-3.2.2-12" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-13">
 For example, when using ECDH-ES with secp256r1 (P-256) to establish a shared secret,
 the ECDH algorithm is a function of an ephemeral and a static key,
 which need to be of the same key type, and having the same parameters, in this case, the curve parameter.<a href="#section-3.2.2-13" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-14">
-To successfully encrypt to a recipient, a sender needs to possess the recipient's key (which contains the curve parameter) and know the recipient's supported algorithms.<a href="#section-3.2.2-14" class="pilcrow">¶</a></p>
+To successfully encrypt to a recipient, a sender needs to possess the recipient's key (which contains the curve parameter) and know the recipient's supported algorithms.
+In JOSE and COSE, key representations can support communicating the algorithm that a recipient supports for a given key.
+It is considered a best practice to only use a key with one algorithm.<a href="#section-3.2.2-14" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-15">
-In JOSE and COSE, key representations can support communicating the algorithm which a recipient supports for a given key.
-It is considered a best practice to only use a key with one algorithm.<a href="#section-3.2.2-15" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-16">
-Example of a decoded JWE Protected Header, for Key Establishment with Direct Encryption:<a href="#section-3.2.2-16" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.2-17">
+Example of a decoded JWE Protected Header, for Key Establishment with Direct Encryption:<a href="#section-3.2.2-15" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.2-16">
 <pre>
 {
   "alg":"ECDH-ES",
   "enc":"A128GCM",
   ...
 }
-</pre><a href="#section-3.2.2-17" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-16" class="pilcrow">¶</a>
 </div>
+<p id="section-3.2.2-17">
+Despite containing both the key establishment algorithm (with an implicit KDF) and the symmetric encryption algorithm, the example above is not fully specified.
+To make a Key Establishment with Direct Encryption algorithm fully specified, all essential parameters need to be encoded in the algorithm identifiers.
+In the example above, the missing explicit parameters are curve name and KDF name.
+If the KDF requires additional parameters, they also need to be present.<a href="#section-3.2.2-17" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-18">
-Despite containing both the key establishment algorithm (with an implicit KDF) and the symmetric encryption algorithm, the example above is not fully specified.<a href="#section-3.2.2-18" class="pilcrow">¶</a></p>
+  Note that in JOSE, there is the option to derive some cryptographic parameters
+  used in the "alg" computation from the accompanying "enc" value.
+  An example of this is that the keydatalen KDF parameter value
+  for <code>ECDH-ES</code> is determined from the "enc" value,
+  as described in Section 4.6.2 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.
+  For the purposes of an "alg" value being fully-specified,
+  deriving parameters from "enc" does not make the algorithm polymorphic,
+  as the computation is still fully determined by the algorithm identifiers used.
+  This option is not present in COSE.<a href="#section-3.2.2-18" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-19">
-To make a Key Establishment with Direct Encryption algorithm fully specified, all essential parameters need to be encoded in the algorithm identifier.
-In the context of the example above, the missing explicit parameters are curve name and KDF name.
-If the KDF requires additional parameters, they need to be present.<a href="#section-3.2.2-19" class="pilcrow">¶</a></p>
+To convey fully-specified Key Establishment with Direct Encryption in JOSE,
+the "alg" value MUST specify all essential parameters for key establishment
+or derive some of them from the accompanying "enc" value and
+the "enc" value MUST specify all essential parameters for symmetric encryption.
+For example,
+an "alg" value specifiying ECDH-ES using P-256 and Concat-KDF and
+an "enc" value of "A128GCM".<a href="#section-3.2.2-19" class="pilcrow">¶</a></p>
 <p id="section-3.2.2-20">
-To convey a fully-specified Key Establishment with Direct Encryption algorithm in JOSE, the "alg" value MUST be "dir",
-and the "enc" value MUST be fully specified, specifying all essential parameters for both key establishment and symmetric encryption.
-For example: "ECDH-ES using P-256 and Concat-KDF with A128GCM" or "ECDH-ES using X25519 and Concat-KDF with A256GCM".<a href="#section-3.2.2-20" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-21">
-To convey a fully-specified Key Establishment with Direct Encryption algorithm in COSE, the "alg" value MUST specify all essential parameters for both key establishment and symmetric encryption.
-For example: "ECDH-ES using P-256 and HKDF SHA-256 with A128GCM" or "ECDH-ES using X25519 HKDF SHA-512 wit A256GCM".<a href="#section-3.2.2-21" class="pilcrow">¶</a></p>
+To convey fully-specified Key Establishment with Direct Encryption in COSE,
+the outer "alg" value MUST specify all essential parameters for key establishment and
+the inner "alg" value must specify all essential parameters for symmetric encryption.
+For example,
+an outer "alg" value specifying ECDH-ES using P-256 and HKDF SHA-256 with 128-bit output and
+an inner "alg" value specifying A128GCM.<a href="#section-3.2.2-20" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fully-specified-key-wrapping-encryption-algs">
@@ -1723,13 +1739,13 @@ This specification uses the term "Two-Layer Encryption" to refer to what JOSE de
 <p id="section-3.2.3-3">
 A distinguishing characteristic of Two-Layer Encryption schemes is that multiple recipients can perform decryptions, using a wide range of algorithms, and that encrypted content encryption keys are always present.<a href="#section-3.2.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-4">
-In RSA-OAEP, the encrypted content encryption key is generated through an asymmetric cryptographic operation.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
+In RSA-OAEP, the content encryption key is encrypted using an asymmetric cryptographic operation.
+When Key Wrapping without any key establishment is used,
+the content encryption key is encrypted using a symmetric cryptographic operation (key wrap).
+How the content encryption key is generated is out of scope for this discussion.<a href="#section-3.2.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-5">
-When Key Wrapping without any key establishment is used, the content encryption key is encrypted using a symmetric cryptographic operation (key wrap).
-How the content encryption key was generated is out of scope for this discussion.<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-6">
-Key wrapping algorithms generally satisfy the following interface:<a href="#section-3.2.3-6" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.3-7">
+Key wrapping algorithms generally satisfy the following interface:<a href="#section-3.2.3-5" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.3-6">
 <pre>
 key_encryption_key = \
 key_generation(algorithm_identifier)
@@ -1739,13 +1755,13 @@ encrypt(content_encryption_key, key_encryption_key)
 
 content_encryption_key  = \
 decrypt(encrypted_content_encryption_key, key_encryption_key)
-</pre><a href="#section-3.2.3-7" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.3-6" class="pilcrow">¶</a>
 </div>
+<p id="section-3.2.3-7">
+When Key Establishment with Key Wrapping is used, the content encryption key is protected with Key Wrapping, where the Key Encryption Key is derived from an asymmetric cryptographic operation and a key derivation function.<a href="#section-3.2.3-7" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-8">
-When Key Establishment with Key Wrapping is used, the content encryption key is protected with Key Wrapping, where the Key Encryption Key is derived from an asymmetric cryptographic operation and a key derivation function.<a href="#section-3.2.3-8" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-9">
-Key Establishment with Key Wrapping algorithms generally satisfy the following interface:<a href="#section-3.2.3-9" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.3-10">
+Key Establishment with Key Wrapping algorithms generally satisfy the following interface:<a href="#section-3.2.3-8" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.3-9">
 <pre>
 private_key, public_key = key_generation(algorithm_identifier)
 # ignoring ephemeral/static vs. static/static, etc.
@@ -1758,29 +1774,29 @@ encrypt(content_encryption_key, key_encryption_key)
 
 content_encryption_key = \
 decrypt(encrypted_content_encryption_key, key_encryption_key)
-</pre><a href="#section-3.2.3-10" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.3-9" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.3-11">
+<p id="section-3.2.3-10">
 The interface above is consistent with Key Establishment with Direct Encryption.
 The process of deriving a shared secret and content encryption key is specific to the asymmetric key type used.
-The difference is that instead of using the derived content encryption key directly, two-layer encryption always uses a key encryption key, and protects the content encryption key.<a href="#section-3.2.3-11" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-12">
-Regardless of how a Two-Layer Encryption scheme protects the content encryption key, content encryption algorithms generally satisfy the following interface:<a href="#section-3.2.3-12" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.3-13">
+The difference is that instead of using the derived content encryption key directly, two-layer encryption always uses a key encryption key, and protects the content encryption key.<a href="#section-3.2.3-10" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-11">
+Regardless of how a Two-Layer Encryption scheme protects the content encryption key, content encryption algorithms generally satisfy the following interface:<a href="#section-3.2.3-11" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.3-12">
 <pre>
 content_encryption_key = \
 unwrap or establish and unwrap or key transport...
 
 ciphertext = encrypt(plaintext, content_encryption_key)
 plaintext  = decrypt(ciphertext, content_encryption_key)
-</pre><a href="#section-3.2.3-13" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.3-12" class="pilcrow">¶</a>
 </div>
+<p id="section-3.2.3-13">
+Depending on the content encryption algorithm, additional parameters such as Additional Authenticated Data (AAD) and/or an Initialization Vector (IV) might be required.<a href="#section-3.2.3-13" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-14">
-Depending on the content encryption algorithm, additional parameters such as Additional Authenticated Data (AAD) and/or an Initialization Vector (IV) might be required.<a href="#section-3.2.3-14" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-15">
 Although JOSE and COSE encode Two-Layer Encryptions differently, both rely on a protected content encryption key.
-The content encryption key is protected using Key Wrapping directly, or through Key Establishment and then Key Wrapping, or Key Transport, or Key Encryption.<a href="#section-3.2.3-15" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-16">
+The content encryption key is protected using Key Wrapping directly, or through Key Establishment and then Key Wrapping, or Key Transport, or Key Encryption.<a href="#section-3.2.3-14" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-15">
 When using Two-Layer Encryption, the output of symmetric encryption
 includes the ciphertext and is accompanied by
 all parameters necessary for the recipient to decrypt the ciphertext,
@@ -1790,58 +1806,65 @@ Parameters accompanying the ciphertext can include
 an Initialization Vector (IV),
 an Authentication Tag,
 and Additional Authenticated Data (AAD).
-Two-Layer Encryption is often used for encrypting the same plaintext to multiple recipients, in contrast with other modes which can only be used to encrypt to a single recipient.<a href="#section-3.2.3-16" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-17">
-Example of a decoded JWE Protected Header, for Key Agreement with ECDH-ES:<a href="#section-3.2.3-17" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.3-18">
+Two-Layer Encryption is often used for encrypting the same plaintext to multiple recipients, in contrast with other modes that can only be used to encrypt to a single recipient.<a href="#section-3.2.3-15" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-16">
+Example of a decoded JWE Protected Header for Key Encryption with RSA OAEP
+and Content Encryption using AES_128_CBC_HMAC_SHA_256:<a href="#section-3.2.3-16" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.3-17">
 <pre>
 {
-  "alg": "ECDH-ES",
-  "enc": "A256GCM",
+  "alg": "RSA-OAEP-256",
+  "enc": "A128CBC-HS256",
   ...
 }
-</pre><a href="#section-3.2.3-18" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.3-17" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.3-19">
-Example of a decoded JWE Protected Header, for Key Agreement using ECDH-ES and AES-KeyWrap with AES-GCM:<a href="#section-3.2.3-19" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.3-20">
+<p id="section-3.2.3-18">
+Example of a decoded JWE Protected Header for Key Agreement using ECDH-ES with key wrapping and Content Encryption using AES GCM:<a href="#section-3.2.3-18" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.3-19">
 <pre>
 {
   "alg": "ECDH-ES+A128KW",
   "enc": "A128GCM",
   ...
 }
-</pre><a href="#section-3.2.3-20" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.3-19" class="pilcrow">¶</a>
 </div>
+<p id="section-3.2.3-20">
+However, despite containing both the key establishment algorithm
+and a content encryption algorithm, the second example above is not fully specified.
+In this example, the missing parameter is
+the curve name for the ephemeral key used for key agreement.<a href="#section-3.2.3-20" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-21">
-However, despite containing both the key establishment algorithm and a content encryption algorithm, the examples above are not fully specified.<a href="#section-3.2.3-21" class="pilcrow">¶</a></p>
+To convey fully-specified Two-Layer Encryption in JOSE,
+the "alg" value MUST specify all essential parameters for key protection
+or derive them from the accompanying "enc" value
+and the "enc" value MUST be fully specified,
+specifying all essential parameters for symmetric encryption.
+For example,
+ECDH-ES using Concat KDF and P-256 and "A128KW" key wrapping
+used with AES-GCM.<a href="#section-3.2.3-21" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-22">
-To make a Two-Layer Encryption algorithm fully specified, all security relevant details need to be encoded in the algorithm identifiers directly or be defined by the other algorithm.
-In the context of the examples above, the missing explicit parameters are
-the curve name for the ephemeral key in both cases and
-for <code>ECDH-ES</code>, the keydatalen KDF parameter.<a href="#section-3.2.3-22" class="pilcrow">¶</a></p>
+To convey fully-specified Two-Layer Encryption in COSE,
+the outer "alg" value MUST specify all essential parameters for key protection
+and the inner "alg" value MUST be fully specified,
+specifying all essential parameters for symmetric encryption.
+For example,
+ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key
+used with AES-GCM.<a href="#section-3.2.3-22" class="pilcrow">¶</a></p>
 <p id="section-3.2.3-23">
-To convey a fully-specified Two-Layer Encryption algorithm in JOSE, the "alg" value MUST explicitly specify all essential parameters for key establishment and key wrapping
-or have them be specified by the accompanying "enc" value.
-For example: "ECDH-ES using Concat KDF and P-256" or "ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping".
-The keydatalen KDF parameter value for <code>ECDH-ES</code> is determined from the "enc" value,
-as described in Section 4.6.2 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.<a href="#section-3.2.3-23" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-24">
-To convey a fully-specified Two-Layer Encryption algorithm in COSE, the outer "alg" value MUST specify all essential parameters for key establishment and key wrapping.
-For example: "ECDH-ES using P-256 w/ HKDF" or "ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key".<a href="#section-3.2.3-24" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-25">
 In COSE, preventing cross-mode attacks, such as those described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span>, can be accomplished in two ways:
 (1) Allow only authenticated content encryption algorithms.
 (2) Bind the the potentially unauthenticated content encryption algorithm to be used
 into the key protection algorithm so that different content encryption algorithms
 result in different content encryption keys.
-Which choice to use in which circumstances is beyond the scope of this specification.<a href="#section-3.2.3-25" class="pilcrow">¶</a></p>
-<p id="section-3.2.3-26">
+Which choice to use in which circumstances is beyond the scope of this specification.<a href="#section-3.2.3-23" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-24">
 Fully-specified Two-Layer Encryption algorithms enable the sender and receiver to agree on all mandatory security parameters.
 They also enable a protocol to specify an allow list of algorithm combinations that does not include polymorphic combinations,
 such as cross-curve key establishment,
 cross-mode symmetric encryption,
-or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" class="pilcrow">¶</a></p>
+or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-24" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
