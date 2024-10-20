@@ -1310,6 +1310,14 @@ or mismatched KDF size to symmetric key scenarios.
 	The security considerations for preventing cross-mode attacks
 	described in <xref target="RFC9459"/> apply.
       </t>
+
+			<t>
+A cryptographic key SHOULD be used with only a single algorithm,
+unless the use of the same key with different algorithms is proven secure.
+See <xref target="25519KeyPairReuse"/> for an example of such a proof.
+As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
+unless there exists some other mechanism for ensuring the key is used as intended.
+      </t>
     </section>
 
   </middle>
@@ -1473,6 +1481,16 @@ or mismatched KDF size to symmetric key scenarios.
 	  <date day="22" month="March" year="2019" />
 	</front>
 	<seriesInfo name="FIPS" value="PUB 140-3" />
+      </reference>
+
+			<reference anchor="25519KeyPairReuse" target="https://eprint.iacr.org/2021/509.pdf">
+        <front>
+          <title>On using the same key pair for Ed25519 and an X25519 based KEM</title>
+					<author fullname="Erik Thormarker" initials="E." surname="Thormarker">
+						<organization abbrev="Ericsson">Ericsson</organization>
+					</author>
+					<date day="23" month="April" year="2021"/>
+        </front>
       </reference>
 
     </references>
