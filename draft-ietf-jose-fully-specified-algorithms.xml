@@ -1206,7 +1206,7 @@ or mismatched KDF size to symmetric key scenarios.
 	      There is a preferred mechanism to achieve similar functionality
 	      to that referenced by the identifier;
 	      this replacement functionality SHOULD be utilized in new deployments
-	      in preference to the deprecated identifier, unless there exist documented operational, 
+	      in preference to the deprecated identifier, unless there exist documented operational,
 				or regulatory requirments that prevent migration away from the deprecated identifier.
 	    </t>
 
