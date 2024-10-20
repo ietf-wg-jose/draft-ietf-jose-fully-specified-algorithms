@@ -2590,7 +2590,7 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
  The security considerations for preventing cross-mode attacks
  described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">
-Cryptographic keys SHOULD be used with only a single algorithm during their cryptoperiod,
+A cryptographic key SHOULD be used with only a single algorithm,
 unless the use of the same key with different algorithms is proven secure.
 See <span>[<a href="#_5519KeyPairReuse" class="cite xref">_5519KeyPairReuse</a>]</span> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,

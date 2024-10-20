@@ -894,12 +894,12 @@ Table of Contents
    The security considerations for preventing cross-mode attacks
    described in [RFC9459] apply.
 
-   Cryptographic keys SHOULD be used with only a single algorithm during
-   their cryptoperiod, unless the use of the same key with different
-   algorithms is proven secure.  See [_5519KeyPairReuse] for an example
-   of such a proof.  As a result, it is RECOMMENDED that the algorithm
-   parameter of JSON Web Keys and COSE Keys be present, unless there
-   exists some other mechanism for ensuring the key is used as intended.
+   A cryptographic key SHOULD be used with only a single algorithm,
+   unless the use of the same key with different algorithms is proven
+   secure.  See [_5519KeyPairReuse] for an example of such a proof.  As
+   a result, it is RECOMMENDED that the algorithm parameter of JSON Web
+   Keys and COSE Keys be present, unless there exists some other
+   mechanism for ensuring the key is used as intended.
 
 8.  References
 
