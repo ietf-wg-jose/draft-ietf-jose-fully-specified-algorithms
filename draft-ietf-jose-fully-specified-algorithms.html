@@ -2590,6 +2590,12 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
 <p id="section-7-3">
  The security considerations for preventing cross-mode attacks
  described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">
+A cryptographic key SHOULD be used with only a single algorithm,
+unless the use of the same key with different algorithms is proven secure.
+See <span>[<a href="#_5519KeyPairReuse" class="cite xref">_5519KeyPairReuse</a>]</span> for an example of such a proof.
+As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
+unless there exists some other mechanism for ensuring the key is used as intended.<a href="#section-7-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">
@@ -2681,8 +2687,12 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
 <span class="refAuthor">Housley, R.</span> and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): AES-CTR and AES-CBC"</span>, <span class="seriesInfo">RFC 9459</span>, <span class="seriesInfo">DOI 10.17487/RFC9459</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9459">https://www.rfc-editor.org/info/rfc9459</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="WebAuthn">[WebAuthn]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Hodges, J.</span>, <span class="refAuthor">Jones, J.C.</span>, <span class="refAuthor">Jones, M.B.</span>, <span class="refAuthor">Kumar, A.</span>, and <span class="refAuthor">E. Lundberg</span>, <span class="refTitle">"Web Authentication: An API for accessing Public Key Credentials - Level 2"</span>, <span class="seriesInfo">World Wide Web Consortium (W3C) Recommendation</span>, <time datetime="2021-04-08" class="refDate">8 April 2021</time>, <span>&lt;<a href="https://www.w3.org/TR/2021/REC-webauthn-2-20210408/">https://www.w3.org/TR/2021/REC-webauthn-2-20210408/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="_5519KeyPairReuse">[_5519KeyPairReuse]</dt>
+      <dd>
+<span class="refAuthor">Thormarker, E.</span>, <span class="refTitle">"On using the same key pair for Ed25519 and an X25519 based KEM"</span>, <time datetime="2021-04-23" class="refDate">23 April 2021</time>, <span>&lt;<a href="https://eprint.iacr.org/2021/509.pdf">https://eprint.iacr.org/2021/509.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
