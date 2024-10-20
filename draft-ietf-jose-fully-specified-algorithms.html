@@ -2580,22 +2580,18 @@ or mismatched KDF size to symmetric key scenarios.<a href="#section-3.2.3-26" cl
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-7-1">
- Using fully-specified algorithm identifiers reduces the attack surface
- relative to using polymorphic algorithm identifiers,
- since it reduces the opportunity for attackers to choose insecure or unexpected combinations of algorithms.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">
  The security considerations for ECDSA in <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>,
  for EdDSA in <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span>, and
- for ECDSA and EdDSA in <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> apply.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">
+ for ECDSA and EdDSA in <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> apply.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">
  The security considerations for preventing cross-mode attacks
- described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">
+ described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">
 A cryptographic key SHOULD be used with only a single algorithm,
 unless the use of the same key with different algorithms is proven secure.
 See <span>[<a href="#Reuse25519" class="cite xref">Reuse25519</a>]</span> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
-unless there exists some other mechanism for ensuring the key is used as intended.<a href="#section-7-4" class="pilcrow">¶</a></p>
+unless there exists some other mechanism for ensuring the key is used as intended.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">

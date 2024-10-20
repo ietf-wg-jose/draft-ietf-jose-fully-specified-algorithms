@@ -885,11 +885,6 @@ Table of Contents
 
 7.  Security Considerations
 
-   Using fully-specified algorithm identifiers reduces the attack
-   surface relative to using polymorphic algorithm identifiers, since it
-   reduces the opportunity for attackers to choose insecure or
-   unexpected combinations of algorithms.
-
    The security considerations for ECDSA in [RFC7518], for EdDSA in
    [RFC8037], and for ECDSA and EdDSA in [RFC9053] apply.
 
