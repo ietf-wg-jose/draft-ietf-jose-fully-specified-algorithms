@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 23 April 2025                                   20 October 2024
+Expires: 24 April 2025                                   21 October 2024
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -141,6 +141,9 @@ Table of Contents
    effectively eliminating the possibility of using Ed448.  Other
    similar workarounds for polymorphic algorithm identifiers are used in
    practice.
+
+   Note that using fully-specified algorithms is sometimes referred to
+   as the "cipher suite" approach.
 
    This specification creates fully-specified algorithm identifiers for
    registered polymorphic JOSE and COSE algorithms and their parameters,
@@ -1155,6 +1158,8 @@ Appendix B.  Document History
    -06
 
    *  Corrected inconsistencies identified during the 2nd WGLC.
+
+   *  Added terminology remark about the "cipher suite" approach.
 
    -05
 
