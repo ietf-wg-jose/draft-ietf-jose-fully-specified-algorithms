@@ -132,7 +132,9 @@
       </t>
       <t>
 	Note that using fully-specified algorithms is sometimes
-	referred to as the "cipher suite" approach.
+	referred to as the "cipher suite" approach;
+	using polymorphic algorithms is sometimes
+	referred to as the "à la carte" approach.
       </t>
       <t>
 	This specification creates fully-specified algorithm identifiers for registered
@@ -345,7 +347,6 @@ A symmetric encryption algorithm is fully specified when it satisfies the interf
 </t>
 <t>
 Direct Encryption and Key Wrapping algorithms encode the primary symmetric key parameter (key length) in the algorithm identifier.
-Key Wrapping algorithms impose additional implicit constraints on AAD and IV.
 </t>
 
 <t>
@@ -417,10 +418,10 @@ shared_secret = derive_shared_secret(public_key2, private_key1)
 </sourcecode>
 
 <t>
-An algorithm called a Key Encapsulation Mechanism, can be used to provide a common interface for deriving shared secrets, regardless of key type.
-</t>
-
-<t>
+An algorithm called a Key Encapsulation Mechanism (KEM) can be used to provide a common interface for deriving shared secrets, regardless of key type.
+For examples of the use of KEMs,
+see <xref target="I-D.ietf-lamps-rfc5990bis"/>
+and <xref target="I-D.ietf-lamps-cms-kemri"/>.
 Key encapsulation algorithms generally satisfy the following interface:
 </t>
 <sourcecode>
@@ -1362,6 +1363,9 @@ unless there exists some other mechanism for ensuring the key is used as intende
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8996.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9459.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-lamps-rfc5990bis-10.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-lamps-cms-kemri-08.xml"/>
+
       <reference anchor="IANA.JOSE" target="https://www.iana.org/assignments/jose/">
         <front>
           <title>JSON Object Signing and Encryption (JOSE)</title>
@@ -1688,7 +1692,8 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	    Corrected inconsistencies identified during the 2nd WGLC.
 	  </t>
 	  <t>
-	    Added terminology remark about the "cipher suite" approach.
+	    Added terminology remark about the "cipher suite" and
+	    "à la carte" approaches.
 	  </t>
 	</list>
       </t>
@@ -1799,6 +1804,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Göran Selander,
 	Filip Skokan,
 	Oliver Terbu,
+	Hannes Tschofenig,
 	and
 	David Waite
 	for their contributions to this specification.
