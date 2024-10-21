@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="20" month="October" year="2024" />
+    <date day="21" month="October" year="2024" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -43,6 +43,8 @@
     <keyword>Cryptographic Algorithm Identifiers</keyword>
     <keyword>JSON Object Signing and Encryption (JOSE)</keyword>
     <keyword>CBOR Object Signing and Encryption (COSE)</keyword>
+    <keyword>Polymorphic Algorithms</keyword>
+    <keyword>Algorithm Cipher Suites</keyword>
     <keyword>Internet-Draft</keyword>
 
     <abstract>
@@ -127,6 +129,10 @@
 	so that algorithm negotiation can succeed, but also effectively
 	eliminating the possibility of using <spanx style="verb">Ed448</spanx>.
 	Other similar workarounds for polymorphic algorithm identifiers are used in practice.
+      </t>
+      <t>
+	Note that using fully-specified algorithms is sometimes
+	referred to as the "cipher suite" approach.
       </t>
       <t>
 	This specification creates fully-specified algorithm identifiers for registered
@@ -1680,6 +1686,9 @@ unless there exists some other mechanism for ensuring the key is used as intende
         <list style="symbols">
 	  <t>
 	    Corrected inconsistencies identified during the 2nd WGLC.
+	  </t>
+	  <t>
+	    Added terminology remark about the "cipher suite" approach.
 	  </t>
 	</list>
       </t>
