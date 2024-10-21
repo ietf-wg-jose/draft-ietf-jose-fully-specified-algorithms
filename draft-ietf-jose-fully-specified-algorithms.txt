@@ -143,7 +143,8 @@ Table of Contents
    practice.
 
    Note that using fully-specified algorithms is sometimes referred to
-   as the "cipher suite" approach.
+   as the "cipher suite" approach; using polymorphic algorithms is
+   sometimes referred to as the "à la carte" approach.
 
    This specification creates fully-specified algorithm identifiers for
    registered polymorphic JOSE and COSE algorithms and their parameters,
@@ -325,8 +326,6 @@ Table of Contents
 
    Direct Encryption and Key Wrapping algorithms encode the primary
    symmetric key parameter (key length) in the algorithm identifier.
-   Key Wrapping algorithms impose additional implicit constraints on AAD
-   and IV.
 
    In JOSE and COSE, all currently registered Direct Encryption and Key
    Wrapping algorithms are fully specified.
@@ -380,12 +379,11 @@ Table of Contents
    shared_secret = derive_shared_secret(public_key1, private_key2)
    shared_secret = derive_shared_secret(public_key2, private_key1)
 
-   An algorithm called a Key Encapsulation Mechanism, can be used to
-   provide a common interface for deriving shared secrets, regardless of
-   key type.
-
-   Key encapsulation algorithms generally satisfy the following
-   interface:
+   An algorithm called a Key Encapsulation Mechanism (KEM) can be used
+   to provide a common interface for deriving shared secrets, regardless
+   of key type.  For examples of the use of KEMs, see
+   [I-D.ietf-lamps-rfc5990bis] and [I-D.ietf-lamps-cms-kemri].  Key
+   encapsulation algorithms generally satisfy the following interface:
 
    private_key, public_key = key_generation(algorithm_identifier)
    ciphertext, shared_secret = encapsulate(public_key)
@@ -954,6 +952,21 @@ Table of Contents
               <https://nvlpubs.nist.gov/nistpubs/FIPS/
               NIST.FIPS.140-3.pdf>.
 
+   [I-D.ietf-lamps-cms-kemri]
+              Housley, R., Gray, J., and T. Okubo, "Using Key
+              Encapsulation Mechanism (KEM) Algorithms in the
+              Cryptographic Message Syntax (CMS)", Work in Progress,
+              Internet-Draft, draft-ietf-lamps-cms-kemri-08, 6 February
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lamps-cms-kemri-08>.
+
+   [I-D.ietf-lamps-rfc5990bis]
+              Housley, R. and S. Turner, "Use of the RSA-KEM Algorithm
+              in the Cryptographic Message Syntax (CMS)", Work in
+              Progress, Internet-Draft, draft-ietf-lamps-rfc5990bis-10,
+              30 July 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-rfc5990bis-10>.
+
    [IANA.COSE]
               IANA, "CBOR Object Signing and Encryption (COSE)",
               <https://www.iana.org/assignments/cose/>.
@@ -1159,7 +1172,8 @@ Appendix B.  Document History
 
    *  Corrected inconsistencies identified during the 2nd WGLC.
 
-   *  Added terminology remark about the "cipher suite" approach.
+   *  Added terminology remark about the "cipher suite" and "à la carte"
+      approaches.
 
    -05
 
@@ -1218,8 +1232,8 @@ Acknowledgements
    The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
    Campbell, Stephen Farrell, Ilari Liusvaara, Tobias Looker, Neil
    Madden, John Mattsson, Jeremy O'Donoghue, Anders Rundgren, Göran
-   Selander, Filip Skokan, Oliver Terbu, and David Waite for their
-   contributions to this specification.
+   Selander, Filip Skokan, Oliver Terbu, Hannes Tschofenig, and David
+   Waite for their contributions to this specification.
 
 Authors' Addresses
 

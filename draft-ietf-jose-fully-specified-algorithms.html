@@ -1343,7 +1343,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
  Other similar workarounds for polymorphic algorithm identifiers are used in practice.<a href="#section-1-9" class="pilcrow">¶</a></p>
 <p id="section-1-10">
  Note that using fully-specified algorithms is sometimes
- referred to as the "cipher suite" approach.<a href="#section-1-10" class="pilcrow">¶</a></p>
+ referred to as the "cipher suite" approach;
+ using polymorphic algorithms is sometimes
+ referred to as the "à la carte" approach.<a href="#section-1-10" class="pilcrow">¶</a></p>
 <p id="section-1-11">
  This specification creates fully-specified algorithm identifiers for registered
  polymorphic JOSE and COSE algorithms and their parameters,
@@ -1601,8 +1603,7 @@ An example of a fully-specified key wrapping algorithm is "A128KW" (AES Key Wrap
 <p id="section-3.2.1-7">
 A symmetric encryption algorithm is fully specified when it satisfies the interface above, and depends only on the parameters to the encrypt and decrypt operations.<a href="#section-3.2.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-8">
-Direct Encryption and Key Wrapping algorithms encode the primary symmetric key parameter (key length) in the algorithm identifier.
-Key Wrapping algorithms impose additional implicit constraints on AAD and IV.<a href="#section-3.2.1-8" class="pilcrow">¶</a></p>
+Direct Encryption and Key Wrapping algorithms encode the primary symmetric key parameter (key length) in the algorithm identifier.<a href="#section-3.2.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-9">
 In JOSE and COSE, all currently registered Direct Encryption and Key Wrapping algorithms are fully specified.<a href="#section-3.2.1-9" class="pilcrow">¶</a></p>
 <p id="section-3.2.1-10">
@@ -1662,49 +1663,51 @@ shared_secret = derive_shared_secret(public_key2, private_key1)
 </pre><a href="#section-3.2.2-7" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2.2-8">
-An algorithm called a Key Encapsulation Mechanism, can be used to provide a common interface for deriving shared secrets, regardless of key type.<a href="#section-3.2.2-8" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-9">
-Key encapsulation algorithms generally satisfy the following interface:<a href="#section-3.2.2-9" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.2-10">
+An algorithm called a Key Encapsulation Mechanism (KEM) can be used to provide a common interface for deriving shared secrets, regardless of key type.
+For examples of the use of KEMs,
+see <span>[<a href="#I-D.ietf-lamps-rfc5990bis" class="cite xref">I-D.ietf-lamps-rfc5990bis</a>]</span>
+and <span>[<a href="#I-D.ietf-lamps-cms-kemri" class="cite xref">I-D.ietf-lamps-cms-kemri</a>]</span>.
+Key encapsulation algorithms generally satisfy the following interface:<a href="#section-3.2.2-8" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.2-9">
 <pre>
 private_key, public_key = key_generation(algorithm_identifier)
 ciphertext, shared_secret = encapsulate(public_key)
 shared_secret = deencapsulate(ciphertext, private_key)
-</pre><a href="#section-3.2.2-10" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.2-11">
+<p id="section-3.2.2-10">
 When using Key Establishment with Direct Encryption, the ciphertext is not only the output of symmetric encryption, but also includes all parameters necessary for the recipient to decrypt the ciphertext.
-Encrypted content encryption keys are not produced by fully-specified Key Establishment with Direct Encryption algorithms.<a href="#section-3.2.2-11" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-12">
+Encrypted content encryption keys are not produced by fully-specified Key Establishment with Direct Encryption algorithms.<a href="#section-3.2.2-10" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-11">
 In JOSE, the KDF algorithm is "Concat KDF" and is an implicit parameter of the key establishment algorithm.
 In JOSE and COSE, key establishment algorithms have historically been generic to a key type including all its mandatory parameters.
 For example, "ECDH-ES" establishes a shared secret, and then through the use of a KDF, a content encryption key, for keys based on elliptic curves.
-However, the mandatory parameters of the public key and private key need be the same in the context of the key type.<a href="#section-3.2.2-12" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-13">
+However, the mandatory parameters of the public key and private key need be the same in the context of the key type.<a href="#section-3.2.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-12">
 For example, when using ECDH-ES with secp256r1 (P-256) to establish a shared secret,
 the ECDH algorithm is a function of an ephemeral and a static key,
-which need to be of the same key type, and having the same parameters, in this case, the curve parameter.<a href="#section-3.2.2-13" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-14">
+which need to be of the same key type, and having the same parameters, in this case, the curve parameter.<a href="#section-3.2.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-13">
 To successfully encrypt to a recipient, a sender needs to possess the recipient's key (which contains the curve parameter) and know the recipient's supported algorithms.
 In JOSE and COSE, key representations can support communicating the algorithm that a recipient supports for a given key.
-It is considered a best practice to only use a key with one algorithm.<a href="#section-3.2.2-14" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-15">
-Example of a decoded JWE Protected Header, for Key Establishment with Direct Encryption:<a href="#section-3.2.2-15" class="pilcrow">¶</a></p>
-<div class="sourcecode" id="section-3.2.2-16">
+It is considered a best practice to only use a key with one algorithm.<a href="#section-3.2.2-13" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-14">
+Example of a decoded JWE Protected Header, for Key Establishment with Direct Encryption:<a href="#section-3.2.2-14" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-3.2.2-15">
 <pre>
 {
   "alg":"ECDH-ES",
   "enc":"A128GCM",
   ...
 }
-</pre><a href="#section-3.2.2-16" class="pilcrow">¶</a>
+</pre><a href="#section-3.2.2-15" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2.2-17">
+<p id="section-3.2.2-16">
 Despite containing both the key establishment algorithm (with an implicit KDF) and the symmetric encryption algorithm, the example above is not fully specified.
 To make a Key Establishment with Direct Encryption algorithm fully specified, all essential parameters need to be encoded in the algorithm identifiers.
 In the example above, the missing explicit parameters are curve name and KDF name.
-If the KDF requires additional parameters, they also need to be present.<a href="#section-3.2.2-17" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-18">
+If the KDF requires additional parameters, they also need to be present.<a href="#section-3.2.2-16" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-17">
   Note that in JOSE, there is the option to derive some cryptographic parameters
   used in the "alg" computation from the accompanying "enc" value.
   An example of this is that the keydatalen KDF parameter value
@@ -1713,22 +1716,22 @@ If the KDF requires additional parameters, they also need to be present.<a href=
   For the purposes of an "alg" value being fully-specified,
   deriving parameters from "enc" does not make the algorithm polymorphic,
   as the computation is still fully determined by the algorithm identifiers used.
-  This option is not present in COSE.<a href="#section-3.2.2-18" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-19">
+  This option is not present in COSE.<a href="#section-3.2.2-17" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-18">
 To convey fully-specified Key Establishment with Direct Encryption in JOSE,
 the "alg" value MUST specify all essential parameters for key establishment
 or derive some of them from the accompanying "enc" value and
 the "enc" value MUST specify all essential parameters for symmetric encryption.
 For example,
 an "alg" value specifiying ECDH-ES using P-256 and Concat-KDF and
-an "enc" value of "A128GCM".<a href="#section-3.2.2-19" class="pilcrow">¶</a></p>
-<p id="section-3.2.2-20">
+an "enc" value of "A128GCM".<a href="#section-3.2.2-18" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-19">
 To convey fully-specified Key Establishment with Direct Encryption in COSE,
 the outer "alg" value MUST specify all essential parameters for key establishment and
 the inner "alg" value must specify all essential parameters for symmetric encryption.
 For example,
 an outer "alg" value specifying ECDH-ES using P-256 and HKDF SHA-256 with 128-bit output and
-an inner "alg" value specifying A128GCM.<a href="#section-3.2.2-20" class="pilcrow">¶</a></p>
+an inner "alg" value specifying A128GCM.<a href="#section-3.2.2-19" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fully-specified-key-wrapping-encryption-algs">
@@ -2674,6 +2677,14 @@ unless there exists some other mechanism for ensuring the key is used as intende
         <dd>
 <span class="refAuthor">National Institute of Standards and Technology (NIST)</span>, <span class="refTitle">"Security Requirements for Cryptographic Modules"</span>, <span class="seriesInfo">FIPS PUB 140-3</span>, <time datetime="2019-03-22" class="refDate">22 March 2019</time>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-3.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-lamps-cms-kemri">[I-D.ietf-lamps-cms-kemri]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Gray, J.</span>, and <span class="refAuthor">T. Okubo</span>, <span class="refTitle">"Using Key Encapsulation Mechanism (KEM) Algorithms in the Cryptographic Message Syntax (CMS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-cms-kemri-08</span>, <time datetime="2024-02-06" class="refDate">6 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-kemri-08">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-cms-kemri-08</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-lamps-rfc5990bis">[I-D.ietf-lamps-rfc5990bis]</dt>
+        <dd>
+<span class="refAuthor">Housley, R.</span> and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Use of the RSA-KEM Algorithm in the Cryptographic Message Syntax (CMS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-rfc5990bis-10</span>, <time datetime="2024-07-30" class="refDate">30 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-rfc5990bis-10">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-rfc5990bis-10</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="IANA.COSE">[IANA.COSE]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE)"</span>, <span>&lt;<a href="https://www.iana.org/assignments/cose/">https://www.iana.org/assignments/cose/</a>&gt;</span>. </dd>
@@ -2984,7 +2995,8 @@ unless there exists some other mechanism for ensuring the key is used as intende
 </li>
         <li class="normal" id="appendix-B-3.2">
           <p id="appendix-B-3.2.1">
-     Added terminology remark about the "cipher suite" approach.<a href="#appendix-B-3.2.1" class="pilcrow">¶</a></p>
+     Added terminology remark about the "cipher suite" and
+     "à la carte" approaches.<a href="#appendix-B-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-4">
@@ -3102,6 +3114,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
  Göran Selander,
  Filip Skokan,
  Oliver Terbu,
+ Hannes Tschofenig,
  and
  David Waite
  for their contributions to this specification.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
