@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T00:42:16.274390+00:00",
+  "timestamp": "2024-10-22T00:38:50.360581+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1213,6 +1213,278 @@
               "updatedAt": "2024-10-19T22:57:24Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOKNEhZc5_OYmd",
+      "title": "More detail on deprecation",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/21",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressing: https://mailarchive.ietf.org/arch/msg/jose/5j9RimIziHrwz9RH9b6ldbUEz0s/",
+      "createdAt": "2024-10-20T13:13:53Z",
+      "updatedAt": "2024-10-20T16:06:40Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "6f34a6965d89a8a81301b69a4ac9d28558a78f59",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "wglc-gorans-feedback-on-deprecation",
+      "headRefOid": "51e5edec9ef063dfbba28e0231d3cd11905f0a9d",
+      "closedAt": "2024-10-20T16:06:40Z",
+      "mergedAt": "2024-10-20T16:06:40Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "236df2baa9d7b7979271dbf80d6a57ad084becbb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N5FLx",
+          "commit": {
+            "abbreviatedOid": "51e5ede"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T15:53:34Z",
+          "updatedAt": "2024-10-20T15:53:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOKNEhZc5_Oc-P",
+      "title": "On alg in keys",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/22",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addressing: https://mailarchive.ietf.org/arch/msg/jose/H6a2kwclex1RffOzJrOoBUolaBI/",
+      "createdAt": "2024-10-20T13:51:56Z",
+      "updatedAt": "2024-10-20T16:11:44Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "6f34a6965d89a8a81301b69a4ac9d28558a78f59",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "wglc-alg-in-keys",
+      "headRefOid": "f29fe03fd4d54223e7fac4d119008cc51b05c352",
+      "closedAt": "2024-10-20T16:11:44Z",
+      "mergedAt": "2024-10-20T16:11:44Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "f6fedc5f153fa16dca523b89ab5eadbeb7eccae5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N5JLf",
+          "commit": {
+            "abbreviatedOid": "69c6abe"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T16:05:46Z",
+          "updatedAt": "2024-10-20T16:05:46Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nA cryptographic key SHOULD be used with only a single algorithm,\r\n```",
+              "createdAt": "2024-10-20T16:05:46Z",
+              "updatedAt": "2024-10-20T16:05:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6N5JXP",
+          "commit": {
+            "abbreviatedOid": "f29fe03"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T16:06:15Z",
+          "updatedAt": "2024-10-20T16:06:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOKNEhZc5_PUxC",
+      "title": "Remove attack surface text",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/23",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove Security Considerations text that Neil Madden objected to.",
+      "createdAt": "2024-10-20T20:11:11Z",
+      "updatedAt": "2024-10-20T21:15:27Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "17607c1f123eeee661f58d2827824d0e923b7e63",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-attack-surface",
+      "headRefOid": "71b48fbda148bc8fc0812fee7124bbe4bd93b914",
+      "closedAt": "2024-10-20T21:15:27Z",
+      "mergedAt": "2024-10-20T21:15:26Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "c4c662f854267c18bb23b0f3af05da7e8c2d1f30"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N5jnS",
+          "commit": {
+            "abbreviatedOid": "71b48fb"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T21:15:22Z",
+          "updatedAt": "2024-10-20T21:15:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOKNEhZc5_Pk5s",
+      "title": "Updated encryption examples",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/24",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-20T23:45:04Z",
+      "updatedAt": "2024-10-20T23:50:24Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "c4c662f854267c18bb23b0f3af05da7e8c2d1f30",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-encryption-examples",
+      "headRefOid": "1f7af6d4ee379c2e776955c1734c7d8d718f1eb6",
+      "closedAt": "2024-10-20T23:50:24Z",
+      "mergedAt": "2024-10-20T23:50:23Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "b12b496cb7194dfe251caa5433f55d3d02c027db"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6N5q8t",
+          "commit": {
+            "abbreviatedOid": "1f7af6d"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T23:49:44Z",
+          "updatedAt": "2024-10-20T23:49:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOKNEhZc5_WjSK",
+      "title": "Add remark about cipher suite terminology",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/25",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per the discussion on Hannes' review",
+      "createdAt": "2024-10-21T17:04:23Z",
+      "updatedAt": "2024-10-21T17:20:17Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "b12b496cb7194dfe251caa5433f55d3d02c027db",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-cipher-suite",
+      "headRefOid": "30e082e8ac17afe743621f6988c8e88ed506a869",
+      "closedAt": "2024-10-21T17:20:17Z",
+      "mergedAt": "2024-10-21T17:20:17Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "44e37018b5e76dc33f9eb59321dadf45e2adf85a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6OBqpt",
+          "commit": {
+            "abbreviatedOid": "30e082e"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T17:20:13Z",
+          "updatedAt": "2024-10-21T17:20:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOKNEhZc5_XF2M",
+      "title": "Address issues identified by Hannes Tschofenig",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/26",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-21T18:30:10Z",
+      "updatedAt": "2024-10-21T19:08:54Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "44e37018b5e76dc33f9eb59321dadf45e2adf85a",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-hannes",
+      "headRefOid": "2cbb4d9cf7ed99032aba09ce90994b83862a8422",
+      "closedAt": "2024-10-21T19:08:54Z",
+      "mergedAt": "2024-10-21T19:08:54Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "0a041c8698e2d2d471fa0134c318e90e29fcaf51"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6OCza8",
+          "commit": {
+            "abbreviatedOid": "2cbb4d9"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T19:08:50Z",
+          "updatedAt": "2024-10-21T19:08:50Z",
+          "comments": []
         }
       ]
     }
