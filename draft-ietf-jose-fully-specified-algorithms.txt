@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 24 April 2025                                   21 October 2024
+Expires: 24 August 2025                                 20 February 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,11 +40,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2025.
+   This Internet-Draft will expire on 24 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -64,11 +64,8 @@ Table of Contents
      2.1.  Elliptic Curve Digital Signature Algorithm (ECDSA)
      2.2.  Edwards-Curve Digital Signature Algorithm (EdDSA)
    3.  Fully-Specified Encryption
-     3.1.  Fully-Specified Computations Using Multiple Algorithms
-     3.2.  Analysis of Modes of Encryption
-       3.2.1.  Direct Encryption
-       3.2.2.  Key Establishment with Direct Encryption
-       3.2.3.  Two-Layer Encryption
+     3.1.  Fully-Specified Encryption Algorithms
+     3.2.  Polymorphic Encryption Algorithms
    4.  IANA Considerations
      4.1.  JOSE Algorithms Registrations
        4.1.1.  Fully-Specified JOSE Algorithm Registrations
@@ -84,14 +81,12 @@ Table of Contents
    6.  Notes on Algorithms Not Updated
      6.1.  RSA Signing Algorithms
      6.2.  ECDH Key Agreement Algorithms
+     6.3.  HSS/LMS Hash-Based Digital Signature Algorithm
    7.  Security Considerations
    8.  References
      8.1.  Normative References
      8.2.  Informative References
-   Appendix A.  Inventory of Polymorphic ECDH Algorithms
-     A.1.  Polymorphic ECDH JOSE Algorithms
-     A.2.  Polymorphic ECDH COSE Algorithms
-   Appendix B.  Document History
+   Appendix A.  Document History
    Acknowledgements
    Authors' Addresses
 
@@ -163,8 +158,8 @@ Table of Contents
 2.  Fully-Specified Digital Signature Algorithm Identifiers
 
    This section creates fully-specified digital signature algorithm
-   identifiers for all registered polymorphic JOSE and COSE algorithms
-   and their parameters.
+   identifiers for a set of registered polymorphic JOSE and COSE
+   algorithms and their parameters.
 
 2.1.  Elliptic Curve Digital Signature Algorithm (ECDSA)
 
@@ -240,372 +235,89 @@ Table of Contents
 
    This section describes the construction of fully-specified encryption
    algorithm identifiers in the context of existing the JOSE and COSE
-   encryption schemes JSON Web Encryption (JWE) as described in
-   [RFC7516] and COSE Encrypt as described in [RFC9052].
+   encryption schemes JSON Web Encryption, (JWE) as described in
+   [RFC7516] and [RFC7518], and COSE Encrypt, as described in [RFC9052]
+   and [RFC9053].
 
-3.1.  Fully-Specified Computations Using Multiple Algorithms
+   Using fully-specified encryption algorithms enables the sender and
+   receiver to agree on all mandatory security parameters.  They also
+   enable protocols to specify an allow list of algorithm combinations
+   that does not include polymorphic combinations, prventing problems
+   such as cross-curve key establishment, cross-mode symmetric
+   encryption, or mismatched KDF size to symmetric key scenarios.
 
    Both JOSE and COSE have operations that take multiple algorithms as
    parameters.  Encrypted objects in JOSE [RFC7516] use two algorithm
-   identifiers: the first in the alg (Algorithm) Header Parameter, which
-   specifies how to determine the content encryption key, and the second
-   in the enc (Encryption Algorithm) Header Parameter, which specifies
-   the content encryption algorithm.  Likewise, encrypted COSE objects
-   can use multiple algorithms for corresponding purposes.  The
-   following sections describe how to fully specify encryption
-   algorithms when multiple algorithms are used in the computation.
+   identifiers: the first in the "alg" (Algorithm) Header Parameter,
+   which specifies how to determine the content encryption key, and the
+   second in the "enc" (Encryption Algorithm) Header Parameter, which
+   specifies the content encryption algorithm.  Likewise, encrypted COSE
+   objects can use multiple algorithms for corresponding purposes.  This
+   section describes how to fully specify encryption algorithms for JOSE
+   and COSE.
 
-3.2.  Analysis of Modes of Encryption
-
-   JOSE and COSE support several modes of encryption.  Although the
-   terminology sometimes differs between JOSE and COSE, both support
-   these encryption modes:
-
-   *  Direct Encryption - A symmetric cryptographic operation.
-
-   *  Key Establishment with Direct Encryption - An asymmetric
-      cryptographic operation to derive a shared secret, key derivation
-      and then a symmetric cryptographic operation.
-
-   *  Two-Layer Encryption - A content encryption key is protected
-      (multiple possible ways), then content encryption or decryption is
-      performed using the protected content encryption key.
-
-   Mode complexity creates the following risks:
-
-   *  The combination of chosen algorithms might not be implemented by
-      the receiver.
-
-   *  The combination of chosen algorithms might not be aligned in terms
-      of strength.
-
-   *  Underspecified or implicit parameters could lead to exploitable
-      faults in implementations, for example, cross-curve Elliptic Curve
-      Diffie-Hellman (ECDH) between P-256 and P-384 or X25519.
-
-   *  Alternative algorithms at a component layer, such as symmetric key
-      encryption, might provide different security properties, for
-      example, "A128GCM" vs. "A128CBC-HS256".
-
-   While this specification provides a definition of what fully-
-   specified encryption algorithm identifiers are for both JOSE and
-   COSE, including examples, it does not deprecate any polymorphic
-   encryption algorithms, since replacements for them are not provided
-   by this specification.
-
-   The following sections describe what fully specified means for each
-   mode.
-
-3.2.1.  Direct Encryption
-
-   Symmetric encryption algorithms generally satisfy the following
-   interface:
-
-   secret_key = key_generation(algorithm_identifier)
-   ciphertext = encrypt(plaintext, secret_key)
-   plaintext  = decrypt(ciphertext, secret_key)
-
-   Depending on the algorithm, additional parameters such as Additional
-   Authenticated Data (AAD) or Initialization Vector (IV) might be
-   required.
-
-   In the special case where the plaintext is a content encryption key,
-   to be used with a subsequent symmetric encryption algorithm, such a
-   symmetric encryption algorithm is referred to as a key wrapping
-   algorithm and the secret_key is referred to as a key wrapping key.
-
-   An example of a fully-specified symmetric encryption algorithm is
-   "A128GCM" (AES GCM using 128-bit key).
-
-   An example of a fully-specified key wrapping algorithm is "A128KW"
-   (AES Key Wrap using 128-bit key).
-
-   A symmetric encryption algorithm is fully specified when it satisfies
-   the interface above, and depends only on the parameters to the
-   encrypt and decrypt operations.
-
-   Direct Encryption and Key Wrapping algorithms encode the primary
-   symmetric key parameter (key length) in the algorithm identifier.
-
-   In JOSE and COSE, all currently registered Direct Encryption and Key
-   Wrapping algorithms are fully specified.
-
-   Example of a decoded JWE Protected Header, for Direct Encryption:
-
-   {
-     "alg": "dir",
-     "enc": "A128GCM",
-     ...
-   }
-
-   Example of a decoded JWE Protected Header, for Key Wrapping:
-
-   {
-     "alg": "A128KW",
-     "enc": "A128GCM",
-     ...
-   }
-
-3.2.2.  Key Establishment with Direct Encryption
-
-   Key establishment with direct encryption algorithms generally satisfy
-   the following interface:
-
-   private_key, public_key = key_generation(algorithm_identifier)
-   ciphertext = encrypt(plaintext, public_key)
-   plaintext  = decrypt(ciphertext, private_key)
-
-   Depending on the symmetric algorithm, additional parameters such as
-   Additional Authenticated Data (AAD) or Initialization Vector (IV)
-   might be required.
-
-   Although JOSE and COSE encode this type of encryption differently,
-   both rely on a symmetric key derived from an asymmetric key.  An
-   algorithm called a key derivation function (KDF) is applied between
-   key establishment and symmetric encryption.
-
-   Key establishment algorithms often rely on an asymmetric
-   cryptographic operation whereby a public and a private key are used
-   to produce a shared secret, which can be combined with a KDF to
-   produce a symmetric key.  The process of producing a shared secret is
-   key type specific, and is different for elliptic curves, RSA, and
-   lattice-based algorithms.
-
-   Elliptic Curve Diffie-Hellman (ECDH) is used to produce a shared
-   secret with elliptic curve-based keys as follows:
-
-   private_key1, public_key1 = key_generation(algorithm_identifier)
-   private_key2, public_key2 = key_generation(algorithm_identifier)
-   shared_secret = derive_shared_secret(public_key1, private_key2)
-   shared_secret = derive_shared_secret(public_key2, private_key1)
-
-   An algorithm called a Key Encapsulation Mechanism (KEM) can be used
-   to provide a common interface for deriving shared secrets, regardless
-   of key type.  For examples of the use of KEMs, see
-   [I-D.ietf-lamps-rfc5990bis] and [I-D.ietf-lamps-cms-kemri].  Key
-   encapsulation algorithms generally satisfy the following interface:
-
-   private_key, public_key = key_generation(algorithm_identifier)
-   ciphertext, shared_secret = encapsulate(public_key)
-   shared_secret = deencapsulate(ciphertext, private_key)
-
-   When using Key Establishment with Direct Encryption, the ciphertext
-   is not only the output of symmetric encryption, but also includes all
-   parameters necessary for the recipient to decrypt the ciphertext.
-   Encrypted content encryption keys are not produced by fully-specified
-   Key Establishment with Direct Encryption algorithms.
-
-   In JOSE, the KDF algorithm is "Concat KDF" and is an implicit
-   parameter of the key establishment algorithm.  In JOSE and COSE, key
-   establishment algorithms have historically been generic to a key type
-   including all its mandatory parameters.  For example, "ECDH-ES"
-   establishes a shared secret, and then through the use of a KDF, a
-   content encryption key, for keys based on elliptic curves.  However,
-   the mandatory parameters of the public key and private key need be
-   the same in the context of the key type.
-
-   For example, when using ECDH-ES with secp256r1 (P-256) to establish a
-   shared secret, the ECDH algorithm is a function of an ephemeral and a
-   static key, which need to be of the same key type, and having the
-   same parameters, in this case, the curve parameter.
-
-   To successfully encrypt to a recipient, a sender needs to possess the
-   recipient's key (which contains the curve parameter) and know the
-   recipient's supported algorithms.  In JOSE and COSE, key
-   representations can support communicating the algorithm that a
-   recipient supports for a given key.  It is considered a best practice
-   to only use a key with one algorithm.
-
-   Example of a decoded JWE Protected Header, for Key Establishment with
-   Direct Encryption:
-
-   {
-     "alg":"ECDH-ES",
-     "enc":"A128GCM",
-     ...
-   }
-
-   Despite containing both the key establishment algorithm (with an
-   implicit KDF) and the symmetric encryption algorithm, the example
-   above is not fully specified.  To make a Key Establishment with
-   Direct Encryption algorithm fully specified, all essential parameters
-   need to be encoded in the algorithm identifiers.  In the example
-   above, the missing explicit parameters are curve name and KDF name.
-   If the KDF requires additional parameters, they also need to be
-   present.
+   To perform fully-specified encryption in JOSE, the "alg" value MUST
+   specify all essential parameters for key establishment or derive some
+   of them from the accompanying "enc" value and the "enc" value MUST
+   specify all essential parameters for symmetric encryption.  For
+   example, JWE encryption using an "alg" value of "A128KW" (AES Key
+   Wrap using 128-bit key) and an "enc" value of "A128GCM" (AES GCM
+   using 128-bit key) uses fully-specified algorithms.
 
    Note that in JOSE, there is the option to derive some cryptographic
    parameters used in the "alg" computation from the accompanying "enc"
    value.  An example of this is that the keydatalen KDF parameter value
-   for ECDH-ES is determined from the "enc" value, as described in
+   for "ECDH-ES" is determined from the "enc" value, as described in
    Section 4.6.2 of [RFC7518].  For the purposes of an "alg" value being
    fully-specified, deriving parameters from "enc" does not make the
    algorithm polymorphic, as the computation is still fully determined
    by the algorithm identifiers used.  This option is not present in
    COSE.
 
-   To convey fully-specified Key Establishment with Direct Encryption in
-   JOSE, the "alg" value MUST specify all essential parameters for key
-   establishment or derive some of them from the accompanying "enc"
-   value and the "enc" value MUST specify all essential parameters for
-   symmetric encryption.  For example, an "alg" value specifiying ECDH-
-   ES using P-256 and Concat-KDF and an "enc" value of "A128GCM".
+   To perform fully-specified encryption in COSE, the outer "alg" value
+   MUST specify all essential parameters for key establishment and the
+   inner "alg" value must specify all essential parameters for symmetric
+   encryption.  For example, COSE encryption using an outer "alg" value
+   of A128KW and an inner "alg" value of A128GCM uses fully-specified
+   algorithms.
 
-   To convey fully-specified Key Establishment with Direct Encryption in
-   COSE, the outer "alg" value MUST specify all essential parameters for
-   key establishment and the inner "alg" value must specify all
-   essential parameters for symmetric encryption.  For example, an outer
-   "alg" value specifying ECDH-ES using P-256 and HKDF SHA-256 with
-   128-bit output and an inner "alg" value specifying A128GCM.
+   While this specification provides a definition of what fully-
+   specified encryption algorithm identifiers are for both JOSE and
+   COSE, it does not deprecate any polymorphic encryption algorithms,
+   since replacements for them are not provided by this specification.
+   This is discussed in Section 6.2.
 
-3.2.3.  Two-Layer Encryption
+3.1.  Fully-Specified Encryption Algorithms
 
-   This section describes Two-Layer Encryption in both JOSE and COSE.
-   Each defines multiple ways that a content encryption key can be
-   produced and protected, then later used to decrypt or encrypt
-   content.
+   Many of the registered JOSE and COSE algorithms used for encryption
+   are already fully-specified.  This section discusses them.
 
-   This specification uses the term "Two-Layer Encryption" to refer to
-   what JOSE describes as "Key Encryption" and "Key Agreement with Key
-   Wrapping", and what COSE describes as "Key Transport" and "Key
-   Agreement with Key Wrap".
+   All the symmetric encryption algorithms registered by [RFC7518] and
+   [RFC9053] are fully-specified.  An example of a fully-specified
+   symmetric encryption algorithm is "A128GCM" (AES GCM using 128-bit
+   key).
 
-   A distinguishing characteristic of Two-Layer Encryption schemes is
-   that multiple recipients can perform decryptions, using a wide range
-   of algorithms, and that encrypted content encryption keys are always
-   present.
+   In both JOSE and COSE, all registered key wrapping algorithms are
+   fully specified, as are the key wrapping with AES GCM algorithms.  An
+   example of a fully-specified key wrapping algorithm is "A128KW" (AES
+   Key Wrap using 128-bit key).
 
-   In RSA-OAEP, the content encryption key is encrypted using an
-   asymmetric cryptographic operation.  When Key Wrapping without any
-   key establishment is used, the content encryption key is encrypted
-   using a symmetric cryptographic operation (key wrap).  How the
-   content encryption key is generated is out of scope for this
-   discussion.
+   The JOSE "dir" and COSE "direct" algorithms are fully specified.  The
+   COSE direct+HKDF algorithms are fully specified.
 
-   Key wrapping algorithms generally satisfy the following interface:
+   The JOSE Key Encryption with PBES2 algorithms are fully specified.
 
-   key_encryption_key = \
-   key_generation(algorithm_identifier)
+3.2.  Polymorphic Encryption Algorithms
 
-   encrypted_content_encryption_key = \
-   encrypt(content_encryption_key, key_encryption_key)
+   Some of the registered JOSE and COSE algorithms used for encryption
+   are polymorphic.  This section discusses them.
 
-   content_encryption_key  = \
-   decrypt(encrypted_content_encryption_key, key_encryption_key)
-
-   When Key Establishment with Key Wrapping is used, the content
-   encryption key is protected with Key Wrapping, where the Key
-   Encryption Key is derived from an asymmetric cryptographic operation
-   and a key derivation function.
-
-   Key Establishment with Key Wrapping algorithms generally satisfy the
-   following interface:
-
-   private_key, public_key = key_generation(algorithm_identifier)
-   # ignoring ephemeral/static vs. static/static, etc.
-
-   key_encryption_key = \
-   key_establishment(public_key, private_key)
-
-   encrypted_content_encryption_key = \
-   encrypt(content_encryption_key, key_encryption_key)
-
-   content_encryption_key = \
-   decrypt(encrypted_content_encryption_key, key_encryption_key)
-
-   The interface above is consistent with Key Establishment with Direct
-   Encryption.  The process of deriving a shared secret and content
-   encryption key is specific to the asymmetric key type used.  The
-   difference is that instead of using the derived content encryption
-   key directly, two-layer encryption always uses a key encryption key,
-   and protects the content encryption key.
-
-   Regardless of how a Two-Layer Encryption scheme protects the content
-   encryption key, content encryption algorithms generally satisfy the
-   following interface:
-
-   content_encryption_key = \
-   unwrap or establish and unwrap or key transport...
-
-   ciphertext = encrypt(plaintext, content_encryption_key)
-   plaintext  = decrypt(ciphertext, content_encryption_key)
-
-   Depending on the content encryption algorithm, additional parameters
-   such as Additional Authenticated Data (AAD) and/or an Initialization
-   Vector (IV) might be required.
-
-   Although JOSE and COSE encode Two-Layer Encryptions differently, both
-   rely on a protected content encryption key.  The content encryption
-   key is protected using Key Wrapping directly, or through Key
-   Establishment and then Key Wrapping, or Key Transport, or Key
-   Encryption.
-
-   When using Two-Layer Encryption, the output of symmetric encryption
-   includes the ciphertext and is accompanied by all parameters
-   necessary for the recipient to decrypt the ciphertext, including
-   parameters for use with the key establishment algorithm, such as
-   ephemeral or encapsulated keys, any required key derivation functions
-   and their parameters and the key wrapping algorithm.  Encrypted
-   content encryption keys are always present when Two-Layer Encryption
-   is used.  Parameters accompanying the ciphertext can include an
-   Initialization Vector (IV), an Authentication Tag, and Additional
-   Authenticated Data (AAD).  Two-Layer Encryption is often used for
-   encrypting the same plaintext to multiple recipients, in contrast
-   with other modes that can only be used to encrypt to a single
-   recipient.
-
-   Example of a decoded JWE Protected Header for Key Encryption with RSA
-   OAEP and Content Encryption using AES_128_CBC_HMAC_SHA_256:
-
-   {
-     "alg": "RSA-OAEP-256",
-     "enc": "A128CBC-HS256",
-     ...
-   }
-
-   Example of a decoded JWE Protected Header for Key Agreement using
-   ECDH-ES with key wrapping and Content Encryption using AES GCM:
-
-   {
-     "alg": "ECDH-ES+A128KW",
-     "enc": "A128GCM",
-     ...
-   }
-
-   However, despite containing both the key establishment algorithm and
-   a content encryption algorithm, the second example above is not fully
-   specified.  In this example, the missing parameter is the curve name
-   for the ephemeral key used for key agreement.
-
-   To convey fully-specified Two-Layer Encryption in JOSE, the "alg"
-   value MUST specify all essential parameters for key protection or
-   derive them from the accompanying "enc" value and the "enc" value
-   MUST be fully specified, specifying all essential parameters for
-   symmetric encryption.  For example, ECDH-ES using Concat KDF and
-   P-256 and "A128KW" key wrapping used with AES-GCM.
-
-   To convey fully-specified Two-Layer Encryption in COSE, the outer
-   "alg" value MUST specify all essential parameters for key protection
-   and the inner "alg" value MUST be fully specified, specifying all
-   essential parameters for symmetric encryption.  For example, ECDH-ES
-   using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key used with AES-
-   GCM.
-
-   In COSE, preventing cross-mode attacks, such as those described in
-   [RFC9459], can be accomplished in two ways: (1) Allow only
-   authenticated content encryption algorithms. (2) Bind the the
-   potentially unauthenticated content encryption algorithm to be used
-   into the key protection algorithm so that different content
-   encryption algorithms result in different content encryption keys.
-   Which choice to use in which circumstances is beyond the scope of
-   this specification.
-
-   Fully-specified Two-Layer Encryption algorithms enable the sender and
-   receiver to agree on all mandatory security parameters.  They also
-   enable a protocol to specify an allow list of algorithm combinations
-   that does not include polymorphic combinations, such as cross-curve
-   key establishment, cross-mode symmetric encryption, or mismatched KDF
-   size to symmetric key scenarios.
+   The ECDH key establishment algorithms in both JOSE and COSE are
+   polymorphic because they do not specify the elliptic curve to be used
+   for the key.  This is true of the ephemeral key for the Ephemeral-
+   Static (ES) algorithms registered for JOSE and COSE and of the static
+   key for the Static-Static (SS) algorithms registered by COSE.  See
+   more discussion of ECDH algorithms in Section 6.2.
 
 4.  IANA Considerations
 
@@ -857,9 +569,9 @@ Table of Contents
 
 6.  Notes on Algorithms Not Updated
 
-   The working group has discussed some existing algorithms that are not
-   updated by this specification.  This section discusses why they have
-   not been updated.
+   The working group has discussed some existing polymorphic algorithms
+   that are not updated by this specification.  This section discusses
+   why they have not been updated.
 
 6.1.  RSA Signing Algorithms
 
@@ -882,9 +594,27 @@ Table of Contents
 
 6.2.  ECDH Key Agreement Algorithms
 
-   As discussed in Appendix A, the working group decided not to update
-   the Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time, but
-   to describe how to potentially do so in the future, if needed.
+   The working group decided not to update the Elliptic Curve Diffie-
+   Hellman (ECDH) algorithms at this time, but to describe how to
+   potentially do so in the future, if needed.  The registered JOSE and
+   COSE ECDH algorithms are polymorphic because they do not specify the
+   curve to be used for the ephemeral key.
+
+   Fully-specified versions of these algorithms would specify all
+   choices needed, including the KDF and the curve.  For instance, an
+   algorithm performing ECDH-ES using the Concat KDF and the P-256
+   curve, would be fully-specified and could be defined and registered.
+   While there was not an appetite in the working group to define and
+   register such replacement algorithms at this time, other
+   specifications could do so in the future, if desired.
+
+6.3.  HSS/LMS Hash-Based Digital Signature Algorithm
+
+   The HSS-LMS algorithm registered by COSE is polymorphic.  It is
+   polymorphic because the algorithm identifier does not specify the
+   hash function to be used.  Like ECDH, the working group did not
+   propose to register replacement algorithms, but future specifications
+   could do so.
 
 7.  Security Considerations
 
@@ -900,6 +630,19 @@ Table of Contents
    result, it is RECOMMENDED that the algorithm parameter of JSON Web
    Keys and COSE Keys be present, unless there exists some other
    mechanism for ensuring the key is used as intended.
+
+   In COSE, preventing cross-mode attacks, such as those described in
+   [RFC9459], can be accomplished in two ways:
+
+   1.  Allow only authenticated content encryption algorithms.
+
+   2.  Bind the the potentially unauthenticated content encryption
+       algorithm to be used into the key protection algorithm so that
+       different content encryption algorithms result in different
+       content encryption keys.
+
+   Which choice to use in which circumstances is beyond the scope of
+   this specification.
 
 8.  References
 
@@ -951,21 +694,6 @@ Table of Contents
               FIPS PUB 140-3, 22 March 2019,
               <https://nvlpubs.nist.gov/nistpubs/FIPS/
               NIST.FIPS.140-3.pdf>.
-
-   [I-D.ietf-lamps-cms-kemri]
-              Housley, R., Gray, J., and T. Okubo, "Using Key
-              Encapsulation Mechanism (KEM) Algorithms in the
-              Cryptographic Message Syntax (CMS)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-cms-kemri-08, 6 February
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-cms-kemri-08>.
-
-   [I-D.ietf-lamps-rfc5990bis]
-              Housley, R. and S. Turner, "Use of the RSA-KEM Algorithm
-              in the Cryptographic Message Syntax (CMS)", Work in
-              Progress, Internet-Draft, draft-ietf-lamps-rfc5990bis-10,
-              30 July 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-lamps-rfc5990bis-10>.
 
    [IANA.COSE]
               IANA, "CBOR Object Signing and Encryption (COSE)",
@@ -1019,154 +747,20 @@ Table of Contents
               (W3C) Recommendation, 8 April 2021,
               <https://www.w3.org/TR/2021/REC-webauthn-2-20210408/>.
 
-Appendix A.  Inventory of Polymorphic ECDH Algorithms
-
-   The working group assembled the following inventory of registered
-   polymorphic Elliptic Curve Diffie-Hellman (ECDH) JOSE and COSE
-   algorithms with the goal of understanding what registering fully-
-   specified ECDH algorithms to replace them would entail.  While there
-   was not an appetite in the working group to register these
-   replacement algorithms at this time, this inventory documents how to
-   do so, should others wish to register some or all of the replacements
-   in the future.
-
-A.1.  Polymorphic ECDH JOSE Algorithms
-
-   These registered JOSE algorithms are polymorphic, because they do not
-   include the curve name in the algorithm to be used with the ephemeral
-   key:
-
-    +================+================================================+
-    | Name           | Description                                    |
-    +================+================================================+
-    | ECDH-ES        | ECDH-ES using Concat KDF                       |
-    +----------------+------------------------------------------------+
-    | ECDH-ES+A128KW | ECDH-ES using Concat KDF and "A128KW" wrapping |
-    +----------------+------------------------------------------------+
-    | ECDH-ES+A192KW | ECDH-ES using Concat KDF and "A192KW" wrapping |
-    +----------------+------------------------------------------------+
-    | ECDH-ES+A256KW | ECDH-ES using Concat KDF and "A256KW" wrapping |
-    +----------------+------------------------------------------------+
-
-                 Table 3: Polymorphic ECDH JOSE Algorithms
-
-   Descriptions of fully-specified JOSE versions of these algorithms
-   using combinations discussed by the working group that could be
-   registered by future specifications are:
-
-       +===========================================================+
-       | Description                                               |
-       +===========================================================+
-       | ECDH-ES using Concat KDF and P-256                        |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and P-384                        |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and P-521                        |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and X25519                       |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and X448                         |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and P-256 and "A128KW" wrapping  |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and X25519 and "A128KW" wrapping |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and P-384 and "A192KW" wrapping  |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and P-521 and "A256KW" wrapping  |
-       +-----------------------------------------------------------+
-       | ECDH-ES using Concat KDF and X448 and "A256KW" wrapping   |
-       +-----------------------------------------------------------+
-
-               Table 4: Fully-Specified ECDH JOSE Algorithms
-
-A.2.  Polymorphic ECDH COSE Algorithms
-
-   These registered COSE algorithms are likewise polymorphic, because
-   they do not include the curve name in the algorithm to be used with
-   the ephemeral key or the static key:
-
-     +====================+==========================================+
-     | Name               | Description                              |
-     +====================+==========================================+
-     | ECDH-ES + HKDF-256 | ECDH-ES w/ HKDF -- generate key directly |
-     +--------------------+------------------------------------------+
-     | ECDH-ES + HKDF-512 | ECDH-ES w/ HKDF -- generate key directly |
-     +--------------------+------------------------------------------+
-     | ECDH-SS + HKDF-256 | ECDH-SS w/ HKDF -- generate key directly |
-     +--------------------+------------------------------------------+
-     | ECDH-SS + HKDF-512 | ECDH-SS w/ HKDF -- generate key directly |
-     +--------------------+------------------------------------------+
-     | ECDH-ES + A128KW   | ECDH-ES w/ HKDF and AES Key Wrap w/      |
-     |                    | 128-bit key                              |
-     +--------------------+------------------------------------------+
-     | ECDH-ES + A192KW   | ECDH-ES w/ HKDF and AES Key Wrap w/      |
-     |                    | 192-bit key                              |
-     +--------------------+------------------------------------------+
-     | ECDH-ES + A256KW   | ECDH-ES w/ HKDF and AES Key Wrap w/      |
-     |                    | 256-bit key                              |
-     +--------------------+------------------------------------------+
-     | ECDH-SS + A128KW   | ECDH-SS w/ HKDF and AES Key Wrap w/      |
-     |                    | 128-bit key                              |
-     +--------------------+------------------------------------------+
-     | ECDH-SS + A192KW   | ECDH-SS w/ HKDF and AES Key Wrap w/      |
-     |                    | 192-bit key                              |
-     +--------------------+------------------------------------------+
-     | ECDH-SS + A256KW   | ECDH-SS w/ HKDF and AES Key Wrap w/      |
-     |                    | 256-bit key                              |
-     +--------------------+------------------------------------------+
-
-                 Table 5: Polymorphic ECDH COSE Algorithms
-
-   Descriptions of fully-specified COSE versions of these algorithms
-   using combinations discussed by the working group that could be
-   registered by future specifications are:
-
-     +==============================================================+
-     | Description                                                  |
-     +==============================================================+
-     | ECDH-ES using P-256 w/ HKDF -- generate key directly         |
-     +--------------------------------------------------------------+
-     | ECDH-ES using X25519 w/ HKDF -- generate key directly        |
-     +--------------------------------------------------------------+
-     | ECDH-ES using P-521 w/ HKDF -- generate key directly         |
-     +--------------------------------------------------------------+
-     | ECDH-ES using X448 w/ HKDF -- generate key directly          |
-     +--------------------------------------------------------------+
-     | ECDH-SS using P-256 w/ HKDF -- generate key directly         |
-     +--------------------------------------------------------------+
-     | ECDH-SS using X25519 w/ HKDF -- generate key directly        |
-     +--------------------------------------------------------------+
-     | ECDH-SS using P-521 w/ HKDF -- generate key directly         |
-     +--------------------------------------------------------------+
-     | ECDH-SS using X448 w/ HKDF -- generate key directly          |
-     +--------------------------------------------------------------+
-     | ECDH-ES using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-ES using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key |
-     +--------------------------------------------------------------+
-     | ECDH-ES using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-ES using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-ES using X448 w/ HKDF and AES Key Wrap w/ 256-bit key   |
-     +--------------------------------------------------------------+
-     | ECDH-SS using P-256 w/ HKDF and AES Key Wrap w/ 128-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-SS using X25519 w/ HKDF and AES Key Wrap w/ 128-bit key |
-     +--------------------------------------------------------------+
-     | ECDH-SS using P-384 w/ HKDF and AES Key Wrap w/ 192-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-SS using P-521 w/ HKDF and AES Key Wrap w/ 256-bit key  |
-     +--------------------------------------------------------------+
-     | ECDH-SS using X448 w/ HKDF and AES Key Wrap w/ 256-bit key   |
-     +--------------------------------------------------------------+
-
-              Table 6: Fully-Specified ECDH COSE Algorithms
-
-Appendix B.  Document History
+Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -07
+
+   *  Addressed Deb Cooley's Area Director feedback.  Specifically:
+
+      -  Significantly simplified the encryption description.
+
+      -  Removed the appendix on polymorphic ECDH algorithms.
+
+   *  Stated that HSS-LMS is not fully specified, as suggested by John
+      Preuß Mattsson.
 
    -06
 
@@ -1230,10 +824,11 @@ Appendix B.  Document History
 Acknowledgements
 
    The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
-   Campbell, Stephen Farrell, Ilari Liusvaara, Tobias Looker, Neil
-   Madden, John Mattsson, Jeremy O'Donoghue, Anders Rundgren, Göran
-   Selander, Filip Skokan, Oliver Terbu, Hannes Tschofenig, and David
-   Waite for their contributions to this specification.
+   Campbell, Deb Cooley, Stephen Farrell, Ilari Liusvaara, Tobias
+   Looker, Neil Madden, John Preuß Mattsson, Jeremy O'Donoghue, Anders
+   Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
+   Tschofenig, and David Waite for their contributions to this
+   specification.
 
 Authors' Addresses
 
