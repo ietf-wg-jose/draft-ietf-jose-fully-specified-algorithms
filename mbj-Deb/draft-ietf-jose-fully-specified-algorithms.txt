@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 23 August 2025                                 19 February 2025
+Expires: 24 August 2025                                 20 February 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 August 2025.
+   This Internet-Draft will expire on 24 August 2025.
 
 Copyright Notice
 
@@ -755,9 +755,12 @@ Appendix A.  Document History
 
    *  Addressed Deb Cooley's Area Director feedback.  Specifically:
 
-   *  Significantly simplified the encryption description.
+      -  Significantly simplified the encryption description.
 
-   *  Removed the appendix on polymorphic ECDH algorithms.
+      -  Removed the appendix on polymorphic ECDH algorithms.
+
+   *  Stated that HSS-LMS is not fully specified, as suggested by John
+      Preuß Mattsson.
 
    -06
 
@@ -822,7 +825,7 @@ Acknowledgements
 
    The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
    Campbell, Deb Cooley, Stephen Farrell, Ilari Liusvaara, Tobias
-   Looker, Neil Madden, John Mattsson, Jeremy O'Donoghue, Anders
+   Looker, Neil Madden, John Preuß Mattsson, Jeremy O'Donoghue, Anders
    Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
    Tschofenig, and David Waite for their contributions to this
    specification.
