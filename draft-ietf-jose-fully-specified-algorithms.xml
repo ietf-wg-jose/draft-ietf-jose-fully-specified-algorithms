@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="19" month="February" year="2025" />
+    <date day="20" month="February" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -1241,12 +1241,18 @@ unless there exists some other mechanism for ensuring the key is used as intende
         <list style="symbols">
 	  <t>
 	    Addressed Deb Cooley's Area Director feedback.  Specifically:
+	    <list style="symbols">
+	      <t>
+		Significantly simplified the encryption description.
+	      </t>
+	      <t>
+		Removed the appendix on polymorphic ECDH algorithms.
+	      </t>
+	    </list>
 	  </t>
 	  <t>
-	    Significantly simplified the encryption description.
-	  </t>
-	  <t>
-	    Removed the appendix on polymorphic ECDH algorithms.
+	     Stated that HSS-LMS is not fully specified,
+	     as suggested by John Preuß Mattsson.
 	  </t>
 	</list>
       </t>
@@ -1365,7 +1371,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Ilari Liusvaara,
 	Tobias Looker,
 	Neil Madden,
-	John Mattsson,
+	John Preuß Mattsson,
 	Jeremy O'Donoghue,
 	Anders Rundgren,
 	Göran Selander,
