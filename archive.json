@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:37:18.209993+00:00",
+  "timestamp": "2025-02-23T00:42:23.337216+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1487,6 +1487,76 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOKNEhZc6L1a7_",
+      "title": "Applied feedback from Deb Cooley's AD review",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/27",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Despite the substantial simplification of the encryption section, I tried to have the statements that remain be statements that we already made in the much longer previous section, so as not to be introducing new text from whole cloth not previously reviewed by the working group.\r\n\r\nThe one (short) new piece of text that I added was where I said that HSS-LMS is polymorphic, which John Mattsson had asked us to include.",
+      "createdAt": "2025-02-20T03:13:06Z",
+      "updatedAt": "2025-02-20T20:17:10Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "a2b11bfd24ec78a4a49ac4f64d0b2a289bd1f33c",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-Deb",
+      "headRefOid": "3d09e5a7092e1ebbbf768f94c01b68775515cb66",
+      "closedAt": "2025-02-20T20:17:10Z",
+      "mergedAt": "2025-02-20T20:17:10Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "b7a3503c0402cc91f8ba1d3f895b4997b08ae0a7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6cwQk-",
+          "commit": {
+            "abbreviatedOid": "d44e6c0"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-20T13:43:28Z",
+          "updatedAt": "2025-02-20T13:43:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOKNEhZc6L1dnc",
+      "title": "Use actions/upload-artifact@v4",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/28",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix workflow tooling error",
+      "createdAt": "2025-02-20T03:24:45Z",
+      "updatedAt": "2025-02-20T03:25:26Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "0a041c8698e2d2d471fa0134c318e90e29fcaf51",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-upload-artifact-v4",
+      "headRefOid": "75b016b8e6c7f405dbc06590212547aeb8880c28",
+      "closedAt": "2025-02-20T03:25:26Z",
+      "mergedAt": "2025-02-20T03:25:26Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "a2b11bfd24ec78a4a49ac4f64d0b2a289bd1f33c"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
