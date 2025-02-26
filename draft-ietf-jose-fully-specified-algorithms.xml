@@ -909,7 +909,7 @@
 	      to that referenced by the identifier;
 	      this replacement functionality SHOULD be utilized in new deployments
 	      in preference to the deprecated identifier, unless there exist documented operational
-	      or regulatory requirments that prevent migration away from the deprecated identifier.
+	      or regulatory requirements that prevent migration away from the deprecated identifier.
 	    </t>
 
 	    <t hangText="Prohibited">
