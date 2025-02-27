@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:40:03.930630+00:00",
+  "timestamp": "2025-02-27T00:39:46.841034+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1557,6 +1557,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOKNEhZc6Mnyi7",
+      "title": "fix typo in 4.4",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/29",
+      "state": "MERGED",
+      "author": "panva",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "requirments -> requirements",
+      "createdAt": "2025-02-26T11:13:25Z",
+      "updatedAt": "2025-02-26T11:36:00Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "b7a3503c0402cc91f8ba1d3f895b4997b08ae0a7",
+      "headRepository": "panva/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "patch-1",
+      "headRefOid": "6c4bf3785bd65ffe9a69cad9385825ea4a52761c",
+      "closedAt": "2025-02-26T11:34:53Z",
+      "mergedAt": "2025-02-26T11:34:53Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "f3033eec893899e20a1798ae6b7738c46b64910a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6dmp2b",
+          "commit": {
+            "abbreviatedOid": "6c4bf37"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-26T11:34:23Z",
+          "updatedAt": "2025-02-26T11:34:23Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
