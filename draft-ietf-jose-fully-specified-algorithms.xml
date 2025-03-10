@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="20" month="February" year="2025" />
+    <date day="10" month="March" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -195,22 +195,22 @@
 	  <c>Yes</c>
 
 	  <c>ESB256</c>
-	  <c>TBD (requested assignment -261)</c>
+	  <c>TBD (requested assignment -265)</c>
 	  <c>ECDSA using BrainpoolP256r1 curve and SHA-256</c>
 	  <c>No</c>
 
 	  <c>ESB320</c>
-	  <c>TBD (requested assignment -262)</c>
+	  <c>TBD (requested assignment -266)</c>
 	  <c>ECDSA using BrainpoolP320r1 curve and SHA-384</c>
 	  <c>No</c>
 
 	  <c>ESB384</c>
-	  <c>TBD (requested assignment -263)</c>
+	  <c>TBD (requested assignment -267)</c>
 	  <c>ECDSA using BrainpoolP384r1 curve and SHA-384</c>
 	  <c>No</c>
 
 	  <c>ESB512</c>
-	  <c>TBD (requested assignment -264)</c>
+	  <c>TBD (requested assignment -268)</c>
 	  <c>ECDSA using BrainpoolP512r1 curve and SHA-512</c>
 	  <c>No</c>
 
@@ -1237,6 +1237,15 @@ unless there exists some other mechanism for ensuring the key is used as intende
       </t>
 
       <t>
+        -08
+        <list style="symbols">
+	  <t>
+	    Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.
+	  </t>
+	</list>
+      </t>
+
+      <t>
         -07
         <list style="symbols">
 	  <t>
@@ -1378,6 +1387,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Filip Skokan,
 	Oliver Terbu,
 	Hannes Tschofenig,
+	Sean Turner,
 	and
 	David Waite
 	for their contributions to this specification.
