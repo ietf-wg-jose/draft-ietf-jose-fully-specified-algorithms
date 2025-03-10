@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 24 August 2025                                 20 February 2025
+Expires: 11 September 2025                                 10 March 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 August 2025.
+   This Internet-Draft will expire on 11 September 2025.
 
 Copyright Notice
 
@@ -186,19 +186,19 @@ Table of Contents
       |        | assignment -49)  | curve and SHA-512 |             |
       +--------+------------------+-------------------+-------------+
       | ESB256 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -261) | BrainpoolP256r1   |             |
+      |        | assignment -265) | BrainpoolP256r1   |             |
       |        |                  | curve and SHA-256 |             |
       +--------+------------------+-------------------+-------------+
       | ESB320 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -262) | BrainpoolP320r1   |             |
+      |        | assignment -266) | BrainpoolP320r1   |             |
       |        |                  | curve and SHA-384 |             |
       +--------+------------------+-------------------+-------------+
       | ESB384 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -263) | BrainpoolP384r1   |             |
+      |        | assignment -267) | BrainpoolP384r1   |             |
       |        |                  | curve and SHA-384 |             |
       +--------+------------------+-------------------+-------------+
       | ESB512 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -264) | BrainpoolP512r1   |             |
+      |        | assignment -268) | BrainpoolP512r1   |             |
       |        |                  | curve and SHA-512 |             |
       +--------+------------------+-------------------+-------------+
 
@@ -751,6 +751,11 @@ Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -08
+
+   *  Updated requested Brainpool algorithm numbers to match those
+      chosen by Sean Turner.
+
    -07
 
    *  Addressed Deb Cooley's Area Director feedback.  Specifically:
@@ -827,8 +832,8 @@ Acknowledgements
    Campbell, Deb Cooley, Stephen Farrell, Ilari Liusvaara, Tobias
    Looker, Neil Madden, John Preuß Mattsson, Jeremy O'Donoghue, Anders
    Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
-   Tschofenig, and David Waite for their contributions to this
-   specification.
+   Tschofenig, Sean Turner, and David Waite for their contributions to
+   this specification.
 
 Authors' Addresses
 
