@@ -36,7 +36,7 @@
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
+    Jinja2 3.1.6
     lxml 5.3.0
     platformdirs 4.3.6
     pycountry 24.6.1
@@ -1325,7 +1325,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
  negotiate using COSE <code>alg</code> numbers.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">
  This does not work for polymorphic algorithms.
- For instance, with <code>EdDSA</code>, you do not know which of the curves
+ For instance, with <code>EdDSA</code>, it is not known which of the curves
  <code>Ed25519</code> and/or <code>Ed448</code> are supported!
  This causes real problems in practice.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">
@@ -1351,7 +1351,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
  This specification creates fully-specified algorithm identifiers for registered
  polymorphic JOSE and COSE algorithms and their parameters,
  enabling applications to use only fully-specified algorithm identifiers.
- It furthermore deprecates the practice of registering polymorphic algorithm identifiers.<a href="#section-1-11" class="pilcrow">¶</a></p>
+ Furthermore, it deprecates the practice of registering polymorphic algorithm identifiers.<a href="#section-1-11" class="pilcrow">¶</a></p>
 <div id="rnc">
 <section id="section-1.1">
         <h3 id="name-requirements-notation-and-c">
@@ -2509,6 +2509,10 @@ unless there exists some other mechanism for ensuring the key is used as intende
           <p id="appendix-A-3.1.1">
      Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
 </li>
+        <li class="normal" id="appendix-A-3.2">
+          <p id="appendix-A-3.2.1">
+     Incorporated wording suggestions by Vijay Gurbani.<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
+</li>
       </ul>
 <p id="appendix-A-4">
         -07<a href="#appendix-A-4" class="pilcrow">¶</a></p>
@@ -2653,6 +2657,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
  Brian Campbell,
  Deb Cooley,
  Stephen Farrell,
+ Vijay Gurbani,
  Ilari Liusvaara,
  Tobias Looker,
  Neil Madden,
@@ -2664,8 +2669,9 @@ unless there exists some other mechanism for ensuring the key is used as intende
  Oliver Terbu,
  Hannes Tschofenig,
  Sean Turner,
+ David Waite,
  and
- David Waite
+ Jiankang Yao
  for their contributions to this specification.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 </section>
 </div>

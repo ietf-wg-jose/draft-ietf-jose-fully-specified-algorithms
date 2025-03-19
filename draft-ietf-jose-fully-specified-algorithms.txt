@@ -122,7 +122,7 @@ Table of Contents
    (CTAP) [FIDO2] negotiate using COSE alg numbers.
 
    This does not work for polymorphic algorithms.  For instance, with
-   EdDSA, you do not know which of the curves Ed25519 and/or Ed448 are
+   EdDSA, it is not known which of the curves Ed25519 and/or Ed448 are
    supported!  This causes real problems in practice.
 
    WebAuthn contains this de-facto algorithm definition to work around
@@ -144,7 +144,7 @@ Table of Contents
    This specification creates fully-specified algorithm identifiers for
    registered polymorphic JOSE and COSE algorithms and their parameters,
    enabling applications to use only fully-specified algorithm
-   identifiers.  It furthermore deprecates the practice of registering
+   identifiers.  Furthermore, it deprecates the practice of registering
    polymorphic algorithm identifiers.
 
 1.1.  Requirements Notation and Conventions
@@ -756,6 +756,8 @@ Appendix A.  Document History
    *  Updated requested Brainpool algorithm numbers to match those
       chosen by Sean Turner.
 
+   *  Incorporated wording suggestions by Vijay Gurbani.
+
    -07
 
    *  Addressed Deb Cooley's Area Director feedback.  Specifically:
@@ -829,11 +831,11 @@ Appendix A.  Document History
 Acknowledgements
 
    The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
-   Campbell, Deb Cooley, Stephen Farrell, Ilari Liusvaara, Tobias
-   Looker, Neil Madden, John Preuß Mattsson, Jeremy O'Donoghue, Anders
-   Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
-   Tschofenig, Sean Turner, and David Waite for their contributions to
-   this specification.
+   Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani, Ilari
+   Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson, Jeremy
+   O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan, Oliver
+   Terbu, Hannes Tschofenig, Sean Turner, David Waite, and Jiankang Yao
+   for their contributions to this specification.
 
 Authors' Addresses
 
