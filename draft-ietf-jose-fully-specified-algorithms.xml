@@ -112,7 +112,7 @@
       </t>
       <t>
 	This does not work for polymorphic algorithms.
-	For instance, with <spanx style="verb">EdDSA</spanx>, you do not know which of the curves
+	For instance, with <spanx style="verb">EdDSA</spanx>, it is not known which of the curves
 	<spanx style="verb">Ed25519</spanx> and/or <spanx style="verb">Ed448</spanx> are supported!
 	This causes real problems in practice.
       </t>
@@ -140,7 +140,7 @@
 	This specification creates fully-specified algorithm identifiers for registered
 	polymorphic JOSE and COSE algorithms and their parameters,
 	enabling applications to use only fully-specified algorithm identifiers.
-	It furthermore deprecates the practice of registering polymorphic algorithm identifiers.
+	Furthermore, it deprecates the practice of registering polymorphic algorithm identifiers.
       </t>
 
       <section anchor="rnc" title="Requirements Notation and Conventions">
@@ -1242,6 +1242,9 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	  <t>
 	    Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.
 	  </t>
+	  <t>
+	    Incorporated wording suggestions by Vijay Gurbani.
+	  </t>
 	</list>
       </t>
 
@@ -1377,6 +1380,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Brian Campbell,
 	Deb Cooley,
 	Stephen Farrell,
+	Vijay Gurbani,
 	Ilari Liusvaara,
 	Tobias Looker,
 	Neil Madden,
@@ -1388,8 +1392,9 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Oliver Terbu,
 	Hannes Tschofenig,
 	Sean Turner,
+	David Waite,
 	and
-	David Waite
+	Jiankang Yao
 	for their contributions to this specification.
       </t>
     </section>
