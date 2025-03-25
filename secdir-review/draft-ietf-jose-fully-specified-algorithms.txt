@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 24 August 2025                                 20 February 2025
+Expires: 20 September 2025                                 19 March 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 August 2025.
+   This Internet-Draft will expire on 20 September 2025.
 
 Copyright Notice
 
@@ -122,7 +122,7 @@ Table of Contents
    (CTAP) [FIDO2] negotiate using COSE alg numbers.
 
    This does not work for polymorphic algorithms.  For instance, with
-   EdDSA, you do not know which of the curves Ed25519 and/or Ed448 are
+   EdDSA, it is not known which of the curves Ed25519 and/or Ed448 are
    supported!  This causes real problems in practice.
 
    WebAuthn contains this de-facto algorithm definition to work around
@@ -144,7 +144,7 @@ Table of Contents
    This specification creates fully-specified algorithm identifiers for
    registered polymorphic JOSE and COSE algorithms and their parameters,
    enabling applications to use only fully-specified algorithm
-   identifiers.  It furthermore deprecates the practice of registering
+   identifiers.  Furthermore, it deprecates the practice of registering
    polymorphic algorithm identifiers.
 
 1.1.  Requirements Notation and Conventions
@@ -186,19 +186,19 @@ Table of Contents
       |        | assignment -49)  | curve and SHA-512 |             |
       +--------+------------------+-------------------+-------------+
       | ESB256 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -261) | BrainpoolP256r1   |             |
+      |        | assignment -265) | BrainpoolP256r1   |             |
       |        |                  | curve and SHA-256 |             |
       +--------+------------------+-------------------+-------------+
       | ESB320 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -262) | BrainpoolP320r1   |             |
+      |        | assignment -266) | BrainpoolP320r1   |             |
       |        |                  | curve and SHA-384 |             |
       +--------+------------------+-------------------+-------------+
       | ESB384 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -263) | BrainpoolP384r1   |             |
+      |        | assignment -267) | BrainpoolP384r1   |             |
       |        |                  | curve and SHA-384 |             |
       +--------+------------------+-------------------+-------------+
       | ESB512 | TBD (requested   | ECDSA using       | No          |
-      |        | assignment -264) | BrainpoolP512r1   |             |
+      |        | assignment -268) | BrainpoolP512r1   |             |
       |        |                  | curve and SHA-512 |             |
       +--------+------------------+-------------------+-------------+
 
@@ -242,8 +242,8 @@ Table of Contents
    Using fully-specified encryption algorithms enables the sender and
    receiver to agree on all mandatory security parameters.  They also
    enable protocols to specify an allow list of algorithm combinations
-   that does not include polymorphic combinations, prventing problems
-   such as cross-curve key establishment, cross-mode symmetric
+   that does not include polymorphic combinations, preventing problems
+   such as cross-curve key establishment, cross-protocol symmetric
    encryption, or mismatched KDF size to symmetric key scenarios.
 
    Both JOSE and COSE have operations that take multiple algorithms as
@@ -536,7 +536,7 @@ Table of Contents
       that referenced by the identifier; this replacement functionality
       SHOULD be utilized in new deployments in preference to the
       deprecated identifier, unless there exist documented operational
-      or regulatory requirments that prevent migration away from the
+      or regulatory requirements that prevent migration away from the
       deprecated identifier.
 
    Prohibited
@@ -621,8 +621,14 @@ Table of Contents
    The security considerations for ECDSA in [RFC7518], for EdDSA in
    [RFC8037], and for ECDSA and EdDSA in [RFC9053] apply.
 
-   The security considerations for preventing cross-mode attacks
+   The security considerations for preventing cross-protocol attacks
    described in [RFC9459] apply.
+
+   The list of supported algorithms could be used to produce a
+   fingerprint.  Varying the supported algorithms could impact attempts
+   to use fingerprinting.  For example, in COSE, an endpoint could
+   alternate between advertising ES256 and ESP256, while producing
+   signatures from the same key.
 
    A cryptographic key SHOULD be used with only a single algorithm,
    unless the use of the same key with different algorithms is proven
@@ -631,8 +637,8 @@ Table of Contents
    Keys and COSE Keys be present, unless there exists some other
    mechanism for ensuring the key is used as intended.
 
-   In COSE, preventing cross-mode attacks, such as those described in
-   [RFC9459], can be accomplished in two ways:
+   In COSE, preventing cross-protocol attacks, such as those described
+   in [RFC9459], can be accomplished in two ways:
 
    1.  Allow only authenticated content encryption algorithms.
 
@@ -751,6 +757,13 @@ Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -08
+
+   *  Updated requested Brainpool algorithm numbers to match those
+      chosen by Sean Turner.
+
+   *  Incorporated wording suggestions by Vijay Gurbani.
+
    -07
 
    *  Addressed Deb Cooley's Area Director feedback.  Specifically:
@@ -824,11 +837,11 @@ Appendix A.  Document History
 Acknowledgements
 
    The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
-   Campbell, Deb Cooley, Stephen Farrell, Ilari Liusvaara, Tobias
-   Looker, Neil Madden, John Preuß Mattsson, Jeremy O'Donoghue, Anders
-   Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
-   Tschofenig, and David Waite for their contributions to this
-   specification.
+   Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani, Ilari
+   Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson, Jeremy
+   O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan, Oliver
+   Terbu, Hannes Tschofenig, Sean Turner, David Waite, and Jiankang Yao
+   for their contributions to this specification.
 
 Authors' Addresses
 
