@@ -840,8 +840,9 @@ Acknowledgements
    Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani, Ilari
    Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson, Jeremy
    O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan, Oliver
-   Terbu, Hannes Tschofenig, Sean Turner, David Waite, and Jiankang Yao
-   for their contributions to this specification.
+   Terbu, Hannes Tschofenig, Sean Turner, David Waite, Kathleen
+   Moriarty, and Jiankang Yao for their contributions to this
+   specification.
 
 Authors' Addresses
 
