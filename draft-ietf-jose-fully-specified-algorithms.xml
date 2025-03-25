@@ -1030,7 +1030,7 @@
       </t>
 
 			<t>
-  The list of supported algorithms could be used to produce a fingerprint. 
+  The list of supported algorithms could be used to produce a fingerprint.
 	Varying the supported algorithms could impact attempts to use fingerprinting.
 	For example, in COSE, an endpoint could alternate between advertising ES256 and ESP256, while producing signatures from the same key.
       </t>
