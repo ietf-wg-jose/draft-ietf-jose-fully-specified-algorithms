@@ -261,9 +261,9 @@
 	to agree on all mandatory security parameters.
 	They also enable protocols to specify an allow list of
 	algorithm combinations that does not include polymorphic combinations,
-	prventing problems
+	preventing problems
 	such as cross-curve key establishment,
-	cross-mode symmetric encryption,
+	cross-protocol symmetric encryption,
 	or mismatched KDF size to symmetric key scenarios.
       </t>
       <t>
@@ -1025,8 +1025,14 @@
 	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
       </t>
       <t>
-	The security considerations for preventing cross-mode attacks
+	The security considerations for preventing cross-protocol attacks
 	described in <xref target="RFC9459"/> apply.
+      </t>
+
+			<t>
+  The list of supported algorithms could be used to produce a fingerprint. 
+	Varying the supported algorithms could impact attempts to use fingerprinting.
+	For example, in COSE, an endpoint could alternate between advertising ES256 and ESP256, while producing signatures from the same key.
       </t>
 
       <t>
@@ -1038,7 +1044,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       </t>
 
       <t>
-	In COSE, preventing cross-mode attacks,
+	In COSE, preventing cross-protocol attacks,
 	such as those described in <xref target="RFC9459"/>,
 	can be accomplished in two ways:
 	<list style="numbers">
