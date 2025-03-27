@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T00:42:08.062659+00:00",
+  "timestamp": "2025-03-27T00:41:32.671984+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1599,6 +1599,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOKNEhZc6QFjAk",
+      "title": "Attempt to address secdir review",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/30",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/jose/aik5pnFfPLwP7CnFdxWOm3pFUYY/",
+      "createdAt": "2025-03-25T17:51:35Z",
+      "updatedAt": "2025-03-25T17:53:27Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "fccd059b98bfe727265e2a94a2123abc0d066d69",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "secdir-review",
+      "headRefOid": "1f352968c78be4abb4931f241605c52d66e32550",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
