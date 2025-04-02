@@ -1245,6 +1245,15 @@ unless there exists some other mechanism for ensuring the key is used as intende
         [[ to be removed by the RFC Editor before publication as an RFC ]]
       </t>
 
+			<t>
+        -09
+        <list style="symbols">
+					<t>
+						Addressed comments from secdir review.
+					</t>
+				</list>
+      </t>
+
       <t>
         -08
         <list style="symbols">
