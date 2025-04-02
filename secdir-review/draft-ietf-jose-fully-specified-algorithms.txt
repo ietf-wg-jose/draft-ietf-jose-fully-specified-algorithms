@@ -624,21 +624,18 @@ Table of Contents
    The security considerations for preventing cross-protocol attacks
    described in [RFC9459] apply.
 
-   The list of supported algorithms could be used to produce a
-   fingerprint.  Varying the supported algorithms could impact attempts
-   to use fingerprinting.  For example, in COSE, an endpoint could
-   alternate between advertising ES256 and ESP256, while producing
-   signatures from the same key.
-
-   Note that there may be attacks possible with polymorphic algorithms
-   when the attacker is the party producing a signature.  In this case,
-   the attacker using a polymorphic signature algorithm could vary the
-   actual algorithm used by changing some of the algorithm parameters
-   that are not fully-specified by the polymorphic algorithm identifier.
-   While the signature with different parameters would still be valid,
-   the recipient might not support the necessary algorithm parameters to
-   validate it.  These kinds of attacks are not possible with fully-
-   specified algorithms.
+   An "attack signature" is a unique pattern or characteristic used to
+   identify malicious activity, enabling systems to detect and respond
+   to known threats.  The digital signature and key establishment
+   algorithms used by software can contribute to an attack signature.
+   By varying the identifier used for an algorithm, some sofware systems
+   may attempt to evade rule-based detection and classification.  Rule-
+   based detection and classification systems may need to update their
+   rules to account for fully-specified algorithms.  These systems
+   should be aware that writing rules for polymorphic algorithms is more
+   difficult, as each variant of the algorithm must be accounted for.
+   For example, ES384 in COSE might be used with 3 different keys, each
+   with a different curve.
 
    A cryptographic key SHOULD be used with only a single algorithm,
    unless the use of the same key with different algorithms is proven

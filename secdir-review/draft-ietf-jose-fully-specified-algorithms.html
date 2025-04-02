@@ -2371,42 +2371,36 @@ svg :is([fill="white"], [fill^="#fff"]) {
  The security considerations for preventing cross-protocol attacks
  described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span> apply.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">
-  The list of supported algorithms could be used to produce a fingerprint.
- Varying the supported algorithms could impact attempts to use fingerprinting.
- For example, in COSE, an endpoint could alternate between advertising ES256 and ESP256, while producing signatures from the same key.<a href="#section-7-3" class="pilcrow">¶</a></p>
+ An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats.
+ The digital signature and key establishment algorithms used by software can contribute to an attack signature.
+ By varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.
+ Rule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.
+ These systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.
+ For example, ES384 in COSE might be used with 3 different keys, each with a different curve.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">
-Note that there may be attacks possible with polymorphic algorithms
-when the attacker is the party producing a signature.
-In this case, the attacker using a polymorphic signature algorithm could vary
-the actual algorithm used by changing some of the algorithm parameters
-that are not fully-specified by the polymorphic algorithm identifier.
-While the signature with different parameters would still be valid,
-the recipient might not support the necessary algorithm parameters to validate it.
-These kinds of attacks are not possible with fully-specified algorithms.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<p id="section-7-5">
 A cryptographic key SHOULD be used with only a single algorithm,
 unless the use of the same key with different algorithms is proven secure.
 See <span>[<a href="#Reuse25519" class="cite xref">Reuse25519</a>]</span> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
-unless there exists some other mechanism for ensuring the key is used as intended.<a href="#section-7-5" class="pilcrow">¶</a></p>
-<p id="section-7-6">
+unless there exists some other mechanism for ensuring the key is used as intended.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">
  In COSE, preventing cross-protocol attacks,
  such as those described in <span>[<a href="#RFC9459" class="cite xref">RFC9459</a>]</span>,
- can be accomplished in two ways:<a href="#section-7-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-7-7">
-<li id="section-7-7.1">
-          <p id="section-7-7.1.1">
-     Allow only authenticated content encryption algorithms.<a href="#section-7-7.1.1" class="pilcrow">¶</a></p>
+ can be accomplished in two ways:<a href="#section-7-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-7-6">
+<li id="section-7-6.1">
+          <p id="section-7-6.1.1">
+     Allow only authenticated content encryption algorithms.<a href="#section-7-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-7-7.2">
-          <p id="section-7-7.2.1">
+        <li id="section-7-6.2">
+          <p id="section-7-6.2.1">
      Bind the the potentially unauthenticated content encryption algorithm
      to be used into the key protection algorithm so that different
-     content encryption algorithms result in different content encryption keys.<a href="#section-7-7.2.1" class="pilcrow">¶</a></p>
+     content encryption algorithms result in different content encryption keys.<a href="#section-7-6.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-7-8">
- Which choice to use in which circumstances is beyond the scope of this specification.<a href="#section-7-8" class="pilcrow">¶</a></p>
+<p id="section-7-7">
+ Which choice to use in which circumstances is beyond the scope of this specification.<a href="#section-7-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-8">
