@@ -630,6 +630,16 @@ Table of Contents
    alternate between advertising ES256 and ESP256, while producing
    signatures from the same key.
 
+   Note that there may be attacks possible with polymorphic algorithms
+   when the attacker is the party producing a signature.  In this case,
+   the attacker using a polymorphic signature algorithm could vary the
+   actual algorithm used by changing some of the algorithm parameters
+   that are not fully-specified by the polymorphic algorithm identifier.
+   While the signature with different parameters would still be valid,
+   the recipient might not support the necessary algorithm parameters to
+   validate it.  These kinds of attacks are not possible with fully-
+   specified algorithms.
+
    A cryptographic key SHOULD be used with only a single algorithm,
    unless the use of the same key with different algorithms is proven
    secure.  See [Reuse25519] for an example of such a proof.  As a
