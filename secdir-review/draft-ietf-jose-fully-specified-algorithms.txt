@@ -764,6 +764,10 @@ Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -09
+
+   *  Addressed comments from secdir review.
+
    -08
 
    *  Updated requested Brainpool algorithm numbers to match those
