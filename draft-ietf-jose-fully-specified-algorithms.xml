@@ -1034,6 +1034,16 @@
 	Varying the supported algorithms could impact attempts to use fingerprinting.
 	For example, in COSE, an endpoint could alternate between advertising ES256 and ESP256, while producing signatures from the same key.
       </t>
+      <t>
+Note that there may be attacks possible with polymorphic algorithms
+when the attacker is the party producing a signature.
+In this case, the attacker using a polymorphic signature algorithm could vary
+the actual algorithm used by changing some of the algorithm parameters
+that are not fully-specified by the polymorphic algorithm identifier.
+While the signature with different parameters would still be valid,
+the recipient might not support the necessary algorithm parameters to validate it.
+These kinds of attacks are not possible with fully-specified algorithms.
+      </t>
 
       <t>
 A cryptographic key SHOULD be used with only a single algorithm,
