@@ -1030,7 +1030,7 @@
       </t>
 
   <t>
-	An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats. 
+	An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats.
 	The digital signature and key establishment algorithms used by software can contribute to an attack signature.
 	By varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.
 	Rule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.
