@@ -261,9 +261,9 @@
 	to agree on all mandatory security parameters.
 	They also enable protocols to specify an allow list of
 	algorithm combinations that does not include polymorphic combinations,
-	prventing problems
+	preventing problems
 	such as cross-curve key establishment,
-	cross-mode symmetric encryption,
+	cross-protocol symmetric encryption,
 	or mismatched KDF size to symmetric key scenarios.
       </t>
       <t>
@@ -1025,8 +1025,17 @@
 	for ECDSA and EdDSA in <xref target="RFC9053"/> apply.
       </t>
       <t>
-	The security considerations for preventing cross-mode attacks
+	The security considerations for preventing cross-protocol attacks
 	described in <xref target="RFC9459"/> apply.
+      </t>
+
+  <t>
+	An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats.
+	The digital signature and key establishment algorithms used by software can contribute to an attack signature.
+	By varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.
+	Rule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.
+	These systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.
+	For example, ES384 in COSE might be used with 3 different keys, each with a different curve.
       </t>
 
       <t>
@@ -1038,7 +1047,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       </t>
 
       <t>
-	In COSE, preventing cross-mode attacks,
+	In COSE, preventing cross-protocol attacks,
 	such as those described in <xref target="RFC9459"/>,
 	can be accomplished in two ways:
 	<list style="numbers">
@@ -1236,6 +1245,15 @@ unless there exists some other mechanism for ensuring the key is used as intende
         [[ to be removed by the RFC Editor before publication as an RFC ]]
       </t>
 
+			<t>
+        -09
+        <list style="symbols">
+					<t>
+						Addressed comments from secdir review.
+					</t>
+				</list>
+      </t>
+
       <t>
         -08
         <list style="symbols">
@@ -1393,6 +1411,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	Hannes Tschofenig,
 	Sean Turner,
 	David Waite,
+	Kathleen Moriarty,
 	and
 	Jiankang Yao
 	for their contributions to this specification.
