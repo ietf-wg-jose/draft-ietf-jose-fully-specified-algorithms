@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:49:07.778326+00:00",
+  "timestamp": "2025-04-03T00:41:42.892027+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1605,26 +1605,162 @@
       "id": "PR_kwDOKNEhZc6QFjAk",
       "title": "Attempt to address secdir review",
       "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/30",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "OR13",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/jose/aik5pnFfPLwP7CnFdxWOm3pFUYY/",
       "createdAt": "2025-03-25T17:51:35Z",
-      "updatedAt": "2025-03-25T17:53:27Z",
+      "updatedAt": "2025-04-02T17:43:33Z",
       "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "baseRefName": "main",
       "baseRefOid": "fccd059b98bfe727265e2a94a2123abc0d066d69",
       "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "headRefName": "secdir-review",
-      "headRefOid": "1f352968c78be4abb4931f241605c52d66e32550",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "cbf37f449da6a1f6fcd58a73ecddbd79f1e821ad",
+      "closedAt": "2025-04-02T17:43:33Z",
+      "mergedAt": "2025-04-02T17:43:33Z",
+      "mergedBy": "OR13",
+      "mergeCommit": {
+        "oid": "ddb3772d556387c1fc64507d33ff6dd4567858c3"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6i-j17",
+          "commit": {
+            "abbreviatedOid": "1f35296"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T00:47:13Z",
+          "updatedAt": "2025-04-02T00:47:13Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n      <t>\r\nNote that there may be attacks possible with polymorphic algorithms\r\nwhen the attacker is the party producing a signature.\r\nIn this case, the attacker using a polymorphic signature algorithm could vary\r\nthe actual algorithm used by changing some of the algorithm parameters\r\nthat are not fully-specified by the polymorphic algorithm identifier.\r\nWhile the signature with different parameters would still be valid,\r\nthe recipient might not support the necessary algorithm parameters to validate it.\r\nThese kinds of attacks are not possible with fully-specified algorithms.\r\n      </t>\r\n```\r\n\r\nAttempt to address Kathleen's second comment.",
+              "createdAt": "2025-04-02T00:47:13Z",
+              "updatedAt": "2025-04-02T00:47:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jIj-D",
+          "commit": {
+            "abbreviatedOid": "1f35296"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T16:36:31Z",
+          "updatedAt": "2025-04-02T16:36:32Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n      </t>\r\n      <t>\r\nNote that there may be attacks possible with polymorphic algorithms\r\nwhen the attacker is the party producing a signature.\r\nIn this case, the attacker using a polymorphic signature algorithm could vary\r\nthe actual algorithm used by changing some of the algorithm parameters\r\nthat are not fully-specified by the polymorphic algorithm identifier.\r\nWhile the signature with different parameters would still be valid,\r\nthe recipient might not support the necessary algorithm parameters to validate it.\r\nThese kinds of attacks are not possible with fully-specified algorithms.\r\n      </t>\r\n```",
+              "createdAt": "2025-04-02T16:36:31Z",
+              "updatedAt": "2025-04-02T16:36:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jIkh0",
+          "commit": {
+            "abbreviatedOid": "1f35296"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T16:37:14Z",
+          "updatedAt": "2025-04-02T16:37:14Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "I moved your suggestion from here: https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/30/files#r2023852204\r\n\r\nSo we can keep both, and unpack them with more clarity",
+              "createdAt": "2025-04-02T16:37:14Z",
+              "updatedAt": "2025-04-02T16:37:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jIkwd",
+          "commit": {
+            "abbreviatedOid": "8bf2d3a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T16:37:38Z",
+          "updatedAt": "2025-04-02T16:37:39Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "This text has been added as its own section.",
+              "createdAt": "2025-04-02T16:37:38Z",
+              "updatedAt": "2025-04-02T16:37:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jIwXE",
+          "commit": {
+            "abbreviatedOid": "8bf2d3a"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T16:56:26Z",
+          "updatedAt": "2025-04-02T16:56:26Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\n  <t>\r\n\tAn \"attack signature\" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats. \r\n\tThe digital signature and key establishment algorithms used by software can contribute to an attack signature.\r\n\tBy varying the identifier used for an algorithm, some sofware systems may attempt to evade rule based detection and classification.\r\n\tRule based detection and classification systems may need to update their rules to account for fully specified algorithms.\r\n\tThese systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.\r\n\tFor example, ES384 in COSE might be used with 3 different keys, each with a different curve.\r\n      </t>\r\n```",
+              "createdAt": "2025-04-02T16:56:26Z",
+              "updatedAt": "2025-04-02T16:56:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jI0aA",
+          "commit": {
+            "abbreviatedOid": "f2498cd"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T17:03:13Z",
+          "updatedAt": "2025-04-02T17:03:13Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n\tBy varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.\r\n\tRule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.\r\n```",
+              "createdAt": "2025-04-02T17:03:13Z",
+              "updatedAt": "2025-04-02T17:03:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6jI0tx",
+          "commit": {
+            "abbreviatedOid": "ce84f34"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-02T17:03:46Z",
+          "updatedAt": "2025-04-02T17:03:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
