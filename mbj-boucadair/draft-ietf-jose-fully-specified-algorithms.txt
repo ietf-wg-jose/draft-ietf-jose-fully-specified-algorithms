@@ -4,9 +4,9 @@
 
 JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
-Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
+Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 20 September 2025                                 19 March 2025
+Expires: 4 November 2025                                      3 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2025.
+   This Internet-Draft will expire on 4 November 2025.
 
 Copyright Notice
 
@@ -242,8 +242,8 @@ Table of Contents
    Using fully-specified encryption algorithms enables the sender and
    receiver to agree on all mandatory security parameters.  They also
    enable protocols to specify an allow list of algorithm combinations
-   that does not include polymorphic combinations, prventing problems
-   such as cross-curve key establishment, cross-mode symmetric
+   that does not include polymorphic combinations, preventing problems
+   such as cross-curve key establishment, cross-protocol symmetric
    encryption, or mismatched KDF size to symmetric key scenarios.
 
    Both JOSE and COSE have operations that take multiple algorithms as
@@ -520,11 +520,9 @@ Table of Contents
    registrations are currently undefined.  Furthermore, while in
    [RFC7518] JOSE specifies that both "Deprecated" and "Prohibited" can
    be used, in [RFC8152] COSE specifies the use of "Deprecated" but not
-   "Prohibited".  (Note that [RFC9053] did not carry the definitions of
-   the "Recommended" registry columns forward, so [RFC8152] remains
-   definitive in this regard.)  This section defines these terms for use
-   by both JOSE and COSE IANA registrations in a consistent manner,
-   eliminating this potentially confusing inconsistency.
+   "Prohibited".  This section defines these terms for use by both JOSE
+   and COSE IANA registrations in a consistent manner, eliminating this
+   potentially confusing inconsistency.
 
    For purposes of use in the "JOSE Implementation Requirements" columns
    in the IANA JOSE registries [IANA.JOSE] and in the "Recommended"
@@ -543,6 +541,13 @@ Table of Contents
       The identifier and the functionality that it references MUST NOT
       be used.  (Identifiers MAY be designated as "Prohibited" due to
       security flaws, for instance.)
+
+   For completeness, these definitions bring the set of defined terms
+   for use in the "Recommended" columns in the IANA COSE registries
+   [IANA.COSE] to "Yes" [RFC8152], "No" [RFC8152], "Filter Only"
+   [RFC9054], "Prohobited", and "Deprecated".  The set of defined terms
+   for use in the "JOSE Implementation Requirements" columns in the IANA
+   JOSE registries [IANA.JOSE] are unchanged.
 
    Note that the terms "Deprecated" and "Prohibited" have been used with
    a multiplicity of different meanings in various specifications,
@@ -621,8 +626,21 @@ Table of Contents
    The security considerations for ECDSA in [RFC7518], for EdDSA in
    [RFC8037], and for ECDSA and EdDSA in [RFC9053] apply.
 
-   The security considerations for preventing cross-mode attacks
+   The security considerations for preventing cross-protocol attacks
    described in [RFC9459] apply.
+
+   An "attack signature" is a unique pattern or characteristic used to
+   identify malicious activity, enabling systems to detect and respond
+   to known threats.  The digital signature and key establishment
+   algorithms used by software can contribute to an attack signature.
+   By varying the identifier used for an algorithm, some sofware systems
+   may attempt to evade rule-based detection and classification.  Rule-
+   based detection and classification systems may need to update their
+   rules to account for fully-specified algorithms.  These systems
+   should be aware that writing rules for polymorphic algorithms is more
+   difficult, as each variant of the algorithm must be accounted for.
+   For example, ES384 in COSE might be used with 3 different keys, each
+   with a different curve.
 
    A cryptographic key SHOULD be used with only a single algorithm,
    unless the use of the same key with different algorithms is proven
@@ -631,8 +649,8 @@ Table of Contents
    Keys and COSE Keys be present, unless there exists some other
    mechanism for ensuring the key is used as intended.
 
-   In COSE, preventing cross-mode attacks, such as those described in
-   [RFC9459], can be accomplished in two ways:
+   In COSE, preventing cross-protocol attacks, such as those described
+   in [RFC9459], can be accomplished in two ways:
 
    1.  Allow only authenticated content encryption algorithms.
 
@@ -736,6 +754,10 @@ Table of Contents
               1.1", BCP 195, RFC 8996, DOI 10.17487/RFC8996, March 2021,
               <https://www.rfc-editor.org/info/rfc8996>.
 
+   [RFC9054]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Hash Algorithms", RFC 9054, DOI 10.17487/RFC9054, August
+              2022, <https://www.rfc-editor.org/info/rfc9054>.
+
    [RFC9459]  Housley, R. and H. Tschofenig, "CBOR Object Signing and
               Encryption (COSE): AES-CTR and AES-CBC", RFC 9459,
               DOI 10.17487/RFC9459, September 2023,
@@ -750,6 +772,15 @@ Table of Contents
 Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -10
+
+   *  Provided a complete list of the Recommended column terms for COSE
+      registrations, as suggested by Mohamed Boucadair.
+
+   -09
+
+   *  Addressed comments from secdir review.
 
    -08
 
@@ -830,12 +861,13 @@ Appendix A.  Document History
 
 Acknowledgements
 
-   The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
-   Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani, Ilari
-   Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson, Jeremy
-   O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan, Oliver
-   Terbu, Hannes Tschofenig, Sean Turner, David Waite, and Jiankang Yao
-   for their contributions to this specification.
+   The authors thank Carsten Bormann, Mohamed Boucadair, John Bradley,
+   Tim Bray, Brian Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani,
+   Ilari Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson,
+   Jeremy O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan,
+   Oliver Terbu, Hannes Tschofenig, Sean Turner, David Waite, Kathleen
+   Moriarty, and Jiankang Yao for their contributions to this
+   specification.
 
 Authors' Addresses
 
