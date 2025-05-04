@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 4 November 2025                                      3 May 2025
+Expires: 5 November 2025                                      4 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -26,6 +26,8 @@ Abstract
    polymorphic algorithm identifiers, enabling applications to use only
    fully-specified algorithm identifiers.
 
+   This specification updates RFC 7518, RFC 8037, and RFC 9053.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -41,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 November 2025.
+   This Internet-Draft will expire on 5 November 2025.
 
 Copyright Notice
 
@@ -870,12 +872,12 @@ Appendix A.  Document History
 Acknowledgements
 
    The authors thank Carsten Bormann, Mohamed Boucadair, John Bradley,
-   Tim Bray, Brian Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani,
-   Ilari Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson,
-   Jeremy O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan,
-   Oliver Terbu, Hannes Tschofenig, Sean Turner, David Waite, Kathleen
-   Moriarty, and Jiankang Yao for their contributions to this
-   specification.
+   Tim Bray, Brian Campbell, Deb Cooley, Roman Danyliw, Stephen Farrell,
+   Vijay Gurbani, Ilari Liusvaara, Tobias Looker, Neil Madden, John
+   Preuß Mattsson, Jeremy O'Donoghue, Anders Rundgren, Göran Selander,
+   Filip Skokan, Oliver Terbu, Hannes Tschofenig, Sean Turner, David
+   Waite, Kathleen Moriarty, and Jiankang Yao for their contributions to
+   this specification.
 
 Authors' Addresses
 
