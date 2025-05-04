@@ -5,7 +5,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std" ipr="trust200902"
   docName="draft-ietf-jose-fully-specified-algorithms-latest"
-  updates="7518, 8037, 8152, 9053">
+  updates="7518, 8037, 9053">
 
   <?rfc toc="yes"?>
   <?rfc tocompact="yes"?>
@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="19" month="March" year="2025" />
+    <date day="3" month="May" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -886,9 +886,6 @@
 	  "Deprecated" and "Prohibited" can be used,
 	  in <xref target="RFC8152"/> COSE specifies
 	  the use of "Deprecated" but not "Prohibited".
-	  (Note that <xref target="RFC9053"/> did not carry the definitions of the
-	  "Recommended" registry columns forward,
-	  so <xref target="RFC8152"/> remains definitive in this regard.)
 	  This section defines these terms for use by both
 	  JOSE and COSE IANA registrations in a consistent manner,
 	  eliminating this potentially confusing inconsistency.
@@ -920,6 +917,21 @@
 	    </t>
 
 	  </list>
+	</t>
+	<t>
+	  For completeness, these definitions bring the set of defined terms
+	  for use in the "Recommended" columns
+	  in the IANA COSE registries <xref target="IANA.COSE"/> to
+	  "Yes" <xref target="RFC8152"/>,
+	  "No" <xref target="RFC8152"/>,
+	  "Filter Only" <xref target="RFC9054"/>,
+	  "Prohobited",
+	  and
+	  "Deprecated".
+	  The set of defined terms
+	  for use in the "JOSE Implementation Requirements" columns
+	  in the IANA JOSE registries <xref target="IANA.JOSE"/>
+	  are unchanged.
 	</t>
 	<t>
 	  Note that the terms "Deprecated" and "Prohibited" have been used
@@ -1087,6 +1099,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8152.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8996.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9054.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9459.xml"/>
 
       <reference anchor="IANA.JOSE" target="https://www.iana.org/assignments/jose/">
@@ -1245,6 +1258,16 @@ unless there exists some other mechanism for ensuring the key is used as intende
         [[ to be removed by the RFC Editor before publication as an RFC ]]
       </t>
 
+      <t>
+	-10
+	<list style="symbols">
+	  <t>
+	    Provided a complete list of the Recommended column terms for
+	    COSE registrations, as suggested by Mohamed Boucadair.
+	  </t>
+	</list>
+      </t>
+
 			<t>
         -09
         <list style="symbols">
@@ -1393,6 +1416,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       <t>
 	The authors thank
 	Carsten Bormann,
+	Mohamed Boucadair,
 	John Bradley,
 	Tim Bray,
 	Brian Campbell,
