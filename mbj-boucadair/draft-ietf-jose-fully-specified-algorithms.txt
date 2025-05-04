@@ -545,7 +545,7 @@ Table of Contents
    For completeness, these definitions bring the set of defined terms
    for use in the "Recommended" columns in the IANA COSE registries
    [IANA.COSE] to "Yes" [RFC8152], "No" [RFC8152], "Filter Only"
-   [RFC9054], "Prohobited", and "Deprecated".  The set of defined terms
+   [RFC9054], "Prohibited", and "Deprecated".  The set of defined terms
    for use in the "JOSE Implementation Requirements" columns in the IANA
    JOSE registries [IANA.JOSE] are unchanged.
 
