@@ -925,7 +925,7 @@
 	  "Yes" <xref target="RFC8152"/>,
 	  "No" <xref target="RFC8152"/>,
 	  "Filter Only" <xref target="RFC9054"/>,
-	  "Prohobited",
+	  "Prohibited",
 	  and
 	  "Deprecated".
 	  The set of defined terms
