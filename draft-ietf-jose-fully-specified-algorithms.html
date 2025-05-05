@@ -11,18 +11,23 @@
        
  This specification refers to cryptographic algorithm identifiers
  that fully specify the cryptographic operations to be performed,
- including any curve, key derivation function (KDF), hash functions, etc.,
+ including any curve, key derivation function (KDF), and hash functions,
  as being "fully specified".
  Whereas, it refers to cryptographic algorithm identifiers
  that require additional information beyond the algorithm identifier
  to determine the cryptographic operations to be performed
  as being "polymorphic".
  This specification creates fully-specified algorithm identifiers for registered
- JOSE and COSE polymorphic algorithm identifiers,
+ JSON Object Signing and Encryption (JOSE) and
+ CBOR Object Signing and Encryption (COSE)
+ polymorphic algorithm identifiers,
  enabling applications to use only fully-specified algorithm identifiers.
        
+       
+ This specification updates RFC 7518, RFC 8037, and RFC 9053.
+       
     ' name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="Cryptographic Algorithm Identifiers" name="keyword">
 <meta content="JSON Object Signing and Encryption (JOSE)" name="keyword">
 <meta content="CBOR Object Signing and Encryption (COSE)" name="keyword">
@@ -31,14 +36,14 @@
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-jose-fully-specified-algorithms-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.28.1
+    Python 3.12.10
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1062,11 +1067,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Fully-Specified Algorithms</td>
-<td class="right">March 2025</td>
+<td class="right">May 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Jones &amp; Steele</td>
-<td class="center">Expires 20 September 2025</td>
+<td class="center">Expires 5 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,15 +1084,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-fully-specified-algorithms-latest</dd>
 <dt class="label-updates">Updates:</dt>
 <dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc7518" class="eref">7518</a>, <a href="https://www.rfc-editor.org/rfc/rfc8037" class="eref">8037</a>, <a href="https://www.rfc-editor.org/rfc/rfc8152" class="eref">8152</a>, <a href="https://www.rfc-editor.org/rfc/rfc9053" class="eref">9053</a> (if approved)</dd>
+<a href="https://www.rfc-editor.org/rfc/rfc7518" class="eref">7518</a>, <a href="https://www.rfc-editor.org/rfc/rfc8037" class="eref">8037</a>, <a href="https://www.rfc-editor.org/rfc/rfc9053" class="eref">9053</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-19" class="published">19 March 2025</time>
+<time datetime="2025-05-04" class="published">4 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-20">20 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-05">5 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1107,15 +1112,19 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">
  This specification refers to cryptographic algorithm identifiers
  that fully specify the cryptographic operations to be performed,
- including any curve, key derivation function (KDF), hash functions, etc.,
+ including any curve, key derivation function (KDF), and hash functions,
  as being "fully specified".
  Whereas, it refers to cryptographic algorithm identifiers
  that require additional information beyond the algorithm identifier
  to determine the cryptographic operations to be performed
  as being "polymorphic".
  This specification creates fully-specified algorithm identifiers for registered
- JOSE and COSE polymorphic algorithm identifiers,
+ JSON Object Signing and Encryption (JOSE) and
+ CBOR Object Signing and Encryption (COSE)
+ polymorphic algorithm identifiers,
  enabling applications to use only fully-specified algorithm identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">
+ This specification updates RFC 7518, RFC 8037, and RFC 9053.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1136,7 +1145,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1286,14 +1295,17 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">
- The IANA algorithm registries for JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> and
- COSE <span>[<a href="#IANA.COSE" class="cite xref">IANA.COSE</a>]</span> contain two kinds of algorithm identifiers:<a href="#section-1-1" class="pilcrow">¶</a></p>
+ The IANA algorithm registries for
+ JSON Object Signing and Encryption (JOSE) algorithms <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> and
+ CBOR Object Signing and Encryption (COSE) algorithms <span>[<a href="#IANA.COSE" class="cite xref">IANA.COSE</a>]</span>
+ contain two kinds of algorithm identifiers:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-1-2">
         <dt id="section-1-2.1">Fully Specified</dt>
         <dd style="margin-left: 1.5em" id="section-1-2.2">
      Those that fully determine the cryptographic operations to be performed,
-     including any curve, key derivation function (KDF), hash functions, etc.
-     Examples are <code>RS256</code> and <code>ES256K</code> in both JOSE and COSE
+     including any curve, key derivation function (KDF), and hash functions.
+     Examples are <code>RS256</code> and <code>ES256K</code>
+     in both JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> and COSE <span>[<a href="#IANA.COSE" class="cite xref">IANA.COSE</a>]</span>
      and <code>ES256</code> in JOSE.<a href="#section-1-2.2" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
@@ -1302,7 +1314,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
      Those requiring information beyond the algorithm identifier
      to determine the cryptographic operations to be performed.
      Such additional information could include the actual key value and a curve that it uses.
-     Examples are <code>EdDSA</code> in both JOSE and COSE
+     Examples are <code>EdDSA</code>
+     in both JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> and COSE <span>[<a href="#IANA.COSE" class="cite xref">IANA.COSE</a>]</span>
      and <code>ES256</code> in COSE.<a href="#section-1-2.4" class="pilcrow">¶</a>
 </dd>
       <dd class="break"></dd>
@@ -1381,8 +1394,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-elliptic-curve-digital-sign" class="section-name selfRef">Elliptic Curve Digital Signature Algorithm (ECDSA)</a>
         </h3>
 <p id="section-2.1-1">
-   <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> defines the current use of
-   the Elliptic Curve Digital Signature Algorithm (ECDSA) by COSE.
+   <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> defines a way to use
+   the Elliptic Curve Digital Signature Algorithm (ECDSA) with COSE.
    The COSE algorithm registrations for ECDSA are polymorphic,
    since they do not specify the curve used.
    For instance, <code>ES256</code> is defined as
@@ -1458,9 +1471,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-edwards-curve-digital-signa" class="section-name selfRef">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>
         </h3>
 <p id="section-2.2-1">
-   <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> defines the current use of
+   <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> defines a way to use
    the Edwards-Curve Digital Signature Algorithm (EdDSA)
-   by JOSE and <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> defines its current use by COSE.
+   with JOSE and <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> defines a way to use it with COSE.
    Both register polymorphic <code>EdDSA</code> algorithm identifiers.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2-2">
    The following fully-specified JOSE and COSE EdDSA algorithms are defined:<a href="#section-2.2-2" class="pilcrow">¶</a></p>
@@ -1507,8 +1520,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-fully-specified-encryption" class="section-name selfRef">Fully-Specified Encryption</a>
       </h2>
 <p id="section-3-1">
- This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing the JOSE and COSE encryption schemes
- JSON Web Encryption, (JWE) as described in <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span> and <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>, and
+ This section describes the construction of fully-specified encryption algorithm identifiers in the context of the JOSE and COSE encryption schemes
+ JSON Web Encryption (JWE), as described in <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span> and <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>, and
  COSE Encrypt, as described in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span> and <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">
  Using fully-specified encryption algorithms enables the sender and receiver
@@ -1532,9 +1545,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
  for JOSE and COSE.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-3-4">
  To perform fully-specified encryption in JOSE,
- the "alg" value MUST specify all essential parameters for key establishment
+ the "alg" value MUST specify all parameters for key establishment
  or derive some of them from the accompanying "enc" value and
- the "enc" value MUST specify all essential parameters for symmetric encryption.
+ the "enc" value MUST specify all parameters for symmetric encryption.
  For example, JWE encryption using
  an "alg" value of "A128KW" (AES Key Wrap using 128-bit key) and
  an "enc" value of "A128GCM" (AES GCM using 128-bit key)
@@ -1551,12 +1564,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
  This option is not present in COSE.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">
  To perform fully-specified encryption in COSE,
- the outer "alg" value MUST specify all essential parameters for key establishment and
- the inner "alg" value must specify all essential parameters for symmetric encryption.
+ the outer "alg" value MUST specify all parameters for key establishment and
+ the inner "alg" value must specify all parameters for symmetric encryption.
  For example, COSE encryption using
  an outer "alg" value of A128KW and
  an inner "alg" value of A128GCM
- uses fully-specified algorithms.<a href="#section-3-6" class="pilcrow">¶</a></p>
+ uses fully-specified algorithms.
+ Note that when using COSE_Encrypt,
+ as specified in Section 5.1 of <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>,
+ the outer "alg" is communicated in the headers of the COSE_Encrypt object and
+ the inner "alg" is communicated in the headers of the COSE_recipient object.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <p id="section-3-7">
  While this specification provides a definition of what
  fully-specified encryption algorithm identifiers are for both JOSE and COSE,
@@ -2222,9 +2239,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
    "Deprecated" and "Prohibited" can be used,
    in <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span> COSE specifies
    the use of "Deprecated" but not "Prohibited".
-   (Note that <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> did not carry the definitions of the
-   "Recommended" registry columns forward,
-   so <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span> remains definitive in this regard.)
    This section defines these terms for use by both
    JOSE and COSE IANA registrations in a consistent manner,
    eliminating this potentially confusing inconsistency.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
@@ -2247,25 +2261,39 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt id="section-4.4-3.3">Prohibited</dt>
           <dd style="margin-left: 1.5em" id="section-4.4-3.4">
        The identifier and the functionality that it references MUST NOT be used.
-       (Identifiers MAY be designated as "Prohibited" due to security flaws,
+       (Identifiers may be designated as "Prohibited" due to security flaws,
        for instance.)<a href="#section-4.4-3.4" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
 <p id="section-4.4-4">
+   For completeness, these definitions bring the set of defined terms
+   for use in the "Recommended" columns
+   in the IANA COSE registries <span>[<a href="#IANA.COSE" class="cite xref">IANA.COSE</a>]</span> to
+   "Yes" <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span>,
+   "No" <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span>,
+   "Filter Only" <span>[<a href="#RFC9054" class="cite xref">RFC9054</a>]</span>,
+   "Prohibited",
+   and
+   "Deprecated".
+   The set of defined terms
+   for use in the "JOSE Implementation Requirements" columns
+   in the IANA JOSE registries <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span>
+   are unchanged.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.4-5">
    Note that the terms "Deprecated" and "Prohibited" have been used
    with a multiplicity of different meanings in various specifications,
    sometimes without actually being defined in those specifications.
    For instance, the term "Deprecated" is used in the title of
    <span>[<a href="#RFC8996" class="cite xref">RFC8996</a>]</span>, but the actual specification text
-   uses the terminology "MUST NOT be used".<a href="#section-4.4-4" class="pilcrow">¶</a></p>
-<p id="section-4.4-5">
+   uses the terminology "MUST NOT be used".<a href="#section-4.4-5" class="pilcrow">¶</a></p>
+<p id="section-4.4-6">
    The definitions above were chosen because they are consistent with
    all existing registrations in both JOSE and COSE;
    none will need to change.
    Furthermore, they are consistent with their existing usage in JOSE.
    The only net change is to enable a clear distinction between
-   "Deprecated" and "Prohibited" in future COSE registrations.<a href="#section-4.4-5" class="pilcrow">¶</a></p>
+   "Deprecated" and "Prohibited" in future COSE registrations.<a href="#section-4.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2293,8 +2321,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-notes-on-algorithms-not-upd" class="section-name selfRef">Notes on Algorithms Not Updated</a>
       </h2>
 <p id="section-6-1">
- The working group has discussed some existing polymorphic algorithms
- that are not updated by this specification.
+ Some existing polymorphic algorithms
+ are not updated by this specification.
  This section discusses why they have not been updated.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="RSA">
 <section id="section-6.1">
@@ -2302,7 +2330,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-rsa-signing-algorithms" class="section-name selfRef">RSA Signing Algorithms</a>
         </h3>
 <p id="section-6.1-1">
-   The working group has discussed whether the
+   There are different points of view on whether the
    <code>RS256</code>,
    <code>RS384</code>, and
    <code>RS512</code> algorithms
@@ -2327,9 +2355,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-ecdh-key-agreement-algorith" class="section-name selfRef">ECDH Key Agreement Algorithms</a>
         </h3>
 <p id="section-6.2-1">
-   The working group decided not to update the
-   Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time,
-   but to describe how to potentially do so in the future, if needed.
+   This specification does not update the
+   Elliptic Curve Diffie-Hellman (ECDH) algorithms,
+   but describes how to potentially do so in the future, if needed.
    The registered JOSE and COSE ECDH algorithms are polymorphic
    because they do not specify the curve to be used for the ephemeral key.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">
@@ -2338,8 +2366,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
    For instance, an algorithm performing
    ECDH-ES using the Concat KDF and the P-256 curve,
    would be fully-specified and could be defined and registered.
-   While there was not an appetite in the working group
-   to define and register such replacement algorithms at this time,
+   While this specification does not
+   define and register such replacement algorithms,
    other specifications could do so in the future, if desired.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2352,7 +2380,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
    The HSS-LMS algorithm registered by COSE is polymorphic.
    It is polymorphic because the algorithm identifier does not specify
    the hash function to be used.
-   Like ECDH, the working group did not propose to register replacement
+   Like ECDH, this specification does not register replacement
    algorithms, but future specifications could do so.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2491,6 +2519,10 @@ unless there exists some other mechanism for ensuring the key is used as intende
         <dd>
 <span class="refAuthor">Moriarty, K.</span> and <span class="refAuthor">S. Farrell</span>, <span class="refTitle">"Deprecating TLS 1.0 and TLS 1.1"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 8996</span>, <span class="seriesInfo">DOI 10.17487/RFC8996</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8996">https://www.rfc-editor.org/info/rfc8996</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9054">[RFC9054]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Hash Algorithms"</span>, <span class="seriesInfo">RFC 9054</span>, <span class="seriesInfo">DOI 10.17487/RFC9054</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9054">https://www.rfc-editor.org/info/rfc9054</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9459">[RFC9459]</dt>
         <dd>
 <span class="refAuthor">Housley, R.</span> and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): AES-CTR and AES-CBC"</span>, <span class="seriesInfo">RFC 9459</span>, <span class="seriesInfo">DOI 10.17487/RFC9459</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9459">https://www.rfc-editor.org/info/rfc9459</a>&gt;</span>. </dd>
@@ -2510,151 +2542,164 @@ unless there exists some other mechanism for ensuring the key is used as intende
 <p id="appendix-A-1">
         [[ to be removed by the RFC Editor before publication as an RFC ]]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">
-        -09<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+ -10<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-3.1">
           <p id="appendix-A-3.1.1">
- Addressed comments from secdir review.<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
+     Provided a complete list of the Recommended column terms for
+     COSE registrations, as suggested by Mohamed Boucadair.<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-3.2">
+          <p id="appendix-A-3.2.1">
+     Applied suggestions to improve the exposition received during IESG review.<a href="#appendix-A-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-4">
-        -08<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+        -09<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-5.1">
           <p id="appendix-A-5.1.1">
-     Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-5.2">
-          <p id="appendix-A-5.2.1">
-     Incorporated wording suggestions by Vijay Gurbani.<a href="#appendix-A-5.2.1" class="pilcrow">¶</a></p>
+ Addressed comments from secdir review.<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-6">
-        -07<a href="#appendix-A-6" class="pilcrow">¶</a></p>
+        -08<a href="#appendix-A-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-7.1">
           <p id="appendix-A-7.1.1">
-     Addressed Deb Cooley's Area Director feedback.  Specifically:<a href="#appendix-A-7.1.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-A-7.1.2.1">
-              <p id="appendix-A-7.1.2.1.1">
- Significantly simplified the encryption description.<a href="#appendix-A-7.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="appendix-A-7.1.2.2">
-              <p id="appendix-A-7.1.2.2.1">
- Removed the appendix on polymorphic ECDH algorithms.<a href="#appendix-A-7.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
+     Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.<a href="#appendix-A-7.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-7.2">
           <p id="appendix-A-7.2.1">
-      Stated that HSS-LMS is not fully specified,
-      as suggested by John Preuß Mattsson.<a href="#appendix-A-7.2.1" class="pilcrow">¶</a></p>
+     Incorporated wording suggestions by Vijay Gurbani.<a href="#appendix-A-7.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-8">
-        -06<a href="#appendix-A-8" class="pilcrow">¶</a></p>
+        -07<a href="#appendix-A-8" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-9.1">
           <p id="appendix-A-9.1.1">
-     Corrected inconsistencies identified during the 2nd WGLC.<a href="#appendix-A-9.1.1" class="pilcrow">¶</a></p>
+     Addressed Deb Cooley's Area Director feedback.  Specifically:<a href="#appendix-A-9.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-9.1.2.1">
+              <p id="appendix-A-9.1.2.1.1">
+ Significantly simplified the encryption description.<a href="#appendix-A-9.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="appendix-A-9.1.2.2">
+              <p id="appendix-A-9.1.2.2.1">
+ Removed the appendix on polymorphic ECDH algorithms.<a href="#appendix-A-9.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </li>
         <li class="normal" id="appendix-A-9.2">
           <p id="appendix-A-9.2.1">
-     Added terminology remark about the "cipher suite" and
-     "à la carte" approaches.<a href="#appendix-A-9.2.1" class="pilcrow">¶</a></p>
+      Stated that HSS-LMS is not fully specified,
+      as suggested by John Preuß Mattsson.<a href="#appendix-A-9.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-10">
-        -05<a href="#appendix-A-10" class="pilcrow">¶</a></p>
+        -06<a href="#appendix-A-10" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-11.1">
           <p id="appendix-A-11.1.1">
-     Applied IANA early review comments.<a href="#appendix-A-11.1.1" class="pilcrow">¶</a></p>
+     Corrected inconsistencies identified during the 2nd WGLC.<a href="#appendix-A-11.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-11.2">
+          <p id="appendix-A-11.2.1">
+     Added terminology remark about the "cipher suite" and
+     "à la carte" approaches.<a href="#appendix-A-11.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-12">
-        -04<a href="#appendix-A-12" class="pilcrow">¶</a></p>
+        -05<a href="#appendix-A-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-13.1">
           <p id="appendix-A-13.1.1">
-     Removed ECDH registrations and proposed fully-specified ECDH algorithm identifiers, per feedback at IETF 120.<a href="#appendix-A-13.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-13.2">
-          <p id="appendix-A-13.2.1">
-     Tightened descriptive text for fully-specified encryption algorithms.<a href="#appendix-A-13.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-13.3">
-          <p id="appendix-A-13.3.1">
-     Applied John Mattsson's suggestion for the RSA section title.<a href="#appendix-A-13.3.1" class="pilcrow">¶</a></p>
+     Applied IANA early review comments.<a href="#appendix-A-13.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-14">
-        -03<a href="#appendix-A-14" class="pilcrow">¶</a></p>
+        -04<a href="#appendix-A-14" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-15.1">
           <p id="appendix-A-15.1.1">
-     Acknowledged contributions made during Working Group Last Call.<a href="#appendix-A-15.1.1" class="pilcrow">¶</a></p>
+     Removed ECDH registrations and proposed fully-specified ECDH algorithm identifiers, per feedback at IETF 120.<a href="#appendix-A-15.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-15.2">
           <p id="appendix-A-15.2.1">
-     Addressed security considerations feedback from WGLC.<a href="#appendix-A-15.2.1" class="pilcrow">¶</a></p>
+     Tightened descriptive text for fully-specified encryption algorithms.<a href="#appendix-A-15.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-15.3">
           <p id="appendix-A-15.3.1">
-     Made COSE Recommended status for Ed25519 and Ed448 "yes".<a href="#appendix-A-15.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-15.4">
-          <p id="appendix-A-15.4.1">
-     Registered COSE algorithms for using Brainpool curves with ECDSA.<a href="#appendix-A-15.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-15.5">
-          <p id="appendix-A-15.5.1">
-     Removed text on KEMs, since currently registered algorithms don't use them.<a href="#appendix-A-15.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-15.6">
-          <p id="appendix-A-15.6.1">
-     Enabled use of fully-specified ECDH algorithms.<a href="#appendix-A-15.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-15.7">
-          <p id="appendix-A-15.7.1">
-     Defined the terms "Deprecated" and "Prohibited" for both JOSE and COSE registrations.<a href="#appendix-A-15.7.1" class="pilcrow">¶</a></p>
+     Applied John Mattsson's suggestion for the RSA section title.<a href="#appendix-A-15.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-16">
-        -02<a href="#appendix-A-16" class="pilcrow">¶</a></p>
+        -03<a href="#appendix-A-16" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-17.1">
           <p id="appendix-A-17.1.1">
-     Expanded references for KEMs.<a href="#appendix-A-17.1.1" class="pilcrow">¶</a></p>
+     Acknowledged contributions made during Working Group Last Call.<a href="#appendix-A-17.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-17.2">
           <p id="appendix-A-17.2.1">
-     Added example of a fully-specified KEM.<a href="#appendix-A-17.2.1" class="pilcrow">¶</a></p>
+     Addressed security considerations feedback from WGLC.<a href="#appendix-A-17.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.3">
+          <p id="appendix-A-17.3.1">
+     Made COSE Recommended status for Ed25519 and Ed448 "yes".<a href="#appendix-A-17.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.4">
+          <p id="appendix-A-17.4.1">
+     Registered COSE algorithms for using Brainpool curves with ECDSA.<a href="#appendix-A-17.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.5">
+          <p id="appendix-A-17.5.1">
+     Removed text on KEMs, since currently registered algorithms don't use them.<a href="#appendix-A-17.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.6">
+          <p id="appendix-A-17.6.1">
+     Enabled use of fully-specified ECDH algorithms.<a href="#appendix-A-17.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.7">
+          <p id="appendix-A-17.7.1">
+     Defined the terms "Deprecated" and "Prohibited" for both JOSE and COSE registrations.<a href="#appendix-A-17.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-18">
-        -01<a href="#appendix-A-18" class="pilcrow">¶</a></p>
+        -02<a href="#appendix-A-18" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-19.1">
           <p id="appendix-A-19.1.1">
-     Included additional instructions for IANA.<a href="#appendix-A-19.1.1" class="pilcrow">¶</a></p>
+     Expanded references for KEMs.<a href="#appendix-A-19.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-19.2">
           <p id="appendix-A-19.2.1">
-     Added text on KEMs and Encapsulated keys.<a href="#appendix-A-19.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-19.3">
-          <p id="appendix-A-19.3.1">
-     Added the section Fully-Specified Computations Using Multiple Algorithms.<a href="#appendix-A-19.3.1" class="pilcrow">¶</a></p>
+     Added example of a fully-specified KEM.<a href="#appendix-A-19.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-20">
-        -00<a href="#appendix-A-20" class="pilcrow">¶</a></p>
+        -01<a href="#appendix-A-20" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-21.1">
           <p id="appendix-A-21.1.1">
-     Created initial working group version based on draft-jones-jose-fully-specified-algorithms-02.<a href="#appendix-A-21.1.1" class="pilcrow">¶</a></p>
+     Included additional instructions for IANA.<a href="#appendix-A-21.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-21.2">
+          <p id="appendix-A-21.2.1">
+     Added text on KEMs and Encapsulated keys.<a href="#appendix-A-21.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-21.3">
+          <p id="appendix-A-21.3.1">
+     Added the section Fully-Specified Computations Using Multiple Algorithms.<a href="#appendix-A-21.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-A-22">
+        -00<a href="#appendix-A-22" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-23.1">
+          <p id="appendix-A-23.1.1">
+     Created initial working group version based on draft-jones-jose-fully-specified-algorithms-02.<a href="#appendix-A-23.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -2667,10 +2712,12 @@ unless there exists some other mechanism for ensuring the key is used as intende
 <p id="appendix-B-1">
  The authors thank
  Carsten Bormann,
+ Mohamed Boucadair,
  John Bradley,
  Tim Bray,
  Brian Campbell,
  Deb Cooley,
+ Roman Danyliw,
  Stephen Farrell,
  Vijay Gurbani,
  Ilari Liusvaara,

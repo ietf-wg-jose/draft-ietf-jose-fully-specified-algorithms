@@ -4,9 +4,9 @@
 
 JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
-Updates: 7518, 8037, 8152, 9053 (if approved)                  O. Steele
+Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 20 September 2025                                 19 March 2025
+Expires: 5 November 2025                                      4 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -16,14 +16,17 @@ Abstract
 
    This specification refers to cryptographic algorithm identifiers that
    fully specify the cryptographic operations to be performed, including
-   any curve, key derivation function (KDF), hash functions, etc., as
+   any curve, key derivation function (KDF), and hash functions, as
    being "fully specified".  Whereas, it refers to cryptographic
    algorithm identifiers that require additional information beyond the
    algorithm identifier to determine the cryptographic operations to be
    performed as being "polymorphic".  This specification creates fully-
-   specified algorithm identifiers for registered JOSE and COSE
+   specified algorithm identifiers for registered JSON Object Signing
+   and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)
    polymorphic algorithm identifiers, enabling applications to use only
    fully-specified algorithm identifiers.
+
+   This specification updates RFC 7518, RFC 8037, and RFC 9053.
 
 Status of This Memo
 
@@ -40,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2025.
+   This Internet-Draft will expire on 5 November 2025.
 
 Copyright Notice
 
@@ -92,21 +95,23 @@ Table of Contents
 
 1.  Introduction
 
-   The IANA algorithm registries for JOSE [IANA.JOSE] and COSE
-   [IANA.COSE] contain two kinds of algorithm identifiers:
+   The IANA algorithm registries for JSON Object Signing and Encryption
+   (JOSE) algorithms [IANA.JOSE] and CBOR Object Signing and Encryption
+   (COSE) algorithms [IANA.COSE] contain two kinds of algorithm
+   identifiers:
 
    Fully Specified
       Those that fully determine the cryptographic operations to be
-      performed, including any curve, key derivation function (KDF),
-      hash functions, etc.  Examples are RS256 and ES256K in both JOSE
-      and COSE and ES256 in JOSE.
+      performed, including any curve, key derivation function (KDF), and
+      hash functions.  Examples are RS256 and ES256K in both JOSE
+      [IANA.JOSE] and COSE [IANA.COSE] and ES256 in JOSE.
 
    Polymorphic
       Those requiring information beyond the algorithm identifier to
       determine the cryptographic operations to be performed.  Such
       additional information could include the actual key value and a
-      curve that it uses.  Examples are EdDSA in both JOSE and COSE and
-      ES256 in COSE.
+      curve that it uses.  Examples are EdDSA in both JOSE [IANA.JOSE]
+      and COSE [IANA.COSE] and ES256 in COSE.
 
    This matters because many protocols negotiate supported operations
    using only algorithm identifiers.  For instance, OAuth Authorization
@@ -163,12 +168,12 @@ Table of Contents
 
 2.1.  Elliptic Curve Digital Signature Algorithm (ECDSA)
 
-   [RFC9053] defines the current use of the Elliptic Curve Digital
-   Signature Algorithm (ECDSA) by COSE.  The COSE algorithm
-   registrations for ECDSA are polymorphic, since they do not specify
-   the curve used.  For instance, ES256 is defined as "ECDSA w/ SHA-256"
-   in Section 2.1 of [RFC9053].  (The corresponding JOSE registrations
-   in [RFC7518] are full-specified.)
+   [RFC9053] defines a way to use the Elliptic Curve Digital Signature
+   Algorithm (ECDSA) with COSE.  The COSE algorithm registrations for
+   ECDSA are polymorphic, since they do not specify the curve used.  For
+   instance, ES256 is defined as "ECDSA w/ SHA-256" in Section 2.1 of
+   [RFC9053].  (The corresponding JOSE registrations in [RFC7518] are
+   full-specified.)
 
    The following fully-specified COSE ECDSA algorithms are defined:
 
@@ -206,9 +211,9 @@ Table of Contents
 
 2.2.  Edwards-Curve Digital Signature Algorithm (EdDSA)
 
-   [RFC8037] defines the current use of the Edwards-Curve Digital
-   Signature Algorithm (EdDSA) by JOSE and [RFC9053] defines its current
-   use by COSE.  Both register polymorphic EdDSA algorithm identifiers.
+   [RFC8037] defines a way to use the Edwards-Curve Digital Signature
+   Algorithm (EdDSA) with JOSE and [RFC9053] defines a way to use it
+   with COSE.  Both register polymorphic EdDSA algorithm identifiers.
 
    The following fully-specified JOSE and COSE EdDSA algorithms are
    defined:
@@ -234,10 +239,9 @@ Table of Contents
 3.  Fully-Specified Encryption
 
    This section describes the construction of fully-specified encryption
-   algorithm identifiers in the context of existing the JOSE and COSE
-   encryption schemes JSON Web Encryption, (JWE) as described in
-   [RFC7516] and [RFC7518], and COSE Encrypt, as described in [RFC9052]
-   and [RFC9053].
+   algorithm identifiers in the context of the JOSE and COSE encryption
+   schemes JSON Web Encryption (JWE), as described in [RFC7516] and
+   [RFC7518], and COSE Encrypt, as described in [RFC9052] and [RFC9053].
 
    Using fully-specified encryption algorithms enables the sender and
    receiver to agree on all mandatory security parameters.  They also
@@ -257,12 +261,12 @@ Table of Contents
    and COSE.
 
    To perform fully-specified encryption in JOSE, the "alg" value MUST
-   specify all essential parameters for key establishment or derive some
-   of them from the accompanying "enc" value and the "enc" value MUST
-   specify all essential parameters for symmetric encryption.  For
-   example, JWE encryption using an "alg" value of "A128KW" (AES Key
-   Wrap using 128-bit key) and an "enc" value of "A128GCM" (AES GCM
-   using 128-bit key) uses fully-specified algorithms.
+   specify all parameters for key establishment or derive some of them
+   from the accompanying "enc" value and the "enc" value MUST specify
+   all parameters for symmetric encryption.  For example, JWE encryption
+   using an "alg" value of "A128KW" (AES Key Wrap using 128-bit key) and
+   an "enc" value of "A128GCM" (AES GCM using 128-bit key) uses fully-
+   specified algorithms.
 
    Note that in JOSE, there is the option to derive some cryptographic
    parameters used in the "alg" computation from the accompanying "enc"
@@ -275,11 +279,14 @@ Table of Contents
    COSE.
 
    To perform fully-specified encryption in COSE, the outer "alg" value
-   MUST specify all essential parameters for key establishment and the
-   inner "alg" value must specify all essential parameters for symmetric
-   encryption.  For example, COSE encryption using an outer "alg" value
-   of A128KW and an inner "alg" value of A128GCM uses fully-specified
-   algorithms.
+   MUST specify all parameters for key establishment and the inner "alg"
+   value must specify all parameters for symmetric encryption.  For
+   example, COSE encryption using an outer "alg" value of A128KW and an
+   inner "alg" value of A128GCM uses fully-specified algorithms.  Note
+   that when using COSE_Encrypt, as specified in Section 5.1 of
+   [RFC9052], the outer "alg" is communicated in the headers of the
+   COSE_Encrypt object and the inner "alg" is communicated in the
+   headers of the COSE_recipient object.
 
    While this specification provides a definition of what fully-
    specified encryption algorithm identifiers are for both JOSE and
@@ -520,11 +527,9 @@ Table of Contents
    registrations are currently undefined.  Furthermore, while in
    [RFC7518] JOSE specifies that both "Deprecated" and "Prohibited" can
    be used, in [RFC8152] COSE specifies the use of "Deprecated" but not
-   "Prohibited".  (Note that [RFC9053] did not carry the definitions of
-   the "Recommended" registry columns forward, so [RFC8152] remains
-   definitive in this regard.)  This section defines these terms for use
-   by both JOSE and COSE IANA registrations in a consistent manner,
-   eliminating this potentially confusing inconsistency.
+   "Prohibited".  This section defines these terms for use by both JOSE
+   and COSE IANA registrations in a consistent manner, eliminating this
+   potentially confusing inconsistency.
 
    For purposes of use in the "JOSE Implementation Requirements" columns
    in the IANA JOSE registries [IANA.JOSE] and in the "Recommended"
@@ -541,8 +546,15 @@ Table of Contents
 
    Prohibited
       The identifier and the functionality that it references MUST NOT
-      be used.  (Identifiers MAY be designated as "Prohibited" due to
+      be used.  (Identifiers may be designated as "Prohibited" due to
       security flaws, for instance.)
+
+   For completeness, these definitions bring the set of defined terms
+   for use in the "Recommended" columns in the IANA COSE registries
+   [IANA.COSE] to "Yes" [RFC8152], "No" [RFC8152], "Filter Only"
+   [RFC9054], "Prohibited", and "Deprecated".  The set of defined terms
+   for use in the "JOSE Implementation Requirements" columns in the IANA
+   JOSE registries [IANA.JOSE] are unchanged.
 
    Note that the terms "Deprecated" and "Prohibited" have been used with
    a multiplicity of different meanings in various specifications,
@@ -569,16 +581,16 @@ Table of Contents
 
 6.  Notes on Algorithms Not Updated
 
-   The working group has discussed some existing polymorphic algorithms
-   that are not updated by this specification.  This section discusses
-   why they have not been updated.
+   Some existing polymorphic algorithms are not updated by this
+   specification.  This section discusses why they have not been
+   updated.
 
 6.1.  RSA Signing Algorithms
 
-   The working group has discussed whether the RS256, RS384, and RS512
-   algorithms should be considered fully-specified or not, because they
-   can operate on keys of different sizes.  For instance, they can use
-   both 2048- and 4096-bit keys.  The same is true of the PS*
+   There are different points of view on whether the RS256, RS384, and
+   RS512 algorithms should be considered fully-specified or not, because
+   they can operate on keys of different sizes.  For instance, they can
+   use both 2048- and 4096-bit keys.  The same is true of the PS*
    algorithms.
 
    This document does not describe or request registration of any fully
@@ -594,27 +606,27 @@ Table of Contents
 
 6.2.  ECDH Key Agreement Algorithms
 
-   The working group decided not to update the Elliptic Curve Diffie-
-   Hellman (ECDH) algorithms at this time, but to describe how to
-   potentially do so in the future, if needed.  The registered JOSE and
-   COSE ECDH algorithms are polymorphic because they do not specify the
-   curve to be used for the ephemeral key.
+   This specification does not update the Elliptic Curve Diffie-Hellman
+   (ECDH) algorithms, but describes how to potentially do so in the
+   future, if needed.  The registered JOSE and COSE ECDH algorithms are
+   polymorphic because they do not specify the curve to be used for the
+   ephemeral key.
 
    Fully-specified versions of these algorithms would specify all
    choices needed, including the KDF and the curve.  For instance, an
    algorithm performing ECDH-ES using the Concat KDF and the P-256
    curve, would be fully-specified and could be defined and registered.
-   While there was not an appetite in the working group to define and
-   register such replacement algorithms at this time, other
-   specifications could do so in the future, if desired.
+   While this specification does not define and register such
+   replacement algorithms, other specifications could do so in the
+   future, if desired.
 
 6.3.  HSS/LMS Hash-Based Digital Signature Algorithm
 
    The HSS-LMS algorithm registered by COSE is polymorphic.  It is
    polymorphic because the algorithm identifier does not specify the
-   hash function to be used.  Like ECDH, the working group did not
-   propose to register replacement algorithms, but future specifications
-   could do so.
+   hash function to be used.  Like ECDH, this specification does not
+   register replacement algorithms, but future specifications could do
+   so.
 
 7.  Security Considerations
 
@@ -749,6 +761,10 @@ Table of Contents
               1.1", BCP 195, RFC 8996, DOI 10.17487/RFC8996, March 2021,
               <https://www.rfc-editor.org/info/rfc8996>.
 
+   [RFC9054]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Hash Algorithms", RFC 9054, DOI 10.17487/RFC9054, August
+              2022, <https://www.rfc-editor.org/info/rfc9054>.
+
    [RFC9459]  Housley, R. and H. Tschofenig, "CBOR Object Signing and
               Encryption (COSE): AES-CTR and AES-CBC", RFC 9459,
               DOI 10.17487/RFC9459, September 2023,
@@ -763,6 +779,14 @@ Table of Contents
 Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -10
+
+   *  Provided a complete list of the Recommended column terms for COSE
+      registrations, as suggested by Mohamed Boucadair.
+
+   *  Applied suggestions to improve the exposition received during IESG
+      review.
 
    -09
 
@@ -847,13 +871,13 @@ Appendix A.  Document History
 
 Acknowledgements
 
-   The authors thank Carsten Bormann, John Bradley, Tim Bray, Brian
-   Campbell, Deb Cooley, Stephen Farrell, Vijay Gurbani, Ilari
-   Liusvaara, Tobias Looker, Neil Madden, John Preuß Mattsson, Jeremy
-   O'Donoghue, Anders Rundgren, Göran Selander, Filip Skokan, Oliver
-   Terbu, Hannes Tschofenig, Sean Turner, David Waite, Kathleen
-   Moriarty, and Jiankang Yao for their contributions to this
-   specification.
+   The authors thank Carsten Bormann, Mohamed Boucadair, John Bradley,
+   Tim Bray, Brian Campbell, Deb Cooley, Roman Danyliw, Stephen Farrell,
+   Vijay Gurbani, Ilari Liusvaara, Tobias Looker, Neil Madden, John
+   Preuß Mattsson, Jeremy O'Donoghue, Anders Rundgren, Göran Selander,
+   Filip Skokan, Oliver Terbu, Hannes Tschofenig, Sean Turner, David
+   Waite, Kathleen Moriarty, and Jiankang Yao for their contributions to
+   this specification.
 
 Authors' Addresses
 
