@@ -1071,7 +1071,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Jones &amp; Steele</td>
-<td class="center">Expires 5 November 2025</td>
+<td class="center">Expires 6 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1087,12 +1087,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7518" class="eref">7518</a>, <a href="https://www.rfc-editor.org/rfc/rfc8037" class="eref">8037</a>, <a href="https://www.rfc-editor.org/rfc/rfc9053" class="eref">9053</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-04" class="published">4 May 2025</time>
+<time datetime="2025-05-05" class="published">5 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-05">5 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-06">6 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1145,7 +1145,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2401,12 +2401,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-7-3">
  An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats.
  The digital signature and key establishment algorithms used by software can contribute to an attack signature.
- By varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.
+ By varying the identifier used for an algorithm, some software systems may attempt to evade rule-based detection and classification.
  Rule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.
  These systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.
  For example, ES384 in COSE might be used with 3 different keys, each with a different curve.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">
-A cryptographic key SHOULD be used with only a single algorithm,
+A cryptographic key SHOULD be used with only a single algorithm
 unless the use of the same key with different algorithms is proven secure.
 See <span>[<a href="#Reuse25519" class="cite xref">Reuse25519</a>]</span> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
@@ -2422,7 +2422,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 </li>
         <li id="section-7-6.2">
           <p id="section-7-6.2.1">
-     Bind the the potentially unauthenticated content encryption algorithm
+     Bind the potentially unauthenticated content encryption algorithm
      to be used into the key protection algorithm so that different
      content encryption algorithms result in different content encryption keys.<a href="#section-7-6.2.1" class="pilcrow">¶</a></p>
 </li>
