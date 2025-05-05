@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="4" month="May" year="2025" />
+    <date day="5" month="May" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -1057,14 +1057,14 @@
   <t>
 	An "attack signature" is a unique pattern or characteristic used to identify malicious activity, enabling systems to detect and respond to known threats.
 	The digital signature and key establishment algorithms used by software can contribute to an attack signature.
-	By varying the identifier used for an algorithm, some sofware systems may attempt to evade rule-based detection and classification.
+	By varying the identifier used for an algorithm, some software systems may attempt to evade rule-based detection and classification.
 	Rule-based detection and classification systems may need to update their rules to account for fully-specified algorithms.
 	These systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.
 	For example, ES384 in COSE might be used with 3 different keys, each with a different curve.
       </t>
 
       <t>
-A cryptographic key SHOULD be used with only a single algorithm,
+A cryptographic key SHOULD be used with only a single algorithm
 unless the use of the same key with different algorithms is proven secure.
 See <xref target="Reuse25519"/> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
@@ -1080,7 +1080,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	    Allow only authenticated content encryption algorithms.
 	  </t>
 	  <t>
-	    Bind the the potentially unauthenticated content encryption algorithm
+	    Bind the potentially unauthenticated content encryption algorithm
 	    to be used into the key protection algorithm so that different
 	    content encryption algorithms result in different content encryption keys.
 	  </t>
