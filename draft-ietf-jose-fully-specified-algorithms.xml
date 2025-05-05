@@ -5,7 +5,7 @@
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude"
   category="std" ipr="trust200902"
   docName="draft-ietf-jose-fully-specified-algorithms-latest"
-  updates="7518, 8037, 8152, 9053">
+  updates="7518, 8037, 9053">
 
   <?rfc toc="yes"?>
   <?rfc tocompact="yes"?>
@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="19" month="March" year="2025" />
+    <date day="4" month="May" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -51,15 +51,20 @@
       <t>
 	This specification refers to cryptographic algorithm identifiers
 	that fully specify the cryptographic operations to be performed,
-	including any curve, key derivation function (KDF), hash functions, etc.,
+	including any curve, key derivation function (KDF), and hash functions,
 	as being "fully specified".
 	Whereas, it refers to cryptographic algorithm identifiers
 	that require additional information beyond the algorithm identifier
 	to determine the cryptographic operations to be performed
 	as being "polymorphic".
 	This specification creates fully-specified algorithm identifiers for registered
-	JOSE and COSE polymorphic algorithm identifiers,
+	JSON Object Signing and Encryption (JOSE) and
+	CBOR Object Signing and Encryption (COSE)
+	polymorphic algorithm identifiers,
 	enabling applications to use only fully-specified algorithm identifiers.
+      </t>
+      <t>
+	This specification updates RFC 7518, RFC 8037, and RFC 9053.
       </t>
     </abstract>
 
@@ -69,8 +74,10 @@
 
     <section anchor="Introduction" title="Introduction">
       <t>
-	The IANA algorithm registries for JOSE <xref target="IANA.JOSE"/> and
-	COSE <xref target="IANA.COSE"/> contain two kinds of algorithm identifiers:
+	The IANA algorithm registries for
+	JSON Object Signing and Encryption (JOSE) algorithms <xref target="IANA.JOSE"/> and
+	CBOR Object Signing and Encryption (COSE) algorithms <xref target="IANA.COSE"/>
+	contain two kinds of algorithm identifiers:
       </t>
       <t>
 	<list style="hanging">
@@ -78,8 +85,9 @@
           <t hangText="Fully Specified">
 	    <vspace/>
 	    Those that fully determine the cryptographic operations to be performed,
-	    including any curve, key derivation function (KDF), hash functions, etc.
-	    Examples are <spanx style="verb">RS256</spanx> and <spanx style="verb">ES256K</spanx> in both JOSE and COSE
+	    including any curve, key derivation function (KDF), and hash functions.
+	    Examples are <spanx style="verb">RS256</spanx> and <spanx style="verb">ES256K</spanx>
+	    in both JOSE <xref target="IANA.JOSE"/> and COSE <xref target="IANA.COSE"/>
 	    and <spanx style="verb">ES256</spanx> in JOSE.
 	  </t>
 
@@ -88,7 +96,8 @@
 	    Those requiring information beyond the algorithm identifier
 	    to determine the cryptographic operations to be performed.
 	    Such additional information could include the actual key value and a curve that it uses.
-	    Examples are <spanx style="verb">EdDSA</spanx> in both JOSE and COSE
+	    Examples are <spanx style="verb">EdDSA</spanx>
+	    in both JOSE <xref target="IANA.JOSE"/> and COSE <xref target="IANA.COSE"/>
 	    and <spanx style="verb">ES256</spanx> in COSE.
 	  </t>
 
@@ -162,8 +171,8 @@
 
       <section anchor="ECDSA" title="Elliptic Curve Digital Signature Algorithm (ECDSA)">
 	<t>
-	  <xref target="RFC9053"/> defines the current use of
-	  the Elliptic Curve Digital Signature Algorithm (ECDSA) by COSE.
+	  <xref target="RFC9053"/> defines a way to use
+	  the Elliptic Curve Digital Signature Algorithm (ECDSA) with COSE.
 	  The COSE algorithm registrations for ECDSA are polymorphic,
 	  since they do not specify the curve used.
 	  For instance, <spanx style="verb">ES256</spanx> is defined as
@@ -219,9 +228,9 @@
 
       <section anchor="EdDSA" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">
 	<t>
-	  <xref target="RFC8037"/> defines the current use of
+	  <xref target="RFC8037"/> defines a way to use
 	  the Edwards-Curve Digital Signature Algorithm (EdDSA)
-	  by JOSE and <xref target="RFC9053"/> defines its current use by COSE.
+	  with JOSE and <xref target="RFC9053"/> defines a way to use it with COSE.
 	  Both register polymorphic <spanx style="verb">EdDSA</spanx> algorithm identifiers.
 	</t>
 	<t>
@@ -252,8 +261,8 @@
 
     <section anchor="fully-specified-enc" title="Fully-Specified Encryption">
       <t>
-	This section describes the construction of fully-specified encryption algorithm identifiers in the context of existing the JOSE and COSE encryption schemes
-	JSON Web Encryption, (JWE) as described in <xref target="RFC7516"/> and <xref target="RFC7518"/>, and
+	This section describes the construction of fully-specified encryption algorithm identifiers in the context of the JOSE and COSE encryption schemes
+	JSON Web Encryption (JWE), as described in <xref target="RFC7516"/> and <xref target="RFC7518"/>, and
 	COSE Encrypt, as described in <xref target="RFC9052"/> and <xref target="RFC9053"/>.
       </t>
       <t>
@@ -280,9 +289,9 @@
       </t>
       <t>
 	To perform fully-specified encryption in JOSE,
-	the "alg" value MUST specify all essential parameters for key establishment
+	the "alg" value MUST specify all parameters for key establishment
 	or derive some of them from the accompanying "enc" value and
-	the "enc" value MUST specify all essential parameters for symmetric encryption.
+	the "enc" value MUST specify all parameters for symmetric encryption.
 	For example, JWE encryption using
 	an "alg" value of "A128KW" (AES Key Wrap using 128-bit key) and
 	an "enc" value of "A128GCM" (AES GCM using 128-bit key)
@@ -301,12 +310,16 @@
       </t>
       <t>
 	To perform fully-specified encryption in COSE,
-	the outer "alg" value MUST specify all essential parameters for key establishment and
-	the inner "alg" value must specify all essential parameters for symmetric encryption.
+	the outer "alg" value MUST specify all parameters for key establishment and
+	the inner "alg" value must specify all parameters for symmetric encryption.
 	For example, COSE encryption using
 	an outer "alg" value of A128KW and
 	an inner "alg" value of A128GCM
 	uses fully-specified algorithms.
+	Note that when using COSE_Encrypt,
+	as specified in Section 5.1 of <xref target="RFC9052"/>,
+	the outer "alg" is communicated in the headers of the COSE_Encrypt object and
+	the inner "alg" is communicated in the headers of the COSE_recipient object.
       </t>
       <t>
 	While this specification provides a definition of what
@@ -886,9 +899,6 @@
 	  "Deprecated" and "Prohibited" can be used,
 	  in <xref target="RFC8152"/> COSE specifies
 	  the use of "Deprecated" but not "Prohibited".
-	  (Note that <xref target="RFC9053"/> did not carry the definitions of the
-	  "Recommended" registry columns forward,
-	  so <xref target="RFC8152"/> remains definitive in this regard.)
 	  This section defines these terms for use by both
 	  JOSE and COSE IANA registrations in a consistent manner,
 	  eliminating this potentially confusing inconsistency.
@@ -915,11 +925,26 @@
 	    <t hangText="Prohibited">
 	      <vspace/>
 	      The identifier and the functionality that it references MUST NOT be used.
-	      (Identifiers MAY be designated as "Prohibited" due to security flaws,
+	      (Identifiers may be designated as "Prohibited" due to security flaws,
 	      for instance.)
 	    </t>
 
 	  </list>
+	</t>
+	<t>
+	  For completeness, these definitions bring the set of defined terms
+	  for use in the "Recommended" columns
+	  in the IANA COSE registries <xref target="IANA.COSE"/> to
+	  "Yes" <xref target="RFC8152"/>,
+	  "No" <xref target="RFC8152"/>,
+	  "Filter Only" <xref target="RFC9054"/>,
+	  "Prohibited",
+	  and
+	  "Deprecated".
+	  The set of defined terms
+	  for use in the "JOSE Implementation Requirements" columns
+	  in the IANA JOSE registries <xref target="IANA.JOSE"/>
+	  are unchanged.
 	</t>
 	<t>
 	  Note that the terms "Deprecated" and "Prohibited" have been used
@@ -957,14 +982,14 @@
 
     <section anchor="NotUpdated" title="Notes on Algorithms Not Updated">
       <t>
-	The working group has discussed some existing polymorphic algorithms
-	that are not updated by this specification.
+	Some existing polymorphic algorithms
+	are not updated by this specification.
 	This section discusses why they have not been updated.
       </t>
 
       <section anchor="RSA" title="RSA Signing Algorithms">
 	<t>
-	  The working group has discussed whether the
+	  There are different points of view on whether the
 	  <spanx style="verb">RS256</spanx>,
 	  <spanx style="verb">RS384</spanx>, and
 	  <spanx style="verb">RS512</spanx> algorithms
@@ -988,9 +1013,9 @@
 
       <section anchor="ECDH" title="ECDH Key Agreement Algorithms">
 	<t>
-	  The working group decided not to update the
-	  Elliptic Curve Diffie-Hellman (ECDH) algorithms at this time,
-	  but to describe how to potentially do so in the future, if needed.
+	  This specification does not update the
+	  Elliptic Curve Diffie-Hellman (ECDH) algorithms,
+	  but describes how to potentially do so in the future, if needed.
 	  The registered JOSE and COSE ECDH algorithms are polymorphic
 	  because they do not specify the curve to be used for the ephemeral key.
 	</t>
@@ -1000,8 +1025,8 @@
 	  For instance, an algorithm performing
 	  ECDH-ES using the Concat KDF and the P-256 curve,
 	  would be fully-specified and could be defined and registered.
-	  While there was not an appetite in the working group
-	  to define and register such replacement algorithms at this time,
+	  While this specification does not
+	  define and register such replacement algorithms,
 	  other specifications could do so in the future, if desired.
 	</t>
       </section>
@@ -1011,7 +1036,7 @@
 	  The HSS-LMS algorithm registered by COSE is polymorphic.
 	  It is polymorphic because the algorithm identifier does not specify
 	  the hash function to be used.
-	  Like ECDH, the working group did not propose to register replacement
+	  Like ECDH, this specification does not register replacement
 	  algorithms, but future specifications could do so.
 	</t>
       </section>
@@ -1087,6 +1112,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8152.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8414.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8996.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9054.xml"/>
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9459.xml"/>
 
       <reference anchor="IANA.JOSE" target="https://www.iana.org/assignments/jose/">
@@ -1245,6 +1271,19 @@ unless there exists some other mechanism for ensuring the key is used as intende
         [[ to be removed by the RFC Editor before publication as an RFC ]]
       </t>
 
+      <t>
+	-10
+	<list style="symbols">
+	  <t>
+	    Provided a complete list of the Recommended column terms for
+	    COSE registrations, as suggested by Mohamed Boucadair.
+	  </t>
+	  <t>
+	    Applied suggestions to improve the exposition received during IESG review.
+	  </t>
+	</list>
+      </t>
+
 			<t>
         -09
         <list style="symbols">
@@ -1393,10 +1432,12 @@ unless there exists some other mechanism for ensuring the key is used as intende
       <t>
 	The authors thank
 	Carsten Bormann,
+	Mohamed Boucadair,
 	John Bradley,
 	Tim Bray,
 	Brian Campbell,
 	Deb Cooley,
+	Roman Danyliw,
 	Stephen Farrell,
 	Vijay Gurbani,
 	Ilari Liusvaara,
