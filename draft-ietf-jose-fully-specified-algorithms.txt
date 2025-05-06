@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 6 November 2025                                      5 May 2025
+Expires: 7 November 2025                                      6 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2025.
+   This Internet-Draft will expire on 7 November 2025.
 
 Copyright Notice
 
