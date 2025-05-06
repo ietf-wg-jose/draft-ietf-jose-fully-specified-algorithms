@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T00:41:42.892027+00:00",
+  "timestamp": "2025-05-06T00:44:20.535944+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1758,6 +1758,116 @@
           "body": "",
           "createdAt": "2025-04-02T17:03:46Z",
           "updatedAt": "2025-04-02T17:03:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOKNEhZc6U13mW",
+      "title": "Provide complete list of COSE Recommended terms",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/31",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The first commit addresses the Discuss points by @boucadair.",
+      "createdAt": "2025-05-04T05:50:35Z",
+      "updatedAt": "2025-05-05T05:56:55Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "ddb3772d556387c1fc64507d33ff6dd4567858c3",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-boucadair",
+      "headRefOid": "325ca584fbfe76736cb2c9a1e68e175e270ecf62",
+      "closedAt": "2025-05-05T05:56:55Z",
+      "mergedAt": "2025-05-05T05:56:55Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "7c2a3d789ca028a2713bb3185bf9725ae398a697"
+      },
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This PR now also addresses Roman Danyliw's review comments.",
+          "createdAt": "2025-05-04T08:41:54Z",
+          "updatedAt": "2025-05-04T08:41:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6nsKx5",
+          "commit": {
+            "abbreviatedOid": "15ff6ff"
+          },
+          "author": "panva",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-04T06:36:20Z",
+          "updatedAt": "2025-05-04T06:36:20Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\r\n\t  \"Prohibited\",\r\n```",
+              "createdAt": "2025-05-04T06:36:20Z",
+              "updatedAt": "2025-05-04T06:36:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6nt-MQ",
+          "commit": {
+            "abbreviatedOid": "325ca58"
+          },
+          "author": "boucadair",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thanks  @selfissued. Looks good to me. ",
+          "createdAt": "2025-05-05T05:49:21Z",
+          "updatedAt": "2025-05-05T05:49:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOKNEhZc6U_Tvq",
+      "title": "Add statement about deprecations to abstract",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/32",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Apply suggestions by @evyncke.",
+      "createdAt": "2025-05-05T19:34:37Z",
+      "updatedAt": "2025-05-05T19:54:36Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "633bf18a3569bbcda10adbbfa0ebdb094852a2f8",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-vyncke",
+      "headRefOid": "6af0aafa7bdd8cfcaf0c11b94213685d99b12f5a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6n18vb",
+          "commit": {
+            "abbreviatedOid": "6af0aaf"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-05T19:54:36Z",
+          "updatedAt": "2025-05-05T19:54:36Z",
           "comments": []
         }
       ]
