@@ -23,8 +23,9 @@ Abstract
    performed as being "polymorphic".  This specification creates fully-
    specified algorithm identifiers for registered JSON Object Signing
    and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)
-   polymorphic algorithm identifiers, enabling applications to use only
-   fully-specified algorithm identifiers.
+   polymorphic algorithm identifiers and deprecates those polymorphic
+   algorithm identifiers, enabling applications to use only fully-
+   specified algorithm identifiers.
 
    This specification updates RFC 7518, RFC 8037, and RFC 9053.
 
@@ -175,7 +176,8 @@ Table of Contents
    [RFC9053].  (The corresponding JOSE registrations in [RFC7518] are
    full-specified.)
 
-   The following fully-specified COSE ECDSA algorithms are defined:
+   The following fully-specified COSE ECDSA algorithms are defined by
+   this specification:
 
       +========+==================+===================+=============+
       | Name   | COSE Value       | Description       | COSE        |
@@ -216,7 +218,7 @@ Table of Contents
    with COSE.  Both register polymorphic EdDSA algorithm identifiers.
 
    The following fully-specified JOSE and COSE EdDSA algorithms are
-   defined:
+   defined by this specification:
 
     +=======+============+=============+================+=============+
     |Name   | COSE Value | Description | JOSE           | COSE        |
@@ -780,6 +782,11 @@ Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -11
+
+   *  Stated in the abstract that the specification deprecates some
+      polymorphic algorithm identifiers, as suggested by Éric Vyncke.
+
    -10
 
    *  Provided a complete list of the Recommended column terms for COSE
@@ -874,10 +881,10 @@ Acknowledgements
    The authors thank Carsten Bormann, Mohamed Boucadair, John Bradley,
    Tim Bray, Brian Campbell, Deb Cooley, Roman Danyliw, Stephen Farrell,
    Vijay Gurbani, Ilari Liusvaara, Tobias Looker, Neil Madden, John
-   Preuß Mattsson, Jeremy O'Donoghue, Anders Rundgren, Göran Selander,
-   Filip Skokan, Oliver Terbu, Hannes Tschofenig, Sean Turner, David
-   Waite, Kathleen Moriarty, and Jiankang Yao for their contributions to
-   this specification.
+   Preuß Mattsson, Kathleen Moriarty, Jeremy O'Donoghue, Anders
+   Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
+   Tschofenig, Sean Turner, Éric Vyncke, David Waite, and Jiankang Yao
+   for their contributions to this specification.
 
 Authors' Addresses
 
