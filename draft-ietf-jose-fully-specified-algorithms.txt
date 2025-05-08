@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 7 November 2025                                      6 May 2025
+Expires: 9 November 2025                                      8 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 November 2025.
+   This Internet-Draft will expire on 9 November 2025.
 
 Copyright Notice
 
@@ -187,10 +187,10 @@ Table of Contents
       |        | assignment -9)   | curve and SHA-256 |             |
       +--------+------------------+-------------------+-------------+
       | ESP384 | TBD (requested   | ECDSA using P-384 | Yes         |
-      |        | assignment -48)  | curve and SHA-384 |             |
+      |        | assignment -51)  | curve and SHA-384 |             |
       +--------+------------------+-------------------+-------------+
       | ESP512 | TBD (requested   | ECDSA using P-521 | Yes         |
-      |        | assignment -49)  | curve and SHA-512 |             |
+      |        | assignment -52)  | curve and SHA-512 |             |
       +--------+------------------+-------------------+-------------+
       | ESB256 | TBD (requested   | ECDSA using       | No          |
       |        | assignment -265) | BrainpoolP256r1   |             |
@@ -228,12 +228,12 @@ Table of Contents
     |Ed25519| TBD        | EdDSA using | Optional       | Yes         |
     |       | (requested | Ed25519     |                |             |
     |       | assignment | curve       |                |             |
-    |       | -50)       |             |                |             |
+    |       | -19)       |             |                |             |
     +-------+------------+-------------+----------------+-------------+
     |Ed448  | TBD        | EdDSA using | Optional       | Yes         |
     |       | (requested | Ed448 curve |                |             |
     |       | assignment |             |                |             |
-    |       | -51)       |             |                |             |
+    |       | -53)       |             |                |             |
     +-------+------------+-------------+----------------+-------------+
 
                       Table 2: EdDSA Algorithm Values
@@ -385,7 +385,7 @@ Table of Contents
 
 
    *  Name: ESP384
-   *  Value: TBD (requested assignment -48)
+   *  Value: TBD (requested assignment -51)
    *  Description: ECDSA using P-384 curve and SHA-384
    *  Capabilities: [kty]
    *  Change Controller: IETF
@@ -394,7 +394,7 @@ Table of Contents
 
 
    *  Name: ESP512
-   *  Value: TBD (requested assignment -49)
+   *  Value: TBD (requested assignment -52)
    *  Description: ECDSA using P-521 curve and SHA-512
    *  Capabilities: [kty]
    *  Change Controller: IETF
@@ -439,7 +439,7 @@ Table of Contents
 
 
    *  Name: Ed25519
-   *  Value: TBD (requested assignment -50)
+   *  Value: TBD (requested assignment -19)
    *  Description: EdDSA using Ed25519 curve
    *  Capabilities: [kty]
    *  Change Controller: IETF
@@ -448,7 +448,7 @@ Table of Contents
 
 
    *  Name: Ed448
-   *  Value: TBD (requested assignment -51)
+   *  Value: TBD (requested assignment -53)
    *  Description: EdDSA using Ed448 curve
    *  Capabilities: [kty]
    *  Change Controller: IETF
@@ -782,6 +782,11 @@ Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+   -12
+
+   *  Changed requested COSE assignments for ESP384, ESP512, Ed25519,
+      and Ed448 due to conflicts with the new ML-DSA assignments.
+
    -11
 
    *  Stated in the abstract that the specification deprecates some
@@ -797,7 +802,7 @@ Appendix A.  Document History
 
    -09
 
-   *  Addressed comments from secdir review.
+   *  Addressed comments from secdir review by Kathleen Moriarty.
 
    -08
 
