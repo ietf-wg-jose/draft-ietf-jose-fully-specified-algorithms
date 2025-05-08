@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-06T00:44:20.535944+00:00",
+  "timestamp": "2025-05-08T00:44:53.373314+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1837,24 +1837,26 @@
       "id": "PR_kwDOKNEhZc6U_Tvq",
       "title": "Add statement about deprecations to abstract",
       "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Apply suggestions by @evyncke.",
       "createdAt": "2025-05-05T19:34:37Z",
-      "updatedAt": "2025-05-05T19:54:36Z",
+      "updatedAt": "2025-05-06T08:36:16Z",
       "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "baseRefName": "main",
       "baseRefOid": "633bf18a3569bbcda10adbbfa0ebdb094852a2f8",
       "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "headRefName": "mbj-vyncke",
       "headRefOid": "6af0aafa7bdd8cfcaf0c11b94213685d99b12f5a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-06T08:36:16Z",
+      "mergedAt": "2025-05-06T08:36:16Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "cd61699d53b5258a3ee994ffdf4bcc6fd935ceb0"
+      },
       "comments": [],
       "reviews": [
         {
