@@ -35,7 +35,7 @@
       </address>
     </author>
 
-    <date day="6" month="May" year="2025" />
+    <date day="8" month="May" year="2025" />
 
     <area>Security</area>
     <workgroup>JOSE Working Group</workgroup>
@@ -194,12 +194,12 @@
 	  <c>Yes</c>
 
 	  <c>ESP384</c>
-	  <c>TBD (requested assignment -48)</c>
+	  <c>TBD (requested assignment -51)</c>
 	  <c>ECDSA using P-384 curve and SHA-384</c>
 	  <c>Yes</c>
 
 	  <c>ESP512</c>
-	  <c>TBD (requested assignment -49)</c>
+	  <c>TBD (requested assignment -52)</c>
 	  <c>ECDSA using P-521 curve and SHA-512</c>
 	  <c>Yes</c>
 
@@ -244,13 +244,13 @@
 	  <ttcol align="left">COSE Recommended</ttcol>
 
 	  <c>Ed25519</c>
-	  <c>TBD (requested assignment -50)</c>
+	  <c>TBD (requested assignment -19)</c>
 	  <c>EdDSA using Ed25519 curve</c>
 	  <c>Optional</c>
 	  <c>Yes</c>
 
 	  <c>Ed448</c>
-	  <c>TBD (requested assignment -51)</c>
+	  <c>TBD (requested assignment -53)</c>
 	  <c>EdDSA using Ed448 curve</c>
 	  <c>Optional</c>
 	  <c>Yes</c>
@@ -516,7 +516,7 @@
 		Name: ESP384
 	      </t>
 	      <t>
-		Value: TBD (requested assignment -48)
+		Value: TBD (requested assignment -51)
 	      </t>
 	      <t>
 		Description: ECDSA using P-384 curve and SHA-384
@@ -544,7 +544,7 @@
 		Name: ESP512
 	      </t>
 	      <t>
-		Value: TBD (requested assignment -49)
+		Value: TBD (requested assignment -52)
 	      </t>
 	      <t>
 		Description: ECDSA using P-521 curve and SHA-512
@@ -684,7 +684,7 @@
 		Name: Ed25519
 	      </t>
 	      <t>
-		Value: TBD (requested assignment -50)
+		Value: TBD (requested assignment -19)
 	      </t>
 	      <t>
 		Description: EdDSA using Ed25519 curve
@@ -712,7 +712,7 @@
 		Name: Ed448
 	      </t>
 	      <t>
-		Value: TBD (requested assignment -51)
+		Value: TBD (requested assignment -53)
 	      </t>
 	      <t>
 		Description: EdDSA using Ed448 curve
@@ -1272,6 +1272,16 @@ unless there exists some other mechanism for ensuring the key is used as intende
       </t>
 
       <t>
+	-12
+	<list style="symbols">
+	  <t>
+	    Changed requested COSE assignments for ESP384, ESP512, Ed25519, and Ed448
+	    due to conflicts with the new ML-DSA assignments.
+	  </t>
+	</list>
+      </t>
+
+      <t>
 	-11
 	<list style="symbols">
 	  <t>
@@ -1294,13 +1304,13 @@ unless there exists some other mechanism for ensuring the key is used as intende
 	</list>
       </t>
 
-			<t>
+      <t>
         -09
         <list style="symbols">
-					<t>
-						Addressed comments from secdir review.
-					</t>
-				</list>
+	  <t>
+	    Addressed comments from secdir review by Kathleen Moriarty.
+	  </t>
+	</list>
       </t>
 
       <t>
