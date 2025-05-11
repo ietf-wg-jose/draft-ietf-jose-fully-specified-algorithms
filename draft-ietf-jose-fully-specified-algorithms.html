@@ -13,18 +13,22 @@
  that fully specify the cryptographic operations to be performed,
  including any curve, key derivation function (KDF), and hash functions,
  as being "fully specified".
- Whereas, it refers to cryptographic algorithm identifiers
+ It refers to cryptographic algorithm identifiers
  that require additional information beyond the algorithm identifier
  to determine the cryptographic operations to be performed
  as being "polymorphic".
  This specification creates fully-specified algorithm identifiers for registered
  JSON Object Signing and Encryption (JOSE) and
  CBOR Object Signing and Encryption (COSE)
- polymorphic algorithm identifiers and deprecates those polymorphic algorithm identifiers,
+ polymorphic algorithm identifiers,
  enabling applications to use only fully-specified algorithm identifiers.
+ It deprecates those polymorphic algorithm identifiers.
        
        
  This specification updates RFC 7518, RFC 8037, and RFC 9053.
+ It deprecates polymorphic algorithms defined by RFC 8037 and RFC 9053
+ and provides fully-specified replacements for them.
+ It adds to the instructions to designated experts in RFC 7518 and RFC 9053.
        
     ' name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
@@ -1071,7 +1075,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Jones &amp; Steele</td>
-<td class="center">Expires 9 November 2025</td>
+<td class="center">Expires 11 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1087,12 +1091,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7518" class="eref">7518</a>, <a href="https://www.rfc-editor.org/rfc/rfc8037" class="eref">8037</a>, <a href="https://www.rfc-editor.org/rfc/rfc9053" class="eref">9053</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-08" class="published">8 May 2025</time>
+<time datetime="2025-05-10" class="published">10 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-09">9 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-11">11 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1114,17 +1118,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
  that fully specify the cryptographic operations to be performed,
  including any curve, key derivation function (KDF), and hash functions,
  as being "fully specified".
- Whereas, it refers to cryptographic algorithm identifiers
+ It refers to cryptographic algorithm identifiers
  that require additional information beyond the algorithm identifier
  to determine the cryptographic operations to be performed
  as being "polymorphic".
  This specification creates fully-specified algorithm identifiers for registered
  JSON Object Signing and Encryption (JOSE) and
  CBOR Object Signing and Encryption (COSE)
- polymorphic algorithm identifiers and deprecates those polymorphic algorithm identifiers,
- enabling applications to use only fully-specified algorithm identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+ polymorphic algorithm identifiers,
+ enabling applications to use only fully-specified algorithm identifiers.
+ It deprecates those polymorphic algorithm identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">
- This specification updates RFC 7518, RFC 8037, and RFC 9053.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+ This specification updates RFC 7518, RFC 8037, and RFC 9053.
+ It deprecates polymorphic algorithms defined by RFC 8037 and RFC 9053
+ and provides fully-specified replacements for them.
+ It adds to the instructions to designated experts in RFC 7518 and RFC 9053.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1145,7 +1153,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1339,7 +1347,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-6">
  This does not work for polymorphic algorithms.
  For instance, with <code>EdDSA</code>, it is not known which of the curves
- <code>Ed25519</code> and/or <code>Ed448</code> are supported!
+ <code>Ed25519</code> and/or <code>Ed448</code> are supported.
  This causes real problems in practice.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">
  WebAuthn contains this de-facto algorithm definition to work around this problem:<a href="#section-1-7" class="pilcrow">¶</a></p>
@@ -2276,24 +2284,42 @@ svg :is([fill="white"], [fill^="#fff"]) {
    "Prohibited",
    and
    "Deprecated".
+   This updates the definitions of the "Recommended" columns
+   in these registries to be:<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.4-5">
+          <dt id="section-4.4-5.1">Recommended:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.4-5.2">
+       Does the IETF have a consensus recommendation to use the algorithm?
+       The legal values are
+       "Yes",
+       "No",
+       "Filter Only",
+       "Prohibited",
+       and
+       "Deprecated".<a href="#section-4.4-5.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-4.4-6"></p>
+<p id="section-4.4-7">
    The set of defined terms
    for use in the "JOSE Implementation Requirements" columns
    in the IANA JOSE registries <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span>
-   are unchanged.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
-<p id="section-4.4-5">
+   are unchanged.<a href="#section-4.4-7" class="pilcrow">¶</a></p>
+<p id="section-4.4-8">
    Note that the terms "Deprecated" and "Prohibited" have been used
    with a multiplicity of different meanings in various specifications,
    sometimes without actually being defined in those specifications.
    For instance, the term "Deprecated" is used in the title of
    <span>[<a href="#RFC8996" class="cite xref">RFC8996</a>]</span>, but the actual specification text
-   uses the terminology "MUST NOT be used".<a href="#section-4.4-5" class="pilcrow">¶</a></p>
-<p id="section-4.4-6">
+   uses the terminology "MUST NOT be used".<a href="#section-4.4-8" class="pilcrow">¶</a></p>
+<p id="section-4.4-9">
    The definitions above were chosen because they are consistent with
    all existing registrations in both JOSE and COSE;
    none will need to change.
    Furthermore, they are consistent with their existing usage in JOSE.
    The only net change is to enable a clear distinction between
-   "Deprecated" and "Prohibited" in future COSE registrations.<a href="#section-4.4-6" class="pilcrow">¶</a></p>
+   "Deprecated" and "Prohibited" in future COSE registrations.<a href="#section-4.4-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2406,7 +2432,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
  These systems should be aware that writing rules for polymorphic algorithms is more difficult, as each variant of the algorithm must be accounted for.
  For example, ES384 in COSE might be used with 3 different keys, each with a different curve.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">
-A cryptographic key SHOULD be used with only a single algorithm
+A cryptographic key MUST be used with only a single algorithm
 unless the use of the same key with different algorithms is proven secure.
 See <span>[<a href="#Reuse25519" class="cite xref">Reuse25519</a>]</span> for an example of such a proof.
 As a result, it is RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE Keys be present,
@@ -2418,7 +2444,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 <ol start="1" type="1" class="normal type-1" id="section-7-6">
 <li id="section-7-6.1">
           <p id="section-7-6.1.1">
-     Allow only authenticated content encryption algorithms.<a href="#section-7-6.1.1" class="pilcrow">¶</a></p>
+     Allow only authenticated content encryption (AEAD) algorithms.<a href="#section-7-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-7-6.2">
           <p id="section-7-6.2.1">
@@ -2477,7 +2503,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
 <dl class="references">
 <dt id="FIDO2">[FIDO2]</dt>
         <dd>
-<span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Hodges, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Kumar, A.</span>, <span class="refAuthor">Lindemann, R.</span>, and <span class="refAuthor">J. Johan</span>, <span class="refTitle">"Client to Authenticator Protocol (CTAP)"</span>, <span class="seriesInfo">FIDO Alliance Proposed Standard</span>, <time datetime="2022-06-21" class="refDate">21 June 2022</time>, <span>&lt;<a href="https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html">https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Kumar, A.</span>, <span class="refAuthor">Lindemann, R.</span>, <span class="refAuthor">Johan, J.</span>, and <span class="refAuthor">D. David</span>, <span class="refTitle">"Client to Authenticator Protocol (CTAP)"</span>, <span class="seriesInfo">FIDO Alliance Proposed Standard</span>, <time datetime="2025-02-28" class="refDate">28 February 2025</time>, <span>&lt;<a href="https://fidoalliance.org/specs/fido-v2.2-ps-20250228/fido-client-to-authenticator-protocol-v2.2-ps-20250228.html">https://fidoalliance.org/specs/fido-v2.2-ps-20250228/fido-client-to-authenticator-protocol-v2.2-ps-20250228.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="FIPS.140-3">[FIPS.140-3]</dt>
         <dd>
@@ -2542,182 +2568,190 @@ unless there exists some other mechanism for ensuring the key is used as intende
 <p id="appendix-A-1">
         [[ to be removed by the RFC Editor before publication as an RFC ]]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">
- -12<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+ -13<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-3.1">
           <p id="appendix-A-3.1.1">
-     Changed requested COSE assignments for ESP384, ESP512, Ed25519, and Ed448
-     due to conflicts with the new ML-DSA assignments.<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
+     Applied suggestions by Mike Bishop and Paul Wouters.<a href="#appendix-A-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-4">
- -11<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+ -12<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-5.1">
           <p id="appendix-A-5.1.1">
-     Stated in the abstract that the specification deprecates
-     some polymorphic algorithm identifiers, as suggested by Éric Vyncke.<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
+     Changed requested COSE assignments for ESP384, ESP512, Ed25519, and Ed448
+     due to conflicts with the new ML-DSA assignments.<a href="#appendix-A-5.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-6">
- -10<a href="#appendix-A-6" class="pilcrow">¶</a></p>
+ -11<a href="#appendix-A-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-7.1">
           <p id="appendix-A-7.1.1">
-     Provided a complete list of the Recommended column terms for
-     COSE registrations, as suggested by Mohamed Boucadair.<a href="#appendix-A-7.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-7.2">
-          <p id="appendix-A-7.2.1">
-     Applied suggestions to improve the exposition received during IESG review.<a href="#appendix-A-7.2.1" class="pilcrow">¶</a></p>
+     Stated in the abstract that the specification deprecates
+     some polymorphic algorithm identifiers, as suggested by Éric Vyncke.<a href="#appendix-A-7.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-8">
-        -09<a href="#appendix-A-8" class="pilcrow">¶</a></p>
+ -10<a href="#appendix-A-8" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-9.1">
           <p id="appendix-A-9.1.1">
-     Addressed comments from secdir review by Kathleen Moriarty.<a href="#appendix-A-9.1.1" class="pilcrow">¶</a></p>
+     Provided a complete list of the Recommended column terms for
+     COSE registrations, as suggested by Mohamed Boucadair.<a href="#appendix-A-9.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-9.2">
+          <p id="appendix-A-9.2.1">
+     Applied suggestions to improve the exposition received during IESG review.<a href="#appendix-A-9.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-10">
-        -08<a href="#appendix-A-10" class="pilcrow">¶</a></p>
+        -09<a href="#appendix-A-10" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-11.1">
           <p id="appendix-A-11.1.1">
-     Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.<a href="#appendix-A-11.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-11.2">
-          <p id="appendix-A-11.2.1">
-     Incorporated wording suggestions by Vijay Gurbani.<a href="#appendix-A-11.2.1" class="pilcrow">¶</a></p>
+     Addressed comments from secdir review by Kathleen Moriarty.<a href="#appendix-A-11.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-12">
-        -07<a href="#appendix-A-12" class="pilcrow">¶</a></p>
+        -08<a href="#appendix-A-12" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-13.1">
           <p id="appendix-A-13.1.1">
-     Addressed Deb Cooley's Area Director feedback.  Specifically:<a href="#appendix-A-13.1.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-A-13.1.2.1">
-              <p id="appendix-A-13.1.2.1.1">
- Significantly simplified the encryption description.<a href="#appendix-A-13.1.2.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="appendix-A-13.1.2.2">
-              <p id="appendix-A-13.1.2.2.1">
- Removed the appendix on polymorphic ECDH algorithms.<a href="#appendix-A-13.1.2.2.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
+     Updated requested Brainpool algorithm numbers to match those chosen by Sean Turner.<a href="#appendix-A-13.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-13.2">
           <p id="appendix-A-13.2.1">
-      Stated that HSS-LMS is not fully specified,
-      as suggested by John Preuß Mattsson.<a href="#appendix-A-13.2.1" class="pilcrow">¶</a></p>
+     Incorporated wording suggestions by Vijay Gurbani.<a href="#appendix-A-13.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-14">
-        -06<a href="#appendix-A-14" class="pilcrow">¶</a></p>
+        -07<a href="#appendix-A-14" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-15.1">
           <p id="appendix-A-15.1.1">
-     Corrected inconsistencies identified during the 2nd WGLC.<a href="#appendix-A-15.1.1" class="pilcrow">¶</a></p>
+     Addressed Deb Cooley's Area Director feedback.  Specifically:<a href="#appendix-A-15.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-15.1.2.1">
+              <p id="appendix-A-15.1.2.1.1">
+ Significantly simplified the encryption description.<a href="#appendix-A-15.1.2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="appendix-A-15.1.2.2">
+              <p id="appendix-A-15.1.2.2.1">
+ Removed the appendix on polymorphic ECDH algorithms.<a href="#appendix-A-15.1.2.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </li>
         <li class="normal" id="appendix-A-15.2">
           <p id="appendix-A-15.2.1">
-     Added terminology remark about the "cipher suite" and
-     "à la carte" approaches.<a href="#appendix-A-15.2.1" class="pilcrow">¶</a></p>
+      Stated that HSS-LMS is not fully specified,
+      as suggested by John Preuß Mattsson.<a href="#appendix-A-15.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-16">
-        -05<a href="#appendix-A-16" class="pilcrow">¶</a></p>
+        -06<a href="#appendix-A-16" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-17.1">
           <p id="appendix-A-17.1.1">
-     Applied IANA early review comments.<a href="#appendix-A-17.1.1" class="pilcrow">¶</a></p>
+     Corrected inconsistencies identified during the 2nd WGLC.<a href="#appendix-A-17.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-17.2">
+          <p id="appendix-A-17.2.1">
+     Added terminology remark about the "cipher suite" and
+     "à la carte" approaches.<a href="#appendix-A-17.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-18">
-        -04<a href="#appendix-A-18" class="pilcrow">¶</a></p>
+        -05<a href="#appendix-A-18" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-19.1">
           <p id="appendix-A-19.1.1">
-     Removed ECDH registrations and proposed fully-specified ECDH algorithm identifiers, per feedback at IETF 120.<a href="#appendix-A-19.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-19.2">
-          <p id="appendix-A-19.2.1">
-     Tightened descriptive text for fully-specified encryption algorithms.<a href="#appendix-A-19.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-19.3">
-          <p id="appendix-A-19.3.1">
-     Applied John Mattsson's suggestion for the RSA section title.<a href="#appendix-A-19.3.1" class="pilcrow">¶</a></p>
+     Applied IANA early review comments.<a href="#appendix-A-19.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-20">
-        -03<a href="#appendix-A-20" class="pilcrow">¶</a></p>
+        -04<a href="#appendix-A-20" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-21.1">
           <p id="appendix-A-21.1.1">
-     Acknowledged contributions made during Working Group Last Call.<a href="#appendix-A-21.1.1" class="pilcrow">¶</a></p>
+     Removed ECDH registrations and proposed fully-specified ECDH algorithm identifiers, per feedback at IETF 120.<a href="#appendix-A-21.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-21.2">
           <p id="appendix-A-21.2.1">
-     Addressed security considerations feedback from WGLC.<a href="#appendix-A-21.2.1" class="pilcrow">¶</a></p>
+     Tightened descriptive text for fully-specified encryption algorithms.<a href="#appendix-A-21.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-21.3">
           <p id="appendix-A-21.3.1">
-     Made COSE Recommended status for Ed25519 and Ed448 "yes".<a href="#appendix-A-21.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-21.4">
-          <p id="appendix-A-21.4.1">
-     Registered COSE algorithms for using Brainpool curves with ECDSA.<a href="#appendix-A-21.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-21.5">
-          <p id="appendix-A-21.5.1">
-     Removed text on KEMs, since currently registered algorithms don't use them.<a href="#appendix-A-21.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-21.6">
-          <p id="appendix-A-21.6.1">
-     Enabled use of fully-specified ECDH algorithms.<a href="#appendix-A-21.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-21.7">
-          <p id="appendix-A-21.7.1">
-     Defined the terms "Deprecated" and "Prohibited" for both JOSE and COSE registrations.<a href="#appendix-A-21.7.1" class="pilcrow">¶</a></p>
+     Applied John Mattsson's suggestion for the RSA section title.<a href="#appendix-A-21.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-22">
-        -02<a href="#appendix-A-22" class="pilcrow">¶</a></p>
+        -03<a href="#appendix-A-22" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-23.1">
           <p id="appendix-A-23.1.1">
-     Expanded references for KEMs.<a href="#appendix-A-23.1.1" class="pilcrow">¶</a></p>
+     Acknowledged contributions made during Working Group Last Call.<a href="#appendix-A-23.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-23.2">
           <p id="appendix-A-23.2.1">
-     Added example of a fully-specified KEM.<a href="#appendix-A-23.2.1" class="pilcrow">¶</a></p>
+     Addressed security considerations feedback from WGLC.<a href="#appendix-A-23.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-23.3">
+          <p id="appendix-A-23.3.1">
+     Made COSE Recommended status for Ed25519 and Ed448 "yes".<a href="#appendix-A-23.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-23.4">
+          <p id="appendix-A-23.4.1">
+     Registered COSE algorithms for using Brainpool curves with ECDSA.<a href="#appendix-A-23.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-23.5">
+          <p id="appendix-A-23.5.1">
+     Removed text on KEMs, since currently registered algorithms don't use them.<a href="#appendix-A-23.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-23.6">
+          <p id="appendix-A-23.6.1">
+     Enabled use of fully-specified ECDH algorithms.<a href="#appendix-A-23.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-23.7">
+          <p id="appendix-A-23.7.1">
+     Defined the terms "Deprecated" and "Prohibited" for both JOSE and COSE registrations.<a href="#appendix-A-23.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-24">
-        -01<a href="#appendix-A-24" class="pilcrow">¶</a></p>
+        -02<a href="#appendix-A-24" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-25.1">
           <p id="appendix-A-25.1.1">
-     Included additional instructions for IANA.<a href="#appendix-A-25.1.1" class="pilcrow">¶</a></p>
+     Expanded references for KEMs.<a href="#appendix-A-25.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-A-25.2">
           <p id="appendix-A-25.2.1">
-     Added text on KEMs and Encapsulated keys.<a href="#appendix-A-25.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-A-25.3">
-          <p id="appendix-A-25.3.1">
-     Added the section Fully-Specified Computations Using Multiple Algorithms.<a href="#appendix-A-25.3.1" class="pilcrow">¶</a></p>
+     Added example of a fully-specified KEM.<a href="#appendix-A-25.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-A-26">
-        -00<a href="#appendix-A-26" class="pilcrow">¶</a></p>
+        -01<a href="#appendix-A-26" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A-27.1">
           <p id="appendix-A-27.1.1">
-     Created initial working group version based on draft-jones-jose-fully-specified-algorithms-02.<a href="#appendix-A-27.1.1" class="pilcrow">¶</a></p>
+     Included additional instructions for IANA.<a href="#appendix-A-27.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-27.2">
+          <p id="appendix-A-27.2.1">
+     Added text on KEMs and Encapsulated keys.<a href="#appendix-A-27.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-A-27.3">
+          <p id="appendix-A-27.3.1">
+     Added the section Fully-Specified Computations Using Multiple Algorithms.<a href="#appendix-A-27.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-A-28">
+        -00<a href="#appendix-A-28" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-A-29.1">
+          <p id="appendix-A-29.1.1">
+     Created initial working group version based on draft-jones-jose-fully-specified-algorithms-02.<a href="#appendix-A-29.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -2729,6 +2763,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
       </h2>
 <p id="appendix-B-1">
  The authors thank
+ Mike Bishop,
  Carsten Bormann,
  Mohamed Boucadair,
  John Bradley,
@@ -2752,6 +2787,7 @@ unless there exists some other mechanism for ensuring the key is used as intende
  Sean Turner,
  Éric Vyncke,
  David Waite,
+ Paul Wouters,
  and
  Jiankang Yao
  for their contributions to this specification.<a href="#appendix-B-1" class="pilcrow">¶</a></p>

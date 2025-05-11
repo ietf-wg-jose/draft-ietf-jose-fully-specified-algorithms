@@ -6,7 +6,7 @@ JOSE Working Group                                            M.B. Jones
 Internet-Draft                                    Self-Issued Consulting
 Updates: 7518, 8037, 9053 (if approved)                        O. Steele
 Intended status: Standards Track                               Transmute
-Expires: 9 November 2025                                      8 May 2025
+Expires: 11 November 2025                                    10 May 2025
 
 
               Fully-Specified Algorithms for JOSE and COSE
@@ -17,17 +17,20 @@ Abstract
    This specification refers to cryptographic algorithm identifiers that
    fully specify the cryptographic operations to be performed, including
    any curve, key derivation function (KDF), and hash functions, as
-   being "fully specified".  Whereas, it refers to cryptographic
-   algorithm identifiers that require additional information beyond the
-   algorithm identifier to determine the cryptographic operations to be
-   performed as being "polymorphic".  This specification creates fully-
-   specified algorithm identifiers for registered JSON Object Signing
-   and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)
-   polymorphic algorithm identifiers and deprecates those polymorphic
-   algorithm identifiers, enabling applications to use only fully-
-   specified algorithm identifiers.
+   being "fully specified".  It refers to cryptographic algorithm
+   identifiers that require additional information beyond the algorithm
+   identifier to determine the cryptographic operations to be performed
+   as being "polymorphic".  This specification creates fully-specified
+   algorithm identifiers for registered JSON Object Signing and
+   Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)
+   polymorphic algorithm identifiers, enabling applications to use only
+   fully-specified algorithm identifiers.  It deprecates those
+   polymorphic algorithm identifiers.
 
-   This specification updates RFC 7518, RFC 8037, and RFC 9053.
+   This specification updates RFC 7518, RFC 8037, and RFC 9053.  It
+   deprecates polymorphic algorithms defined by RFC 8037 and RFC 9053
+   and provides fully-specified replacements for them.  It adds to the
+   instructions to designated experts in RFC 7518 and RFC 9053.
 
 Status of This Memo
 
@@ -44,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2025.
+   This Internet-Draft will expire on 11 November 2025.
 
 Copyright Notice
 
@@ -129,7 +132,7 @@ Table of Contents
 
    This does not work for polymorphic algorithms.  For instance, with
    EdDSA, it is not known which of the curves Ed25519 and/or Ed448 are
-   supported!  This causes real problems in practice.
+   supported.  This causes real problems in practice.
 
    WebAuthn contains this de-facto algorithm definition to work around
    this problem:
@@ -554,9 +557,17 @@ Table of Contents
    For completeness, these definitions bring the set of defined terms
    for use in the "Recommended" columns in the IANA COSE registries
    [IANA.COSE] to "Yes" [RFC8152], "No" [RFC8152], "Filter Only"
-   [RFC9054], "Prohibited", and "Deprecated".  The set of defined terms
-   for use in the "JOSE Implementation Requirements" columns in the IANA
-   JOSE registries [IANA.JOSE] are unchanged.
+   [RFC9054], "Prohibited", and "Deprecated".  This updates the
+   definitions of the "Recommended" columns in these registries to be:
+
+   Recommended:  Does the IETF have a consensus recommendation to use
+      the algorithm?  The legal values are "Yes", "No", "Filter Only",
+      "Prohibited", and "Deprecated".
+
+
+   The set of defined terms for use in the "JOSE Implementation
+   Requirements" columns in the IANA JOSE registries [IANA.JOSE] are
+   unchanged.
 
    Note that the terms "Deprecated" and "Prohibited" have been used with
    a multiplicity of different meanings in various specifications,
@@ -651,17 +662,17 @@ Table of Contents
    For example, ES384 in COSE might be used with 3 different keys, each
    with a different curve.
 
-   A cryptographic key SHOULD be used with only a single algorithm
-   unless the use of the same key with different algorithms is proven
-   secure.  See [Reuse25519] for an example of such a proof.  As a
-   result, it is RECOMMENDED that the algorithm parameter of JSON Web
-   Keys and COSE Keys be present, unless there exists some other
-   mechanism for ensuring the key is used as intended.
+   A cryptographic key MUST be used with only a single algorithm unless
+   the use of the same key with different algorithms is proven secure.
+   See [Reuse25519] for an example of such a proof.  As a result, it is
+   RECOMMENDED that the algorithm parameter of JSON Web Keys and COSE
+   Keys be present, unless there exists some other mechanism for
+   ensuring the key is used as intended.
 
    In COSE, preventing cross-protocol attacks, such as those described
    in [RFC9459], can be accomplished in two ways:
 
-   1.  Allow only authenticated content encryption algorithms.
+   1.  Allow only authenticated content encryption (AEAD) algorithms.
 
    2.  Bind the potentially unauthenticated content encryption algorithm
        to be used into the key protection algorithm so that different
@@ -708,12 +719,12 @@ Table of Contents
 
 8.2.  Informative References
 
-   [FIDO2]    Bradley, J., Hodges, J., Jones, M., Kumar, A., Lindemann,
-              R., and J. Johan, "Client to Authenticator Protocol
-              (CTAP)", FIDO Alliance Proposed Standard, 21 June 2022,
-              <https://fidoalliance.org/specs/fido-v2.1-ps-20210615/
-              fido-client-to-authenticator-protocol-v2.1-ps-errata-
-              20220621.html>.
+   [FIDO2]    Bradley, J., Jones, M., Kumar, A., Lindemann, R., Johan,
+              J., and D. David, "Client to Authenticator Protocol
+              (CTAP)", FIDO Alliance Proposed Standard, 28 February
+              2025, <https://fidoalliance.org/specs/fido-v2.2-ps-
+              20250228/fido-client-to-authenticator-protocol-v2.2-ps-
+              20250228.html>.
 
    [FIPS.140-3]
               National Institute of Standards and Technology (NIST),
@@ -781,6 +792,10 @@ Table of Contents
 Appendix A.  Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -13
+
+   *  Applied suggestions by Mike Bishop and Paul Wouters.
 
    -12
 
@@ -883,13 +898,13 @@ Appendix A.  Document History
 
 Acknowledgements
 
-   The authors thank Carsten Bormann, Mohamed Boucadair, John Bradley,
-   Tim Bray, Brian Campbell, Deb Cooley, Roman Danyliw, Stephen Farrell,
-   Vijay Gurbani, Ilari Liusvaara, Tobias Looker, Neil Madden, John
-   Preuß Mattsson, Kathleen Moriarty, Jeremy O'Donoghue, Anders
-   Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
-   Tschofenig, Sean Turner, Éric Vyncke, David Waite, and Jiankang Yao
-   for their contributions to this specification.
+   The authors thank Mike Bishop, Carsten Bormann, Mohamed Boucadair,
+   John Bradley, Tim Bray, Brian Campbell, Deb Cooley, Roman Danyliw,
+   Stephen Farrell, Vijay Gurbani, Ilari Liusvaara, Tobias Looker, Neil
+   Madden, John Preuß Mattsson, Kathleen Moriarty, Jeremy O'Donoghue,
+   Anders Rundgren, Göran Selander, Filip Skokan, Oliver Terbu, Hannes
+   Tschofenig, Sean Turner, Éric Vyncke, David Waite, Paul Wouters, and
+   Jiankang Yao for their contributions to this specification.
 
 Authors' Addresses
 
