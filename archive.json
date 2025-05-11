@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-08T00:44:53.373314+00:00",
+  "timestamp": "2025-05-11T00:48:48.101584+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1873,6 +1873,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOKNEhZc6VtI6N",
+      "title": "Apply suggestions by Mike Bishop and Paul Wouters",
+      "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/33",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Cc: @MikeBishop @paulwouters",
+      "createdAt": "2025-05-10T17:21:00Z",
+      "updatedAt": "2025-05-10T17:21:00Z",
+      "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "baseRefName": "main",
+      "baseRefOid": "b333eec6a07b6d0ab64b324abbd071372b0eb006",
+      "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
+      "headRefName": "mbj-bishop-wouters",
+      "headRefOid": "1f0e5304c41500bd9b2870c56268533dbe9ad5e0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
