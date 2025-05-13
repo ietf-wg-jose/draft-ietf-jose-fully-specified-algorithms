@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-11T00:48:48.101584+00:00",
+  "timestamp": "2025-05-13T00:44:49.063469+00:00",
   "repo": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
   "labels": [
     {
@@ -1879,26 +1879,82 @@
       "id": "PR_kwDOKNEhZc6VtI6N",
       "title": "Apply suggestions by Mike Bishop and Paul Wouters",
       "url": "https://github.com/ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms/pull/33",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Cc: @MikeBishop @paulwouters",
       "createdAt": "2025-05-10T17:21:00Z",
-      "updatedAt": "2025-05-10T17:21:00Z",
+      "updatedAt": "2025-05-11T21:57:31Z",
       "baseRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "baseRefName": "main",
       "baseRefOid": "b333eec6a07b6d0ab64b324abbd071372b0eb006",
       "headRepository": "ietf-wg-jose/draft-ietf-jose-fully-specified-algorithms",
       "headRefName": "mbj-bishop-wouters",
       "headRefOid": "1f0e5304c41500bd9b2870c56268533dbe9ad5e0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-11T21:57:31Z",
+      "mergedAt": "2025-05-11T21:57:30Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "188a5a65b70776e73bae1854b471b609ef2a6d9f"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKNEhZc6oxXSL",
+          "commit": {
+            "abbreviatedOid": "1f0e530"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-11T21:49:06Z",
+          "updatedAt": "2025-05-11T21:49:07Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n\tIt deprecates all presently registered polymorphic algorithm identifiers.\r\n```",
+              "createdAt": "2025-05-11T21:49:07Z",
+              "updatedAt": "2025-05-11T21:49:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6oxXex",
+          "commit": {
+            "abbreviatedOid": "1f0e530"
+          },
+          "author": "OR13",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-11T21:53:05Z",
+          "updatedAt": "2025-05-11T21:53:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOKNEhZc6oxXik",
+          "commit": {
+            "abbreviatedOid": "1f0e530"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-11T21:54:48Z",
+          "updatedAt": "2025-05-11T21:54:48Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "The wording \"It deprecates all presently registered polymorphic algorithm identifiers.\" would be misinterpreted.  We don't deprecate all registered polymorphic algorithm identifiers.  We only deprecate those for which we register replacement algorithms, hence the \"those\".\r\n\r\nFor instance, we don't deprecate \"ECDH-ES\".",
+              "createdAt": "2025-05-11T21:54:48Z",
+              "updatedAt": "2025-05-11T21:56:04Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
